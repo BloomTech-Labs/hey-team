@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Navigation from './components/Navigation';
-import { LandingPage, Conversations, Billing, Preferences } from './components';
+import InsideNavigation from './components/InsideNavigation';
+import { LandingPage, Conversations, Billing, Preferences, SignIn } from './components';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 
 class App extends Component {
@@ -8,11 +8,14 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Navigation />
+          {/* <InsideNavigation /> */}
           <Route exact path="/" component={ LandingPage }/>
           <Route exact path="/billing" component={ Billing }/>
           <Route path="/conversations" component={ Conversations }/>
           <Route path="/preferences" component={ Preferences }/>
+          {/*^^^^^ this navigation menu will be used once people have signed in */}
+
+          <Route path="/welcome" component={ SignIn }/>
         </div>
       </Router>
     );

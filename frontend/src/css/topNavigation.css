@@ -1,0 +1,28 @@
+.topNavigation{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 15;
+}
+
+.topNavigation__items{
+    padding: 15px;
+}
+
+
+.button{
+    border: darkblue solid 2px;
+    border-radius: 25px;
+}
+
+a{
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+}
+
+a:hover { 
+    color: darkblue;
+    font-weight: 1000;
+}
