@@ -1,0 +1,44 @@
+{
+  "name": "hey-team",
+  "version": "0.0.1",
+  "description": "A Slack stand-up bot",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lambda-School-Labs/hey-team.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lambda-School-Labs/hey-team/issues"
+  },
+  "homepage": "https://github.com/Lambda-School-Labs/hey-team#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "express-mailer": "^0.3.1",
+    "express-promise-router": "^2.0.0",
+    "express-session": "^1.15.6",
+    "joi": "^13.1.0",
+    "jsonwebtoken": "^8.1.0",
+    "jwt-simple": "^0.5.1",
+    "mongoose": "^4.13.5",
+    "morgan": "^1.9.0",
+    "node-schedule": "^1.2.5",
+    "nodemailer": "^4.4.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.1",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "mocha": "^4.0.1",
+    "sinon": "^4.1.3"
+  }
+}
