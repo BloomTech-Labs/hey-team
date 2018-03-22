@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Lambda-School-Labs/hey-team#readme",
   "dependencies": {
+    "@slack/client": "^4.0.1",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
