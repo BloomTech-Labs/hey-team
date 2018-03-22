@@ -2,50 +2,128 @@
 CSS By Alex Cassell
 http://alexcassell.com
 */
-/* css for mobile navigation to come later after I can see all of the pieces */
 
+
+/* desktop */
 @media screen and (min-width: 1000px) {
+
     .topNavigation{
         position: fixed;
-        top: 25px;
-        right: 25px;
+        top: 1vw;
+        right: 2vw;
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
-        padding: 15;
+        padding: 1vw;
         width: 100%;
     }
-    
+
+    .topNavigation__padding{
+        margin-right: 1vw
+    }
+
     .header{
         position: fixed;
         top: 0px;
         width: 100%;
-        height: 115px;
-        background-color: grey;
+        height: 12vh;
+        /* background-color: grey; */
+        /* a colored background will show up after user has scrolled down  */
         z-index: 15;
     }
+
+    .signin{
+        border: darkblue solid 2px;
+        border-radius: 25px;
+    }
     
+    .signin:hover{
+        border: blue solid 2px;
+        border-radius: 0px;
+        color: blue;
+    }
+
+    .topNavigation__items{
+        padding: 1vh;
+    }
+
+    .Nav-link{
+        font-size: 1.5vw;
+    }
+
     .logo{
         position: fixed;
-        top: 5px;
+        top: -5vw;
+        margin-top: 5px;
         left: 10px;
+        width: 15vw;
+        height: 15vw;
+        background: url('../images/logo.png') no-repeat center;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
     }
     
-    .topNavigation__items{
-        padding: 15px;
-    }
-    
-    .Nav-link{
-        font-size: 1.8rem;
-    }
 }
 
 
+/* Mobile */
+@media screen and (max-width: 999px) {
 
+    .topNavigation{
+        position: fixed;
+        top: 1vh;
+        right: 5vw;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        padding: 1vw;
+        width: 100%;
+    }
 
-.button{
-    border: darkblue solid 2px;
-    border-radius: 25px;
+    .topNavigation__padding{
+        padding-right: 3vw
+    }
+
+    .header{
+        position: fixed;
+        top: 0px;
+        width: 100%;
+        height: 4vh;
+        /* background-color: grey; */
+        /* color will show up after user has scrolled down  */
+        z-index: 15;
+    }
+
+    .signin{
+        padding: 1px;
+        border: darkblue solid 2px;
+    }
+    
+    .signin:hover{
+        border: blue solid 2px;
+        color: blue;
+    }
+
+    .Nav-link{
+        font-size: 3.5vh;
+    }
+
+    .logo{
+        position: fixed;
+        top: -5vh;
+        margin-top: 5px;
+        left: 10px;
+        width: 15vh;
+        height: 15vh;
+        background: url('../images/logo.png') no-repeat center;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+    }
+    
 }
 
 a{

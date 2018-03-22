@@ -15,33 +15,51 @@
     height: 100vh;
 }
 
-.wrapper__header{
-    position: static;
-    top: 0px;
-    width: 100%;
-    height: 120px;
-    padding: 25px;
-    background-color: grey;
-}
 
 /* the wrapper for eveything below the header at the top of the landing page */
-.landingTop{
-    position: absolute;
-    top: 120px;
+
+@media screen and (min-width: 1000px) {
+    .landingTop{
+        position: absolute;
+        top: 10vh;
+    }
+
+    .landingTop__tite{
+        position: relative;
+        padding: 1vw;
+        width: 100vw;
+        font-weight: bold;
+        text-align: center;
+        color: darkblue;
+        font-size: 3vw;
+    }
+
+    .landingTop__tite__sub{
+        margin-top: 2vw;
+        font-size: 2vw;
+    }
 }
 
-.landingTop__tite{
-    position: relative;
-    padding: 15px;
-    width: 100vw;
-    font-weight: bold;
-    text-align: center;
-    color: darkblue;
-    font-size: 3rem;
-}
+/* CSS */
 
-.landingTop__tite__sub{
-    padding-top: 25px;
-    font-size: 2rem;
-}
+@media screen and (max-width: 999px) {
+    .landingTop{
+        position: absolute;
+        top: 10vh;
+    }
 
+    .landingTop__tite{
+        position: relative;
+        padding: 1vw;
+        width: 100vw;
+        font-weight: bold;
+        text-align: center;
+        color: darkblue;
+        font-size: 3vh;
+    }
+
+    .landingTop__tite__sub{
+        margin-top: 2vh;
+        font-size: 2vh;
+    }
+}

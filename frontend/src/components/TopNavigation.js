@@ -11,18 +11,19 @@ const TopNavigation = () => {
         <div className="header">
             <Nav className="topNavigation">         
                 {/* <div className="topNavigation__items"><Link to="/" className="Nav-link">Home</Link></div> */}
-                <div className="logo">
-                    <img src={logo} alt={"Temp Logo"}/>
-                </div>
-                <div className="topNavigation__items"><Link to="/#features" className="Nav-link">Features</Link></div>
-                <Button inverted color='blue' animated='fade'>
+                <div className="logo"/>
+                <div className="topNavigation__items topNavigation__padding"><Link to="/#features" className="Nav-link">Features</Link></div>
+                <div className="topNavigation__items signin"><Link to="/welcome" className="Nav-link">Sign In</Link></div>
+
+                {/* Alex: the block of code below does not work in Firefox.. will look at this more once site is completed */}
+                {/* <Button inverted color='blue' animated='fade'>
                     <Button.Content visible>
-                    <Link to="/signin" className="Nav-link">Sign In</Link>
+                    <Link to="/welcome" className="Nav-link">Sign In</Link>
                     </Button.Content>
                     <Button.Content hidden>
                     <Link to="/welcome" className="Nav-link">Welcome!</Link>
                     </Button.Content>
-                </Button>
+                </Button> */}
             </Nav>
         </div>
     );
