@@ -1,14 +1,46 @@
-.topNavigation{
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    padding: 15;
+/*
+CSS By Alex Cassell
+http://alexcassell.com
+*/
+/* css for mobile navigation to come later after I can see all of the pieces */
+
+@media screen and (min-width: 1000px) {
+    .topNavigation{
+        position: fixed;
+        top: 25px;
+        right: 25px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        padding: 15;
+        width: 100%;
+    }
+    
+    .header{
+        position: fixed;
+        top: 0px;
+        width: 100%;
+        height: 115px;
+        background-color: grey;
+        z-index: 15;
+    }
+    
+    .logo{
+        position: fixed;
+        top: 5px;
+        left: 10px;
+    }
+    
+    .topNavigation__items{
+        padding: 15px;
+    }
+    
+    .Nav-link{
+        font-size: 1.8rem;
+    }
 }
 
-.topNavigation__items{
-    padding: 15px;
-}
+
 
 
 .button{

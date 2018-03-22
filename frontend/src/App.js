@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import InsideNavigation from './components/InsideNavigation';
+//import InsideNavigation from './components/InsideNavigation';
 import { LandingPage, Conversations, Billing, Preferences, SignIn } from './components';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 
