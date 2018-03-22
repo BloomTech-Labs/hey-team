@@ -1,5 +1,15 @@
 /*all colors are temp */
 
+
+@font-face {
+    font-family: Adventuring;
+    src: url(../fonts/Adventuring.otf);
+}
+
+body{
+    overflow-x: hidden;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -9,12 +19,13 @@
     vertical-align: baseline;
     background: transparent;
     
+    
 }
 .wrapper{
     background-color: lightblue;
+    font-family: Adventuring;
     height: 100vh;
 }
-
 
 /* the wrapper for eveything below the header at the top of the landing page */
 
@@ -31,16 +42,16 @@
         font-weight: bold;
         text-align: center;
         color: darkblue;
-        font-size: 3vw;
+        font-size: 2vw;
     }
 
     .landingTop__tite__sub{
         margin-top: 2vw;
-        font-size: 2vw;
+        font-size: 1.5vw;
     }
 }
 
-/* CSS */
+/* Mobile */
 
 @media screen and (max-width: 999px) {
     .landingTop{

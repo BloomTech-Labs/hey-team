@@ -12,8 +12,17 @@ const TopNavigation = () => {
             <Nav className="topNavigation">         
                 {/* <div className="topNavigation__items"><Link to="/" className="Nav-link">Home</Link></div> */}
                 <div className="logo"/>
-                <div className="topNavigation__items topNavigation__padding"><Link to="/#features" className="Nav-link">Features</Link></div>
-                <div className="topNavigation__items signin"><Link to="/welcome" className="Nav-link">Sign In</Link></div>
+                <div className="topNavigation__items">
+                    <Link to="/#features" className="Nav-link">
+                    <div className="features__default"/>
+                    </Link>
+                </div>
+
+                <div className="topNavigation__items">
+                    <Link to="/welcome" className="Nav-link">
+                        <div className="signIn__default"/>
+                    </Link>
+                </div>
 
                 {/* Alex: the block of code below does not work in Firefox.. will look at this more once site is completed */}
                 {/* <Button inverted color='blue' animated='fade'>

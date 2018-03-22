@@ -32,15 +32,48 @@ http://alexcassell.com
         z-index: 15;
     }
 
-    .signin{
-        border: darkblue solid 2px;
-        border-radius: 25px;
+    .signIn__default{
+        margin-top: -4.5vw;
+        width: 10vw;
+        height: 10vw;
+        background: url('../images/slackSignInDefault.png') no-repeat center;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
     }
-    
-    .signin:hover{
-        border: blue solid 2px;
-        border-radius: 0px;
-        color: blue;
+
+    .signIn__default:hover{
+        margin-top: -4.5vw;
+        width: 10vw;
+        height: 10vw;
+        background: url('../images/slackSignInHover.png') no-repeat center;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+    }
+
+    .features__default{
+        margin-top: -6vw;
+        width: 13vw;
+        height: 13vw;
+        background: url('../images/featureButton.png') no-repeat center;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+    }
+
+    .features__default:hover{
+        margin-top: -6vw;
+        width: 13vw;
+        height: 13vw;
+        background: url('../images/featureButtonHover.png') no-repeat center;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
     }
 
     .topNavigation__items{
@@ -96,14 +129,48 @@ http://alexcassell.com
         z-index: 15;
     }
 
-    .signin{
-        padding: 1px;
-        border: darkblue solid 2px;
+    .signIn__default{
+        margin-top: -4.5vh;
+        width: 15vh;
+        height: 15vh;
+        background: url('../images/slackSignInDefault.png') no-repeat center;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
     }
-    
-    .signin:hover{
-        border: blue solid 2px;
-        color: blue;
+
+    .signIn__default:hover{
+        margin-top: -4.5vh;
+        width: 15vh;
+        height: 15vh;
+        background: url('../images/slackSignInHover.png') no-repeat center;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+    }
+
+    .features__default{
+        margin-top: -6.6vh;
+        width: 19.5vh;
+        height: 19.5vh;
+        background: url('../images/featureButton.png') no-repeat center;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+    }
+
+    .features__default:hover{
+        margin-top: -6.6vh;
+        width: 19.5vh;
+        height: 19.5vh;
+        background: url('../images/featureButtonHover.png') no-repeat center;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
     }
 
     .Nav-link{

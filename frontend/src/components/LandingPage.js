@@ -1,12 +1,20 @@
 import React from 'react';
 import TopNavigation from './TopNavigation';
 import '../css/landingPageTop.css';
-import { Button, Grid, Header, List, Segment } from 'semantic-ui-react'
+import * as Scroll from 'react-scroll';
+import { Link, DirectLink, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+
 
 //Alex: after functional site is complete I can add UI scroll effects. scroll down to featurted, scroll back to top etc
 // the header will also change colors and maybe size, after you scroll down a bit
 
-const LandingPage = () => (
+class LandingPage extends React.Component {
+    //   constructor(props) {
+    //     super(props);
+    //     this.state = {'mainState': 
+
+    render() {
+            return (
     <div className="wrapper">
         <TopNavigation />
         <div className="landingTop">
@@ -21,5 +29,7 @@ const LandingPage = () => (
 
     </div>
     );
+}
+}
 
 export default LandingPage;
