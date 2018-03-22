@@ -1,6 +1,8 @@
 const passport = require('passport');
 const cors = require('cors');
 
+const sendMessage = require('../controllers/messageController');
+
 // const foodController = require('../controllers/foodController');
 // const cardController = require('../controllers/cardController');
 // const userController = require('../controllers/userController');
@@ -18,5 +20,5 @@ const corsOptions = {
 
 module.exports = app => {
   app.use(cors(corsOptions));
-  // app.use('/login', testController.test);
+  app.route('/sendMessage').post(sendMessage.sendMessage);
 };
