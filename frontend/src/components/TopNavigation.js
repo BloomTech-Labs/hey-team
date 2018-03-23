@@ -4,11 +4,14 @@ import { Link } from 'react-router-dom';
 import { Button } from 'semantic-ui-react'
 import '../Semantic-UI-CSS/semantic.min.css';
 import '../css/topNavigation.css';
-import logo from '../images/logo.png';
+
+import {displayHeader} from './LandingPage/'
+
 
 const TopNavigation = () => {
     return (
-        <div className="header">
+
+        <div className={displayHeader}>
             <Nav className="topNavigation">         
                 {/* <div className="topNavigation__items"><Link to="/" className="Nav-link">Home</Link></div> */}
                 <div className="logo"/>
@@ -23,16 +26,6 @@ const TopNavigation = () => {
                         <div className="signIn__default"/>
                     </Link>
                 </div>
-
-                {/* Alex: the block of code below does not work in Firefox.. will look at this more once site is completed */}
-                {/* <Button inverted color='blue' animated='fade'>
-                    <Button.Content visible>
-                    <Link to="/welcome" className="Nav-link">Sign In</Link>
-                    </Button.Content>
-                    <Button.Content hidden>
-                    <Link to="/welcome" className="Nav-link">Welcome!</Link>
-                    </Button.Content>
-                </Button> */}
             </Nav>
         </div>
     );

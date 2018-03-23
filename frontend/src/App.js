@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 //import InsideNavigation from './components/InsideNavigation';
-import { LandingPage, Conversations, Billing, Preferences, SignIn } from './components';
+import { Conversations, Billing, Preferences, SignIn } from './components';
+import LandingPageIndex from './components/LandingPage/index.js';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 
 class App extends Component {
@@ -9,7 +10,7 @@ class App extends Component {
       <Router>
         <div>
           {/* <InsideNavigation /> */}
-          <Route exact path="/" component={ LandingPage }/>
+          <Route exact path="/" component={ LandingPageIndex }/>
           <Route exact path="/billing" component={ Billing }/>
           <Route path="/conversations" component={ Conversations }/>
           <Route path="/preferences" component={ Preferences }/>

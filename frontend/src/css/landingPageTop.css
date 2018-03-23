@@ -1,5 +1,16 @@
-/*all colors are temp */
+/*
+CSS By Alex Cassell
+http://alexcassell.com
+*/
+/* color pallette */
+/* https://coolors.co/98c1d9-466365-b1b7d1-9b9fb5-a5d8ff */
 
+/* preloader for images */
+#preload-00 { background: url('../images/logo.png') no-repeat -9999px -9999px; }
+#preload-01 { background: url('../images/slackSignInDefault.png') no-repeat -9999px -9999px; }
+#preload-02 { background: url('../images/slackSignInHover.png') no-repeat -9999px -9999px; }
+#preload-03 { background: url('../images/featureButton.png') no-repeat -9999px -9999px; }
+#preload-04 { background: url('../images/featureButtonHover.png') no-repeat -9999px -9999px; }
 
 @font-face {
     font-family: Adventuring;
@@ -22,9 +33,10 @@ body{
     
 }
 .wrapper{
-    background-color: lightblue;
+    background-color: #98C1D9;
     font-family: Adventuring;
     height: 100vh;
+    width: 100vw;
 }
 
 /* the wrapper for eveything below the header at the top of the landing page */
@@ -32,7 +44,7 @@ body{
 @media screen and (min-width: 1000px) {
     .landingTop{
         position: absolute;
-        top: 10vh;
+        top: 12vh;
     }
 
     .landingTop__tite{
@@ -41,13 +53,38 @@ body{
         width: 100vw;
         font-weight: bold;
         text-align: center;
-        color: darkblue;
+        color: #466365;
         font-size: 2vw;
     }
 
     .landingTop__tite__sub{
         margin-top: 2vw;
         font-size: 1.5vw;
+    }
+/*  add to mobile when finished*/
+    .ui.color1.button {
+        background-color: #466365;
+        font-family: Adventuring;
+        color: white;
+        font-size: 2vw;
+        width: 20vw;
+        height: 5vw;
+    }
+
+    .productImage{
+        position: relative;
+        margin: auto;
+        /* border is dev only */
+        border: red 2px solid;
+        height: 50vh;
+        width: 60vw;
+        /* padding is dev only too */
+        padding: 50px;
+    }
+
+    .button__BuyNow{
+        position: relative;
+        margin-top: 5vh;
     }
 }
 
@@ -56,7 +93,7 @@ body{
 @media screen and (max-width: 999px) {
     .landingTop{
         position: absolute;
-        top: 10vh;
+        top: 12vh;
     }
 
     .landingTop__tite{
@@ -65,7 +102,7 @@ body{
         width: 100vw;
         font-weight: bold;
         text-align: center;
-        color: darkblue;
+        color: #466365;
         font-size: 3vh;
     }
 
