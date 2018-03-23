@@ -1,10 +1,5 @@
 const mongoose = require('mongoose');
 
-const participantSchema = new mongoose.Schema({
-  time: {
-    type: Date,
-  },
-  responces: [{ type: String }],
-});
+const participantSchema = new mongoose.Schema({});
 
 module.exports = mongoose.model('participant', participantSchema);
