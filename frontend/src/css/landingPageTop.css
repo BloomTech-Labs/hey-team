@@ -17,10 +17,6 @@ http://alexcassell.com
     src: url(../fonts/Adventuring.otf);
 }
 
-body{
-    overflow-x: hidden;
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -35,7 +31,7 @@ body{
 .wrapper{
     background-color: #98C1D9;
     font-family: Adventuring;
-    height: 100vh;
+    height: 110vh;
     width: 100vw;
 }
 
@@ -44,7 +40,7 @@ body{
 @media screen and (min-width: 1000px) {
     .landingTop{
         position: absolute;
-        top: 12vh;
+        top: 15vh;
     }
 
     .landingTop__tite{
@@ -61,7 +57,7 @@ body{
         margin-top: 2vw;
         font-size: 1.5vw;
     }
-/*  add to mobile when finished*/
+/*  add everything below here to mobile when finished*/
     .ui.color1.button {
         background-color: #466365;
         font-family: Adventuring;
@@ -82,9 +78,38 @@ body{
         padding: 50px;
     }
 
+    .productImage:hover {
+        box-shadow: 10px 10px grey;
+    }
+
     .button__BuyNow{
         position: relative;
         margin-top: 5vh;
+    }
+
+    /* scrapping this parelex because it no longer works with firefox :( */
+    .divider{
+        background-color: black;
+        position: absolute;
+        top: 115vh;
+        height: 40vh;
+        width: 100%;
+        background-image: url("../images/divider.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        -moz-transform:translateZ(-999px) scale(1.5);
+        -webkit-transform: translateZ(-999px) scale(1.5);
+        transform: translateZ(-999px) scale(1.5);
+        z-index: 3;
+    }
+
+    .features{
+        position: absolute;
+        top:155vh;
     }
 }
 
