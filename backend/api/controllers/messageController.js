@@ -24,7 +24,7 @@ const questions = [
   'is your life all that you expected?',
 ];
 
-const receiveMessage = async (req, res) => {
+const receiveMessage = (req, res) => {
   rtm.start();
 
   const conversationId = 'C7YJ65J10';
