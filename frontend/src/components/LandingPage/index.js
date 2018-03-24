@@ -130,9 +130,9 @@ class LandingPageIndex extends React.Component {
                         </div>
                     </div>
                     <div className="divider"/>
-                    {/* <div className="features">
+                    <div className="features">
                         <Features />
-                    </div> */}
+                    </div>
                 </div>
             );
     }
