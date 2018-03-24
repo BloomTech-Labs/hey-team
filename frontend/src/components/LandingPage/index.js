@@ -1,3 +1,5 @@
+//Alex Cassell
+//http://alexcassell.com
 import React from 'react';
 
 import * as Scroll from 'react-scroll';

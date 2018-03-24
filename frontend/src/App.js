@@ -1,3 +1,6 @@
+//Alex Cassell
+//http://alexcassell.com
+
 import React, { Component } from 'react';
 //import InsideNavigation from './components/InsideNavigation';
 import { Conversations, Billing, Preferences, SignIn } from './components';
