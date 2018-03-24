@@ -3,8 +3,11 @@ const mongoose = require('mongoose');
 const conversationSchema = new mongoose.Schema({
   questions: [
     {
-      type: String,
-      // required: true,
+      question: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'question',
+        // required: true,
+      },
     },
   ],
   schedule: {
