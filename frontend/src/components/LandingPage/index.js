@@ -90,7 +90,7 @@ class LandingPageIndex extends React.Component {
             shakeLogo = "logo";
             shakeFeatures = "features__default";
             shakeSignIn = "signIn__default";
-            displayHeader = "header"
+            displayHeader = "header__noBackground"
             this.setState({header: ''});
         }
         setTimeout(this.handleHeaderScrolling.bind(this), 200);
