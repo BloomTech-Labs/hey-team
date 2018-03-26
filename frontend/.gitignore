@@ -3,6 +3,9 @@
 # dependencies
 /node_modules
 
+#alex's stuff
+Notes.txt
+
 # testing
 /coverage
 

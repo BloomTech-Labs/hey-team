@@ -1,0 +1,32 @@
+/*
+CSS By Alex Cassell
+http://alexcassell.com
+*/
+/* color pallette */
+/* https://coolors.co/98c1d9-466365-b1b7d1-9b9fb5-a5d8ff */
+
+.interiorNavigation{
+    position: fixed;
+    /* border-right: 5px solid #466365; */
+    box-shadow: 10px 10px grey;
+    justify-content: flex-start;
+    background-color: #B1B7D1;
+    top: 11.6vh;
+    z-index: 15;
+    left: 0;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    width: 12vw;
+}
+
+/* pushes text in side menu down a little further from top */
+.interiorNavigation__items__spacer{
+    margin-top: 3vh;
+}
+
+.interiorNavigation__items{
+    color: white;
+    padding: 1vh;
+    font-size: 1.2vw;
+}
