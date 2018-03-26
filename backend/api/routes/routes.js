@@ -3,8 +3,9 @@ const cors = require('cors');
 
 const messageController = require('../controllers/messageController');
 const accountController = require('../controllers/accountController');
+const testController = require('../controllers/testController');
 
-// const passportConfig = require('../common/passport');
+const passportConfig = require('../../app/passport');
 // const middleware = require('../common/middleware');
 
 const corsOptions = {
@@ -17,7 +18,12 @@ const corsOptions = {
 
 module.exports = app => {
   app.use(cors(corsOptions));
+  app.use(passport.initialize());
   app.route('/sendMessage').post(messageController.sendMessage);
   app.route('/receiveMessage').get(messageController.receiveMessage);
-  app.route('/test').get(accountController.createUserAccount);
+  // app.route('/test').get(accountController.createUserAccount);
+  app.route('/test').get(
+    // passport.authenticate('slack'),
+    testController.slackOAuth
+  );
 };
