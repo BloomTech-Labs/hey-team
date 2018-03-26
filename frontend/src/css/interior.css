@@ -43,7 +43,7 @@ http://alexcassell.com
 }
 
 .interior__title{
-    padding-top: 5vh;
+    padding-top: 4vh;
     text-align: center;
     color: white;
     font-size: 5vw;
@@ -52,7 +52,7 @@ http://alexcassell.com
 .interior__signOut{
     position: absolute;
     right: 2vw;
-    margin-top: -6vw;
+    margin-top: -5.5vw;
     width: 11vw;
     height: 11vw;
     background: url('../images/signOut.png') no-repeat center;
@@ -65,7 +65,7 @@ http://alexcassell.com
 .interior__signOut:hover{
     position: absolute;
     right: 2vw;
-    margin-top: -6vw;
+    margin-top: -5.5vw;
     width: 11vw;
     height: 11vw;
     background: url('../images/signOutHover.png') no-repeat center;

@@ -9,7 +9,7 @@ import '../../../css/interior.css';
 import InsideNavigation from '../../InsideNavigation';
 
 
-class PreferencesIndex extends React.Component {
+class BillingIndex extends React.Component {
     constructor(props) {
     super(props);
     this.state = {'somestate': ''};
@@ -20,7 +20,7 @@ class PreferencesIndex extends React.Component {
                 <div className="interior__header">
                     <div className="logo"/>
                     <div className="interior__title">
-                        Preferences
+                        Billing
                     </div>
                     <div className="interior__signOut"/>
                 </div>
@@ -30,4 +30,4 @@ class PreferencesIndex extends React.Component {
 }
 }
 
-export default PreferencesIndex;
+export default BillingIndex;
