@@ -131,10 +131,10 @@ class LandingPageIndex extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="divider"/>
-                    <div className="features">
+                    {/* <div className="divider"/> */} 
+                    {/* the parallex has to be redone because it is broken in firefox */}
+                    <a href="#features"/>
                         <Features />
-                    </div>
                 </div>
             );
     }
