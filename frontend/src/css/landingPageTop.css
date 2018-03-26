@@ -12,6 +12,10 @@ http://alexcassell.com
 #preload-03 { background: url('../images/featureButton.png') no-repeat -9999px -9999px; }
 #preload-04 { background: url('../images/featureButtonHover.png') no-repeat -9999px -9999px; }
 
+body{
+    background-color: #B1B7D1;
+}
+
 @font-face {
     font-family: Adventuring;
     src: url(../fonts/Adventuring.otf);
