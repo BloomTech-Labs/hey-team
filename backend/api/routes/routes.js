@@ -2,6 +2,7 @@ const passport = require('passport');
 const cors = require('cors');
 
 const messageController = require('../controllers/messageController');
+const accountController = require('../controllers/accountController');
 
 // const passportConfig = require('../common/passport');
 // const middleware = require('../common/middleware');
@@ -18,4 +19,5 @@ module.exports = app => {
   app.use(cors(corsOptions));
   app.route('/sendMessage').post(messageController.sendMessage);
   app.route('/receiveMessage').get(messageController.receiveMessage);
+  app.route('/test').get(accountController.createUserAccount);
 };
