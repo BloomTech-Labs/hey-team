@@ -1,0 +1,42 @@
+/*
+CSS By Alex Cassell
+http://alexcassell.com
+*/
+/* color pallette */
+/* https://coolors.co/98c1d9-466365-b1b7d1-9b9fb5-a5d8ff */
+
+.conversations__wrapper{
+    position: absolute;
+    width: 100vw;
+    height: 85vh;
+    z-index: 50;
+    top: 15vh;
+    left: 12vw;
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    justify-content: center;
+    align-content: center;
+    -webkit-align-content: center;
+    align-content: center;
+    flex-direction: row;
+}
+
+.conversation__add{
+    margin-top: 30%;
+    font-size: 3vw;    
+}
+
+.conversation__addButton{
+    position: relative;
+    margin-top: 5vh;
+    margin-right: 50px;
+    width: 10vh;
+    height: 10vh;
+    border-radius: 50px;
+    background-color: red;
+    cursor: pointer;
+    /* align-self: center; */
+}

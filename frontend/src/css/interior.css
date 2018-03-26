@@ -24,8 +24,7 @@ http://alexcassell.com
     height: 12vh;
     width: 100%;
     background-color: #B1B7D1;
-    /* border-bottom: 4px solid #466365; */
-    box-shadow: 10px 10px grey;
+    box-shadow: 10px 10px #466365;
 }
 
 .logo{
