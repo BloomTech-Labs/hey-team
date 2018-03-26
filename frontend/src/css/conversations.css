@@ -26,7 +26,9 @@ http://alexcassell.com
 
 .conversation__add{
     margin-top: 30%;
-    font-size: 3vw;    
+    font-size: 3vw;
+    color: white;
+    text-shadow: 2px 2px #466365;
 }
 
 .conversation__addButton{
@@ -36,7 +38,9 @@ http://alexcassell.com
     width: 10vh;
     height: 10vh;
     border-radius: 50px;
-    background-color: red;
+    border: 5px solid #466365;
+    text-shadow: 2px 2px #466365;
+    color: white;
     cursor: pointer;
     /* align-self: center; */
 }
