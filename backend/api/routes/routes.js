@@ -21,9 +21,6 @@ module.exports = app => {
   app.use(passport.initialize());
   app.route('/sendMessage').post(messageController.sendMessage);
   app.route('/receiveMessage').get(messageController.receiveMessage);
-  // app.route('/test').get(accountController.createUserAccount);
-  app.route('/test').get(
-    // passport.authenticate('slack'),
-    testController.slackOAuth
-  );
+  app.route('/testcode').get(accountController.createUserAccount);
+  app.route('/test').get(testController.slackOAuth);
 };

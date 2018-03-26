@@ -15,6 +15,7 @@ passport.use(
     (accessToken, refreshToken, profile, done) => {
       // optionally persist profile data
       console.log(accessToken, refreshToken, profile);
+      done(null, profile);
     }
   )
 );

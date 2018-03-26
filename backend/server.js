@@ -9,7 +9,9 @@ const server = express();
 const routes = require('./api/routes/routes');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017', { useMongoClient: true });
+mongoose.connect('mongodb://localhost:27017/testuser', {
+  useMongoClient: true,
+});
 
 server.use(morgan('dev'));
 server.use(bodyParser.json());
