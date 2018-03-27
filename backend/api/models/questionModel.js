@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
 
-const QuestionModel = new mongoose.Schema({
-  
-})
+const questionSchema = new mongoose.Schema({
+  question: {
+    type: String,
+    required: true,
+  },
+});
+
+module.exports = mongoose.model('question', questionSchema);
