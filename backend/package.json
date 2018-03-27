@@ -35,7 +35,8 @@
     "passport": "^0.4.0",
     "passport-jwt": "^3.0.1",
     "passport-local": "^1.0.0",
-    "passport-slack": "0.0.7"
+    "passport-slack": "0.0.7",
+    "request": "^2.85.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
