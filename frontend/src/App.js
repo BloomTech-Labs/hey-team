@@ -2,8 +2,10 @@
 //http://alexcassell.com
 
 import React, { Component } from 'react';
-//import InsideNavigation from './components/InsideNavigation';
-import { Conversations, Billing, Preferences, SignIn } from './components';
+import {Billing, Preferences, SignIn } from './components';
+import ConversationsIndex from './components/Interior/Conversations/index.js';
+import PreferencesIndex from './components/Interior/Preferences/index.js';
+import BillingIndex from './components/Interior/Billing/index.js';
 import LandingPageIndex from './components/LandingPage/index.js';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 
@@ -12,14 +14,13 @@ class App extends Component {
     return (
       <Router>
         <div>
-          {/* <InsideNavigation /> */}
           <Route exact path="/" component={ LandingPageIndex }/>
-          <Route exact path="/billing" component={ Billing }/>
-          <Route path="/conversations" component={ Conversations }/>
-          <Route path="/preferences" component={ Preferences }/>
-          {/*^^^^^ this navigation menu will be used once people have signed in */}
-
           <Route path="/welcome" component={ SignIn }/>
+
+          <Route exact path="/billing" component={ BillingIndex }/>
+          <Route path="/conversations" component={ ConversationsIndex }/>
+          <Route path="/preferences" component={ PreferencesIndex }/>
+
         </div>
       </Router>
     );

@@ -119,6 +119,7 @@ class LandingPageIndex extends React.Component {
                                 maybe a picture of the bot<br /><br /><br />
                                 in action
                             </div>
+                            {/* button is no longer working correctly.. will have to take it apart */}
                             <div className="button__BuyNow">
                                 <Button className="ui color1 button" animated='fade' onClick={() => this.handleBuyButton()}>
                                     <Button.Content visible>
@@ -133,7 +134,6 @@ class LandingPageIndex extends React.Component {
                     </div>
                     {/* <div className="divider"/> */} 
                     {/* the parallex has to be redone because it is broken in firefox */}
-                    <a href="#features"/>
                         <Features />
                 </div>
             );

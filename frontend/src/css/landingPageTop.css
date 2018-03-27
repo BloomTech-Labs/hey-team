@@ -91,7 +91,7 @@ body{
         margin-top: 5vh;
     }
 
-    /* scrapping this parelex because it no longer works with firefox :( */
+    /* scrapping this parallex because it is no longer works with firefox :(  will make a js one later*/
     .divider{
         background-color: black;
         position: absolute;

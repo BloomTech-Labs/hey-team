@@ -16,7 +16,7 @@ const TopNavigation = () => {
                 {/* <div className="topNavigation__items"><Link to="/" className="Nav-link">Home</Link></div> */}
                 <div className={shakeLogo}/>
                 <div className="topNavigation__items">
-                    <Link to="/#features" className="Nav-link">
+                    <Link to="#features" className="Nav-link">
                     <div className={shakeFeatures}/>
                     </Link>
                 </div>
