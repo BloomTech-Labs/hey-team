@@ -47,20 +47,23 @@ http://alexcassell.com
 
 .conversations__newWrapper{
     position: absolute;
-    display: inline;
+    height: 80vh;
     top: 20vh;
     left: 15vw;
     padding-left: 4vw;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: space-evenly; */
 }
 
 .ui.size.input{
     width: 400px;
-    margin-top: 2vh;
+    /* margin-top: 2vh; */
 }
 
 .ui.size.input.small{
     width: 200px;
-    margin-top: 2vh;
+    /* margin-top: 2vh; */
 }
 
 .ui.input.participants{
@@ -73,4 +76,60 @@ http://alexcassell.com
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    margin-top: 2vh;
+}
+
+/* Drop down menu */
+.conversations__time{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2vh;
+}
+
+.conversations__dropbtn {
+    background-color: #466365;
+    color: white;
+    padding: .5vw;
+    font-size: 1vw;
+    border: none;
+    cursor: pointer;
+}
+
+.conversations__timeZoneDropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.conversations__dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    /* display: flex;//dev only */
+}
+
+.conversations__timeZone__square{
+    background-color: #f9f9f9;
+}
+
+.conversations__dropdown-content a {
+    color: black;
+    border: black 1px solid;
+    padding: .5vw .5vw;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.conversations__dropdown-content a:hover {
+    background-color: #466365;
+    color: white;
+}
+
+.conversations__timeZoneDropdown:hover .conversations__dropdown-content {
+    display: flex;
+}
+
+.conversations__timeZoneDropdown:hover .conversations__dropbtn {
+    background-color: #466365;
+    color: white;
 }
