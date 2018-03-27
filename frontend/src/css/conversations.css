@@ -44,3 +44,33 @@ http://alexcassell.com
     cursor: pointer;
     /* align-self: center; */
 }
+
+.conversations__newWrapper{
+    position: absolute;
+    display: inline;
+    top: 20vh;
+    left: 15vw;
+    padding-left: 4vw;
+}
+
+.ui.size.input{
+    width: 400px;
+    margin-top: 2vh;
+}
+
+.ui.size.input.small{
+    width: 200px;
+    margin-top: 2vh;
+}
+
+.ui.input.participants{
+    width: 200px;
+
+}
+
+.conversations__schedule{
+    padding-top: 2vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}

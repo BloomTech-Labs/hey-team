@@ -9,6 +9,7 @@ import React from 'react';
 import '../../../css/interior.css';
 import '../../../css/conversations.css';
 import InsideNavigation from '../../InsideNavigation';
+import New from './New';
 
 
 class ConversationsIndex extends React.Component {
@@ -29,13 +30,14 @@ class ConversationsIndex extends React.Component {
                 <InsideNavigation />{/*Side menu */}
 
                 {/* Below will be handled by states*/}
-                <div className="conversations__wrapper">
+                {/* <div className="conversations__wrapper">
                     <div className="conversation__add">
-                        Add a New Conversation <br />
+                        Add a New Conversation <br /> */}
                         {/* the above text will be the default [0] of an array */}
-                        <button className="conversation__addButton">+</button>
+                        {/* <button className="conversation__addButton">+</button>
                     </div>
-                </div>
+                </div> */}
+                <New />
             </div>
         );
 }
