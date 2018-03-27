@@ -34,23 +34,35 @@ const createUserAccount = (req, res) => {
 			// OAuth done- redirect the user to wherever
 			const newBody = JSON.parse(body);
 			console.log(newBody.user.name);
-
-			const newAccount = new Account({
-				owner: {
-					access_token: newBody.access_token,
-					name: newBody.user.name,
-					id: newBody.user.id,
-					email: newBody.user.email,
-					image: newBody.user.image_192
-				}
-			});
-			newAccount.save((err, newAccount) => {
-				if (err) {
-					return res.status(403).json({ err: err.message });
-				}
-				// res.status(200).json({ newAccount });
-			});
-			res.redirect(__dirname + '/public/success.html');
+			// let access_token = newBody.access_token;
+			const foundAccount = Account.findOne({
+				access_token: newBody.access_token
+      });
+      
+			console.log('newBody Token', newBody.access_token);
+      console.log('foundAccount access token', foundAccount._conditions.access_token);
+      
+			if (foundAccount) {
+				console.log('Account already made!');
+				return res.json({ err: 'Account already exists!' });
+			} else {
+				const newAccount = new Account({
+					owner: {
+						access_token: newBody.access_token,
+						name: newBody.user.name,
+						id: newBody.user.id,
+						email: newBody.user.email,
+						image: newBody.user.image_192
+					}
+				});
+				newAccount.save((err, newAccount) => {
+					if (err) {
+						return res.status(403).json({ err: err.message });
+					}
+					// res.status(200).json({ newAccount });
+				});
+				res.redirect(__dirname + '/public/success.html');
+			}
 		}
 	});
 };
