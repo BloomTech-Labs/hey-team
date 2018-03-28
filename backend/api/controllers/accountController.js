@@ -58,8 +58,9 @@ const createUserAccount = (req, res) => {
   });
 };
 
-const testbot = () => {
+const testbot = (req, res) => {
   console.log('test bot is the best ham in the house');
+  res.status(200).send('bots in the house!');
 };
 
 module.exports = {
