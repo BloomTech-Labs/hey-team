@@ -13,6 +13,7 @@ const createUserAccount = (req, res) => {
     form: {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
+      redirect_uri: 'https://2b7b0cfd.ngrok.io/auth/account',
       code: req.query.code,
     },
   };
@@ -32,7 +33,6 @@ const createUserAccount = (req, res) => {
           console.log('doc', doc);
         }
       );
-      // console.log(foundAccount.owner);
       if (foundAccount) {
         console.log('Account already made!');
         return res.json({ err: 'Account already exists!' });
