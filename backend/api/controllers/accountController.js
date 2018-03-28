@@ -4,12 +4,6 @@ const request = require('request');
 const CLIENT_ID = '270618182930.333388702161';
 const CLIENT_SECRET = '8a86f76a3e4f7de24fae4dab9397848b';
 
-// const createUserAccount = (req, res) => {
-//   console.log('code', req.query.code);
-//   const request = req;
-//   res.status(200).send('hit it');
-// };
-
 const createUserAccount = (req, res) => {
   if (!req.query.code) {
     // access denied
@@ -28,19 +22,8 @@ const createUserAccount = (req, res) => {
     body
   ) {
     if (!error && response.statusCode == 200) {
-      // Get an auth token
-      // let oauthToken = JSON.parse().arsccess_token;
-      // const foundUser = User.find({});
-      // OAuth done- redirect the user to wherever
       const newBody = JSON.parse(body);
-      console.log(typeof newBody.access_token);
-      // let access_token = newBody.access_token;
 
-      // const foundAccount = await Account.findById(
-      //   '5abab8223957423b89b4f734',
-      //   (err, doc) => {
-      //     console.log('doc', doc);
-      //   }
       const foundAccount = await Account.findOne(
         {
           'owner.access_token': newBody.access_token,
@@ -75,6 +58,11 @@ const createUserAccount = (req, res) => {
   });
 };
 
+const testbot = () => {
+  console.log('test bot is the best ham in the house');
+};
+
 module.exports = {
   createUserAccount,
+  testbot,
 };
