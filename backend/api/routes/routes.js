@@ -19,8 +19,8 @@ const corsOptions = {
 module.exports = app => {
   app.use(cors(corsOptions));
   app.use(passport.initialize());
-  app.route('/sendMessage').post(messageController.sendMessage);
-  app.route('/receiveMessage').get(messageController.receiveMessage);
-  app.route('/testcode').get(accountController.createUserAccount);
-  app.route('/test').get(testController.slackOAuth);
+  // app.route('/sendMessage').post(messageController.sendMessage);
+  // app.route('/receiveMessage').get(messageController.receiveMessage);
+  app.route('/test').get(accountController.createUserAccount);
+  app.route('/testy').get(testController.slackOAuth);
 };
