@@ -42,7 +42,7 @@ const slackOAuth = (req, res) => {
     if (!error && response.statusCode == 200) {
       // Get an auth token
       let oauthToken = JSON.parse(body).access_token;
-      const foundUser = User.find({});
+      
       // OAuth done- redirect the user to wherever
       console.log(JSON.parse(body));
       res.redirect(__dirname + '/public/success.html');
