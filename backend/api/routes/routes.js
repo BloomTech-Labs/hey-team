@@ -23,4 +23,5 @@ module.exports = app => {
   // app.route('/receiveMessage').get(messageController.receiveMessage);
   app.route('/auth/account').get(accountController.createUserAccount);
   app.route('/auth/bot').get(accountController.testbot);
+  app.route('/auth/login').get(accountController.login);
 };
