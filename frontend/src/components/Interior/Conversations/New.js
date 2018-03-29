@@ -11,14 +11,14 @@ random place within the timezone with the rest of the info */
 let timeZone = getTimeZone.substring(0,8);
 
                                     //days array starts with Monday 1 for message scheduled for that day
-let conversations  = [{name:"Fred", days:[0, 1, 0, 1, 0, 0, 0], time:"10:00 AM", 
-    questions: ["Question One", "Question Two"], participants: ["@user1", "@user2"], channel: "SomeChannelName"}];
+let conversation  = {name:"", days:[0, 0, 0, 0, 0, 0, 0], time:"", timeZone:"",
+    questions: ["", ""], participants: ["@", "@"], channel: ""};
 
 class New extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            conversations: conversations
+            conversation: conversation
         };
     }
 
@@ -27,27 +27,97 @@ class New extends Component {
 
     handleTimeZone(e){
         timeZone = e.target.name;
+        conversation["timeZone"] = timeZone;
+        console.log(conversation);
+        this.setState({conversation:conversation});
+    }
+
+    handleInput(e){
+        if(e.target.name === "name"){
+            conversation["name"] = e.target.value;
+        }
+        else if (e.target.name === "Mon"){
+            if(conversation["days"][0] === 0){
+                conversation["days"][0] = 1;
+            }
+            else{
+                conversation["days"][0] = 0;
+            }
+        }
+        else if (e.target.name === "Tue"){
+            if(conversation["days"][1] === 0){
+                conversation["days"][1] = 1;
+            }
+            else{
+                conversation["days"][1] = 0;
+            }
+        }
+        else if (e.target.name === "Wed"){
+            if(conversation["days"][2] === 0){
+                conversation["days"][2] = 1;
+            }
+            else{
+                conversation["days"][2] = 0;
+            }
+        }
+        else if (e.target.name === "Thur"){
+            if(conversation["days"][3] === 0){
+                conversation["days"][3] = 1;
+            }
+            else{
+                conversation["days"][3] = 0;
+            }
+        }
+        else if (e.target.name === "Fri"){
+            if(conversation["days"][4] === 0){
+                conversation["days"][4] = 1;
+            }
+            else{
+                conversation["days"][4] = 0;
+            }
+        }
+        else if (e.target.name === "Sat"){
+            if(conversation["days"][5] === 0){
+                conversation["days"][5] = 1;
+            }
+            else{
+                conversation["days"][5] = 0;
+            }
+        }
+        else if (e.target.name === "Sun"){
+            if(conversation["days"][6] === 0){
+                conversation["days"][6] = 1;
+            }
+            else{
+                conversation["days"][6] = 0;
+            }
+        }
+        else if (e.target.name === "time"){
+            conversation["time"] = e.target.value;
+        }
+        console.log(conversation);
     }
 
 
     render() {
         return ( 
             <div className="conversations__newWrapper">
-                <Input className="ui size input" type="text" name="name"placeholder="Enter Name for this Conversation"/>
+                <Input className="ui size input" type="text" name="name" onChange={(e) => this.handleInput(e)} placeholder="Enter Name for this Conversation"/>
                 <div className="conversations__schedule">
-                    <Button basic>Mon</Button>
-                    <Button basic>Tue</Button>
-                    <Button basic>Wed</Button>
-                    <Button basic>Thur</Button>
-                    <Button basic>Fri</Button>
-                    <Button color="grey">Sat</Button>
-                    <Button color="grey">Sun</Button>
+                    <Button name="Mon" onClick={(e) => this.handleInput(e)} basic>Mon</Button>
+                    <Button name="Tue" onClick={(e) => this.handleInput(e)} basic>Tue</Button>
+                    <Button name="Wed" onClick={(e) => this.handleInput(e)} basic>Wed</Button>
+                    <Button name="Thur" onClick={(e) => this.handleInput(e)} basic>Thur</Button>
+                    <Button name="Fri" onClick={(e) => this.handleInput(e)} basic>Fri</Button>
+                    <Button name="Sat" onClick={(e) => this.handleInput(e)} color="grey">Sat</Button>
+                    <Button name="Sun" onClick={(e) => this.handleInput(e)} color="grey">Sun</Button>
                 </div>
                 <div className="conversations__time">
-                    <Input className="ui size input small" type="text" name="time" placeholder="10:00 AM"/>
-                    <div class="conversations__timeZoneDropdown">
-                        <button class="conversations__dropbtn">Time Zones</button>
-                        <div class="conversations__dropdown-content">
+                    <Input className="ui size input small" type="text" name="time" onChange={(e) => this.handleInput(e)} placeholder="10:00 AM"/>
+                    {/* Drop Down Time Zones Menu */}
+                    <div className="conversations__timeZoneDropdown">
+                        <button className="conversations__dropbtn">Time Zones</button>
+                        <div className="conversations__dropdown-content">
                             <div className="conversations__timezones__row">
                                 <a className="conversations__timeZone__square" name="LINT: UTC+14" onClick={(e) => this.handleTimeZone(e)} href="#">LINT: UTC+14</a>
                                 <a className="conversations__timeZone__square" name="CHADT: UTC+13:45" onClick={(e) => this.handleTimeZone(e)} href="#">CHADT: UTC+13:45</a>
