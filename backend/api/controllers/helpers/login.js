@@ -1,6 +1,7 @@
 const request = require('request');
 const Account = require('../../models/accountModel');
 const createUserAccount = require('./createUserAccount');
+const createTeamAccount = require('./createTeamAccount');
 
 const colors = require('colors');
 
@@ -29,6 +30,7 @@ module.exports = login = (req, res, done) => {
   ) {
     if (!error && response.statusCode === 200) {
       body = JSON.parse(body);
+      console.log(colors.cyan('BODY', body));
       const account = await Account.findOne({
         'owner.access_token': body.access_token,
       });
@@ -37,6 +39,7 @@ module.exports = login = (req, res, done) => {
         res.redirect(__dirname + '/test.html');
       } else {
         // console.log(colors.blue(res));
+        // createTeamAccount(body, req, res, done);
         createUserAccount(body, req, res, done);
       }
     }

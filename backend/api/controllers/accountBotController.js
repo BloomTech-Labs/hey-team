@@ -24,12 +24,12 @@ const botAccount = (req, res) => {
 	) {
 		if (!error && response.statusCode == 200) {
 			const bot = JSON.parse(body);
-      console.log('NEWBOT', bot);
-      const findBot = await Account.find({'owner.id': bot.user_id});
-      if (findBot) {
-        //Bot is already made!
-        return res.redirect(__dirname + '../../../test.html');;
-      }
+			console.log('NEWBOT', bot);
+			const findBot = await Account.find({ 'bot.user_id': bot.user_id });
+			if (findBot) {
+				//Bot is already made!
+				return res.redirect(__dirname + '../../../FAIL.html');
+			}
 			const newBot = await Account.findOneAndUpdate(
 				{ 'owner.id': bot.user_id },
 				{
