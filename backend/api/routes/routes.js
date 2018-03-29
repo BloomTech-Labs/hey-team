@@ -3,6 +3,7 @@ const cors = require('cors');
 
 const messageController = require('../controllers/messageController');
 const accountController = require('../controllers/accountController');
+const accountBotController = require('../controllers/accountBotController');
 const testController = require('../controllers/testController');
 
 const passportConfig = require('../../app/passport');
