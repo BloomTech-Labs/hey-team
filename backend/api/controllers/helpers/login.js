@@ -1,13 +1,13 @@
 const request = require('request');
 const Account = require('../../models/accountModel');
-const createAccount = require('./createUserAccount');
+const createUserAccount = require('./createUserAccount');
 
 const colors = require('colors');
 
 const CLIENT_ID = '270618182930.333388702161';
 const CLIENT_SECRET = '8a86f76a3e4f7de24fae4dab9397848b';
 
-module.exports = login = (req, res) => {
+module.exports = login = (req, res, done) => {
   if (!req.query.code) {
     // access denied
     return;
@@ -34,11 +34,12 @@ module.exports = login = (req, res) => {
       });
       if (account) {
         console.log(colors.cyan(__dirname));
-        res.redirect(__dirname + '../../../test.html');
+        res.redirect(__dirname + '/test.html');
       } else {
         // console.log(colors.blue(res));
-        await createAccount(body, req, res);
+        createUserAccount(body, req, res, done);
       }
     }
+    // res.redirect(__dirname + '/public/success.html');
   });
 };

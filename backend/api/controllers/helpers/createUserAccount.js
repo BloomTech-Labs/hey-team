@@ -15,7 +15,7 @@ module.exports = createUserAccount = (body, req, res) => {
   });
   newAccount.save((err, newAccount) => {
     if (err) {
-      return res.status(403).json({ err: err.message });
+      res.status(403).json({ err: err.message });
     }
     // res.status(200).json({ newAccount });
   });
