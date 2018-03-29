@@ -57,5 +57,5 @@ const botAccount = (req, res) => {
 };
 
 module.exports = {
-	botAccount
+  botAccount,
 };
