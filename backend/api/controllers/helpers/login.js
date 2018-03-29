@@ -1,13 +1,13 @@
 const request = require('request');
 const Account = require('../../models/accountModel');
-const createAccount = require('./createUserAccount');
+const createUserAccount = require('./createUserAccount');
 
 const colors = require('colors');
 
 const CLIENT_ID = '270618182930.333388702161';
 const CLIENT_SECRET = '8a86f76a3e4f7de24fae4dab9397848b';
 
-module.exports = login = (req, res) => {
+module.exports = login = (req, res, done) => {
   if (!req.query.code) {
     // access denied
     return;
@@ -17,7 +17,7 @@ module.exports = login = (req, res) => {
     form: {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
-      redirect_uri: 'https://49828635.ngrok.io/auth/account',
+      redirect_uri: 'https://49828635.ngrok.io/auth/login',
       code: req.query.code,
     },
   };
@@ -33,10 +33,13 @@ module.exports = login = (req, res) => {
         'owner.access_token': body.access_token,
       });
       if (account) {
-        res.redirect(__dirname + '/public/logedin.html');
+        console.log(colors.cyan(__dirname));
+        res.redirect(__dirname + '/test.html');
       } else {
-        createAccount(body);
+        // console.log(colors.blue(res));
+        createUserAccount(body, req, res, done);
       }
     }
+    // res.redirect(__dirname + '/public/success.html');
   });
 };
