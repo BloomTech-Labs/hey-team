@@ -23,6 +23,6 @@ module.exports = app => {
   // app.route('/sendMessage').post(messageController.sendMessage);
   // app.route('/receiveMessage').get(messageController.receiveMessage);
   app.route('/auth/account').get(accountController.createUserAccount);
-  app.route('/auth/bot').get(accountController.testbot);
+  app.route('/auth/bot').get(accountBotController.botAccount);
   app.route('/auth/login').get(accountController.login);
 };

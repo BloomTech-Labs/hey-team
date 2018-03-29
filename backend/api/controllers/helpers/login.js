@@ -17,7 +17,7 @@ module.exports = login = (req, res) => {
     form: {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
-      redirect_uri: 'https://49828635.ngrok.io/auth/account',
+      redirect_uri: 'https://49828635.ngrok.io/auth/login',
       code: req.query.code,
     },
   };
@@ -33,9 +33,11 @@ module.exports = login = (req, res) => {
         'owner.access_token': body.access_token,
       });
       if (account) {
-        res.redirect(__dirname + '/public/logedin.html');
+        console.log(colors.cyan(__dirname));
+        res.redirect(__dirname + '../../../test.html');
       } else {
-        createAccount(body);
+        // console.log(colors.blue(res));
+        await createAccount(body, req, res);
       }
     }
   });
