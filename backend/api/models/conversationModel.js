@@ -3,17 +3,18 @@ const mongoose = require('mongoose');
 const conversationSchema = new mongoose.Schema({
   questions: [
     {
-      question: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'question',
-        // required: true,
-      },
+      // question: {
+      //   type: mongoose.Schema.Types.ObjectId,
+      //   ref: 'question',
+      //   // required: true,
+      // },
+      type: String,
     },
   ],
-  schedule: {
-    type: Date,
-    // required: true,
-  },
+  // schedule: {
+  //   type: Date,
+  //   // required: true,
+  // },
   participants: [
     {
       participant: {

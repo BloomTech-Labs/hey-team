@@ -66,14 +66,29 @@ const accountSchema = new mongoose.Schema({
       default: '',
     },
   },
-  // conversations: [
-  //   {
-  //     conversation: {
-  //       type: mongoose.Schema.Types.ObjectId,
-  //       ref: 'conversation',
-  //     },
-  //   },
-  // ],
+  conversations: [
+    {
+      conversation: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'conversation',
+      },
+      default: {
+        questions: [
+          {
+            type: String,
+          },
+        ],
+        participants: [
+          {
+            participant: {
+              type: mongoose.Schema.Types.ObjectId,
+              ref: 'participant',
+            },
+          },
+        ],
+      },
+    },
+  ],
 });
 
 module.exports = mongoose.model('account', accountSchema);

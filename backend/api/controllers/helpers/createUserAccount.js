@@ -12,6 +12,12 @@ module.exports = createUserAccount = (body, req, res) => {
       email: body.user.email,
       image: body.user.image_192,
     },
+    team: {
+      id: body.team.id,
+      name: body.team.name,
+      domain: body.team.domain,
+      image: body.team.image_132,
+    },
   });
   newAccount.save((err, newAccount) => {
     if (err) {
