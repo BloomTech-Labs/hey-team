@@ -19,5 +19,5 @@ module.exports = createUserAccount = (body, req, res) => {
     }
     // res.status(200).json({ newAccount });
   });
-  res.redirect(__dirname + '/public/success.html');
+  res.redirect(__dirname + '/public/DOOKIE_BUTTHAM.html');
 };
