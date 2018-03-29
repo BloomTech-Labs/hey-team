@@ -6,15 +6,19 @@ import FontAwesome from 'react-fontawesome';
 
 //grabs users timezone -- until default is set in preferences
 let getTimeZone = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1];
-//converts getTimeZone to something like GMT-0400 -Chrome likes to add a seemingly 
-//random place within the timezone with the rest of the info
+/* converts getTimeZone to something like GMT-0400; Chrome likes to add a seemingly 
+random place within the timezone with the rest of the info */
 let timeZone = getTimeZone.substring(0,8);
+
+                                    //days array starts with Monday 1 for message scheduled for that day
+let conversations  = [{name:"Fred", days:[0, 1, 0, 1, 0, 0, 0], time:"10:00 AM", 
+    questions: ["Question One", "Question Two"], participants: ["@user1", "@user2"], channel: "SomeChannelName"}];
 
 class New extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            conversations: conversations
         };
     }
 

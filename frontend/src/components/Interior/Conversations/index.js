@@ -9,8 +9,9 @@ import React from 'react';
 import '../../../css/interior.css';
 import '../../../css/conversations.css';
 import InsideNavigation from '../../InsideNavigation';
-import New from './New';
 
+import Cards from './Cards';
+import New from './New';
 
 class ConversationsIndex extends React.Component {
     constructor(props) {

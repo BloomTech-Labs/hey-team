@@ -1,0 +1,7 @@
+.conversCard {
+    display: flex;
+    position: relative;
+    top: 25%;
+    left: 25%;
+    padding: 5px 2px;
+}
