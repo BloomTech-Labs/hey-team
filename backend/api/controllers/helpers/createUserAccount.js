@@ -1,7 +1,12 @@
-const loginHelper = require('./helpers/login');
-createUserAccountHelper = require('./helpers/createUserAccount');
+const request = require('request');
+const Account = require('../../models/accountModel');
 
-const createUserAccount = (req, res) => {
+const colors = require('colors');
+
+const CLIENT_ID = '270618182930.333388702161';
+const CLIENT_SECRET = '8a86f76a3e4f7de24fae4dab9397848b';
+
+module.exports = createUserAccount = (req, res) => {
   if (!req.query.code) {
     // access denied
     return;
@@ -10,7 +15,7 @@ const createUserAccount = (req, res) => {
     form: {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
-      redirect_uri: 'https://49828635.ngrok.io/auth/login',
+      redirect_uri: 'https://49828635.ngrok.io/auth/account',
       code: req.query.code,
     },
   };
@@ -21,7 +26,7 @@ const createUserAccount = (req, res) => {
   ) {
     if (!error && response.statusCode == 200) {
       const newBody = JSON.parse(body);
-      console.log(newBody);
+
       const foundAccount = await Account.findOne(
         {
           'owner.access_token': newBody.access_token,
@@ -31,7 +36,7 @@ const createUserAccount = (req, res) => {
         }
       );
       if (foundAccount) {
-        console.log('Account already made!');
+        console.log('Account already made!'.bgWhite.italic.cyan);
         return res.json({ err: 'Account already exists!' });
       } else {
         const newAccount = new Account({
@@ -53,19 +58,4 @@ const createUserAccount = (req, res) => {
       }
     }
   });
-};
-
-const testbot = (req, res) => {
-  console.log('test bot is the best ham in the house');
-  res.status(200).send('bots in the house!');
-};
-
-const login = (req, res) => {
-  return loginHelper(req, res);
-};
-
-module.exports = {
-  createUserAccount,
-  testbot,
-  login,
 };

@@ -20,6 +20,7 @@
     "@slack/client": "^4.0.1",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
+    "colors": "^1.2.1",
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "express-mailer": "^0.3.1",
