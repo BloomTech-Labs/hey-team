@@ -3,6 +3,7 @@ const cors = require('cors');
 
 const messageController = require('../controllers/messageController');
 const accountController = require('../controllers/accountController');
+const accountBotController = require('../controllers/accountBotController');
 const testController = require('../controllers/testController');
 
 const passportConfig = require('../../app/passport');
@@ -22,5 +23,5 @@ module.exports = app => {
   // app.route('/sendMessage').post(messageController.sendMessage);
   // app.route('/receiveMessage').get(messageController.receiveMessage);
   app.route('/auth/account').get(accountController.createUserAccount);
-  app.route('/auth/bot').get(accountController.testbot);
+  app.route('/auth/bot').get(accountBotController.botAccount);
 };

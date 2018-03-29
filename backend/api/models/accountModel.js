@@ -35,27 +35,35 @@ const accountSchema = new mongoose.Schema({
   bot: {
     access_token: {
       type: String,
+      default: '',
     },
     user_id: {
       type: String,
+      default: '',
     },
     channel: {
       type: String,
+      default: '',
     },
     channel_id: {
       type: String,
+      default: '',
     },
     configuration_url: {
       type: String,
+      default: '',
     },
     url: {
       type: String,
+      default: '',
     },
     bot_user_id: {
       type: String,
+      default: '',
     },
     bot_access_token: {
       type: String,
+      default: '',
     },
   },
   // conversations: [

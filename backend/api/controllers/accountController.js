@@ -13,7 +13,7 @@ const createUserAccount = (req, res) => {
     form: {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
-      redirect_uri: 'https://2b7b0cfd.ngrok.io/auth/account',
+      redirect_uri: 'https://16a76d79.ngrok.io/auth/account',
       code: req.query.code,
     },
   };
@@ -24,7 +24,7 @@ const createUserAccount = (req, res) => {
   ) {
     if (!error && response.statusCode == 200) {
       const newBody = JSON.parse(body);
-
+      console.log(newBody);
       const foundAccount = await Account.findOne(
         {
           'owner.access_token': newBody.access_token,
