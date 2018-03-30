@@ -86,7 +86,7 @@ http://alexcassell.com
     margin-top: 2vh;
 }
 
-.conversations__dropbtn {
+.conversations__dropButton {
     background-color: #466365;
     color: white;
     padding: .5vw;
@@ -129,7 +129,42 @@ http://alexcassell.com
     display: flex;
 }
 
-.conversations__timeZoneDropdown:hover .conversations__dropbtn {
+.conversations__timeZoneDropdown:hover .conversations__dropButton {
     background-color: #466365;
     color: white;
 }
+
+.conversations__buttonAdd{
+    position: relative;
+    bottom: 0px;
+    cursor: pointer;
+}
+
+.conversations__questions{
+    display: flex;
+    flex-direction: column;
+    /* border: solid red 1px; */
+}
+
+.conversations__question{
+    display: flex;
+    flex-direction: row;
+    /* border: solid red 1px; */
+}
+
+.conversations__questionsWrapper{
+    display: flex;
+    flex-direction: row;
+    /* border: solid red 1px; */
+}
+/* 
+.conversations__input{
+    position: relative;
+    right: 0px;
+}
+*/
+.conversations__questionsStateWrapper{
+    display: flex;
+    flex-direction: column;
+}
+
