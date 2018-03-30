@@ -19,9 +19,7 @@ import FontAwesome from 'react-fontawesome';
 let conversation  = {name:"", days:daysArray, time:"", timeZone:timeZone,
     questions: [], participants: ["@", "@"], channel: ""};
 
-let questionSecondary = <Input className="ui size input" type="text" name="question" onChange={(e) => this.handleInput(e)} placeholder="Type a question"/>;
 
-let question = <div><Input className="ui size input" type="text" name="question" onChange={(e) => this.handleInput(e)} placeholder="Type a question"/><button className="conversations__buttonAdd"  onClick={(e) => this.handleAddingQuestions(e)}><i className="fa fa-plus-circle fa-2x"></i></button></div>;
 
 class New extends Component {
     constructor(props) {
@@ -61,10 +59,6 @@ class New extends Component {
         }
         this.setState({conversation:conversation});
         console.log(conversation);
-    }
-
-    handleAddingQuestions(){
-        // this.setState({questions:});
     }
 
 
