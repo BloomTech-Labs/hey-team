@@ -4,12 +4,16 @@
 
 import React, { Component } from 'react';
 import { Button, Input } from 'semantic-ui-react';
+
 import TimeZones from './TimeZones';
 import { timeZone } from './TimeZones';
+
 import Days from './Days';
 import {daysArray} from './Days';
 
+import Questions from './Questions';
 
+import '../../../../css/conversations.css';
 import FontAwesome from 'react-fontawesome';
 
 let conversation  = {name:"", days:daysArray, time:"", timeZone:timeZone,
@@ -76,18 +80,8 @@ class New extends Component {
 
                     <div className="conversations__showTimeZone">{timeZone}</div>
                 </div>
-                <div className="conversations__questions">
-                    <div className="conversations__title">
-                        Questions
-                    </div>
-                    <div className="conversations__questionsWrapper">
-                        <div className="conversations__questionsStateWrapper">
-                            {this.state.questions}
-                        </div>
-                    </div>
-                    
-                    <button className="conversations__button__questionsSave">Save Questions</button>
-                </div>
+                <Questions />
+
                 <div className="conversations__participantWrapper">
                     <div className="conversations__participant">
                         Participants
@@ -102,7 +96,7 @@ class New extends Component {
                     </div>
                 </div>
                 <div className="conversations__channel">
-                <Input className="ui size input" type="text" name="channel" onChange={(e) => this.handleInput(e)} placeholder="Where should we post answers?"/> 
+                    <Input className="ui size input" type="text" name="channel" onChange={(e) => this.handleInput(e)} placeholder="Where should we post answers?"/> 
                 </div>
             </div>
             );

@@ -1,11 +1,11 @@
 //Alex Cassell
 //http://alexcassell.com
+//set days of the week for conversation
 
 import React from 'react';
 
 import { Button } from 'semantic-ui-react';
 
-import '../../../css/conversations.css';
                 //days array starts with Monday; true for message scheduled for that day
 let daysArray=[false, false, false, false, false, false, false];
 

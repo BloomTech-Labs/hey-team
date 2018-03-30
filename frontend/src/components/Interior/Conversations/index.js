@@ -11,7 +11,7 @@ import '../../../css/conversations.css';
 import InsideNavigation from '../../InsideNavigation';
 
 import Cards from './Cards';
-import New from './New';
+import New from './NewConversation/index';
 
 class ConversationsIndex extends React.Component {
     constructor(props) {

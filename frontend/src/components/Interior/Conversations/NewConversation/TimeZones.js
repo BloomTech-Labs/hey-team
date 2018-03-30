@@ -1,9 +1,7 @@
 //Alex Cassell
 //http://alexcassell.com
-
+//set timezone for conversation
 import React from 'react';
-import '../../../css/conversations.css';
-import InsideNavigation from '../../InsideNavigation';
 
 //grabs users timezone -- until default is set in preferences
 let getTimeZone = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1];
