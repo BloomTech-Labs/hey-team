@@ -13,13 +13,38 @@ const conversationSchema = new mongoose.Schema({
     mon: {
       type: Boolean,
     },
+    tue: {
+      type: Boolean,
+    },
+    wed: {
+      type: Boolean,
+    },
+    thu: {
+      type: Boolean,
+    },
+    fri: {
+      type: Boolean,
+    },
+    sat: {
+      type: Boolean,
+    },
+    sun: {
+      type: Boolean,
+    },
     time: {
       type: String,
     },
   },
   participants: [
     {
-      user: {},
+      user: {
+        name: {
+          type: String,
+        },
+        avitar: {
+          type: String,
+        },
+      },
       responces: [],
     },
   ],
