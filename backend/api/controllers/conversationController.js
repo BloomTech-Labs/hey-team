@@ -1,14 +1,26 @@
 const Conversation = require('../models/conversationModel');
 const Account = require('../models/accountModel');
+const Member = require('../models/memberModel');
 
 const colors = require('colors');
 
 const createConversation = async (req, res) => {
-  const { title, questions, participants, schedule } = req.body;
-  // search for user id and return user
-  // for each participant in list
-  // account.team.members.find("user_id")
-  // const actual participants.push()
+  const { title, questions, users, schedule } = req.body;
+  const participants = [];
+
+  await Account.findById('5abeb1d0b2b1772ff0f1d129', function(err, model) {
+    console.log(colors.yellow(model.team.members[0].name));
+    model.team.members.forEach(m => {
+      console.log(colors.yellow(m.name));
+      users.forEach(u => {
+        if (m.id === u) {
+          participants.push(m);
+        }
+      });
+    });
+  });
+  // if (query) participants.push(query.select('name'));
+
   const newConversation = new Conversation({
     title,
     questions,
@@ -17,7 +29,7 @@ const createConversation = async (req, res) => {
   });
   console.log(colors.cyan(newConversation));
   await Account.findByIdAndUpdate(
-    '5abd8e0f77283c24942533e5',
+    '5abeb1d0b2b1772ff0f1d129',
     { $push: { conversations: newConversation } },
     { safe: true, upsert: true, new: true },
     function(err, model) {
