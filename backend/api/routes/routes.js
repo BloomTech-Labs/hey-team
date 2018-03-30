@@ -7,7 +7,7 @@ const accountBotController = require('../controllers/accountBotController');
 const testController = require('../controllers/testController');
 const conversation = require('../controllers/conversationController');
 
-const teamInfo = require('../controllers/getTeamInfo');
+// const teamInfo = require('../controllers/getTeamInfo');
 
 const passportConfig = require('../../app/passport');
 // const middleware = require('../common/middleware');
@@ -29,5 +29,4 @@ module.exports = app => {
   app.route('/auth/bot').get(accountBotController.botAccount);
   app.route('/auth/login').get(accountController.login);
   app.route('/conversation/create').post(conversation.createConversation);
-  app.route('/team').get(teamInfo.stuff);
 };

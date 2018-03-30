@@ -35,7 +35,7 @@ module.exports = login = (req, res, done) => {
       });
       if (account) {
         console.log(colors.cyan(__dirname));
-        res.redirect(__dirname + '/test.html');
+        res.redirect('https://duckduckgo.com/');
       } else {
         // console.log(colors.blue(res));
         // createTeamAccount(body, req, res, done);

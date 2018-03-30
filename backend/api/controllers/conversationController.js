@@ -4,8 +4,17 @@ const Account = require('../models/accountModel');
 const colors = require('colors');
 
 const createConversation = async (req, res) => {
-  const { title, questions, participants } = req.body;
-  const newConversation = new Conversation({ questions });
+  const { title, questions, participants, schedule } = req.body;
+  // search for user id and return user
+  // for each participant in list
+  // account.team.members.find("user_id")
+  // const actual participants.push()
+  const newConversation = new Conversation({
+    title,
+    questions,
+    participants,
+    schedule,
+  });
   console.log(colors.cyan(newConversation));
   await Account.findByIdAndUpdate(
     '5abd8e0f77283c24942533e5',

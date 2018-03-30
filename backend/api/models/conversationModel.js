@@ -9,11 +9,20 @@ const conversationSchema = new mongoose.Schema({
       type: String,
     },
   ],
-  // schedule: {
-  //   type: Date,
-  //   // required: true,
-  // },
-  participants: [],
+  schedule: {
+    mon: {
+      type: Boolean,
+    },
+    time: {
+      type: String,
+    },
+  },
+  participants: [
+    {
+      user: {},
+      responces: [],
+    },
+  ],
 });
 
 module.exports = mongoose.model('conversation', conversationSchema);
