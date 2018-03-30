@@ -1,0 +1,45 @@
+const mongoose = require('mongoose');
+
+const memberSchema = new mongoose.Schema({
+  // id: {
+  //   type: String,
+  // },
+  // team_id,
+  // name,
+  // deleted,
+  // color,
+  // real_name,
+  // tz,
+  // tz_label,
+  // tz_offset,
+  // profile: {
+  //   title,
+  //   phone,
+  //   skype,
+  //   real_name,
+  //   real_name_normalized,
+  //   display_name,
+  //   display_name_normalized,
+  //   status_text,
+  //   status_emoji,
+  //   status_expiration,
+  //   avatar_hash,
+  //   image_24,
+  //   image_32,
+  //   image_48,
+  //   image_72,
+  //   image_192,
+  //   image_512,
+  //   team,
+  // },
+  // is_admin,
+  // is_owner,
+  // is_primary_owner,
+  // is_restricted,
+  // is_ultra_restricted,
+  // is_bot,
+  // updated,
+  // is_app_user,
+});
+
+module.exports = mongoose.model('member', memberSchema);
