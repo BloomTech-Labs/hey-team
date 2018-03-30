@@ -1,13 +1,11 @@
 const mongoose = require('mongoose');
 
 const conversationSchema = new mongoose.Schema({
+  title: {
+    type: String,
+  },
   questions: [
     {
-      // question: {
-      //   type: mongoose.Schema.Types.ObjectId,
-      //   ref: 'question',
-      //   // required: true,
-      // },
       type: String,
     },
   ],
@@ -15,14 +13,7 @@ const conversationSchema = new mongoose.Schema({
   //   type: Date,
   //   // required: true,
   // },
-  participants: [
-    {
-      participant: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'participant',
-      },
-    },
-  ],
+  participants: [],
 });
 
 module.exports = mongoose.model('conversation', conversationSchema);

@@ -18,7 +18,7 @@ module.exports = login = (req, res, done) => {
     form: {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
-      redirect_uri: 'https://df89225c.ngrok.io/auth/login',
+      redirect_uri: 'https://976ef904.ngrok.io/auth/login',
       code: req.query.code,
     },
   };
@@ -30,7 +30,6 @@ module.exports = login = (req, res, done) => {
   ) {
     if (!error && response.statusCode === 200) {
       body = JSON.parse(body);
-      console.log(colors.cyan('BODY', body));
       const account = await Account.findOne({
         'owner.access_token': body.access_token,
       });
