@@ -18,7 +18,7 @@ module.exports = login = (req, res, done) => {
     form: {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
-      redirect_uri: 'https://976ef904.ngrok.io/auth/login',
+      redirect_uri: 'https://749901e5.ngrok.io/auth/login',
       code: req.query.code,
     },
   };
@@ -30,16 +30,29 @@ module.exports = login = (req, res, done) => {
   ) {
     if (!error && response.statusCode === 200) {
       body = JSON.parse(body);
-      const account = await Account.findOne({
-        'owner.access_token': body.access_token,
-      });
+      const account = await Account.findOne(
+        {
+          'owner.access_token': body.access_token,
+        }
+        // function(err, model) {
+        //   // console.log(colors.yellow(model._id));
+
+        //   return model._id;
+        // }
+      );
       if (account) {
-        console.log(colors.cyan(__dirname));
-        res.redirect('https://duckduckgo.com/');
+        console.log(colors.yellow(account._id));
+        // backend
+        res.redirect(`https://hamhamham.com/?doc_id=${account._id}`);
+        // frontend
+        // const url = new URL(window.location.href);
+        // const params = new URLSearchParams(url.search.slice(1));
+        // const id = params.get('doc_id');
+        // localStorage.setItem('doc_id', id);
       } else {
         // console.log(colors.blue(res));
         // createTeamAccount(body, req, res, done);
-        createUserAccount(body, req, res, done);
+        createUserAccount(body, req, res, account._id, done);
       }
     }
     // res.redirect(__dirname + '/public/success.html');
