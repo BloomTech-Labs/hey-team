@@ -31,6 +31,7 @@ const accountSchema = new mongoose.Schema({
     image: {
       type: String,
     },
+    members: [],
   },
   bot: {
     access_token: {
@@ -66,29 +67,7 @@ const accountSchema = new mongoose.Schema({
       default: '',
     },
   },
-  conversations: [
-    {
-      conversation: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'conversation',
-      },
-      default: {
-        questions: [
-          {
-            type: String,
-          },
-        ],
-        participants: [
-          {
-            participant: {
-              type: mongoose.Schema.Types.ObjectId,
-              ref: 'participant',
-            },
-          },
-        ],
-      },
-    },
-  ],
+  conversations: [],
 });
 
 module.exports = mongoose.model('account', accountSchema);

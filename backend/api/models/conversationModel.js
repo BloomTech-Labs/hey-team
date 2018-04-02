@@ -1,26 +1,51 @@
 const mongoose = require('mongoose');
 
 const conversationSchema = new mongoose.Schema({
+  title: {
+    type: String,
+  },
   questions: [
     {
-      // question: {
-      //   type: mongoose.Schema.Types.ObjectId,
-      //   ref: 'question',
-      //   // required: true,
-      // },
       type: String,
     },
   ],
-  // schedule: {
-  //   type: Date,
-  //   // required: true,
-  // },
+  schedule: {
+    mon: {
+      type: Boolean,
+    },
+    tue: {
+      type: Boolean,
+    },
+    wed: {
+      type: Boolean,
+    },
+    thu: {
+      type: Boolean,
+    },
+    fri: {
+      type: Boolean,
+    },
+    sat: {
+      type: Boolean,
+    },
+    sun: {
+      type: Boolean,
+    },
+    time: {
+      type: String,
+    },
+  },
   participants: [
     {
-      participant: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'participant',
+      user: {
+        name: {
+          type: String,
+        },
+        avatar: {
+          type: String,
+        },
       },
+      responses: [],
     },
   ],
 });

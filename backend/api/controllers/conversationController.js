@@ -1,26 +1,39 @@
-const conversation = require('../models/conversationModel');
+const Conversation = require('../models/conversationModel');
 const Account = require('../models/accountModel');
 
+const colors = require('colors');
+
 const createConversation = async (req, res) => {
-  const { questions } = req.body;
-  const newConversation = new conversation({ questions });
-  const newaccount = await Account.findOneAndUpdate(
-    { _id: '5abd5ec6a92ce13aa88e123d' },
-    {
-      'conversations.conversation': newConversation,
-    },
-    (err, account) => {
-      if (err) {
-        res.status(403).json({ err: err.message });
-      }
-      // res.status(200).json({ res: 'success ham!' });
-      console.log(account);
-      // account.save();
+  const { title, questions, participants, schedule } = req.body;
+  console.log(colors.red(JSON.parse(req)));
+  // search for user id and return user
+  // for each participant in list
+  // account.team.members.find("user_id")
+  // const actual participants.push()
+  const newConversation = new Conversation({
+    title,
+    questions,
+    participants,
+    schedule,
+  });
+  console.log(colors.cyan(newConversation));
+  await Account.findByIdAndUpdate(
+    '5abd8e0f77283c24942533e5',
+    { $push: { conversations: newConversation } },
+    { safe: true, upsert: true, new: true },
+    function(err, model) {
+      // console.log('err', err);
+      // console.log('model', model);
     }
   );
+  // const account = await Account.findById('5abd7623729a5b2bf4c3a8db');
+  // await account.conversations.push(newConversation);
+  // await account.save();
 
-  // newConversation.save();
-  console.log('nc', newaccount);
+  // const c = await Conversation.find({});
+  // console.log(c);
+
+  // console.log(account.conversations[0]);
   res.json(newConversation);
 };
 
