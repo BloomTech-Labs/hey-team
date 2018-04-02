@@ -18,6 +18,12 @@ class ConversationsIndex extends React.Component {
     super(props);
     this.state = {'somestate': ''};
     }
+
+    handleNewConversationButton(){
+        this.props.history.push('/conversations/new');
+        console.log("here");
+    }
+
     render() {
         return (
             <div className="interior__wrapper">
@@ -31,14 +37,15 @@ class ConversationsIndex extends React.Component {
                 <InsideNavigation />{/*Side menu */}
 
                 {/* Below will be handled by states*/}
-                {/* <div className="conversations__wrapper">
+                <div className="conversations__wrapper">
                     <div className="conversation__add">
-                        Add a New Conversation <br /> */}
+                        Add a New Conversation <br />
                         {/* the above text will be the default [0] of an array */}
-                        {/* <button className="conversation__addButton">+</button>
+                        <button onClick={() => this.handleNewConversationButton()} className="conversation__addButton">+</button>
+                        {/* Instead of using router I am going to change the state of this component to show the new.js component
+                        when the user clicks new. */}
                     </div>
-                </div> */}
-                <New />
+                </div>
             </div>
         );
 }
