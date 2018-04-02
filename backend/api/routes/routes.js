@@ -7,6 +7,8 @@ const accountBotController = require('../controllers/accountBotController');
 const testController = require('../controllers/testController');
 const conversation = require('../controllers/conversationController');
 
+// const teamInfo = require('../controllers/getTeamInfo');
+
 const passportConfig = require('../../app/passport');
 // const middleware = require('../common/middleware');
 

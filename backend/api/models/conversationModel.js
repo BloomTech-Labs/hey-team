@@ -37,13 +37,11 @@ const conversationSchema = new mongoose.Schema({
   },
   participants: [
     {
-      user: {
-        name: {
-          type: String,
-        },
-        avatar: {
-          type: String,
-        },
+      name: {
+        type: String,
+      },
+      avatar: {
+        type: String,
       },
       responses: [],
     },

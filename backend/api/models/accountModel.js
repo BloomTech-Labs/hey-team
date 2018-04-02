@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const memberSchema = require('./memberModel');
 
 const accountSchema = new mongoose.Schema({
   owner: {
@@ -31,7 +32,13 @@ const accountSchema = new mongoose.Schema({
     image: {
       type: String,
     },
-    members: [],
+    members: [
+      // {
+      //   member: {
+      //     type: memberSchema,
+      //   },
+      // },
+    ],
   },
   bot: {
     access_token: {
