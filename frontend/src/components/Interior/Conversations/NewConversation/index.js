@@ -3,7 +3,7 @@
 //new conversation component
 
 import React, { Component } from 'react';
-import { Button, Input } from 'semantic-ui-react';
+import { Input } from 'semantic-ui-react';
 
 import TimeZones from './TimeZones';
 import { timeZone } from './TimeZones';
@@ -14,7 +14,6 @@ import {daysArray} from './Days';
 import Questions from './Questions';
 
 import '../../../../css/conversations.css';
-import FontAwesome from 'react-fontawesome';
 
 let conversation  = {name:"", days:daysArray, time:"", timeZone:timeZone,
     questions: [], participants: ["@", "@"], channel: ""};
@@ -26,7 +25,6 @@ class New extends Component {
         super(props);
         this.state = {
             conversation: conversation,
-            questions: [question, questionSecondary, questionSecondary]
         };
     }
 
@@ -38,21 +36,6 @@ class New extends Component {
 
         else if (e.target.name === "time"){
             conversation["time"] = e.target.value;
-        }
-        else if(e.target.name === "question"){
-            // if(conversation["questions"][0] === undefined){
-            //     conversation["questions"][0] = e.target.value;
-            // }
-            // else
-
-            /*when the + button is prssed to add another question
-                an integer var is increased by 1
-                --come back to this when I am less sleepy
-
-                --maybe the question is not saved until the plus button
-                is pressed to add another question - then add a save questions
-                button-- maybe
-            */
         }
         else if (e.target.name === "channel"){
             conversation["channel"] = e.target.value;

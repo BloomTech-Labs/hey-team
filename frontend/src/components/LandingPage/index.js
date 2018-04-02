@@ -2,8 +2,9 @@
 //http://alexcassell.com
 import React from 'react';
 
-import * as Scroll from 'react-scroll';
-import { Link as link, DirectLink, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
+// import * as Scroll from 'react-scroll';
+// import { Link as link, DirectLink, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
+import {Events, scrollSpy, scroll } from 'react-scroll';
 
 import { Button } from 'semantic-ui-react'
 import '../../Semantic-UI-CSS/semantic.min.css';
@@ -80,7 +81,7 @@ class LandingPageIndex extends React.Component {
     }
 
     handleHeaderScrolling(){
-        console.log(window.scrollY);
+        // console.log(window.scrollY);
         if(window.scrollY > 0){
             shakeFeatures = "features__default shakeHeaderMove";
             shakeSignIn = "signIn__default shakeHeaderMove";

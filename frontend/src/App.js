@@ -2,7 +2,7 @@
 //http://alexcassell.com
 
 import React, { Component } from 'react';
-import {Billing, Preferences, SignIn } from './components';
+import { SignIn } from './components';
 import ConversationsIndex from './components/Interior/Conversations/index.js';
 import PreferencesIndex from './components/Interior/Preferences/index.js';
 import BillingIndex from './components/Interior/Billing/index.js';

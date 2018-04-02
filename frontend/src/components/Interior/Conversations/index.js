@@ -10,7 +10,7 @@ import '../../../css/interior.css';
 import '../../../css/conversations.css';
 import InsideNavigation from '../../InsideNavigation';
 
-import Cards from './Cards';
+// import Cards from './Cards';
 import New from './NewConversation/index';
 
 class ConversationsIndex extends React.Component {

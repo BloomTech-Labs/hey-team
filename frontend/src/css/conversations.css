@@ -140,12 +140,6 @@ http://alexcassell.com
     cursor: pointer;
 }
 
-.conversations__questions{
-    display: flex;
-    flex-direction: column;
-    /* border: solid red 1px; */
-}
-
 .conversations__question{
     display: flex;
     flex-direction: row;
@@ -167,4 +161,10 @@ http://alexcassell.com
     display: flex;
     flex-direction: column;
 }
+
+.conversations__questions{
+    position: relative;
+    margin-top: 5px;
+}
+
 
