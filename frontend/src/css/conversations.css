@@ -5,6 +5,12 @@ http://alexcassell.com
 /* color pallette */
 /* https://coolors.co/98c1d9-466365-b1b7d1-9b9fb5-a5d8ff */
 
+@font-face {
+    font-family: Adventuring;
+    src: url(../fonts/Adventuring.otf);
+}
+
+
 .conversations__wrapper{
     position: absolute;
     width: 100vw;
@@ -46,24 +52,20 @@ http://alexcassell.com
 }
 
 .conversations__newWrapper{
+    font-family: Adventuring;
     position: absolute;
     height: 80vh;
     top: 20vh;
     left: 15vw;
     padding-left: 4vw;
-    /* display: flex;
-    flex-direction: column;
-    justify-content: space-evenly; */
 }
 
 .ui.size.input{
     width: 400px;
-    /* margin-top: 2vh; */
 }
 
 .ui.size.input.small{
     width: 200px;
-    /* margin-top: 2vh; */
 }
 
 .ui.input.participants{
@@ -143,13 +145,11 @@ http://alexcassell.com
 .conversations__question{
     display: flex;
     flex-direction: row;
-    /* border: solid red 1px; */
 }
 
 .conversations__questionsWrapper{
     display: flex;
     flex-direction: row;
-    /* border: solid red 1px; */
 }
 /* 
 .conversations__input{

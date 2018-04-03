@@ -6,8 +6,6 @@ import React from 'react';
 // import '../../../Semantic-UI-CSS/semantic.min.css';
 
 import '../../../css/interior.css';
-import InsideNavigation from '../../InsideNavigation';
-
 
 class PreferencesIndex extends React.Component {
     constructor(props) {
@@ -16,15 +14,8 @@ class PreferencesIndex extends React.Component {
     }
     render() {
         return (
-            <div className="interior__wrapper">
-                <div className="interior__header">
-                    <div className="logo"/>
-                    <div className="interior__title">
-                        Preferences
-                    </div>
-                    <div className="interior__signOut"/>
-                </div>
-                <InsideNavigation />{/*Side menu */}
+            <div>
+                Preferences
             </div>
         );
 }

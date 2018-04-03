@@ -12,9 +12,6 @@ Notes.txt
 # production
 /build
 
-#alex's stuff
-/notes.txt
-
 # misc
 .DS_Store
 .env.local

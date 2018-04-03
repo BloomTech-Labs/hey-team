@@ -8,7 +8,6 @@ import React from 'react';
 
 import '../../../css/interior.css';
 import '../../../css/conversations.css';
-import InsideNavigation from '../../InsideNavigation';
 
 // import Cards from './Cards';
 import New from './NewConversation/index';
@@ -26,17 +25,6 @@ class ConversationsIndex extends React.Component {
 
     render() {
         return (
-            <div className="interior__wrapper">
-                <div className="interior__header">
-                    <div className="logo"/>
-                    <div className="interior__title">
-                        Conversations
-                    </div>
-                    <div className="interior__signOut"/>
-                </div>
-                <InsideNavigation />{/*Side menu */}
-
-                {/* Below will be handled by states*/}
                 <div className="conversations__wrapper">
                     <div className="conversation__add">
                         Add a New Conversation <br />
@@ -46,7 +34,6 @@ class ConversationsIndex extends React.Component {
                         when the user clicks new. */}
                     </div>
                 </div>
-            </div>
         );
 }
 }

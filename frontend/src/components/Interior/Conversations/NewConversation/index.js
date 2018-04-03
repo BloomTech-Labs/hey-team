@@ -3,7 +3,7 @@
 //new conversation component
 
 import React, { Component } from 'react';
-import { Input } from 'semantic-ui-react';
+import { Input, Button } from 'semantic-ui-react';
 
 import TimeZones from './TimeZones';
 import { timeZone } from './TimeZones';
@@ -75,6 +75,8 @@ class New extends Component {
                 <div className="conversations__channel">
                     <Input className="ui size input" type="text" name="channel" onChange={(e) => this.handleInput(e)} placeholder="Where should we post answers?"/> 
                 </div>
+                <Button basic className="conversations__submitButton">Submit</Button>
+                {/* during refactor make this button pop */}
             </div>
             );
         }
