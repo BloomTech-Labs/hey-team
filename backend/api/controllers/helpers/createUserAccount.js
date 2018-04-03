@@ -17,7 +17,7 @@ module.exports = createUserAccount = async (body, req, res) => {
     });
     test.push(newMember);
   });
-  console.log(test);
+  console.log(colors.red(test));
   const newAccount = await new Account({
     owner: {
       access_token: body.access_token,

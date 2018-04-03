@@ -10,7 +10,7 @@ const createUserAccount = (req, res) => {
     form: {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
-      redirect_uri: 'https://df89225c.ngrok.io/auth/login',
+      redirect_uri: 'https://b85cb671.ngrok.io/auth/login',
       code: req.query.code,
     },
   };

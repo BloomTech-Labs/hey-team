@@ -1,11 +1,14 @@
 const passport = require('passport');
 const cors = require('cors');
 
-const messageController = require('../controllers/messageController');
 const accountController = require('../controllers/accountController');
 const accountBotController = require('../controllers/accountBotController');
 const testController = require('../controllers/testController');
+
+const messageController = require('../controllers/messageController');
 const conversation = require('../controllers/conversationController');
+const deleteConversation = require('../controllers/conversationController');
+const updateConversation = require('../controllers/conversationController');
 
 // const teamInfo = require('../controllers/getTeamInfo');
 
@@ -13,20 +16,27 @@ const passportConfig = require('../../app/passport');
 // const middleware = require('../common/middleware');
 
 const corsOptions = {
-  // origin: 'http://localhost:3000',
-  // origin: 'http://www.mynutricard.com',
-  // methods: 'GET, POST, HEAD, PUT, PATCH, DELETE',
-  // preflightContinue: false,
-  credentials: true,
+	// origin: 'http://localhost:3000',
+	// origin: 'http://www.mynutricard.com',
+	// methods: 'GET, POST, HEAD, PUT, PATCH, DELETE',
+	// preflightContinue: false,
+	credentials: true
 };
 
 module.exports = app => {
-  app.use(cors(corsOptions));
-  app.use(passport.initialize());
-  // app.route('/sendMessage').post(messageController.sendMessage);
-  // app.route('/receiveMessage').get(messageController.receiveMessage);
-  app.route('/auth/account').get(accountController.createUserAccount);
-  app.route('/auth/bot').get(accountBotController.botAccount);
-  app.route('/auth/login').get(accountController.login);
-  app.route('/conversation/create').post(conversation.createConversation);
+	app.use(cors(corsOptions));
+	app.use(passport.initialize());
+
+	// Account Routes
+	app.route('/auth/account').get(accountController.createUserAccount);
+	app.route('/auth/bot').get(accountBotController.botAccount);
+	app.route('/auth/login').get(accountController.login);
+
+	// Conversation Routes
+	app.route('/conversation/create').post(conversation.createConversation);
+	app.route('/conversation/delete').delete(conversation.deleteConversation);
+	app.route('/conversation/update').put(conversation.updateConversation);
+
+	// app.route('/sendMessage').post(messageController.sendMessage);
+	// app.route('/receiveMessage').get(messageController.receiveMessage);
 };
