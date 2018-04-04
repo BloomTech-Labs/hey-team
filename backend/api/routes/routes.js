@@ -24,9 +24,10 @@ module.exports = app => {
   app.use(cors(corsOptions));
   app.use(passport.initialize());
   // app.route('/sendMessage').post(messageController.sendMessage);
-  // app.route('/receiveMessage').get(messageController.receiveMessage);
+  app.route('/receiveMessage').get(messageController.receiveMessage);
   app.route('/auth/account').get(accountController.createUserAccount);
   app.route('/auth/bot').get(accountBotController.botAccount);
   app.route('/auth/login').get(accountController.login);
   app.route('/conversation/create').post(conversation.createConversation);
+  app.route('/conversation/create').post(conversation.addResponses);
 };
