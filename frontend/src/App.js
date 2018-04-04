@@ -17,23 +17,41 @@ import LandingPageIndex from './components/LandingPage/index.js';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {loggedIn: true};
+    }
   render() {
+        // <NavigationHeader {...this.state} />
+        const loggedIn = this.state.loggedIn;
+    
+        const navigation = loggedIn ? (
+          <div>
+              <Route path="/welcome" component={ SignIn }/>
+              <Route path="/billing" component={ BillingIndex }/>
+              <Route exact path="/conversations" component={ ConversationsIndex }/>
+              <Route path="/preferences" component={ PreferencesIndex }/>
+              <Route path="/conversations/new" component={ New }/>
+              <NavigationHeader />
+          </div>
+        ) : (
+          <div>
+            <Route path="/welcome" component={ SignIn }/>
+            <Route path="/billing" component={ LandingPageIndex }/>
+            <Route exact path="/conversations" component={ LandingPageIndex }/>
+            <Route path="/preferences" component={ LandingPageIndex }/>
+            <Route path="/conversations/new" component={ LandingPageIndex }/>
+          </div>
+        );
     return (
       <Router>
         <div>
-          <NavigationHeader />
           {/* above will only be shown if logged in and 
           landing page will not be shown if logged in */}
           <Route exact path="/" component={ LandingPageIndex }/>
-          {/* above automatically take you to conversations page when logged in */}
+          {navigation}
 
-          <Route path="/welcome" component={ SignIn }/>
 
-          <Route path="/billing" component={ BillingIndex }/>
-          <Route exact path="/conversations" component={ ConversationsIndex }/>
-          <Route path="/preferences" component={ PreferencesIndex }/>
-
-          <Route path="/conversations/new" component={ New }/>
 
         </div>
       </Router>

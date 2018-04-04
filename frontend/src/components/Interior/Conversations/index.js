@@ -1,6 +1,6 @@
 //Alex Cassell
 //http://alexcassell.com
-//conversations page
+//conversations index
 
 import React from 'react';
 
@@ -10,12 +10,26 @@ import '../../../css/interior.css';
 import '../../../css/conversations.css';
 
 // import Cards from './Cards';
-import New from './NewConversation/index';
+// import New from './NewConversation/index';
+
+
+
+let conversationsArray;
 
 class ConversationsIndex extends React.Component {
     constructor(props) {
     super(props);
-    this.state = {'somestate': ''};
+    this.state = {conversationsArrayEmpty: true};
+    }
+
+    componentDidMount(){
+        console.log(conversationsArray);
+        //load data from the server fill in conversationsArray with objects
+        //full of the conversation's data
+        if(conversationsArray !== undefined){
+            this.setState({conversationsArrayEmpty: false});
+        }
+
     }
 
     handleNewConversationButton(){
@@ -24,15 +38,20 @@ class ConversationsIndex extends React.Component {
     }
 
     render() {
+        const conversationsArrayEmpty = this.state.conversationsArrayEmpty;
+        const button = conversationsArrayEmpty ? (
+            <div className="conversation__add">Add a New Conversation <br />
+            <button onClick={() => this.handleNewConversationButton()} className="conversation__addButton">+</button>
+            </div>
+        ) : (
+            <div>
+                Downloaded data from server<br />
+                array of objects
+            </div>
+        );
         return (
                 <div className="conversations__wrapper">
-                    <div className="conversation__add">
-                        Add a New Conversation <br />
-                        {/* the above text will be the default [0] of an array */}
-                        <button onClick={() => this.handleNewConversationButton()} className="conversation__addButton">+</button>
-                        {/* Instead of using router I am going to change the state of this component to show the new.js component
-                        when the user clicks new. */}
-                    </div>
+                    {button}
                 </div>
         );
 }

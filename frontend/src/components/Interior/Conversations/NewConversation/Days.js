@@ -74,7 +74,7 @@ class Days extends React.Component {
             }
         }
 
-        console.log(daysArray);
+        // console.log(daysArray);
     }
 
     render() {

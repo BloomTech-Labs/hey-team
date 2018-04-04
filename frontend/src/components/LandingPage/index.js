@@ -116,7 +116,6 @@ class LandingPageIndex extends React.Component {
                             </div>
                             <div className="productImage">
                                 image or carousel here<br /><br /><br />
-                                border is dev only<br /><br /><br />
                                 maybe a picture of the bot<br /><br /><br />
                                 in action
                             </div>

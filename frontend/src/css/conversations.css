@@ -58,6 +58,7 @@ http://alexcassell.com
     top: 20vh;
     left: 15vw;
     padding-left: 4vw;
+    z-index: 15;
 }
 
 .ui.size.input{

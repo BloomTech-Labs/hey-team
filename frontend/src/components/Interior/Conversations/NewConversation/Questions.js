@@ -2,9 +2,22 @@
 //http://alexcassell.com
 //questions
 
+/* this component will likely have to be re writtem
+    deleteing data is problematic
+    if you hit add question before filling out the form
+    it does not save the questions 
+    trying to add a unique key breaks it
+
+    I will probably hard code it to accept like 15 questions
+    that would simplify the entire thing
+
+    possible fixes.. grey out add question button
+    until a question has been filled in
+*/
+
 import React from 'react';
 import { Input } from 'semantic-ui-react';
-import { v4 } from 'uuid';
+import { v4 } from 'uuid';//creates unique keys
 
 let questionName = 0;
 let questionsArray =[];
@@ -48,13 +61,8 @@ class Questions extends React.Component {
 
     handleInput(evt){
         questionsArray[questionName] = evt.target.value;
-        console.log(questionsArray);
+        // console.log(questionsArray);
     }
-
-    //create random name for form when created
-    //add to array with name
-    //delete from array when name is deleted ?
-    //use loop to find within array if nessacery
 
 
     render() {
@@ -82,3 +90,4 @@ class Questions extends React.Component {
 }
 
 export default Questions;
+export {questionsArray};
