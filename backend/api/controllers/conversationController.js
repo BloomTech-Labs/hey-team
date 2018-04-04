@@ -4,6 +4,8 @@ const Member = require('../models/memberModel');
 
 const colors = require('colors');
 
+const colors = require('colors');
+
 const createConversation = async (req, res) => {
   const { title, questions, users, schedule } = req.body;
   const participants = [];
@@ -102,3 +104,4 @@ module.exports = {
   createConversation,
   addResponses,
 };
+

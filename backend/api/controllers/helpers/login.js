@@ -1,7 +1,6 @@
 const request = require('request');
 const Account = require('../../models/accountModel');
 const createUserAccount = require('./createUserAccount');
-const createTeamAccount = require('./createTeamAccount');
 
 const colors = require('colors');
 
@@ -52,7 +51,6 @@ module.exports = login = (req, res, done) => {
         // localStorage.setItem('doc_id', id);
       } else {
         // console.log(colors.blue(res));
-        // createTeamAccount(body, req, res, done);
         createUserAccount(body, req, res, done);
       }
     }
