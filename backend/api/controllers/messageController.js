@@ -35,7 +35,7 @@ const receiveMessage = async (req, res) => {
   const convo = await Account.findById({
     _id: '5ac43b3b30f8f724b88b4e90',
   });
-  questionsss = convo.conversations[0].questions;
+  questionsss = convo.conversations['5ac43b3b30f8f724b88b4e90'].questions;
   console.log(questionsss);
 
   // const conversationId = 'C7YJ65J10';
