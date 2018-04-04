@@ -74,7 +74,9 @@ const accountSchema = new mongoose.Schema({
       default: '',
     },
   },
-  conversations: [],
+  conversations: [
+    
+  ],
 });
 
 module.exports = mongoose.model('account', accountSchema);

@@ -17,7 +17,7 @@ module.exports = login = (req, res, done) => {
     form: {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
-      redirect_uri: 'https://976ef904.ngrok.io/auth/login',
+      redirect_uri: 'https://dcccc58f.ngrok.io/auth/login',
       code: req.query.code,
     },
   };
