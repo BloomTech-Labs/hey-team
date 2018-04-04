@@ -25,7 +25,7 @@ const sendMessage = (req, res) => {
   });
 };
 
-const questions = [];
+let questions = [];
 
 const answers = [];
 
@@ -35,62 +35,64 @@ const receiveMessage = async (req, res) => {
   const convo = await Account.findById({
     _id: '5ac43b3b30f8f724b88b4e90',
   });
-  questionsss = convo.conversations['5ac43b3b30f8f724b88b4e90'].questions;
-  console.log(questionsss);
-
-  // const conversationId = 'C7YJ65J10';
-  // const queLength = questions.length;
-  // let currentQuestion = 0;
-  // rtm
-  //   .sendMessage(questions[currentQuestion], conversationId)
-  //   .then(res => {
-  //     console.log('Message sent: ', res);
-  //     questions;
-  //     currentQuestion++;
-  //   })
-  //   .catch(console.error);
-
-  // rtm.on('message', event => {
-  //   console.log('event', event);
-  //   answers.push(event.text);
-  //   if (currentQuestion < queLength) {
-  //     rtm
-  //       .sendMessage(questions[currentQuestion], conversationId)
-  //       .then(res => {
-  //         console.log('Message sent: ', res);
-  //         currentQuestion++;
-  //       })
-  //       .catch(console.error);
-  //   } else {
-  //     rtm.disconnect();
-  //     // web.chat
-  //     //   .postMessage({
-  //     //     channel: conversationId,
-  //   }
-  // });
-
-  const newConversation = new Conversation({});
-  const newResponse = new Response({
-    user: 'test',
-    questions,
-    answers,
+  convo.conversations.forEach(c => {
+    console.log(c._id);
+    if (c._id.toString() === '5ac43bd4176daf309063a17a') {
+      questions = c.questions;
+    }
   });
 
-  const test = await Account.findById({
-    _id: '5ac43b3b30f8f724b88b4e90',
+  const conversationId = 'C7YJ65J10';
+  const queLength = questions.length;
+  let currentQuestion = 0;
+  rtm
+    .sendMessage(questions[currentQuestion], conversationId)
+    .then(res => {
+      // console.log('Message sent: ', res);
+      currentQuestion++;
+    })
+    .catch(console.error);
+
+  rtm.on('message', event => {
+    // console.log('event', event);
+    answers.push(event.text);
+    if (currentQuestion < queLength) {
+      rtm
+        .sendMessage(questions[currentQuestion], conversationId)
+        .then(res => {
+          // console.log('Message sent: ', res);
+          currentQuestion++;
+        })
+        .catch(console.error);
+    } else {
+      rtm.disconnect();
+      // web.chat
+      //   .postMessage({
+      //     channel: conversationId,
+      const newConversation = new Conversation({});
+      const newResponse = new Response({
+        user: 'test',
+        questions,
+        answers,
+      });
+
+      convo.conversations.push(newConversation);
+      convo.conversations.remove(newConversation);
+      convo.conversations[0].responses.push({
+        submittedOn: new Date(),
+        user: 'String',
+        avatar: 'String',
+        questions,
+        answers,
+      });
+
+      convo.save();
+
+      console.log(convo.conversations[0]);
+    }
   });
 
-  await test.conversations.push(newConversation);
-  await test.conversations.remove(newConversation);
-  await test.conversations[0].responses.push({
-    submittedOn: Date.now,
-    user: 'String',
-    avatar: 'String',
-    questions: [],
-    answers: [],
-  });
-
-  res.status(200).send(test);
+  res.status(200).send(convo);
 };
 
 module.exports = {
