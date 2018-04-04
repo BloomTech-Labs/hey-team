@@ -1,3 +1,5 @@
+// import { WebClient } from '@slack/client';
+
 const { IncomingWebhook } = require('@slack/client');
 const { RTMClient } = require('@slack/client');
 const Conversation = require('../models/conversationModel');
@@ -12,17 +14,18 @@ const token = 'xoxb-334119064773-U6lf4TG13OrIhJm2IvrX1Uvw';
 const rtm = new RTMClient(token);
 // An access token (from your Slack app or custom integration - usually xoxb)
 const webhook = new IncomingWebhook(url);
+// const web = new WebClient(token);
 
 const sendMessage = (req, res) => {
   const { message } = req.body;
   // Send simple text to the webhook channel
-  webhook.send(message, function(err, res) {
-    if (err) {
-      console.log('Error:', err);
-    } else {
-      console.log('Message sent: ', res);
-    }
-  });
+  // webhook.send(message, function(err, res) {
+  //   if (err) {
+  //     console.log('Error:', err);
+  //   } else {
+  //     console.log('Message sent: ', res);
+  //   }
+  // });
 };
 
 let questions = [];
@@ -30,11 +33,17 @@ let questions = [];
 const answers = [];
 
 const receiveMessage = async (req, res) => {
+  // const dm = await webhook.im.open({user: ''});
   rtm.start();
-  // rtm.subscribePresence('U9TKS1XJN');
   const convo = await Account.findById({
     _id: '5ac43b3b30f8f724b88b4e90',
   });
+
+  // convo.conversations.forEach(c => {
+  // if (schedule) {}
+  //   c.participants.forEach(p => {});
+  // });
+  // rtm.subscribePresence('U9TKS1XJN');
   convo.conversations.forEach(c => {
     console.log(c._id);
     if (c._id.toString() === '5ac43bd4176daf309063a17a') {
