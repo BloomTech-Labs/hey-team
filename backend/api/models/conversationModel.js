@@ -40,11 +40,22 @@ const conversationSchema = new mongoose.Schema({
       name: {
         type: String,
       },
-      avitar: {
+      id: {
         type: String,
       },
-      responses: [],
+      avatar: {
+        type: String,
+      },
     },
+  ],
+  responses: [
+    // {
+    //   submittedOn: Date,
+    //   user: String,
+    //   avatar: String,
+    //   questions: [],
+    //   answers: [],
+    // },
   ],
 });
 

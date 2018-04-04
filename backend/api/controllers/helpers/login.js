@@ -18,7 +18,7 @@ module.exports = login = (req, res, done) => {
     form: {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
-      redirect_uri: 'https://749901e5.ngrok.io/auth/login',
+      redirect_uri: 'https://b63c8b78.ngrok.io/auth/login',
       code: req.query.code,
     },
   };
@@ -41,9 +41,10 @@ module.exports = login = (req, res, done) => {
         // }
       );
       if (account) {
-        console.log(colors.yellow(account._id));
+        // console.log(colors.yellow(account._id));
         // backend
-        res.redirect(`https://hamhamham.com/?doc_id=${account._id}`);
+        res.redirect(`https://751dbe2c.ngrok.io`);
+        // res.redirect(`http://localhost:3000/?doc_id=${account._id}`);
         // frontend
         // const url = new URL(window.location.href);
         // const params = new URLSearchParams(url.search.slice(1));
@@ -52,7 +53,7 @@ module.exports = login = (req, res, done) => {
       } else {
         // console.log(colors.blue(res));
         // createTeamAccount(body, req, res, done);
-        createUserAccount(body, req, res, account._id, done);
+        createUserAccount(body, req, res, done);
       }
     }
     // res.redirect(__dirname + '/public/success.html');
