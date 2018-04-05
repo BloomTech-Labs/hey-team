@@ -9,7 +9,9 @@
     is moved to fill in space
     then refill all input forms
     share questionsArray state via props
-    
+
+    loop through array and set values of input fields ez pz
+
     will refactor after mvp showing on friday
 */
 
