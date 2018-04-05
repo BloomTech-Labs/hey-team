@@ -1,12 +1,12 @@
 const passport = require('passport');
 const cors = require('cors');
 
-const messageController = require('../controllers/messageController');
-const accountController = require('../controllers/accountController');
-const accountBotController = require('../controllers/accountBotController');
-const testController = require('../controllers/testController');
+const bot = require('../controllers/accountBotController');
+const message = require('../controllers/messageController');
+const account = require('../controllers/accountController');
 const conversation = require('../controllers/conversationController');
 
+const test = require('../controllers/testController');
 // const teamInfo = require('../controllers/getTeamInfo');
 
 const passportConfig = require('../../app/passport');
@@ -24,10 +24,11 @@ module.exports = app => {
   app.use(cors(corsOptions));
   app.use(passport.initialize());
   // app.route('/sendMessage').post(messageController.sendMessage);
-  app.route('/receiveMessage').get(messageController.receiveMessage);
-  app.route('/auth/account').get(accountController.createUserAccount);
-  app.route('/auth/bot').get(accountBotController.botAccount);
-  app.route('/auth/login').get(accountController.login);
+  app.route('/auth/bot').get(bot.botAccount);
+  app.route('/auth/login').get(account.login);
+  app.route('/receiveMessage').get(message.receiveMessage);
+  app.route('/auth/account').get(account.createUserAccount);
   app.route('/conversation/create').post(conversation.createConversation);
-  app.route('/conversation/create').post(conversation.addResponses);
+  app.route('/conversation/delete').post(conversation.deleteConversation);
+  // app.route('/conversation/create').post(conversation.addResponses);
 };
