@@ -11,15 +11,16 @@ const conversation <conversation obj>
 
 ```
 endpoint = teamURL/conversation/create
-.post(endpoint, {a_id})
+.post(endpoint, { a_id })
 ```
 
 ### delete a conversation
 
 ```
 endpoint = teamURL/conversation/delete
-.post(endpoint, {a_id, c_id})
+.post(endpoint, { a_id, c_id })
 ```
+
 
 ### get all conversations
 
@@ -33,4 +34,17 @@ endpoint = teamURL/conversation/all
 ```
 endpoint = teamURL/conversation/delete
 .post(endpoint, {a_id, c_id, conversation})
+
+### Grab All Members
+
+```
+endpoint = teamURL/account/getAllMembers
+.post(endpoint, { a_id })
+```
+
+### Grab Specific Member
+
+```
+endpoint = teamURL/acount/getOneMember
+.post(endpoint, { a_id, user_id })
 ```
