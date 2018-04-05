@@ -1,31 +1,55 @@
+// import { WebClient } from '@slack/client';
+
 const { IncomingWebhook } = require('@slack/client');
 const { RTMClient } = require('@slack/client');
-const url = 'https://hooks.slack.com/services/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'
-const token = 'xoxb-334119064773-U6lf4TG13OrIhJm2IvrX1Uvw'
+const Conversation = require('../models/conversationModel');
+const Account = require('../models/accountModel');
+const Response = require('../models/responseModel');
+
+// const url = process.env.SLACK_WEBHOOK_URL;
+// const token = process.env.SLACK_TOKEN;
+const url =
+  'https://hooks.slack.com/services/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';
+const token = 'xoxb-334119064773-U6lf4TG13OrIhJm2IvrX1Uvw';
 const rtm = new RTMClient(token);
 // An access token (from your Slack app or custom integration - usually xoxb)
 const webhook = new IncomingWebhook(url);
+// const web = new WebClient(token);
 
 const sendMessage = (req, res) => {
   const { message } = req.body;
   // Send simple text to the webhook channel
-  webhook.send(message, function(err, res) {
-    if (err) {
-      console.log('Error:', err);
-    } else {
-      console.log('Message sent: ', res);
-    }
-  });
+  // webhook.send(message, function(err, res) {
+  //   if (err) {
+  //     console.log('Error:', err);
+  //   } else {
+  //     console.log('Message sent: ', res);
+  //   }
+  // });
 };
 
-const questions = [
-  'how are you?',
-  'are you special?',
-  'is your life all that you expected?',
-];
+let questions = [];
 
-const receiveMessage = (req, res) => {
+const answers = [];
+
+const receiveMessage = async (req, res) => {
+  // const dm = await webhook.im.open({user: ''});
   rtm.start();
+  const convo = await Account.findById({
+    _id: '5ac43b3b30f8f724b88b4e90',
+  });
+
+  // convo.conversations.forEach(c => {
+  // if (schedule) {}
+  //   c.participants.forEach(p => {});
+  // });
+  // rtm.subscribePresence('U9TKS1XJN');
+  convo.conversations.forEach(c => {
+    console.log(c._id);
+    if (c._id.toString() === '5ac43bd4176daf309063a17a') {
+      questions = c.questions;
+    }
+  });
 
   const conversationId = 'C7YJ65J10';
   const queLength = questions.length;
@@ -33,35 +57,51 @@ const receiveMessage = (req, res) => {
   rtm
     .sendMessage(questions[currentQuestion], conversationId)
     .then(res => {
-      console.log('Message sent: ', res.ts);
+      // console.log('Message sent: ', res);
       currentQuestion++;
     })
     .catch(console.error);
 
   rtm.on('message', event => {
-    console.log(event);
+    // console.log('event', event);
+    answers.push(event.text);
     if (currentQuestion < queLength) {
       rtm
-      .sendMessage(questions[currentQuestion], conversationId)
-      .then(res => {
-        console.log('Message sent: ', res.ts);
+        .sendMessage(questions[currentQuestion], conversationId)
+        .then(res => {
+          // console.log('Message sent: ', res);
           currentQuestion++;
         })
         .catch(console.error);
     } else {
       rtm.disconnect();
-          //     }
-          //   ],
-          // })
-          // .then(res => {
-          //   // `res` contains information about the posted message
-          //   console.log('Message sent: ', res.ts);
-          // })
-          // .catch(console.error);
+      // web.chat
+      //   .postMessage({
+      //     channel: conversationId,
+      const newConversation = new Conversation({});
+      const newResponse = new Response({
+        user: 'test',
+        questions,
+        answers,
+      });
+
+      convo.conversations.push(newConversation);
+      convo.conversations.remove(newConversation);
+      convo.conversations[0].responses.push({
+        submittedOn: new Date(),
+        user: 'String',
+        avatar: 'String',
+        questions,
+        answers,
+      });
+
+      convo.save();
+
+      console.log(convo.conversations[0]);
     }
   });
 
-  res.status(200).send();
+  res.status(200).send(convo);
 };
 
 module.exports = {
