@@ -58,7 +58,33 @@ const deleteConversation = async (req, res) => {
     }
   });
   account.save();
-  res.json('hi');
+  res.status(200);
+};
+
+const allConversations = async (req, res) => {
+  const { a_id } = req.body;
+  const account = await Account.findById(a_id);
+  res.json(account.conversations);
+};
+
+const editConversation = async (req, res) => {
+  const { a_id, c_id, conversation } = req.body;
+  const newConversation = new Conversation(conversation);
+  const account = await Account.findById(a_id);
+  account.conversations.forEach(c => {
+    if (c._id.toString() === c_id) {
+      account.conversations.remove(c);
+      account.conversations.push(newConversation);
+      account.save();
+      return;
+    }
+  });
+  res.status(200);
+};
+
+const respondToConversation = async (req, res) => {
+  const { a_id, c_id } = req.body;
+  const account = await Account.findById(a_id);
 };
 
 const addResponses = async (req, res) => {
@@ -170,5 +196,7 @@ const receiveMessage = async (req, res) => {
 module.exports = {
   createConversation,
   deleteConversation,
-  addResponses,
+  allConversations,
+  editConversation,
+  respondToConversation,
 };
