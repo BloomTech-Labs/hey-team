@@ -1,6 +1,7 @@
 const loginHelper = require('./helpers/login');
 createUserAccountHelper = require('./helpers/createUserAccount');
 const Account = require('../models/accountModel');
+const colors = require('colors');
 
 const createUserAccount = (req, res) => {
 
@@ -69,10 +70,12 @@ const getAllMembers = (req, res) => {
 		let memberArray = member.team.members;
 		memberArray.forEach(member => {
 			const memberObj = {};
-      memberObj.real_name = member.real_name;
-      memberObj.username = member.name;
-      memberObj._id = member.id;
-      memberObj.avatar = member.profile.image_192;
+			memberObj.real_name = member.real_name;
+			memberObj.username = member.name;
+			memberObj._id = member.id;
+			memberObj.tz_offset = member.tz_offset;
+			memberObj.tz_label = member.tz_label;
+			memberObj.avatar = member.profile.image_192;
 			allMembers.push(memberObj);
 			console.log(memberObj);
 		});
@@ -81,8 +84,8 @@ const getAllMembers = (req, res) => {
 };
 
 const getOneMember = (req, res) => {
-  const { a_id, user_id } = req.body;
-  Account.findById(a_id, (err, members) => {
+	const { a_id, user_id } = req.body;
+	Account.findById(a_id, (err, members) => {
 		if (err) {
 			res.status(422);
 			res.json({ 'Error finding all users': err.message });
@@ -91,26 +94,52 @@ const getOneMember = (req, res) => {
 		const foundMember = [];
 		let memberArray = members.team.members;
 		memberArray.forEach(member => {
-      const memberObj = {};
-      if (member.id === user_id) {
-        memberObj.real_name = member.real_name;
-        memberObj.username = member.name;
-        memberObj._id = member.id;
-        memberObj.avatar = member.profile.image_192;
-        foundMember.push(memberObj);
-      }
+			const memberObj = {};
+			if (member.id === user_id) {
+				memberObj.real_name = member.real_name;
+				memberObj.username = member.name;
+				memberObj._id = member.id;
+				memberObj.tz_offset = member.tz_offset;
+				memberObj.tz_label = member.tz_label;
+				memberObj.avatar = member.profile.image_192;
+				foundMember.push(memberObj);
+			}
 		});
 		res.json(foundMember);
 	});
-}
+};
+
+const getAccountData = (req, res) => {
+	const { a_id } = req.body;
+	Account.findById(a_id, (err, account) => {
+		if (err) {
+			res.status(422);
+			res.json({ 'Error finding all users': err.message });
+			return;
+		}
+		const accountData = [];
+		const memberObj = {};
+		memberObj.team_name = account.team.name;
+		memberObj.domain = account.team.domain;
+		memberObj.team_id = account.team.id;
+		memberObj.team_image = account.team.image;
+		memberObj.owner_name = account.owner.name;
+		memberObj.owner_id = account.owner.id;
+		memberObj.owner_email = account.owner.email;
+		memberObj.owner_image = account.owner.image;
+		accountData.push(memberObj);
+		res.json(accountData);
+	});
+};
 
 const login = (req, res) => {
 	return loginHelper(req, res);
 };
 
 module.exports = {
-  createUserAccount,
+	createUserAccount,
+	getAccountData,
 	getAllMembers,
-  getOneMember,
+	getOneMember,
 	login
 };

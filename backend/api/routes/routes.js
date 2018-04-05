@@ -2,9 +2,9 @@ const passport = require('passport');
 const cors = require('cors');
 
 
-const messageController = require('../controllers/messageController');
+const message = require('../controllers/messageController');
 const account = require('../controllers/accountController');
-const accountBotController = require('../controllers/accountBotController');
+const bot = require('../controllers/accountBotController');
 const testController = require('../controllers/testController');
 const conversation = require('../controllers/conversationController');
 
@@ -26,11 +26,11 @@ module.exports = app => {
   app.use(cors(corsOptions));
   app.use(passport.initialize());
   // Account Routes
-  app.route('/account/getAllMembers').post(account.getAllMembers);
-  app.route('/account/getOneMember').post(account.getOneMember);
   app.route('/auth/login').get(account.login);
   app.route('/auth/account').get(account.createUserAccount);
-  app.route('/auth/bot').get(accountBotController.botAccount);
+  app.route('/account/getAccountData').post(account.getAccountData);
+  app.route('/account/getOneMember').post(account.getOneMember);
+  app.route('/account/getAllMembers').post(account.getAllMembers);
   // Conversation Routes
   // app.route('/sendMessage').post(messageController.sendMessage);
   app.route('/auth/bot').get(bot.botAccount);
