@@ -10,7 +10,7 @@ module.exports = createUserAccount = async (body, req, res) => {
   const web = await new WebClient(body.access_token);
   const team = await web.users.list();
   const test = [];
-  // console.log(team);
+  console.log("TEAM!!!!!!!!!!!!!", team);
   team.members.forEach(member => {
     const newMember = new Member({
       id: member.id,

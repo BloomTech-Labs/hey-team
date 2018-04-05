@@ -42,7 +42,7 @@ module.exports = login = (req, res, done) => {
       if (account) {
         // console.log(colors.yellow(account._id));
         // backend
-        res.redirect(`https://751dbe2c.ngrok.io`);
+        res.redirect(`https://d32ce379.ngrok.io`);
         // res.redirect(`http://localhost:3000/?doc_id=${account._id}`);
         // frontend
         // const url = new URL(window.location.href);
