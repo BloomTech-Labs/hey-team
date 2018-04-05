@@ -25,7 +25,7 @@ const createConversation = async (req, res) => {
     questions,
     participants,
     schedule,
-  });
+  }); 
   // console.log(colors.cyan(newConversation));
   await Account.findByIdAndUpdate(
     a_id,
