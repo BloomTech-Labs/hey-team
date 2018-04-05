@@ -80,10 +80,12 @@ body{
         width: 60vw;
         /* padding is dev only too */
         padding: 50px;
+        box-shadow: 10px 10px grey;
     }
 
     .productImage:hover {
-        box-shadow: 10px 10px grey;
+        box-shadow: 12px 12px grey;
+        
     }
 
     .button__BuyNow{

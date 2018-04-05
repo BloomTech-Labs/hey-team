@@ -13,7 +13,7 @@ http://alexcassell.com
 .interior__wrapper{
     font-family: Adventuring;
     position: absolute;
-    background-color: #98C1D9;
+    /* background-color: #98C1D9; */
     height: 100%;
     width: 100%;
 }

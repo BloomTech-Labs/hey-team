@@ -1,6 +1,6 @@
 //Alex Cassell
 //http://alexcassell.com
-//conversations page
+//conversations index
 
 import React from 'react';
 
@@ -8,37 +8,51 @@ import React from 'react';
 
 import '../../../css/interior.css';
 import '../../../css/conversations.css';
-import InsideNavigation from '../../InsideNavigation';
-import New from './New';
 
+// import Cards from './Cards';
+// import New from './NewConversation/index';
+
+
+
+let conversationsArray;
 
 class ConversationsIndex extends React.Component {
     constructor(props) {
     super(props);
-    this.state = {'somestate': ''};
+    this.state = {conversationsArrayEmpty: true};
     }
-    render() {
-        return (
-            <div className="interior__wrapper">
-                <div className="interior__header">
-                    <div className="logo"/>
-                    <div className="interior__title">
-                        Conversations
-                    </div>
-                    <div className="interior__signOut"/>
-                </div>
-                <InsideNavigation />{/*Side menu */}
 
-                {/* Below will be handled by states*/}
-                {/* <div className="conversations__wrapper">
-                    <div className="conversation__add">
-                        Add a New Conversation <br /> */}
-                        {/* the above text will be the default [0] of an array */}
-                        {/* <button className="conversation__addButton">+</button>
-                    </div>
-                </div> */}
-                <New />
+    componentDidMount(){
+        console.log(conversationsArray);
+        //load data from the server fill in conversationsArray with objects
+        //full of the conversation's data
+        if(conversationsArray !== undefined){
+            this.setState({conversationsArrayEmpty: false});
+        }
+
+    }
+
+    handleNewConversationButton(){
+        this.props.history.push('/conversations/new');
+        console.log("here");
+    }
+
+    render() {
+        const conversationsArrayEmpty = this.state.conversationsArrayEmpty;
+        const button = conversationsArrayEmpty ? (
+            <div className="conversation__add">Add a New Conversation <br />
+            <button onClick={() => this.handleNewConversationButton()} className="conversation__addButton">+</button>
             </div>
+        ) : (
+            <div>
+                Downloaded data from server<br />
+                array of objects
+            </div>
+        );
+        return (
+                <div className="conversations__wrapper">
+                    {button}
+                </div>
         );
 }
 }

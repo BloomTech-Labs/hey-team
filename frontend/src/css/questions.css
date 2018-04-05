@@ -1,0 +1,4 @@
+.questionsWrapper{
+    display: flex;
+    flex-direction: column;
+}
