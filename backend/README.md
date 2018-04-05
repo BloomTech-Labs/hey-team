@@ -10,14 +10,26 @@ const c_id = <conversation id>
 
 ```
 endpoint = teamURL/conversation/create
-.post(endpoint, {a_id})
+.post(endpoint, { a_id })
 ```
 
 ### delete a conversation
 
 ```
 endpoint = teamURL/conversation/delete
-.post(endpoint, {a_id, c_id})
+.post(endpoint, { a_id, c_id })
 ```
 
+### Grab All Members
 
+```
+endpoint = teamURL/account/getAllMembers
+.post(endpoint, { a_id })
+```
+
+### Grab Specific Member
+
+```
+endpoint = teamURL/acount/getOneMember
+.post(endpoint, { a_id, user_id })
+```
