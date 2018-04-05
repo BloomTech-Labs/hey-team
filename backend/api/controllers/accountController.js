@@ -3,6 +3,7 @@ createUserAccountHelper = require('./helpers/createUserAccount');
 const Account = require('../models/accountModel');
 
 const createUserAccount = (req, res) => {
+
 	if (!req.query.code) {
 		// access denied
 		return;
