@@ -1,4 +1,4 @@
-# hey-team
+# _Hey-Team Route Documentation_
 
 ```
 const tempURL = 'https://hey-test-team.herokuapp.com'
@@ -21,7 +21,6 @@ endpoint = teamURL/conversation/delete
 .post(endpoint, { a_id, c_id })
 ```
 
-
 ### get all conversations
 
 ```
@@ -34,6 +33,7 @@ endpoint = teamURL/conversation/all
 ```
 endpoint = teamURL/conversation/delete
 .post(endpoint, {a_id, c_id, conversation})
+```
 
 ### Grab All Members
 
@@ -47,4 +47,11 @@ endpoint = teamURL/account/getAllMembers
 ```
 endpoint = teamURL/acount/getOneMember
 .post(endpoint, { a_id, user_id })
+```
+
+### Grab Account and Team Information
+
+```
+endpoint = teamURL/account/getAccountData
+.post(endpoint, { a_id })
 ```
