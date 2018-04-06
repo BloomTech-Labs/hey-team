@@ -2,9 +2,6 @@
 //http://alexcassell.com
 
 import React from 'react';
-
-// import '../../../Semantic-UI-CSS/semantic.min.css';
-
 import '../../../css/interior.css';
 
 

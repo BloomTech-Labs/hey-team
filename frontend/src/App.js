@@ -22,7 +22,7 @@ class App extends Component {
     this.state = {loggedIn: true};
     }
   render() {
-        // <NavigationHeader {...this.state} />
+        <LandingPageIndex {...this.state} />
         const loggedIn = this.state.loggedIn;
     
         const navigation = loggedIn ? (

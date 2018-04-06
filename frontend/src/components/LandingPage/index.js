@@ -6,8 +6,8 @@ import React from 'react';
 // import { Link as link, DirectLink, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 import {Events, scrollSpy, scroll } from 'react-scroll';
 
-import { Button } from 'semantic-ui-react'
-import '../../Semantic-UI-CSS/semantic.min.css';
+import { Button } from 'semantic-ui-react';
+// import '../../Semantic-UI-CSS/semantic.min.css';
 
 import '../../css/landingPageTop.css';
 import TopNavigation from '../TopNavigation';
@@ -38,8 +38,7 @@ class LandingPageIndex extends React.Component {
         scrollSpy.update();
     }
 
-
-    componentWillUnmount(){
+    componentWillUnmount(props){
         Events.scrollEvent.remove('begin');
         Events.scrollEvent.remove('end');
     }
