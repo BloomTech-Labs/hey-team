@@ -5,29 +5,28 @@ http://alexcassell.com
 /* color pallette */
 /* https://coolors.co/98c1d9-466365-b1b7d1-9b9fb5-a5d8ff */
 
+@font-face {
+    font-family: Adventuring;
+    src: url(../fonts/Adventuring.otf);
+}
+
+body{
+    background-color: #98C1D9;
+}
+
 .conversations__wrapper{
     position: absolute;
-    width: 100vw;
-    height: 85vh;
-    z-index: 50;
-    top: 15vh;
-    left: 12vw;
-    display: flex;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    justify-content: center;
-    align-content: center;
-    -webkit-align-content: center;
-    align-content: center;
-    flex-direction: row;
+    width: 100%;
+    height: 100%;
 }
 
 .conversation__add{
-    margin-top: 30%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
     font-size: 3vw;
     color: white;
+    border: red solid 2px;
     text-shadow: 2px 2px #466365;
 }
 
@@ -44,3 +43,129 @@ http://alexcassell.com
     cursor: pointer;
     /* align-self: center; */
 }
+
+.conversationsBackground{
+    /* background-color: #98C1D9; */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.conversations__newWrapper{
+    font-family: Adventuring;
+    position: absolute;
+    height: 80vh;
+    top: 20vh;
+    left: 15vw;
+    padding-left: 4vw;
+    z-index: 15;
+}
+
+.ui.size.input{
+    width: 400px;
+}
+
+.ui.size.input.small{
+    width: 200px;
+}
+
+.ui.input.participants{
+    width: 200px;
+
+}
+
+.conversations__schedule{
+    padding-top: 2vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 2vh;
+}
+
+/* Drop down menu */
+.conversations__time{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2vh;
+}
+
+.conversations__dropButton {
+    background-color: #466365;
+    color: white;
+    padding: .5vw;
+    font-size: 1vw;
+    border: none;
+    cursor: pointer;
+}
+
+.conversations__timeZoneDropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.conversations__dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    /* display: flex;//dev only */
+}
+
+.conversations__timeZone__square{
+    background-color: #f9f9f9;
+}
+
+.conversations__dropdown-content a {
+    color: black;
+    border: black 1px solid;
+    padding: .5vw .5vw;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.conversations__dropdown-content a:hover {
+    background-color: #466365;
+    color: white;
+}
+
+.conversations__timeZoneDropdown:hover .conversations__dropdown-content {
+    display: flex;
+}
+
+.conversations__timeZoneDropdown:hover .conversations__dropButton {
+    background-color: #466365;
+    color: white;
+}
+
+.conversations__buttonAdd{
+    position: relative;
+    bottom: 0px;
+    cursor: pointer;
+}
+
+.conversations__question{
+    display: flex;
+    flex-direction: row;
+}
+
+.conversations__questionsWrapper{
+    display: flex;
+    flex-direction: row;
+}
+/* 
+.conversations__input{
+    position: relative;
+    right: 0px;
+}
+*/
+.conversations__questionsStateWrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.conversations__questions{
+    position: relative;
+    margin-top: 5px;
+}
+
+
