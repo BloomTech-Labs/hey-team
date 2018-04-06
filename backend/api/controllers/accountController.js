@@ -1,4 +1,7 @@
+const loginHelper = require('./helpers/login');
+createUserAccountHelper = require('./helpers/createUserAccount');
 const Account = require('../models/accountModel');
+const colors = require('colors');
 
 const request = require('request');
 const CLIENT_ID = '270618182930.333388702161';
@@ -13,12 +16,15 @@ const CLIENT_SECRET = '8a86f76a3e4f7de24fae4dab9397848b';
 const createUserAccount = (req, res) => {
   if (!req.query.code) {
     // access denied
+    console.log('NO CODE!!!!');
+
     return;
   }
   var data = {
     form: {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
+      redirect_uri: 'https://hey-test-team.herokuapp.com/auth/login',
       code: req.query.code,
     },
   };
@@ -28,19 +34,8 @@ const createUserAccount = (req, res) => {
     body
   ) {
     if (!error && response.statusCode == 200) {
-      // Get an auth token
-      // let oauthToken = JSON.parse().arsccess_token;
-      // const foundUser = User.find({});
-      // OAuth done- redirect the user to wherever
       const newBody = JSON.parse(body);
-      console.log(typeof newBody.access_token);
-      // let access_token = newBody.access_token;
-
-      // const foundAccount = await Account.findById(
-      //   '5abab8223957423b89b4f734',
-      //   (err, doc) => {
-      //     console.log('doc', doc);
-      //   }
+      console.log(newBody);
       const foundAccount = await Account.findOne(
         {
           'owner.access_token': newBody.access_token,
@@ -49,7 +44,6 @@ const createUserAccount = (req, res) => {
           console.log('doc', doc);
         }
       );
-      // console.log(foundAccount.owner);
       if (foundAccount) {
         console.log('Account already made!');
         return res.json({ err: 'Account already exists!' });
@@ -75,6 +69,88 @@ const createUserAccount = (req, res) => {
   });
 };
 
+const getAllMembers = (req, res) => {
+  const { a_id } = req.body;
+  Account.findById(a_id, (err, member) => {
+    if (err) {
+      res.status(422);
+      res.json({ 'Error finding all users': err.message });
+      return;
+    }
+    const allMembers = [];
+    let memberArray = member.team.members;
+    memberArray.forEach(member => {
+      const memberObj = {};
+      memberObj.real_name = member.real_name;
+      memberObj.username = member.name;
+      memberObj._id = member.id;
+      memberObj.tz_offset = member.tz_offset;
+      memberObj.tz_label = member.tz_label;
+      memberObj.avatar = member.profile.image_192;
+      allMembers.push(memberObj);
+      console.log(memberObj);
+    });
+    res.json(allMembers);
+  });
+};
+
+const getOneMember = (req, res) => {
+  const { a_id, user_id } = req.body;
+  Account.findById(a_id, (err, members) => {
+    if (err) {
+      res.status(422);
+      res.json({ 'Error finding all users': err.message });
+      return;
+    }
+    const foundMember = [];
+    let memberArray = members.team.members;
+    memberArray.forEach(member => {
+      const memberObj = {};
+      if (member.id === user_id) {
+        memberObj.real_name = member.real_name;
+        memberObj.username = member.name;
+        memberObj._id = member.id;
+        memberObj.tz_offset = member.tz_offset;
+        memberObj.tz_label = member.tz_label;
+        memberObj.avatar = member.profile.image_192;
+        foundMember.push(memberObj);
+      }
+    });
+    res.json(foundMember);
+  });
+};
+
+const getAccountData = (req, res) => {
+  const { a_id } = req.body;
+  Account.findById(a_id, (err, account) => {
+    if (err) {
+      res.status(422);
+      res.json({ 'Error finding all users': err.message });
+      return;
+    }
+    const accountData = [];
+    const memberObj = {};
+    memberObj.team_name = account.team.name;
+    memberObj.domain = account.team.domain;
+    memberObj.team_id = account.team.id;
+    memberObj.team_image = account.team.image;
+    memberObj.owner_name = account.owner.name;
+    memberObj.owner_id = account.owner.id;
+    memberObj.owner_email = account.owner.email;
+    memberObj.owner_image = account.owner.image;
+    accountData.push(memberObj);
+    res.json(accountData);
+  });
+};
+
+const login = (req, res) => {
+  return loginHelper(req, res);
+};
+
 module.exports = {
-	createUserAccount
+  createUserAccount,
+  getAccountData,
+  getAllMembers,
+  getOneMember,
+  login,
 };

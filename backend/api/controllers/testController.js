@@ -1,5 +1,5 @@
-const CLIENT_ID = '270618182930.333388702161';
-const CLIENT_SECRET = '8a86f76a3e4f7de24fae4dab9397848b';
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
 const User = require('../models/testModel');
 const request = require('request');
@@ -42,7 +42,6 @@ const slackOAuth = (req, res) => {
     if (!error && response.statusCode == 200) {
       // Get an auth token
       let oauthToken = JSON.parse(body).access_token;
-      
       // OAuth done- redirect the user to wherever
       console.log(JSON.parse(body));
       res.redirect(__dirname + '/public/success.html');

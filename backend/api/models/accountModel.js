@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const memberSchema = require('./memberModel');
 
 const accountSchema = new mongoose.Schema({
   owner: {
@@ -12,6 +13,9 @@ const accountSchema = new mongoose.Schema({
       type: String,
     },
     email: {
+      type: String,
+    },
+    timezone: {
       type: String,
     },
     image: {
@@ -31,41 +35,51 @@ const accountSchema = new mongoose.Schema({
     image: {
       type: String,
     },
+    members: [
+      // {
+      //   member: {
+      //     type: memberSchema,
+      //   },
+      // },
+    ],
   },
   bot: {
     access_token: {
       type: String,
+      default: '',
     },
     user_id: {
       type: String,
+      default: '',
     },
     channel: {
       type: String,
+      default: '',
     },
     channel_id: {
       type: String,
+      default: '',
     },
     configuration_url: {
       type: String,
+      default: '',
     },
     url: {
       type: String,
+      default: '',
     },
     bot_user_id: {
       type: String,
+      default: '',
     },
     bot_access_token: {
       type: String,
+      default: '',
     },
   },
-  // conversations: [
-  //   {
-  //     conversation: {
-  //       type: mongoose.Schema.Types.ObjectId,
-  //       ref: 'conversation',
-  //     },
-  //   },
-  // ],
+  conversations: [
+    
+  ],
 });
 
 module.exports = mongoose.model('account', accountSchema);
