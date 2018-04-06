@@ -6,31 +6,37 @@ const Member = require('../../models/memberModel');
 const colors = require('colors');
 
 module.exports = createUserAccount = async (body, req, res) => {
-  // console.log(body);
-  const web = await new WebClient(body.access_token);
+  
+  const token = body.access_token;
+  const web = await new WebClient(token);
   const team = await web.users.list();
-  const test = [];
-  console.log("TEAM!!!!!!!!!!!!!", team);
+  const teamInfo = await web.team.info();
+
+  let adminName = '';
+  let adminImage = '';
+  let timezone = '';
   team.members.forEach(member => {
-    const newMember = new Member({
-      id: member.id,
-    });
-    test.push(newMember);
+    if (member.id === body.user_id) {
+      adminName = member.real_name;
+      adminImage = member.profile.image_192;
+      timezone = member.tz_offest;
+    }
   });
-  console.log(test);
+
   const newAccount = await new Account({
     owner: {
       access_token: body.access_token,
-      name: body.user.name,
-      id: body.user.id,
-      email: body.user.email,
-      image: body.user.image_192,
+      id: body.user_id,
+      name: adminName,
+      // email: body.user.email,
+      timezone: timezone,
+      image: adminImage,
     },
     team: {
-      id: body.team.id,
-      name: body.team.name,
-      domain: body.team.domain,
-      image: body.team.image_132,
+      id: teamInfo.team.id,
+      name: teamInfo.team.name,
+      domain: teamInfo.team.domain,
+      image: teamInfo.team.icon.image_132,
       members: team.members,
       // members: test,
     },

@@ -15,6 +15,9 @@ const accountSchema = new mongoose.Schema({
     email: {
       type: String,
     },
+    timezone: {
+      type: String,
+    },
     image: {
       type: String,
     },

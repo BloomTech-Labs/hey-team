@@ -17,9 +17,7 @@ module.exports = login = (req, res, done) => {
     form: {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
-
-      redirect_uri: 'https://d32ce379.ngrok.io/auth/login',
-
+      redirect_uri: 'https://063b82f9.ngrok.io/auth/login',
       code: req.query.code,
     },
   };
@@ -31,12 +29,12 @@ module.exports = login = (req, res, done) => {
   ) {
     if (!error && response.statusCode === 200) {
       body = JSON.parse(body);
+      console.log(body)
       const account = await Account.findOne(
         {
           'owner.access_token': body.access_token,
         }
         // function(err, model) {
-        //   // console.log(colors.yellow(model._id));
 
         //   return model._id;
         // }
@@ -44,7 +42,7 @@ module.exports = login = (req, res, done) => {
       if (account) {
         // console.log(colors.yellow(account._id));
         // backend
-        res.redirect(`https://d32ce379.ngrok.io`);
+        res.redirect(`https://063b82f9.ngrok.io`);
         // res.redirect(`http://localhost:3000/?doc_id=${account._id}`);
         // frontend
         // const url = new URL(window.location.href);
@@ -52,7 +50,6 @@ module.exports = login = (req, res, done) => {
         // const id = params.get('doc_id');
         // localStorage.setItem('doc_id', id);
       } else {
-        // console.log(colors.blue(res));
         createUserAccount(body, req, res, done);
       }
     }

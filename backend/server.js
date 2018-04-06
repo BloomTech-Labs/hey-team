@@ -10,8 +10,7 @@ const routes = require('./api/routes/routes');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(
-  // 'mongodb://localhost:27017/testuser',
-  'mongodb://davidlong:5ive7even@ds233769.mlab.com:33769/hey-test-team',
+  'mongodb://localhost:27017/testuser',
   {
     useMongoClient: true,
   }

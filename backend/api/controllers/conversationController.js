@@ -108,7 +108,7 @@ const addResponses = async (req, res) => {
     participants,
     schedule,
   });
-  console.log(colors.cyan(newConversation));
+  // console.log(colors.cyan(newConversation));
   await Account.findByIdAndUpdate(
     a_id,
     { $push: { conversations: newConversation } },

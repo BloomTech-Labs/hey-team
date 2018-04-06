@@ -6,14 +6,16 @@ const colors = require('colors');
 const createUserAccount = (req, res) => {
 
 	if (!req.query.code) {
-		// access denied
+    // access denied
+    console.log("NO CODE!!!!")
+    
 		return;
 	}
 	var data = {
 		form: {
 			client_id: CLIENT_ID,
 			client_secret: CLIENT_SECRET,
-			redirect_uri: 'https://d32ce379.ngrok.io/auth/login',
+			redirect_uri: 'https://063b82f9.ngrok.io/auth/login',
 			code: req.query.code
 		}
 	};
