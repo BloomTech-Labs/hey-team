@@ -22,7 +22,7 @@ class App extends Component {
     this.state = {loggedIn: true};
     }
   render() {
-        <LandingPageIndex {...this.state} />
+        // <LandingPageIndex {...this.state} />
         const loggedIn = this.state.loggedIn;
     
         const navigation = loggedIn ? (
@@ -32,6 +32,7 @@ class App extends Component {
               <Route exact path="/conversations" component={ ConversationsIndex }/>
               <Route path="/preferences" component={ PreferencesIndex }/>
               <Route path="/conversations/new" component={ New }/>
+              <Route path="/conversations/edit" component={ New }/>
               <NavigationHeader />
           </div>
         ) : (
@@ -41,6 +42,7 @@ class App extends Component {
             <Route exact path="/conversations" component={ LandingPageIndex }/>
             <Route path="/preferences" component={ LandingPageIndex }/>
             <Route path="/conversations/new" component={ LandingPageIndex }/>
+            <Route path="/conversations/edit" component={ LandingPageIndex }/>
           </div>
         );
     return (

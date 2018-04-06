@@ -3,19 +3,20 @@
 //conversations index
 
 import React from 'react';
-import Card, { Button } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import { v4 } from 'uuid';//creates unique keys
 
 import '../../../css/conversations.css';
 import '../../../css/cards.css';
+import '../../../Semantic-UI-CSS/semantic.min.css';
 
 
 // import New from './NewConversation/index';
 let dataArray =[];
-let i = 0;
+let i = 1;
 // dummy info//will fill in from server//all conversation data will be saved here more properties than shown
 let conversationsArray =    [
-                                {name:"Stand Up CS3", time: "10:00 AM",schedule:"Mon, Tues, Fri", created:"21st of January 2018"},
+                                {name:"Stand Up CS3", time: "12:20 AM",schedule:"Mon, Tues, Fri", created:"21st of January 2018", timeZone:"loaded time zone", post:"channel Zero"},
                                 {name:"Stand Up CS4", time: "11:00 AM",schedule:"Wed", created:"11th of July 2018"},
                                 {name:"Stand Up CS5", time: "12:15 AM",schedule:"Tues, Fri", created:"12th of Bradbury 2018"},
                                 {name:"Stand Up CS6", time: "07:00 PM",schedule:"Thur, Tues, Fri", created:"21st of January 2018"},
@@ -39,9 +40,10 @@ let conversationsArray =    [
                                 {name:"Stand Up CS13", time: "10:05 PM",schedule:"Mon, Tues, Fri", created:"21st of January 2018"}
                             ];
 
-let endCard = <div key={v4()} className="cardWrap"><div className="ui card"><div className="card__header">Add New Conversation</div></div></div>;
+let endCard;
 let cardArray = [];
-let conversationsArrayPosition;//exported variable that keeps track of which conversation is to be opened for edit.
+let conversationsArrayPosition = 0;//exported variable that keeps track of which conversation is to be opened for edit.
+let editClicked = false; //dev only will be false
 
 class ConversationsIndex extends React.Component {
     constructor(props) {
@@ -67,16 +69,26 @@ class ConversationsIndex extends React.Component {
         // console.log(conversationsArray);
         //load data from the server fill in conversationsArray with objects
         //full of the conversation's data
-        if(conversationsArray !== undefined){
-            // this.setState({conversationsArrayEmpty: false});
+        if(conversationsArray[0] !== undefined){
+            this.setState({conversationsArrayEmpty: false});
         }
-
+        else{
+            this.setState({conversationsArrayEmpty: true});
+        }
+        // this.setState({conversationsArrayEmpty: true}); //this is dev only
+        endCard = 
+                <div key={v4()} className="cardWrap">
+                    <div className="ui card">
+                        <Button className="ui white button" onClick={() => this.handleNewConversationButton()} className="conversation__addButton">Add New Conversation <i className="plus circle icon fa-5 right floated"></i></Button>
+                    </div>
+                </div>
         this.handleDisplayCards();
     }
 //saves conversation object data into an array
     handleDisplayCards(){
         if(i < conversationsArray.length){
             this.setState({displayArray:[]});
+            cardArray[0] = endCard;
             cardArray[i] =
             <div key={v4()} className="cardWrap"><div className="ui card"><div className="content"><button name={i} className="right floated" onClick={(e) => this.handleEdit(e)}><i className="edit icon"></i></button><button name={i} className="right floated" onClick={(e) => this.handleDelete(e)}><i className="trash icon"></i></button><div className="card__header">
             {dataArray[[i[0]]] = conversationsArray[i].name}</div><div className="description"><div className="cards__time"><span className="cards__titles">Time: </span>
@@ -85,8 +97,8 @@ class ConversationsIndex extends React.Component {
             {dataArray[[i[3]]] = conversationsArray[i].created}</div></div></div></div></div>;
             this.setState({displayArray:cardArray});
             i++
-            // setTimeout(this.handleDisplayCards.bind(this), 100);
-            this.handleDisplayCards();
+            setTimeout(this.handleDisplayCards.bind(this), 100);
+            // this.handleDisplayCards();
         }
     }
 
@@ -102,13 +114,16 @@ class ConversationsIndex extends React.Component {
         */
 
     handleNewConversationButton(){
+        editClicked = false;
         this.props.history.push('/conversations/new');
         console.log("here");
     }
 
     handleEdit(e){
         console.log(e.currentTarget.name);
+        editClicked = true;
         conversationsArrayPosition = e.currentTarget.name;
+        this.props.history.push('/conversations/edit');
         
     }
 
@@ -116,7 +131,7 @@ class ConversationsIndex extends React.Component {
         console.log(e.currentTarget.name);
         console.log(conversationsArray);
         conversationsArray.splice(e.currentTarget.name, 1);
-        i = 0;
+        i = 1;
         cardArray = [];
         this.handleDisplayCards();
         console.log(conversationsArray);
@@ -127,10 +142,11 @@ class ConversationsIndex extends React.Component {
     }
 
     render() {
+        console.log(this.state.conversationsArrayEmpty);
         const conversationsArrayEmpty = this.state.conversationsArrayEmpty;
         const button = conversationsArrayEmpty ? (
             <div className="conversation__add">Add a New Conversation <br />
-            <button onClick={() => this.handleNewConversationButton()} className="conversation__addButton">+</button>
+            <button onClick={() => this.handleNewConversationButton()} className="conversation__addButton"><i className="plus circle icon"></i></button>
             </div>
         ) : (
             <div className="cards__flexWrapper">
@@ -141,9 +157,12 @@ class ConversationsIndex extends React.Component {
         return (
                 <div className="conversations__wrapper">
                     {button}
-            </div>
+                </div>
         );
     }
 }
 
 export default ConversationsIndex;
+export {conversationsArray};
+export {conversationsArrayPosition};
+export {editClicked};
