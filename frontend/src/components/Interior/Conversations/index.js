@@ -40,13 +40,27 @@ let conversationsArray =    [
                             ];
 
 let endCard = <div key={v4()} className="cardWrap"><div className="ui card"><div className="card__header">Add New Conversation</div></div></div>;
-let cardArray = []
+let cardArray = [];
+let conversationsArrayPosition;//exported variable that keeps track of which conversation is to be opened for edit.
 
 class ConversationsIndex extends React.Component {
     constructor(props) {
     super(props);
     this.state = {conversationsArrayEmpty: true};
     this.state = {displayArray:cardArray};
+    this.state = {areYouSure:
+        <div>
+            <div className="conversations__greyedOut"/>
+            <div className="conversations__areYouSure">
+                <div className="conversations__areYouSureTitle">
+                    Are you sure?
+                </div>
+                <div className="conversations__areYouSureButtonWrapper">
+                <Button color='green' onClick={(e) => this.handleEdit(e)}>No</Button><Button color='red'>Yes</Button>
+                </div>
+            </div>
+        </div>
+        };
     }
 
     componentDidMount(){
@@ -54,12 +68,12 @@ class ConversationsIndex extends React.Component {
         //load data from the server fill in conversationsArray with objects
         //full of the conversation's data
         if(conversationsArray !== undefined){
-            this.setState({conversationsArrayEmpty: false});
+            // this.setState({conversationsArrayEmpty: false});
         }
 
         this.handleDisplayCards();
     }
-//saves conversation object data into an array// displayed in its place with in the jsx card
+//saves conversation object data into an array
     handleDisplayCards(){
         if(i < conversationsArray.length){
             this.setState({displayArray:[]});
@@ -69,11 +83,10 @@ class ConversationsIndex extends React.Component {
             {dataArray[[i[1]]] = conversationsArray[i].time}</div><div className="cards__schedule"><span className="cards__titles">Schedule: </span>
             {dataArray[[i[2]]] = conversationsArray[i].schedule}</div><div className="cards__created"><span className="cards__titles">Created: </span>
             {dataArray[[i[3]]] = conversationsArray[i].created}</div></div></div></div></div>;
-
-            cardArray.push(endCard);
             this.setState({displayArray:cardArray});
-            setTimeout(this.handleDisplayCards.bind(this), 100);
             i++
+            // setTimeout(this.handleDisplayCards.bind(this), 100);
+            this.handleDisplayCards();
         }
     }
 
@@ -95,37 +108,39 @@ class ConversationsIndex extends React.Component {
 
     handleEdit(e){
         console.log(e.currentTarget.name);
+        conversationsArrayPosition = e.currentTarget.name;
+        
     }
 
     handleDelete(e){
         console.log(e.currentTarget.name);
         console.log(conversationsArray);
-        conversationsArray.splice(((e.currentTarget.name)), 1);
+        conversationsArray.splice(e.currentTarget.name, 1);
         i = 0;
         cardArray = [];
         this.handleDisplayCards();
         console.log(conversationsArray);
     }
 
+    handleDeleteYes(e){
+
+    }
+
     render() {
-        // const conversationsArrayEmpty = this.state.conversationsArrayEmpty;
-        // const button = conversationsArrayEmpty ? (
-        //     <div className="conversation__add">Add a New Conversation <br />
-        //     <button onClick={() => this.handleNewConversationButton()} className="conversation__addButton">+</button>
-        //     </div>
-        // ) : (
-        //     <div>
-        //         Downloaded data from server<br />
-        //         array of objects
-        //     </div>
-        // );
+        const conversationsArrayEmpty = this.state.conversationsArrayEmpty;
+        const button = conversationsArrayEmpty ? (
+            <div className="conversation__add">Add a New Conversation <br />
+            <button onClick={() => this.handleNewConversationButton()} className="conversation__addButton">+</button>
+            </div>
+        ) : (
+            <div className="cards__flexWrapper">
+                {this.state.displayArray}
+                {/* {this.state.areYouSure} */}
+            </div>
+        );
         return (
                 <div className="conversations__wrapper">
-                     {/* {button}
-                 </div> */}
-                <div className="cards__flexWrapper">
-                    {this.state.displayArray}
-                </div>
+                    {button}
             </div>
         );
     }
