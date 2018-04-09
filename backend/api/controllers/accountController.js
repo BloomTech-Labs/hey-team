@@ -136,7 +136,7 @@ const getAccountData = (req, res) => {
     memberObj.team_image = account.team.image;
     memberObj.owner_name = account.owner.name;
     memberObj.owner_id = account.owner.id;
-    memberObj.owner_email = account.owner.email;
+    // memberObj.owner_email = account.owner.email;
     memberObj.owner_image = account.owner.image;
     accountData.push(memberObj);
     res.json(accountData);
