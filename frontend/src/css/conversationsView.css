@@ -1,0 +1,45 @@
+/*
+CSS By Alex Cassell
+http://alexcassell.com
+*/
+/* color pallette */
+/* https://coolors.co/98c1d9-466365-b1b7d1-9b9fb5-a5d8ff */
+
+
+.conversationsView__Wrapper{
+    font-family: Adventuring;
+    position: absolute;
+    height: 80vh;
+    top: 20vh;
+    left: 10vw;
+    padding-left: 4vw;
+    z-index: 15;
+    display: flex;
+    flex-direction: column;
+}
+
+.conversationsView__flexWrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.conversationsView__title{
+    font-size: 2vw;
+    margin-bottom: 10px;
+}
+
+.conversationsView__participantsCards{
+    height: 100px;
+}
+
+.conversationsView__questions{
+    height: 100px;
+}
+
+.conversationsView__schedule{
+    height: 100px;
+}
+
+.conversationsView__cards{
+    height: 100px;
+}

@@ -76,6 +76,7 @@ class ConversationsIndex extends React.Component {
             this.setState({conversationsArrayEmpty: true});
         }
         // this.setState({conversationsArrayEmpty: true}); //this is dev only
+
         endCard = 
                 <div key={v4()} className="cardWrap">
                     <div className="ui card" onClick={() => this.handleNewConversationButton()}>

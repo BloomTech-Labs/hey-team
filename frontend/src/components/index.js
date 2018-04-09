@@ -1,5 +1,6 @@
 import LandingPageIndex from './LandingPage/index.js';
 import ConversationsIndex from './Interior/Conversations/index';
+import View from './Interior/Conversations/ViewConversation/index';
 import PreferencesIndex from './Interior/Preferences/index';
 import BillingIndex from './Interior/Billing/index';
 import New from './Interior/Conversations/NewConversation/index.js'
@@ -12,5 +13,6 @@ export {
   PreferencesIndex,
   ConversationsIndex,
   SignIn,
-  New
+  New,
+  View
 };

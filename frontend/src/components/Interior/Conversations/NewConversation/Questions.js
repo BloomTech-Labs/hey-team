@@ -67,13 +67,13 @@ class Questions extends React.Component {
     }
     handleDelete(e){
         if(questionsArray.length > 1){
-            console.log("Name: " + e.currentTarget.name);
-            console.log(questionsArray);
+            // console.log("Name: " + e.currentTarget.name);
+            // console.log(questionsArray);
             questionsArray.splice((parseInt(e.currentTarget.name)), 1);
             i = 0;
             inputArray = [];
             this.handleDisplayQuestions();
-            console.log(questionsArray);
+            // console.log(questionsArray);
         }
     }
 
