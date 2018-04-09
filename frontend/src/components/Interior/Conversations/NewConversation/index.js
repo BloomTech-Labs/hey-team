@@ -14,7 +14,7 @@ import {daysArray} from './Days';
 import Questions from './Questions';
 
 
-import {conversationsArray} from '../index.js'
+import {conversationsArray, editClicked} from '../index.js'
 import {conversationsArrayPosition} from '../index.js'
 
 import '../../../../css/conversations.css';
@@ -25,6 +25,7 @@ let dateStamp = String(new Date());
 let conversation  = {name:"", days:daysArray, time:"", timeZone:timeZone,
     questions: "", participants: ["@", "@"], channel: "", date:dateStamp};
 
+let postName, postTime, postWhere;
 
 class New extends Component {
     constructor(props) {
@@ -35,7 +36,14 @@ class New extends Component {
     }
 
     componentWillMount(){
-
+        if(editClicked){
+            postName = conversationsArray[conversationsArrayPosition].name
+        }
+        else{
+            postName = "Enter Name for this conversation";
+            postTime = "10:00 AM"
+            postWhere = "Where should we post answers?" 
+        }
     }
 
 
@@ -43,7 +51,6 @@ class New extends Component {
         if(e.target.name === "name"){
             conversation["name"] = e.target.value;
         }
-
         else if (e.target.name === "time"){
             conversation["time"] = e.target.value;
         }
@@ -56,6 +63,7 @@ class New extends Component {
 
     handleFinished(){
         console.log(conversation);
+        this.props.history.push('/conversations/');
         //make sure object is correct then upload to server
     }
 
@@ -63,10 +71,10 @@ class New extends Component {
         return (
             <div className="conversationsBackground">
                 <div className="conversations__newWrapper">
-                    <Input className="ui size input" type="text" name="name" onChange={(e) => this.handleInput(e)} placeholder={conversationsArray[conversationsArrayPosition].name}/>
+                    <Input className="ui size input" type="text" name="name" onChange={(e) => this.handleInput(e)} placeholder={postName}/>
                         <Days />
                     <div className="conversations__time">
-                        <Input className="ui size input small" type="text" name="time" onChange={(e) => this.handleInput(e)} placeholder={conversationsArray[conversationsArrayPosition].time}/>
+                        <Input className="ui size input small" type="text" name="time" onChange={(e) => this.handleInput(e)} placeholder={postTime}/>
                         {/* After time is submitted reformat to look like 10:00:AM */}
 
                         {/* Drop Down Time Zones Menu */}
@@ -94,7 +102,7 @@ class New extends Component {
                         </div>
                     </div>
                     <div className="conversations__channel">
-                        <Input className="ui size input" type="text" name="channel" onChange={(e) => this.handleInput(e)} placeholder={conversationsArray[conversationsArrayPosition].post}/> 
+                        <Input className="ui size input" type="text" name="channel" onChange={(e) => this.handleInput(e)} placeholder={postWhere}/> 
                     </div>
                     <Button basic className="conversations__submitButton" onClick={() => this.handleFinished()}>Finished</Button>
                     {/* during refactor make this button pop (maybe include snap and crackle, we will see) */}

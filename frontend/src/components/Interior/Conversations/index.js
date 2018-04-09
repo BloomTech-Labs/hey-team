@@ -16,12 +16,12 @@ let dataArray =[];
 let i = 1;
 // dummy info//will fill in from server//all conversation data will be saved here more properties than shown
 let conversationsArray =    [
-                                {name:"Stand Up CS3", time: "12:20 AM",schedule:"Mon, Tues, Fri", created:"21st of January 2018", timeZone:"loaded time zone", post:"channel Zero"},
-                                {name:"Stand Up CS4", time: "11:00 AM",schedule:"Wed", created:"11th of July 2018"},
-                                {name:"Stand Up CS5", time: "12:15 AM",schedule:"Tues, Fri", created:"12th of Bradbury 2018"},
-                                {name:"Stand Up CS6", time: "07:00 PM",schedule:"Thur, Tues, Fri", created:"21st of January 2018"},
-                                {name:"Stand Up CS7", time: "10:05 PM",schedule:"Mon, Tues, Fri", created:"21st of January 2018"},
-                                {name:"Stand Up CS8", time: "11:22 AM",schedule:"Mon, Tues, Fri", created:"21st of January 2018"},
+                                {name:"Stand Up CS3", time: "12:20 AM",schedule:"Mon, Tues, Fri", created:"21st of January 2018", timeZone:"loaded time zone", post:"channel Zero", questions:["some silly question", "some sillier question", "a question that makes sense"]},
+                                {name:"Stand Up CS4", time: "11:00 AM",schedule:"Wed", created:"11th of July 2018",timeZone:"loaded time zone", post:"channel Zero", questions:["some silly question", "some sillier question", "a question that makes sense"]},
+                                {name:"Stand Up CS5", time: "12:15 AM",schedule:"Tues, Fri", created:"12th of Bradbury 2018", timeZone:"loaded time zone", post:"channel Zero", questions:["some silly question", "some sillier question", "a question that makes sense"]},
+                                {name:"Stand Up CS6", time: "07:00 PM",schedule:"Thur, Tues, Fri", created:"21st of January 2018", timeZone:"loaded time zone", post:"channel Zero", questions:["some silly question", "some sillier question", "a question that makes sense"]},
+                                {name:"Stand Up CS7", time: "10:05 PM",schedule:"Mon, Tues, Fri", created:"21st of January 2018",timeZone:"loaded time zone", post:"channel Zero", questions:["some silly question", "some sillier question", "a question that makes sense"]},
+                                {name:"Stand Up CS8", time: "11:22 AM",schedule:"Mon, Tues, Fri", created:"21st of January 2018",timeZone:"loaded time zone", post:"channel Zero", questions:["some silly question", "some sillier question", "a question that makes sense"]},
                                 {name:"Stand Up CS9", time: "12:00 PM",schedule:"Mon, Tues, Fri", created:"21st of January 2018"},
                                 {name:"Stand Up CS10", time: "03:20 PM",schedule:"Mon, Tues, Fri", created:"21st of January 2018"},
                                 {name:"Stand Up CS11", time: "12:15 AM",schedule:"Mon, Tues, Fri", created:"21st of January 2018"},
@@ -65,7 +65,7 @@ class ConversationsIndex extends React.Component {
         };
     }
 
-    componentDidMount(){
+    componentWillMount(){
         // console.log(conversationsArray);
         //load data from the server fill in conversationsArray with objects
         //full of the conversation's data
@@ -78,8 +78,13 @@ class ConversationsIndex extends React.Component {
         // this.setState({conversationsArrayEmpty: true}); //this is dev only
         endCard = 
                 <div key={v4()} className="cardWrap">
-                    <div className="ui card">
-                        <Button className="ui white button" onClick={() => this.handleNewConversationButton()} className="conversation__addButton">Add New Conversation <i className="plus circle icon fa-5 right floated"></i></Button>
+                    <div className="ui card" onClick={() => this.handleNewConversationButton()}>
+                        <div className="converations__createNew">
+                            <div className="converations__createNew__header">
+                                Add New Conversation
+                            </div>
+                            <i className="converations__createNew__icon plus circle icon fa-5"></i>
+                        </div>
                     </div>
                 </div>
         this.handleDisplayCards();
@@ -97,8 +102,8 @@ class ConversationsIndex extends React.Component {
             {dataArray[[i[3]]] = conversationsArray[i].created}</div></div></div></div></div>;
             this.setState({displayArray:cardArray});
             i++
-            setTimeout(this.handleDisplayCards.bind(this), 100);
-            // this.handleDisplayCards();
+            // setTimeout(this.handleDisplayCards.bind(this), 100);
+            this.handleDisplayCards();
         }
     }
 
@@ -142,10 +147,9 @@ class ConversationsIndex extends React.Component {
     }
 
     render() {
-        console.log(this.state.conversationsArrayEmpty);
         const conversationsArrayEmpty = this.state.conversationsArrayEmpty;
         const button = conversationsArrayEmpty ? (
-            <div className="conversation__add">Add a New Conversation <br />
+            <div className="conversation__add">Add a new Conversation <br />
             <button onClick={() => this.handleNewConversationButton()} className="conversation__addButton"><i className="plus circle icon"></i></button>
             </div>
         ) : (
