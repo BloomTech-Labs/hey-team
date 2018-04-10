@@ -376,74 +376,63 @@ const test = async (req, res) => {
 
 const sendToParticipant = async (a_id, c_id, users) => {};
 
-const initiate = async (req, res) => {
-  const { a_id, c_id, users } = await req.body;
-  const account = await Account.findById(a_id);
-
-  const token = 'xoxb-334119064773-rgcvNMZI70rMnTd22lmXGryY';
-  // const rtm = new RTMClient(token);
-  const web = new WebClient(token);
-  // get owner id and dm owner response
-  // get user and dm
-  let requests = [];
-  const getit = async position => {
-    if (position === users.length) {
-      return;
-    } else {
-      console.log();
-      const dm = await web.im.open({ user: users[position] }).then(r => {
-        console.log(r);
-        position++;
-        getit(position);
-      });
-    }
-  };
-
-  getit(0);
-  // users.forEach(u => {
-  //   let i = 0;
-  //   const dm = web.im.open({ user: u });
-  //   while (i < 50000) {
-  //     console.log(i);
-  //     i++;
-  //   }
-  //   console.log(dm);
-  // console.log(dm.channel.id);
-  // account.conv_map.push({
-  //   user_id: u,
-  //   c_id,
-  // });
-  // async.each(account.conversations, c => {
-  //   if (c._id.toString() === c_id) {
-  //     web.chat
-  //       .postMessage({
-  //         channel: dm.channel.id,
-  //         text: c.questions[0],
-  //       })
-  //       .then(res => {
-  //         // `res` contains information about the posted message
-  //         console.log('Message sent: ', res.ts);
-  //       })
-  //       .catch(console.error);
-  //   }
-  // });
-  // });
-
-  // Promise.all(requests)
-  //   .then(p => {
-  //     p.forEach(stuff => {
-  //       console.log('stuff', stuff);
-  //     });
-  //   })
-  //   .catch(console.error);
-
-  // account.save();
-  // console.log(account.conv_map);
-  res.send(requests);
-};
-
 const quicktest = async (req, res) => {
   // console.log(req.body);
+  const { a_id, c_id, users } = await req.body;
+  users.forEach(user => {
+    initiate(a_id, c_id, user);
+  });
+  res.send(req.body);
+};
+
+const initiate = async (a_id, c_id, user) => {
+  const account = await Account.findById(a_id);
+  const token = 'xoxb-334119064773-rgcvNMZI70rMnTd22lmXGryY';
+  const web = new WebClient(token);
+
+  let questions = [];
+  account.conversations.forEach(c => {
+    if (c._id.toString() === c_id) {
+      questions = c.questions;
+    }
+  });
+
+  const dm = await web.im.open({ user: user }).then(res => {
+    console.log(res);
+    web.im.close({ channel: 'D9TSHMKPD' }).then(res => {
+      console.log(res);
+    });
+  });
+
+  account.conv_map.push({
+    user_id: user,
+    c_id,
+  });
+
+  web.chat
+    .postMessage({
+      channel: dm.channel.id,
+      text: questions[1],
+    })
+    .then(res => {
+      // `res` contains information about the posted message
+      console.log('Message sent: ', res.ts);
+    })
+    .catch(console.error);
+
+  account.save();
+  console.log(dm.channel.id);
+
+  // console.log(account.conv_map);
+};
+
+const continueConversation = body => {
+  Account.findOne({});
+};
+
+const im = (req, res) => {
+  continueConversation(req.body);
+  console.log(req.body);
   res.send(req.body);
 };
 
@@ -457,4 +446,5 @@ module.exports = {
   test,
   quicktest,
   initiate,
+  im,
 };

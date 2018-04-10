@@ -46,4 +46,5 @@ module.exports = app => {
   app.route('/conversation/test').post(conversation.test);
   app.route('/conversation/quicktest').post(conversation.quicktest);
   app.route('/conversation/initiate').post(conversation.initiate);
+  app.route('/slack/im/listen').post(conversation.im);
 };

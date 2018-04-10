@@ -135,3 +135,50 @@
       bot_access_token: 'xoxb-334119064773-U6lf4TG13OrIhJm2IvrX1Uvw',
     });
 }
+
+const initiate = async (req, res) => {
+  const { a_id, c_id, users } = await req.body;
+  const account = await Account.findById(a_id);
+
+  const token = 'xoxb-334119064773-rgcvNMZI70rMnTd22lmXGryY';
+  // const rtm = new RTMClient(token);
+  const web = new WebClient(token);
+  // get owner id and dm owner response
+  // get user and dm
+  let questions = [];
+  async.each(account.conversations, c => {
+    if (c._id.toString() === c_id) {
+      questions = c.questions;
+    }
+  });
+
+  const getit = async position => {
+    if (position === users.length) {
+      account.save();
+      console.log(account.conv_map);
+    } else {
+      console.log();
+      const dm = await web.im.open({ user: users[position] }).then(dm => {
+        web.chat
+          .postMessage({
+            channel: dm.channel.id,
+            text: questions[0],
+          })
+          .then(res => {
+            // `res` contains information about the posted message
+            console.log('Message sent: ', res.ts);
+            account.conv_map.push({
+              user_id: users[position],
+              c_id,
+            });
+          })
+          .catch(console.error);
+        position++;
+        getit(position);
+      });
+    }
+    res.send(questions);
+  };
+
+  getit(0);
+};
