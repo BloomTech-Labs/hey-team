@@ -390,11 +390,12 @@ const initiate = async (req, res) => {
     if (position === users.length) {
       return;
     } else {
-      const dm = await web.im.open({ user: user[position] }).then(r => {
+      console.log();
+      const dm = await web.im.open({ user: users[position] }).then(r => {
         console.log(r);
+        position++;
+        getit(position);
       });
-      position++;
-      getit(position);
     }
   };
 
