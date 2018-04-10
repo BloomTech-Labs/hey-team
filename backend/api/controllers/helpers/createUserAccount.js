@@ -6,7 +6,6 @@ const Member = require('../../models/memberModel');
 const colors = require('colors');
 
 module.exports = createUserAccount = async (body, req, res) => {
-  
   const token = body.access_token;
   const web = await new WebClient(token);
   const team = await web.users.list();

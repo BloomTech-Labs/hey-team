@@ -4,8 +4,8 @@ const createUserAccount = require('./createUserAccount');
 
 const colors = require('colors');
 
-const CLIENT_ID = process.env.CLIENT_ID;
-const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const CLIENT_ID = '270618182930.333388702161';
+const CLIENT_SECRET = '8a86f76a3e4f7de24fae4dab9397848b';
 
 module.exports = login = (req, res, done) => {
   if (!req.query.code) {
@@ -17,7 +17,7 @@ module.exports = login = (req, res, done) => {
     form: {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
-      redirect_uri: 'https://hey-test-team.herokuapp.com/auth/login',
+      redirect_uri: 'https://6500aab4.ngrok.io/auth/login',
       code: req.query.code,
     },
   };
@@ -42,7 +42,7 @@ module.exports = login = (req, res, done) => {
       if (account) {
         // console.log(colors.yellow(account._id));
         // backend
-        res.redirect(`https://hey-test-team.herokuapp.com`);
+        res.redirect(`https://6500aab4.ngrok.io/?doc_id=${account._id}`);
         // res.redirect(`http://localhost:3000/?doc_id=${account._id}`);
         // frontend
         // const url = new URL(window.location.href);

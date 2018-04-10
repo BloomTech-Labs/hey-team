@@ -14,7 +14,7 @@ const createUserAccount = (req, res) => {
     form: {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
-      redirect_uri: 'https://hey-test-team.herokuapp.com/auth/login',
+      redirect_uri: 'https://6500aab4.ngrok.io/auth/login',
       code: req.query.code,
     },
   };

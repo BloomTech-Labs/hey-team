@@ -1,7 +1,6 @@
 const passport = require('passport');
 const cors = require('cors');
 
-
 const message = require('../controllers/messageController');
 const account = require('../controllers/accountController');
 const bot = require('../controllers/accountBotController');
@@ -35,7 +34,7 @@ module.exports = app => {
   // app.route('/sendMessage').post(messageController.sendMessage);
   app.route('/auth/bot').get(bot.botAccount);
   app.route('/auth/login').get(account.login);
-  app.route('/receiveMessage').get(message.receiveMessage);
+  app.route('/send/test').post(message.sendMessage);
   app.route('/auth/account').get(account.createUserAccount);
   // conversations
   app.route('/conversation/create').post(conversation.createConversation);
@@ -43,4 +42,8 @@ module.exports = app => {
   app.route('/conversation/all').post(conversation.allConversations);
   app.route('/conversation/edit').post(conversation.editConversation);
   app.route('/conversation/respond').post(conversation.respondToConversation);
+  app.route('/conversation/start').post(conversation.startConversation);
+  app.route('/conversation/test').post(conversation.test);
+  app.route('/conversation/quicktest').post(conversation.quicktest);
+  app.route('/conversation/initiate').post(conversation.initiate);
 };
