@@ -397,12 +397,7 @@ const initiate = async (a_id, c_id, user) => {
     }
   });
 
-  const dm = await web.im.open({ user: user }).then(res => {
-    console.log(res);
-    web.im.close({ channel: 'D9TSHMKPD' }).then(res => {
-      console.log(res);
-    });
-  });
+  const dm = await web.im.open({ user: user });
 
   account.conv_map.push({
     user_id: user,
