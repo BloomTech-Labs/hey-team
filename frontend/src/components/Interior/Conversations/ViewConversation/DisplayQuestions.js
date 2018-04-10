@@ -1,6 +1,6 @@
 //Alex Cassell
 //http://alexcassell.com
-//questions refactored
+//display questions in view conversation mode
 
 import React from 'react';
 import { Input, Button } from 'semantic-ui-react';
@@ -30,10 +30,7 @@ class DisplayQuestions extends React.Component {
     componentWillMount(){
         for(let r = 0; r < conversationsArray[conversationsArrayPosition].questions.length;r++){
             questionsArray[r] = conversationsArray[conversationsArrayPosition].questions[r]
-            console.log(conversationsArray[conversationsArrayPosition].questions[r]);
             }
-
-            console.log(questionsArray);
         this.handleDisplayQuestions();
     }
 

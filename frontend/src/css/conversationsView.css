@@ -18,6 +18,12 @@ http://alexcassell.com
     flex-direction: column;
 }
 
+.conversationsViewButtons{
+    position: fixed;
+    top:20vh;
+    right: 1vw;
+}
+
 .conversationsView__flexWrapper{
     display: flex;
     flex-direction: column;
@@ -28,18 +34,25 @@ http://alexcassell.com
     margin-bottom: 10px;
 }
 
+.conversationsView__titleQuestions{
+    margin-top: 15px;
+}
 .conversationsView__participantsCards{
-    height: 100px;
+    height: auto;
 }
 
 .conversationsView__questions{
     height: 100px;
+    padding: 5px;
+    border: solid 3px #466365;
+    width: 20vw;
+    overflow-y: scroll;
 }
 
 .conversationsView__schedule{
-    height: 100px;
+    height: 35px;
 }
-
+/* responses */
 .conversationsView__cards{
     height: 100px;
 }

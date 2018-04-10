@@ -69,7 +69,7 @@ class Questions extends React.Component {
         if(questionsArray.length > 1){
             // console.log("Name: " + e.currentTarget.name);
             // console.log(questionsArray);
-            questionsArray.splice((parseInt(e.currentTarget.name)), 1);
+            questionsArray.splice((parseInt(e.currentTarget.name, 10)), 1);
             i = 0;
             inputArray = [];
             this.handleDisplayQuestions();

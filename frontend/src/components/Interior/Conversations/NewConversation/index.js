@@ -12,7 +12,7 @@ import Days from './Days';
 import {daysArray} from './Days';
 
 import Questions from './Questions';
-
+import Participants from '../Participants';
 
 import {conversationsArray, editClicked} from '../index.js'
 import {conversationsArrayPosition} from '../index.js'
@@ -98,7 +98,7 @@ class New extends Component {
                         </div>
                         <div className="conversations__participants__icons">
                         {/* icons for particpants will be loaded here */}
-                        [][][][][][][][][][][][][][]
+                            <Participants />
                         </div>
                     </div>
                     <div className="conversations__channel">
