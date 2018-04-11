@@ -28,22 +28,23 @@ class Participants extends React.Component {
 
 //once connected to backend this will draw for main object array
 handleDisplayCards(){
-    for(let i = 0; i < conversationsArray.length; ++i){
+    for(let i = 0; i < conversationsArray[conversationsArrayPosition].participants[0].length; ++i){
         this.setState({displayArray:[]});
         cardArray[i] =
-        <div key={v4()} className="participants__userImage"><button name={i} className="right floated" onClick={(e) => this.handleDelete(e)}><i className="trash icon"></i></button></div>;
+        <div key={v4()} className="participants__userImage"><button name={i} className="right floated" onClick={(e) => this.handleDelete(e)}><i className="trash icon"></i></button><img src={conversationsArray[conversationsArrayPosition].participants[0][i].imageData} alt="User Photo" /></div>;
         this.setState({displayArray:cardArray});
     }
+    {/* console.log(conversationsArray[conversationsArrayPosition].participants[0][0].imageData); */}
 }
 
 
 handleDelete(e){
-    console.log(e.currentTarget.name);
-    console.log(conversationsArray);
+    // console.log(e.currentTarget.name);
+    // console.log(conversationsArray);
     conversationsArray.splice(e.currentTarget.name, 1);
     cardArray = [];
     this.handleDisplayCards();
-    console.log(conversationsArray);
+    // console.log(conversationsArray);
 }
 
 

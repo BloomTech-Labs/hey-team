@@ -54,8 +54,8 @@ render() {
                     </div>
                 </div>
             </div>
-    );
-}
-}
+            );
+        }
+    }
 
 export default View;

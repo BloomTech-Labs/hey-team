@@ -45,16 +45,12 @@ class Responses extends React.Component {
             this.setState({displayArray:[]});
             cardArray[i] =
             <div key={v4()} className="cardWrap"><div className="ui card"><div className="content"><div className="card__header">
-            {dataArray[[i[0]]] = conversationsArray[conversationsArrayPosition].participants[conversationsArrayPosition][i].userName}</div><div className="description"><div className="cards__time"><span className="cards__titles">Time: </span>
-            {dataArray[[i[1]]] = conversationsArray[conversationsArrayPosition].participants[conversationsArrayPosition][i].responseTime}</div><div className="cards__schedule"><span className="cards__titles">Date: </span>
-            {dataArray[[i[2]]] = conversationsArray[conversationsArrayPosition].participants[conversationsArrayPosition][i].responseDate}</div><div className="cards__created">
+            {dataArray[[i[0]]] = conversationsArray[conversationsArrayPosition].participants[0][i].userName}</div><div className="description"><div className="cards__time"><span className="cards__titles">Time: </span>
+            {dataArray[[i[1]]] = conversationsArray[conversationsArrayPosition].participants[0][i].responseTime}</div><div className="cards__schedule"><span className="cards__titles">Date: </span>
+            {dataArray[[i[2]]] = conversationsArray[conversationsArrayPosition].participants[0][i].responseDate}</div><div className="cards__created">
             </div></div></div></div></div>;
             this.setState({displayArray:cardArray});
-            console.log(i);
         }
-        // console.log(conversationsArray[conversationsArrayPosition].participants[0].length);
-
-        console.log(conversationsArray[conversationsArrayPosition].participants[conversationsArrayPosition][6].userName);
     }
 
 

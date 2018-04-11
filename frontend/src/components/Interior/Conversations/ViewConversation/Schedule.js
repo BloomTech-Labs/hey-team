@@ -1,22 +1,35 @@
 //Alex Cassell
 //http://alexcassell.com
-//schedule for view (probably does not need to a seperate component)
+//schedule for view
 
 import React from 'react';
 
 import {conversationsArray} from '../index.js'
 import {conversationsArrayPosition} from '../index.js';
 
-let days = conversationsArray[conversationsArrayPosition].schedule;
-let time = conversationsArray[conversationsArrayPosition].time;
+let days;
+let time;
 
-const Schedule = () => {
-    return (
-        <div>
-            {days} at {time}
-        </div>
+class Schedule extends React.Component {
+    constructor() {
+        super();
+        this.state = {theWhen:days + " at " + time};}
+    
+    componentDidMount(){
+        days = conversationsArray[conversationsArrayPosition].schedule;
+        time = conversationsArray[conversationsArrayPosition].time;
+        this.setState({theWhen:days + " at " + time});
+    }
+        
+        render() {
+            return (
+                <div>
+                    {this.state.theWhen}
+                </div>
+                );
+            }
+        }
+        
 
-    );
-}
 
 export default Schedule;
