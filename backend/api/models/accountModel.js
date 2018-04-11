@@ -79,8 +79,7 @@ const accountSchema = new mongoose.Schema({
     },
   },
   conversations: [],
-
-  conv_map: {},
+  conv_map: [],
   // conv_map: [
   //   {
   //     user_id: { type: String },

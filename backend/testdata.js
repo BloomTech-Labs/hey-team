@@ -182,3 +182,27 @@ const initiate = async (req, res) => {
 
   getit(0);
 };
+
+///////////////////////////////////////////////////////////////////////////////
+conv_map = {
+  UT6939J: {
+    user_id: '',
+    other_stuff: '',
+  },
+  UT6939J: {
+    user_id: '',
+    other_stuff: '',
+  },
+  UT6939J: {
+    user_id: '',
+    other_stuff: '',
+  },
+  UT6939J: {
+    user_id: '',
+    other_stuff: '',
+  },
+  UT6939J: {
+    user_id: '',
+    other_stuff: '',
+  },
+};

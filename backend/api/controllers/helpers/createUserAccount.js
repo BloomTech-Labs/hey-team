@@ -39,11 +39,6 @@ module.exports = createUserAccount = async (body, req, res) => {
       members: team.members,
       // members: test,
     },
-    conv_map: {
-      user_id: '123',
-      c_id: '123',
-      channel: '123',
-    },
   });
   await newAccount.save((err, newAccount) => {
     if (err) {

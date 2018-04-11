@@ -9,6 +9,7 @@ const webhook = new IncomingWebhook(url);
 const Conversation = require('../models/conversationModel');
 const Response = require('../models/responseModel');
 const Account = require('../models/accountModel');
+const ConvMap = require('../models/convMapModel');
 const Member = require('../models/memberModel');
 
 const colors = require('colors');
@@ -201,6 +202,7 @@ const startConversation = async (req, res) => {
 
       convo.conversations.push(newConversation);
       convo.conversations.remove(newConversation);
+
       convo.conversations[0].responses.push({
         submittedOn: new Date(),
         user: 'String',
@@ -385,10 +387,16 @@ const quicktest = async (req, res) => {
   res.send(req.body);
 };
 
-const initiate = async (a_id, c_id, user) => {
+const initiate = async (a_id, c_id, user_id) => {
+  console.log(user_id);
+
   const account = await Account.findById(a_id);
   const token = 'xoxb-334119064773-rgcvNMZI70rMnTd22lmXGryY';
   const web = new WebClient(token);
+
+  await Account.findByIdAndUpdate(a_id, {
+    $pull: { conv_map: { user_id: user_id } },
+  });
 
   let questions = [];
   account.conversations.forEach(c => {
@@ -397,15 +405,11 @@ const initiate = async (a_id, c_id, user) => {
     }
   });
 
-  const dm = await web.im.open({ user: user });
-  const history = await web.im.history({ channel: dm.channel.id });
-  console.log(history);
+  const dm = await web.im.open({ user: user_id });
+  const channel = dm.channel.id;
 
-  account.conv_map.push({
-    user_id: user,
-    c_id,
-    channel: dm.channel.id,
-  });
+  const newConvMap = new ConvMap({ user_id, channel, c_id, a_id });
+  account.conv_map.push(newConvMap);
 
   web.chat
     .postMessage({
@@ -419,9 +423,6 @@ const initiate = async (a_id, c_id, user) => {
     .catch(console.error);
 
   account.save();
-  console.log(dm.channel.id);
-
-  // console.log(account.conv_map);
 };
 
 const continueConversation = body => {
@@ -430,7 +431,7 @@ const continueConversation = body => {
 
 const im = (req, res) => {
   continueConversation(req.body);
-  console.log(req.body);
+  // console.log(req.body);
   res.send(req.body);
 };
 
