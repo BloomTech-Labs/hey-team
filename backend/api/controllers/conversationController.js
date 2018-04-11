@@ -398,10 +398,13 @@ const initiate = async (a_id, c_id, user) => {
   });
 
   const dm = await web.im.open({ user: user });
+  const history = await web.im.history({ channel: dm.channel.id });
+  console.log(history);
 
   account.conv_map.push({
     user_id: user,
     c_id,
+    channel: dm.channel.id,
   });
 
   web.chat
@@ -422,7 +425,7 @@ const initiate = async (a_id, c_id, user) => {
 };
 
 const continueConversation = body => {
-  Account.findOne({});
+  Account.findOne({ conv_map: { channel: body.channel } });
 };
 
 const im = (req, res) => {

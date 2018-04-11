@@ -80,12 +80,13 @@ const accountSchema = new mongoose.Schema({
   },
   conversations: [],
 
-  conv_map: [
-    {
-      user_id: { type: String },
-      c_id: { type: String },
-    },
-  ],
+  conv_map: {},
+  // conv_map: [
+  //   {
+  //     user_id: { type: String },
+  //     c_id: { type: String },
+  //   },
+  // ],
 });
 
 module.exports = mongoose.model('account', accountSchema);
