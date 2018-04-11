@@ -11,6 +11,7 @@ import PreferencesIndex from './components/Interior/Preferences/index.js';
 import BillingIndex from './components/Interior/Billing/index.js';
 
 import New from './components/Interior/Conversations/NewConversation/index.js'
+import View from './components/Interior/Conversations/ViewConversation/index.js';
 
 import LandingPageIndex from './components/LandingPage/index.js';
 
@@ -22,7 +23,7 @@ class App extends Component {
     this.state = {loggedIn: true};
     }
   render() {
-        <LandingPageIndex {...this.state} />
+        // <LandingPageIndex {...this.state} />
         const loggedIn = this.state.loggedIn;
     
         const navigation = loggedIn ? (
@@ -32,6 +33,8 @@ class App extends Component {
               <Route exact path="/conversations" component={ ConversationsIndex }/>
               <Route path="/preferences" component={ PreferencesIndex }/>
               <Route path="/conversations/new" component={ New }/>
+              <Route path="/conversations/edit" component={ New }/>
+              <Route path="/conversations/view" component={ View }/>
               <NavigationHeader />
           </div>
         ) : (
@@ -41,6 +44,8 @@ class App extends Component {
             <Route exact path="/conversations" component={ LandingPageIndex }/>
             <Route path="/preferences" component={ LandingPageIndex }/>
             <Route path="/conversations/new" component={ LandingPageIndex }/>
+            <Route path="/conversations/edit" component={ LandingPageIndex }/>
+            <Route path="/conversations/view" component={ LandingPageIndex }/>
           </div>
         );
     return (

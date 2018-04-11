@@ -109,7 +109,7 @@ class LandingPageIndex extends React.Component {
                     <TopNavigation />
                     <div className="landingTop">
                         <div className="landingTop__tite">
-                            These colors are completely random and temporary
+                            A well thought out title/slogan for our product
                             <div className="landingTop__tite landingTop__tite__sub">
                                 buy this product...or else
                             </div>
