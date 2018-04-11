@@ -58,6 +58,7 @@ class ConversationsIndex extends React.Component {
     }
 
     componentDidMount(){
+        editClicked = false;
         //load data from the server fill in conversationsArray with objects
         //full of the conversation's data
         if(conversationsArray[0] !== undefined){
@@ -96,17 +97,6 @@ class ConversationsIndex extends React.Component {
         cardArray.unshift(endCard);
     }
 
-//onClick={(e) => this.handleView(e)}
-    /*
-        set card to read from current array object
-        loop through each object
-        set to new state array
-
-
-        peice jsx together
-        save each data point into an array, fills in next slot
-        */
-
     handleNewConversationButton(){
         editClicked = false;
         this.props.history.push('/conversations/new');
@@ -116,11 +106,11 @@ class ConversationsIndex extends React.Component {
         editClicked = true;
         conversationsArrayPosition = e.currentTarget.name;
         this.props.history.push('/conversations/edit');
-        
+        console.log("Edit");        
     }
 
     handleView(e){
-        // editClicked = true;
+        editClicked = true;
         conversationsArrayPosition = e.currentTarget.name;
         this.props.history.push('/conversations/view');
     }

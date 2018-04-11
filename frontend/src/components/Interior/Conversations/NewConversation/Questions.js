@@ -33,9 +33,7 @@ class Questions extends React.Component {
             questionsArray = [];
             for(let r = 0; r < conversationsArray[conversationsArrayPosition].questions.length;r++){
                 questionsArray[r] = conversationsArray[conversationsArrayPosition].questions[r]
-                console.log(conversationsArray[conversationsArrayPosition].questions[r]);
             }
-            console.log(questionsArray);
             i = 0;
             this.handleDisplayQuestions();
         }
@@ -44,9 +42,7 @@ class Questions extends React.Component {
     handleInput(e){
         /*eslint-disable */
         //dev only this is being refactored
-        console.log(e.target.name + ": " + e.target.value);
         questionsArray[parseInt(e.target.name)] = e.target.value;
-        console.log(this.state.questionsArray);
         /*eslint-enable */
     }
 
@@ -59,7 +55,6 @@ class Questions extends React.Component {
             placeholder={dataArray[[i[0]]] = questionsArray[i]}/><Button 
             name={i} onClick={(e) => this.handleDelete(e)}>-</Button></div>;
             this.setState({displayArray:inputArray});
-            // console.log("i = " + i);
             i++
             // setTimeout(this.handleDisplayQuestions.bind(this), 100);
             this.handleDisplayQuestions();
@@ -67,23 +62,18 @@ class Questions extends React.Component {
     }
     handleDelete(e){
         if(questionsArray.length > 1){
-            // console.log("Name: " + e.currentTarget.name);
-            // console.log(questionsArray);
             questionsArray.splice((parseInt(e.currentTarget.name, 10)), 1);
             i = 0;
             inputArray = [];
             this.handleDisplayQuestions();
-            // console.log(questionsArray);
         }
     }
 
     handleCreateInput(){
-        console.log(questionsArray);
         questionsArray.push("Type a question");
         i = 0;
         inputArray = [];
         this.handleDisplayQuestions();
-        console.log(questionsArray);
     }
     
     render() {
