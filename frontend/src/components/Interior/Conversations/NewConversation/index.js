@@ -37,7 +37,9 @@ class New extends Component {
 
     componentWillMount(){
         if(editClicked){
-            postName = conversationsArray[conversationsArrayPosition].name
+            postName = conversationsArray[conversationsArrayPosition].name;
+            postTime = conversationsArray[conversationsArrayPosition].time;
+            postWhere = conversationsArray[conversationsArrayPosition].post;
         }
         else{
             postName = "Enter Name for this conversation";

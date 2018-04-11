@@ -3,7 +3,6 @@
 //display questions in view conversation mode
 
 import React from 'react';
-import { Input, Button } from 'semantic-ui-react';
 import { v4 } from 'uuid';//creates unique keys
 
 import '../../../../css/questions.css';

@@ -9,11 +9,11 @@ import Schedule from './Schedule.js';
 import Responses from './Responses.js';
 import Participants from '../Participants.js';
 
-import ConversationsIndex from '../index.js'
+// import ConversationsIndex from '../index.js'
 
-import {editClicked} from '../index.js';
+// import {editClicked} from '../index.js';
 import {conversationsArray} from '../index.js'
-import {conversationsArrayPosition} from '../index.js';
+// import {conversationsArrayPosition} from '../index.js';
 
 import '../../../../css/conversationsView.css';
 // import '../../../Semantic-UI-CSS/semantic.min.css';
@@ -32,8 +32,6 @@ handleEdit(){
         conversationsArray.splice(e.currentTarget.name, 1);
         this.props.history.push('/conversations/');
     }
-
-
 
 render() {
     // <ConversationsIndex buttonClick={(e) => this.handleEdit(this)} />
