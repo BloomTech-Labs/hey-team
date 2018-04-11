@@ -14,7 +14,7 @@ const botAccount = (req, res) => {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
 
-      redirect_uri: 'https://fb1f0425.ngrok.io/auth/bot',
+      redirect_uri: 'https://f0d5afdc.ngrok.io/auth/bot',
 
       code: req.query.code,
     },
