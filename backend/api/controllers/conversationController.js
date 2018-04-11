@@ -177,7 +177,7 @@ const initiate = async (a_id, c_id, user_id) => {
   web.chat
     .postMessage({
       channel: dm.channel.id,
-      text: questions[1],
+      text: questions[0],
     })
     .then(res => {
       // `res` contains information about the posted message
@@ -188,8 +188,17 @@ const initiate = async (a_id, c_id, user_id) => {
   account.save();
 };
 
-const continueConversation = body => {
-  Account.findOne({ conv_map: { channel: body.channel } });
+const continueConversation = async body => {
+  console.log(body.event.channel);
+  const account = await Account.findOne({
+    // 'bot.channel_id': 'C7YJ65J10',
+    conv_map: { $elmMatch: { channel: 'D9TSHMKPD' } },
+  });
+  if (account) {
+    console.log(account);
+  }
+  // console.log(account);
+  // Account.where('conv_map')
 };
 
 const im = (req, res) => {

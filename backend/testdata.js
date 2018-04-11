@@ -184,28 +184,17 @@ const initiate = async (req, res) => {
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-conv_map = {
-  UT6939J: {
-    user_id: '',
-    other_stuff: '',
+conv_map = [
+  {
+    channel: 'D9TSHMKPD',
   },
-  UT6939J: {
-    user_id: '',
-    other_stuff: '',
+  {
+    channel: 'TTTTTTTTT',
   },
-  UT6939J: {
-    user_id: '',
-    other_stuff: '',
+  {
+    channel: 'RRRRRRRRR',
   },
-  UT6939J: {
-    user_id: '',
-    other_stuff: '',
-  },
-  UT6939J: {
-    user_id: '',
-    other_stuff: '',
-  },
-};
+];
 
 ///////////////////////////////////////////////////////////////////
 

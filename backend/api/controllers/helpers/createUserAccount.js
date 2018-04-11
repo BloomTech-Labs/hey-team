@@ -14,11 +14,13 @@ module.exports = createUserAccount = async (body, req, res) => {
   let adminName = '';
   let adminImage = '';
   let timezone = '';
+  let email = '';
   team.members.forEach(member => {
     if (member.id === body.user_id) {
       adminName = member.real_name;
       adminImage = member.profile.image_192;
       timezone = member.tz_offest;
+      email = member.profile.email;
     }
   });
 
@@ -27,7 +29,7 @@ module.exports = createUserAccount = async (body, req, res) => {
       access_token: body.access_token,
       id: body.user_id,
       name: adminName,
-      // email: body.user.email,
+      email: email,
       timezone: timezone,
       image: adminImage,
     },
