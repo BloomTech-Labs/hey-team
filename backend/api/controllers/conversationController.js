@@ -189,16 +189,9 @@ const initiate = async (a_id, c_id, user_id) => {
 };
 
 const continueConversation = async body => {
-  console.log(body.event.channel);
   const account = await Account.findOne({
-    // 'bot.channel_id': 'C7YJ65J10',
     conv_map: { $elmMatch: { channel: 'D9TSHMKPD' } },
   });
-  if (account) {
-    console.log(account);
-  }
-  // console.log(account);
-  // Account.where('conv_map')
 };
 
 const im = (req, res) => {
