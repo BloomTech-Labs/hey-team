@@ -14,7 +14,6 @@ import {conversationsArrayPosition} from '../index.js';
 let questionsArray = ["Type a question"];
 let dataArray = [];
 let inputArray = [];
-let i = 0;
 
 class Questions extends React.Component {
     constructor() {
@@ -34,7 +33,6 @@ class Questions extends React.Component {
             for(let r = 0; r < conversationsArray[conversationsArrayPosition].questions.length;r++){
                 questionsArray[r] = conversationsArray[conversationsArrayPosition].questions[r]
             }
-            i = 0;
             this.handleDisplayQuestions();
         }
     }
@@ -47,7 +45,7 @@ class Questions extends React.Component {
     }
 
     handleDisplayQuestions(){
-        if(i < questionsArray.length){
+        for(let i = 0; i < questionsArray.length; i++){
             this.setState({displayArray:[]});
             inputArray[i] =
             <div key={v4()}><Input className="ui size input" type="text" 
@@ -55,15 +53,12 @@ class Questions extends React.Component {
             placeholder={dataArray[[i[0]]] = questionsArray[i]}/><Button 
             name={i} onClick={(e) => this.handleDelete(e)}>-</Button></div>;
             this.setState({displayArray:inputArray});
-            i++
-            // setTimeout(this.handleDisplayQuestions.bind(this), 100);
-            this.handleDisplayQuestions();
         }
     }
+    
     handleDelete(e){
         if(questionsArray.length > 1){
             questionsArray.splice((parseInt(e.currentTarget.name, 10)), 1);
-            i = 0;
             inputArray = [];
             this.handleDisplayQuestions();
         }
@@ -71,7 +66,6 @@ class Questions extends React.Component {
 
     handleCreateInput(){
         questionsArray.push("Type a question");
-        i = 0;
         inputArray = [];
         this.handleDisplayQuestions();
     }

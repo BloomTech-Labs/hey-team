@@ -32,19 +32,16 @@ handleDisplayCards(){
         this.setState({displayArray:[]});
         cardArray[i] =
         <div key={v4()} className="participants__userImage"><button name={i} className="right floated" onClick={(e) => this.handleDelete(e)}><i className="trash icon"></i></button><img src={conversationsArray[conversationsArrayPosition].participants[0][i].imageData} alt="User Photo" /></div>;
-        this.setState({displayArray:cardArray});
     }
-    {/* console.log(conversationsArray[conversationsArrayPosition].participants[0][0].imageData); */}
+    this.setState({displayArray:cardArray});
+    console.log(conversationsArray);
 }
 
 
 handleDelete(e){
-    // console.log(e.currentTarget.name);
-    // console.log(conversationsArray);
-    conversationsArray.splice(e.currentTarget.name, 1);
+    conversationsArray[conversationsArrayPosition].participants[0].splice(e.currentTarget.name, 1);
     cardArray = [];
     this.handleDisplayCards();
-    // console.log(conversationsArray);
 }
 
 

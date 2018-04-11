@@ -25,14 +25,12 @@ class View extends React.Component {
 };
 
 handleEdit(){
-    this.props.history.push('/conversations/edit');
-    console.log("Edit");        
+    this.props.history.push('/conversations/edit');   
 }
 
     callDelete(e){
-        // conversationsArray.splice(e.currentTarget.name, 1);
-
-        // this.handleDisplayCards();
+        conversationsArray.splice(e.currentTarget.name, 1);
+        this.props.history.push('/conversations/');
     }
 
 
