@@ -154,7 +154,7 @@ const initiate = async (a_id, c_id, user_id) => {
   console.log(user_id);
 
   const account = await Account.findById(a_id);
-  const token = 'xoxb-334119064773-rgcvNMZI70rMnTd22lmXGryY';
+  const token = 'xoxb-334119064773-UW39H2oHxVepvxe1DJWXlbmd';
   const web = new WebClient(token);
 
   await Account.findByIdAndUpdate(a_id, {
@@ -191,7 +191,7 @@ const initiate = async (a_id, c_id, user_id) => {
 const continueConversation = async body => {
   // console.log(1);
   const allAccounts = await Account.find({});
-  const token = 'xoxb-334119064773-rgcvNMZI70rMnTd22lmXGryY';
+  const token = 'xoxb-334119064773-UW39H2oHxVepvxe1DJWXlbmd';
   const web = new WebClient(token);
   let a_id;
   allAccounts.forEach(a => {
@@ -203,13 +203,14 @@ const continueConversation = async body => {
       }
     });
   });
-  // let pos = 1;
-  // const ham = `conv_map.${pos}.responses`;
-  // console.log('ham', ham);
-  // await Account.findByIdAndUpdate(a_id, {
-  //   $set: { 'conversations.0.title': 'tofu' },
-  //   $push: { 'conv_map.0.responses': '!!!!!!!!!!!!!!!!!!' },
-  // });
+  let pos = 0;
+  const ham = `conv_map.0.responses`;
+  const obj = { $set: { ham: '6666666' } };
+  console.log('ham', ham);
+  await Account.findByIdAndUpdate(a_id, {
+    $set: { 'conversations.0.title': 'tofu' },
+    $set: { 'conv_map.0.responses.0': '!!!!!!!!!!!!!!!!!!' },
+  });
   const account = await Account.findById(a_id);
   // // account.team.name = 'ham';
   // console.log(account.team.name);

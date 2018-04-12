@@ -10,7 +10,7 @@ const Response = require('../models/responseModel');
 // const token = process.env.SLACK_TOKEN;
 const url =
   'https://hooks.slack.com/services/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';
-// const token = 'xoxb-334119064773-rgcvNMZI70rMnTd22lmXGryY';
+// const token = 'xoxb-334119064773-UW39H2oHxVepvxe1DJWXlbmd';
 // const rtm = new RTMClient(token);
 // An access token (from your Slack app or custom integration - usually xoxb)
 const webhook = new IncomingWebhook(url);
@@ -40,7 +40,7 @@ const receiveMessage = async (req, res) => {
     _id: a_id,
   });
 
-  const token = 'xoxb-334119064773-rgcvNMZI70rMnTd22lmXGryY';
+  const token = 'xoxb-334119064773-UW39H2oHxVepvxe1DJWXlbmd';
   const rtm = new RTMClient(token);
 
   rtm.start();
