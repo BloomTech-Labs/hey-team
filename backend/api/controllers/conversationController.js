@@ -189,9 +189,25 @@ const initiate = async (a_id, c_id, user_id) => {
 };
 
 const continueConversation = async body => {
-  const account = await Account.findOne({
-    conv_map: { $elmMatch: { channel: 'D9TSHMKPD' } },
+  const allAccounts = await Account.find({});
+  let a_id;
+  allAccounts.forEach(a => {
+    a.conv_map.forEach(m => {
+      if (m.channel.toString() === body.event.channel) {
+        a_id = m.a_id;
+      }
+    });
   });
+
+  const account = await Account.findById(a_id);
+  console.log(account);
+  // const account = await Account.findOne(
+  //   { _id: '5ace2f3b4fe2223b887ec9f9' },
+  //   {
+  //     conv_map: { $eleMatch: { channel: 'D9TSHMKPD' } },
+  //   }
+  // );
+  // console.log(allAccounts);
 };
 
 const im = (req, res) => {
