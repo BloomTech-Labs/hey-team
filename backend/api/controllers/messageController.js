@@ -9,9 +9,9 @@ const Response = require('../models/responseModel');
 // const url = process.env.SLACK_WEBHOOK_URL;
 // const token = process.env.SLACK_TOKEN;
 const url =
-  'https://hooks.slack.com/services/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';
-const token = 'xoxb-334119064773-U6lf4TG13OrIhJm2IvrX1Uvw';
-const rtm = new RTMClient(token);
+  'https://hooks.slack.com/services/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';
+// const token = 'xoxb-334119064773-rgcvNMZI70rMnTd22lmXGryY';
+// const rtm = new RTMClient(token);
 // An access token (from your Slack app or custom integration - usually xoxb)
 const webhook = new IncomingWebhook(url);
 // const web = new WebClient(token);
@@ -19,13 +19,14 @@ const webhook = new IncomingWebhook(url);
 const sendMessage = (req, res) => {
   const { message } = req.body;
   // Send simple text to the webhook channel
-  // webhook.send(message, function(err, res) {
-  //   if (err) {
-  //     console.log('Error:', err);
-  //   } else {
-  //     console.log('Message sent: ', res);
-  //   }
-  // });
+  webhook.send(message, function(err, res) {
+    if (err) {
+      console.log('Error:', err);
+    } else {
+      console.log('Message sent: ', 'res');
+    }
+  });
+  res.send('hmmmmm');
 };
 
 let questions = [];
@@ -34,11 +35,15 @@ const answers = [];
 
 const receiveMessage = async (req, res) => {
   // const dm = await webhook.im.open({user: ''});
-  rtm.start();
+  const { a_id, c_id } = req.body;
   const convo = await Account.findById({
-    _id: '5ac63c27e0b4020b1e810d33',
+    _id: a_id,
   });
 
+  const token = 'xoxb-334119064773-rgcvNMZI70rMnTd22lmXGryY';
+  const rtm = new RTMClient(token);
+
+  rtm.start();
   // convo.conversations.forEach(c => {
   // if (schedule) {}
   //   c.participants.forEach(p => {});
@@ -46,7 +51,7 @@ const receiveMessage = async (req, res) => {
   // rtm.subscribePresence('U9TKS1XJN');
   convo.conversations.forEach(c => {
     console.log(c._id);
-    if (c._id.toString() === '5ac63c27e0b4020b1e810d33') {
+    if (c._id.toString() === c_id) {
       questions = c.questions;
     }
   });
