@@ -1,0 +1,17 @@
+/*
+CSS By Alex Cassell
+http://alexcassell.com
+*/
+/* color pallette */
+/* https://coolors.co/98c1d9-466365-b1b7d1-9b9fb5-a5d8ff */
+
+.preferencesWrapper{
+    position: absolute;
+    font-family: Adventuring;
+    left: 13vw;
+    top: 13vh;
+    width: 87vw;
+    height: 87vh;
+    padding: 5px;
+    border: red solid 2px;
+}

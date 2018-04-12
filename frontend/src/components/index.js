@@ -1,14 +1,18 @@
 import LandingPageIndex from './LandingPage/index.js';
-import Billing from './Billing';
-import Preferences from './Preferences';
 import ConversationsIndex from './Interior/Conversations/index';
+import View from './Interior/Conversations/ViewConversation/index';
+import PreferencesIndex from './Interior/Preferences/index';
+import BillingIndex from './Interior/Billing/index';
+import New from './Interior/Conversations/NewConversation/index.js'
 import SignIn from './SignIn';
 
 
 export { 
   LandingPageIndex,
-  Billing,
-  Preferences,
+  BillingIndex,
+  PreferencesIndex,
   ConversationsIndex,
-  SignIn
+  SignIn,
+  New,
+  View
 };

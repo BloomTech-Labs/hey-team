@@ -1,0 +1,13 @@
+/*
+CSS By Alex Cassell
+http://alexcassell.com
+*/
+/* color pallette */
+/* https://coolors.co/98c1d9-466365-b1b7d1-9b9fb5-a5d8ff */
+
+.responses__flexWrapper{
+    display: flex;
+    flex-direction: row;
+    width: 85vw;
+    overflow: auto;
+}

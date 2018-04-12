@@ -15,10 +15,10 @@ const passportConfig = require('../../app/passport');
 // const middleware = require('../common/middleware');
 
 const corsOptions = {
-  // origin: 'http://localhost:3000',
+  origin: 'http://localhost:3000',
   // origin: 'http://www.mynutricard.com',
   // methods: 'GET, POST, HEAD, PUT, PATCH, DELETE',
-  // preflightContinue: false,
+  preflightContinue: false,
   credentials: true,
 };
 
