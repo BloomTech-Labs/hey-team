@@ -171,7 +171,7 @@ const initiate = async (a_id, c_id, user_id) => {
   const dm = await web.im.open({ user: user_id });
   const channel = dm.channel.id;
 
-  const newConvMap = new ConvMap({ user_id, channel, c_id, a_id });
+  const newConvMap = new ConvMap({ user_id, channel, c_id, a_id, questions });
   account.conv_map.push(newConvMap);
 
   web.chat
@@ -189,19 +189,79 @@ const initiate = async (a_id, c_id, user_id) => {
 };
 
 const continueConversation = async body => {
+  // console.log(1);
   const allAccounts = await Account.find({});
+  const token = 'xoxb-334119064773-rgcvNMZI70rMnTd22lmXGryY';
+  const web = new WebClient(token);
   let a_id;
   allAccounts.forEach(a => {
     a.conv_map.forEach(m => {
       if (m.channel.toString() === body.event.channel) {
         a_id = m.a_id;
+        // console.log(2);
         return;
       }
     });
   });
-
+  let pos = 1;
+  const ham = `conv_map.${pos}.responses`;
+  console.log('ham', ham);
+  await Account.findByIdAndUpdate(a_id, {
+    $set: { 'conversations.0.title': 'tofu' },
+    $push: { 'conv_map.0.responses': '!!!!!!!!!!!!!!!!!!' },
+  });
   const account = await Account.findById(a_id);
-  console.log(account);
+  // account.team.name = 'ham';
+  console.log(account.team.name);
+  // account.conversations[0].title = 'poo';
+  account.save(function(err, product, numAffected) {
+    console.log(err, numAffected);
+  });
+
+  account.conv_map.forEach((a, i) => {
+    if (a.user_id === body.event.user) {
+      if (a.q_index < a.questions.length) {
+        a.responses[a.q_index] = body.event.text;
+        account.conversations.forEach(c => {
+          if (c._id.toString() === a.c_id) {
+            c.responses[a.q_index] = body.event.text;
+          }
+          a.q_index++;
+        });
+        console.log('index', account.conv_map[i].q_index);
+        console.log('responses', account.conv_map[i].responses);
+        console.log(account.conversations);
+        account.save();
+      }
+      if (a.q_index < a.questions.length) {
+        // console.log(5);
+        web.chat
+          .postMessage({
+            channel: body.event.channel,
+            text: a.questions[a.q_index],
+          })
+          .then(res => {
+            // `res` contains information about the posted message
+            console.log('Message sent: ', res.ts);
+            account.save();
+          })
+          .catch(console.error);
+      } else {
+        // console.log(6);
+        web.chat
+          .postMessage({
+            channel: body.event.channel,
+            text: 'All done for now!',
+          })
+          .then(res => {
+            // `res` contains information about the posted message
+            console.log('Message sent: ', res.ts);
+            account.save();
+          })
+          .catch(console.error);
+      }
+    }
+  });
 };
 
 const im = (req, res) => {

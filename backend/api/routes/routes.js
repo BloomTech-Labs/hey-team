@@ -6,6 +6,7 @@ const account = require('../controllers/accountController');
 const bot = require('../controllers/accountBotController');
 const testController = require('../controllers/testController');
 const conversation = require('../controllers/conversationController');
+const users = require('../controllers/usersController');
 
 const test = require('../controllers/testController');
 // const teamInfo = require('../controllers/getTeamInfo');
@@ -44,5 +45,7 @@ module.exports = app => {
   app.route('/conversation/respond').post(conversation.respondToConversation);
   app.route('/conversation/start').post(conversation.startConversation);
   app.route('/conversation/quicktest').post(conversation.quicktest);
+  //
   app.route('/slack/im/listen').post(conversation.im);
+  app.route('/users/find').post(users.findUsers);
 };
