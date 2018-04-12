@@ -7,6 +7,8 @@ const convMapSchema = new mongoose.Schema({
   channel: { type: String },
   res_index: { type: Number, default: 0 },
   q_index: { type: Number, default: 0 },
+  questions: [{ type: String }],
+  responces: [{ type: String }],
 });
 
 module.exports = mongoose.model('convMap', convMapSchema);
