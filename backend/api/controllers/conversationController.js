@@ -203,20 +203,20 @@ const continueConversation = async body => {
       }
     });
   });
-  let pos = 1;
-  const ham = `conv_map.${pos}.responses`;
-  console.log('ham', ham);
-  await Account.findByIdAndUpdate(a_id, {
-    $set: { 'conversations.0.title': 'tofu' },
-    $push: { 'conv_map.0.responses': '!!!!!!!!!!!!!!!!!!' },
-  });
+  // let pos = 1;
+  // const ham = `conv_map.${pos}.responses`;
+  // console.log('ham', ham);
+  // await Account.findByIdAndUpdate(a_id, {
+  //   $set: { 'conversations.0.title': 'tofu' },
+  //   $push: { 'conv_map.0.responses': '!!!!!!!!!!!!!!!!!!' },
+  // });
   const account = await Account.findById(a_id);
-  // account.team.name = 'ham';
-  console.log(account.team.name);
-  // account.conversations[0].title = 'poo';
-  account.save(function(err, product, numAffected) {
-    console.log(err, numAffected);
-  });
+  // // account.team.name = 'ham';
+  // console.log(account.team.name);
+  // // account.conversations[0].title = 'poo';
+  // account.save(function(err, product, numAffected) {
+  //   console.log(err, numAffected);
+  // });
 
   account.conv_map.forEach((a, i) => {
     if (a.user_id === body.event.user) {
