@@ -4,6 +4,7 @@ const cors = require('cors');
 const message = require('../controllers/messageController');
 const account = require('../controllers/accountController');
 const bot = require('../controllers/accountBotController');
+const email = require('../controllers/email');
 const testController = require('../controllers/testController');
 const conversation = require('../controllers/conversationController');
 
@@ -30,6 +31,7 @@ module.exports = app => {
   app.route('/account/getAccountData').post(account.getAccountData);
   app.route('/account/getOneMember').post(account.getOneMember);
   app.route('/account/getAllMembers').post(account.getAllMembers);
+  app.route('/account/send').post(email.emailSender);
   // Conversation Routes
   // app.route('/sendMessage').post(messageController.sendMessage);
   app.route('/auth/bot').get(bot.botAccount);
