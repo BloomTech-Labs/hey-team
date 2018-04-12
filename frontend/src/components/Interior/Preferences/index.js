@@ -3,6 +3,7 @@
 
 import React from 'react';
 import '../../../css/interior.css';
+import Preferences from './Preferences';
 
 class PreferencesIndex extends React.Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class PreferencesIndex extends React.Component {
     render() {
         return (
             <div>
-                Preferences
+                <Preferences />
             </div>
         );
 }

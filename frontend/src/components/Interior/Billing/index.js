@@ -3,6 +3,7 @@
 
 import React from 'react';
 import '../../../css/interior.css';
+import Billing from './Billing';
 
 
 class BillingIndex extends React.Component {
@@ -13,7 +14,7 @@ class BillingIndex extends React.Component {
     render() {
         return (
             <div>
-            Billing
+            <Billing />
             </div>
         );
 }
