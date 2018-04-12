@@ -2,7 +2,7 @@
 //http://alexcassell.com
 
 import React from 'react';
-import '../../../css/interior.css';
+import '../../../css/preferences.css';
 
 class PreferencesIndex extends React.Component {
     constructor(props) {
@@ -11,7 +11,7 @@ class PreferencesIndex extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div className="preferencesWrapper">
                 Preferences
             </div>
         );

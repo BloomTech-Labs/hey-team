@@ -84,3 +84,4 @@ class Questions extends React.Component {
 }
 
 export default Questions;
+export {questionsArray};

@@ -141,7 +141,9 @@ class ConversationsIndex extends React.Component {
         );
         return (
                 <div className="conversations__wrapper">
+                    <div className="conversations__scroll">
                     {button}
+                    </div>
                 </div>
         );
     }
