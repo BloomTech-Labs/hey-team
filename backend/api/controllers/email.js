@@ -14,7 +14,7 @@ const sendEmail = (
 	const errorEmails = [];
 	const successfulEmails = [];
 	const sg = require('sendgrid')(
-		'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'
+		'MySendGridToken'
 	);
 	async.parallel(
 		[
