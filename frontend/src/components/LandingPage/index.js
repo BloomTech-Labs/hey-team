@@ -2,11 +2,12 @@
 //http://alexcassell.com
 import React from 'react';
 
-import * as Scroll from 'react-scroll';
-import { Link as link, DirectLink, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
+// import * as Scroll from 'react-scroll';
+// import { Link as link, DirectLink, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
+import {Events, scrollSpy, scroll } from 'react-scroll';
 
-import { Button } from 'semantic-ui-react'
-import '../../Semantic-UI-CSS/semantic.min.css';
+import { Button } from 'semantic-ui-react';
+// import '../../Semantic-UI-CSS/semantic.min.css';
 
 import '../../css/landingPageTop.css';
 import TopNavigation from '../TopNavigation';
@@ -37,8 +38,7 @@ class LandingPageIndex extends React.Component {
         scrollSpy.update();
     }
 
-
-    componentWillUnmount(){
+    componentWillUnmount(props){
         Events.scrollEvent.remove('begin');
         Events.scrollEvent.remove('end');
     }
@@ -80,7 +80,7 @@ class LandingPageIndex extends React.Component {
     }
 
     handleHeaderScrolling(){
-        console.log(window.scrollY);
+        // console.log(window.scrollY);
         if(window.scrollY > 0){
             shakeFeatures = "features__default shakeHeaderMove";
             shakeSignIn = "signIn__default shakeHeaderMove";
@@ -109,13 +109,12 @@ class LandingPageIndex extends React.Component {
                     <TopNavigation />
                     <div className="landingTop">
                         <div className="landingTop__tite">
-                            These colors are completely random and temporary
+                            A well thought out title/slogan for our product
                             <div className="landingTop__tite landingTop__tite__sub">
                                 buy this product...or else
                             </div>
                             <div className="productImage">
                                 image or carousel here<br /><br /><br />
-                                border is dev only<br /><br /><br />
                                 maybe a picture of the bot<br /><br /><br />
                                 in action
                             </div>

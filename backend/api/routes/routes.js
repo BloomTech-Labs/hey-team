@@ -7,6 +7,7 @@ const bot = require('../controllers/accountBotController');
 const email = require('../controllers/email');
 const testController = require('../controllers/testController');
 const conversation = require('../controllers/conversationController');
+const users = require('../controllers/usersController');
 
 const test = require('../controllers/testController');
 // const teamInfo = require('../controllers/getTeamInfo');
@@ -15,10 +16,10 @@ const passportConfig = require('../../app/passport');
 // const middleware = require('../common/middleware');
 
 const corsOptions = {
-  // origin: 'http://localhost:3000',
+  origin: 'http://localhost:3000',
   // origin: 'http://www.mynutricard.com',
   // methods: 'GET, POST, HEAD, PUT, PATCH, DELETE',
-  // preflightContinue: false,
+  preflightContinue: false,
   credentials: true,
 };
 
@@ -46,5 +47,7 @@ module.exports = app => {
   app.route('/conversation/respond').post(conversation.respondToConversation);
   app.route('/conversation/start').post(conversation.startConversation);
   app.route('/conversation/quicktest').post(conversation.quicktest);
+  //
   app.route('/slack/im/listen').post(conversation.im);
+  app.route('/users/find').post(users.findUsers);
 };
