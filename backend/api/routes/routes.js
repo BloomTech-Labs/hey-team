@@ -1,12 +1,13 @@
 const passport = require('passport');
 const cors = require('cors');
 
-
 const message = require('../controllers/messageController');
 const account = require('../controllers/accountController');
 const bot = require('../controllers/accountBotController');
+const email = require('../controllers/email');
 const testController = require('../controllers/testController');
 const conversation = require('../controllers/conversationController');
+const users = require('../controllers/usersController');
 
 const test = require('../controllers/testController');
 // const teamInfo = require('../controllers/getTeamInfo');
@@ -15,10 +16,10 @@ const passportConfig = require('../../app/passport');
 // const middleware = require('../common/middleware');
 
 const corsOptions = {
-  // origin: 'http://localhost:3000',
+  origin: 'http://localhost:3000',
   // origin: 'http://www.mynutricard.com',
   // methods: 'GET, POST, HEAD, PUT, PATCH, DELETE',
-  // preflightContinue: false,
+  preflightContinue: false,
   credentials: true,
 };
 
@@ -31,11 +32,12 @@ module.exports = app => {
   app.route('/account/getAccountData').post(account.getAccountData);
   app.route('/account/getOneMember').post(account.getOneMember);
   app.route('/account/getAllMembers').post(account.getAllMembers);
+  app.route('/account/send').post(email.emailSender);
   // Conversation Routes
   // app.route('/sendMessage').post(messageController.sendMessage);
   app.route('/auth/bot').get(bot.botAccount);
   app.route('/auth/login').get(account.login);
-  app.route('/receiveMessage').get(message.receiveMessage);
+  app.route('/send/test').post(message.sendMessage);
   app.route('/auth/account').get(account.createUserAccount);
   // conversations
   app.route('/conversation/create').post(conversation.createConversation);
@@ -43,4 +45,9 @@ module.exports = app => {
   app.route('/conversation/all').post(conversation.allConversations);
   app.route('/conversation/edit').post(conversation.editConversation);
   app.route('/conversation/respond').post(conversation.respondToConversation);
+  app.route('/conversation/start').post(conversation.startConversation);
+  app.route('/conversation/quicktest').post(conversation.quicktest);
+  //
+  app.route('/slack/im/listen').post(conversation.im);
+  app.route('/users/find').post(users.findUsers);
 };

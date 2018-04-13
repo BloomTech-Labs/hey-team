@@ -2,12 +2,15 @@
 //http://alexcassell.com
 //set timezone for conversation
 import React from 'react';
+import {editClicked} from '../index.js';
+import {conversationsArrayPosition} from '../index.js';
+import {conversationsArray} from '../index.js';
 
 //grabs users timezone -- until default is set in preferences
 let getTimeZone = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1];
 /* converts getTimeZone to something like GMT-0400; Chrome likes to add a seemingly 
 random place within the timezone with the rest of the info */
-let timeZone = getTimeZone.substring(0,8);
+let timeZone;
 
 class TimeZones extends React.Component {
     constructor(props) {
@@ -15,6 +18,18 @@ class TimeZones extends React.Component {
         this.state = {
             timeZone : timeZone
         };
+    }
+
+    componentWillMount(){
+        if(editClicked){
+            timeZone = conversationsArray[conversationsArrayPosition].timeZone;
+            this.setState({timeZone:timeZone});
+            console.log(conversationsArray[conversationsArrayPosition].timeZone);
+            console.log(this.state.timeZone);
+        }
+        else{
+            getTimeZone.substring(0,8);
+        }
     }
 
     handleTimeZone(e){

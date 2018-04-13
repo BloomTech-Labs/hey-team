@@ -24,7 +24,7 @@ const createUserAccount = (req, res) => {
     form: {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
-      redirect_uri: 'https://hey-test-team.herokuapp.com/auth/login',
+      redirect_uri: 'https://f0d5afdc.ngrok.io/auth/login',
       code: req.query.code,
     },
   };
@@ -84,6 +84,7 @@ const getAllMembers = (req, res) => {
       memberObj.real_name = member.real_name;
       memberObj.username = member.name;
       memberObj._id = member.id;
+      memberObj.email = member.profile.email;
       memberObj.tz_offset = member.tz_offset;
       memberObj.tz_label = member.tz_label;
       memberObj.avatar = member.profile.image_192;
@@ -110,6 +111,7 @@ const getOneMember = (req, res) => {
         memberObj.real_name = member.real_name;
         memberObj.username = member.name;
         memberObj._id = member.id;
+        memberObj.email = member.profile.email;
         memberObj.tz_offset = member.tz_offset;
         memberObj.tz_label = member.tz_label;
         memberObj.avatar = member.profile.image_192;

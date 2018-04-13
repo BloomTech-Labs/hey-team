@@ -1,25 +1,19 @@
 //Alex Cassell
 //http://alexcassell.com
-//questions simplified
-
-/*
-    when a question is deleted the form goes away
-    X the question is deleted from the array
-    and the array is collasped - each question
-    is moved to fill in space
-    then refill all input forms
-    share questionsArray state via props
-
-    loop through array and set values of input fields ez pz
-
-    will refactor after mvp showing on friday
-*/
+//questions refactored
 
 import React from 'react';
 import { Input, Button } from 'semantic-ui-react';
 import { v4 } from 'uuid';//creates unique keys
 
 import '../../../../css/questions.css';
+import {editClicked} from '../index.js';
+import {conversationsArray} from '../index.js'
+import {conversationsArrayPosition} from '../index.js';
+
+let questionsArray = ["Type a question"];
+let dataArray = [];
+let inputArray = [];
 
 class Questions extends React.Component {
     constructor() {
@@ -28,90 +22,60 @@ class Questions extends React.Component {
             questions: [],
             questionCount: 0,
             questionsArray: [],
-            inputArray: [
-                        <div key={v4()}><Input className="ui size input" type="text" name="1" onChange={(e) => this.handleInput(e)} placeholder="Type a question"/><Button name="1" onClick={(e) => this.handleDelete(e)}>-</Button></div>,
-                        <div key={v4()}><Input className="ui size input" type="text" name="2" onChange={(e) => this.handleInput(e)} placeholder="Type a question"/><Button name="2" onClick={(e) => this.handleDelete(e)}>-</Button></div>,
-                        <div key={v4()}><Input className="ui size input" type="text" name="3" onChange={(e) => this.handleInput(e)} placeholder="Type a question"/><Button name="3" onClick={(e) => this.handleDelete(e)}>-</Button></div>,
-                        <div key={v4()}><Input className="ui size input" type="text" name="4" onChange={(e) => this.handleInput(e)} placeholder="Type a question"/><Button name="4" onClick={(e) => this.handleDelete(e)}>-</Button></div>,
-                        <div key={v4()}><Input className="ui size input" type="text" name="5" onChange={(e) => this.handleInput(e)} placeholder="Type a question"/><Button name="5" onClick={(e) => this.handleDelete(e)}>-</Button></div>,
-                        <div key={v4()}><Input className="ui size input" type="text" name="6" onChange={(e) => this.handleInput(e)} placeholder="Type a question"/><Button name="1" onClick={(e) => this.handleDelete(e)}>-</Button></div>,
-                        <div key={v4()}><Input className="ui size input" type="text" name="7" onChange={(e) => this.handleInput(e)} placeholder="Type a question"/><Button name="7" onClick={(e) => this.handleDelete(e)}>-</Button></div>,
-                        <div key={v4()}><Input className="ui size input" type="text" name="8" onChange={(e) => this.handleInput(e)} placeholder="Type a question"/><Button name="8" onClick={(e) => this.handleDelete(e)}>-</Button></div>,
-                        <div key={v4()}><Input className="ui size input" type="text" name="9" onChange={(e) => this.handleInput(e)} placeholder="Type a question"/><Button name="9" onClick={(e) => this.handleDelete(e)}>-</Button></div>,
-                        <div key={v4()}><Input className="ui size input" type="text" name="10" onChange={(e) => this.handleInput(e)} placeholder="Type a question"/><Button name="10" onClick={(e) => this.handleDelete(e)}>-</Button></div>,
-                        ]
+            displayArray: []
         };
     }
 
-    handleInput(e){
-        console.log(e.target.name + ": " + e.target.value);
-        this.state.questionsArray[parseInt(e.target.name) - 1] = e.target.value;
-        console.log(this.state.questionsArray);
+    componentWillMount(){
+        console.log(editClicked);
+        this.handleDisplayQuestions();
+        questionsArray = [];
+        if(editClicked){
+            for(let r = 0; r < conversationsArray[conversationsArrayPosition].questions.length;r++){
+                questionsArray[r] = conversationsArray[conversationsArrayPosition].questions[r]
+            }
+            this.handleDisplayQuestions();
+            console.log("reset array");
+        }
     }
 
-    handleDelete(e){  
-        //removes corresponding question from the questionsArray state
-        this.setState({questionsArray: this.state.questionsArray.splice(((parseInt(e.target.name) - 1)), 1)});
+    handleInput(e){
+        /*eslint-disable */
+        //dev only this is being refactored
+        questionsArray[parseInt(e.target.name)] = e.target.value;
+        /*eslint-enable */
+    }
 
-        console.log(this.state.questionsArray);
-        this.state.questionCount --
+    handleDisplayQuestions(){
+        for(let i = 0; i < questionsArray.length; i++){
+            this.setState({displayArray:[]});
+            inputArray[i] =
+            <div key={v4()}><Input className="ui size input" type="text" 
+            name={i} onChange={(e) => this.handleInput(e)} 
+            placeholder={dataArray[[i[0]]] = questionsArray[i]}/><Button 
+            name={i} onClick={(e) => this.handleDelete(e)}>-</Button></div>;
+            this.setState({displayArray:inputArray});
+        }
+    }
+    
+    handleDelete(e){
+        if(questionsArray.length > 1){
+            questionsArray.splice((parseInt(e.currentTarget.name, 10)), 1);
+            inputArray = [];
+            this.handleDisplayQuestions();
+        }
     }
 
     handleCreateInput(){
-        if(this.state.questionCount === 0){
-            this.setState({questions: [this.state.inputArray[0]]});
-        }
-        else if(this.state.questionCount === 1){
-            this.setState({questions: [this.state.inputArray[0], this.state.inputArray[1]]});
-        }
-        else if(this.state.questionCount === 2){
-            this.setState({questions: [this.state.inputArray[0], this.state.inputArray[1], this.state.inputArray[2]]});
-        }
-        else if(this.state.questionCount === 3){
-            this.setState({questions: [this.state.inputArray[0], this.state.inputArray[1], this.state.inputArray[2], 
-                this.state.inputArray[3]]});
-        }
-        else if(this.state.questionCount === 4){
-            this.setState({questions: [this.state.inputArray[0], this.state.inputArray[1], this.state.inputArray[2], 
-                this.state.inputArray[3], this.state.inputArray[4]]});
-        }
-        else if(this.state.questionCount === 5){
-            this.setState({questions: [this.state.inputArray[0], this.state.inputArray[1], this.state.inputArray[2], 
-                this.state.inputArray[3], this.state.inputArray[4], this.state.inputArray[5]]});
-        }
-        else if(this.state.questionCount === 6){
-            this.setState({questions: [this.state.inputArray[0], this.state.inputArray[1], this.state.inputArray[2], 
-                this.state.inputArray[3], this.state.inputArray[4], this.state.inputArray[5], this.state.inputArray[6]]});
-        }
-        else if(this.state.questionCount === 7){
-            this.setState({questions: [this.state.inputArray[0], this.state.inputArray[1], this.state.inputArray[2], 
-                this.state.inputArray[3], this.state.inputArray[4], this.state.inputArray[5], this.state.inputArray[6],
-                this.state.inputArray[7]]});
-        }
-        else if(this.state.questionCount === 8){
-            this.setState({questions: [this.state.inputArray[0], this.state.inputArray[1], this.state.inputArray[2], 
-                this.state.inputArray[3], this.state.inputArray[4], this.state.inputArray[5], this.state.inputArray[6],
-                this.state.inputArray[7], this.state.inputArray[8]]});
-        }
-        else if(this.state.questionCount === 9){
-            this.setState({questions: [this.state.inputArray[0], this.state.inputArray[1], this.state.inputArray[2], 
-                this.state.inputArray[3], this.state.inputArray[4], this.state.inputArray[5], this.state.inputArray[6],
-                this.state.inputArray[7], this.state.inputArray[8], this.state.inputArray[9]]});
-        }
-        else if(this.state.questionCount === 10){
-            this.setState({questions: [this.state.inputArray[0], this.state.inputArray[1], this.state.inputArray[2], 
-                this.state.inputArray[3], this.state.inputArray[4], this.state.inputArray[5], this.state.inputArray[6],
-                this.state.inputArray[7], this.state.inputArray[8], this.state.inputArray[9], this.state.inputArray[10]]});
-        }
-
-        if(this.state.questionCount !== 10){
-            this.state.questionCount ++
-        }
+        questionsArray.push("Type a question");
+        inputArray = [];
+        this.handleDisplayQuestions();
     }
     
     render() {
     return (
         <div className="questionsWrapper">
+            {this.state.displayArray}
             {this.state.questions}
             <Button className="questions__button" onClick={() => this.handleCreateInput()}>Add Question</Button>
         </div>
@@ -119,5 +83,5 @@ class Questions extends React.Component {
     );
 }
 }
-
 export default Questions;
+export {questionsArray};

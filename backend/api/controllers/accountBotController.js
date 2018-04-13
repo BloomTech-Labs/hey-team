@@ -1,8 +1,8 @@
 const Account = require('../models/accountModel');
 
 const request = require('request');
-const CLIENT_ID = process.env.CLIENT_ID;
-const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const CLIENT_ID = '270618182930.333388702161';
+const CLIENT_SECRET = '8a86f76a3e4f7de24fae4dab9397848b';
 
 const botAccount = (req, res) => {
   if (!req.query.code) {
@@ -13,9 +13,7 @@ const botAccount = (req, res) => {
     form: {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
-
-      redirect_uri: 'https://hey-test-team.herokuapp.com/auth/bot',
-
+      redirect_uri: 'https://f0d5afdc.ngrok.io/auth/bot',
       code: req.query.code,
     },
   };

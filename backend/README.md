@@ -7,28 +7,28 @@ const c_id = <conversation id>
 const conversation <conversation obj>
 ```
 
-### create a conversation
+### Create A Conversation
 
 ```
 endpoint = teamURL/conversation/create
 .post(endpoint, { a_id })
 ```
 
-### delete a conversation
+### Delete A Conversation
 
 ```
 endpoint = teamURL/conversation/delete
 .post(endpoint, { a_id, c_id })
 ```
 
-### get all conversations
+### Get All Conversations
 
 ```
 endpoint = teamURL/conversation/all
 .post(endpoint, {a_id)
 ```
 
-### edit a conversation
+### Edit A Conversation
 
 ```
 endpoint = teamURL/conversation/delete
@@ -54,4 +54,13 @@ endpoint = teamURL/acount/getOneMember
 ```
 endpoint = teamURL/account/getAccountData
 .post(endpoint, { a_id })
+```
+
+### Send Email to Slected Users
+
+```
+endpoint = teamURL/account/send
+.post(endpoint, { a_id, users })
+
+Where users is an array the IDs of the members within the database.
 ```

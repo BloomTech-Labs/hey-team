@@ -1,5 +1,15 @@
+const { RTMClient, WebClient, IncomingWebhook } = require('@slack/client');
+const async = require('async');
+const rp = require('request-promise');
+
+const url =
+  'https://hooks.slack.com/services/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';
+const webhook = new IncomingWebhook(url);
+
 const Conversation = require('../models/conversationModel');
+const Response = require('../models/responseModel');
 const Account = require('../models/accountModel');
+const ConvMap = require('../models/convMapModel');
 const Member = require('../models/memberModel');
 
 const colors = require('colors');
@@ -25,7 +35,7 @@ const createConversation = async (req, res) => {
     questions,
     participants,
     schedule,
-  }); 
+  });
   // console.log(colors.cyan(newConversation));
   await Account.findByIdAndUpdate(
     a_id,
@@ -121,76 +131,144 @@ const addResponses = async (req, res) => {
   res.json(newConversation);
 };
 
-const receiveMessage = async (req, res) => {
-  // const dm = await webhook.im.open({user: ''});
-  rtm.start();
-  const convo = await Account.findById({
-    _id: '5ac570fdfb14b00014687413',
+const startConversation = async (req, res) => {
+  const { a_id, c_id, users } = await req.body;
+  users.forEach(user => {
+    initiate(a_id, c_id, user);
+  });
+  res.send(req.body);
+};
+
+const sendToParticipant = async (a_id, c_id, users) => {};
+
+const quicktest = async (req, res) => {
+  // console.log(req.body);
+  const { a_id, c_id, users } = await req.body;
+  users.forEach(user => {
+    initiate(a_id, c_id, user);
+  });
+  res.send(req.body);
+};
+
+const initiate = async (a_id, c_id, user_id) => {
+  console.log(user_id);
+
+  const account = await Account.findById(a_id);
+  const token = 'xoxb-334119064773-UW39H2oHxVepvxe1DJWXlbmd';
+  const web = new WebClient(token);
+
+  await Account.findByIdAndUpdate(a_id, {
+    $pull: { conv_map: { user_id: user_id } },
   });
 
-  // convo.conversations.forEach(c => {
-  // if (schedule) {}
-  //   c.participants.forEach(p => {});
-  // });
-  // rtm.subscribePresence('U9TKS1XJN');
-  convo.conversations.forEach(c => {
-    console.log(c._id);
-    if (c._id.toString() === '5ac570fdfb14b00014687413') {
+  let questions = [];
+  account.conversations.forEach(c => {
+    if (c._id.toString() === c_id) {
       questions = c.questions;
     }
   });
 
-  const conversationId = 'C7YJ65J10';
-  const queLength = questions.length;
-  let currentQuestion = 0;
-  rtm
-    .sendMessage(questions[currentQuestion], conversationId)
+  const dm = await web.im.open({ user: user_id });
+  const channel = dm.channel.id;
+
+  const newConvMap = new ConvMap({ user_id, channel, c_id, a_id, questions });
+  account.conv_map.push(newConvMap);
+
+  web.chat
+    .postMessage({
+      channel: dm.channel.id,
+      text: questions[0],
+    })
     .then(res => {
-      // console.log('Message sent: ', res);
-      currentQuestion++;
+      // `res` contains information about the posted message
+      console.log('Message sent: ', res.ts);
     })
     .catch(console.error);
 
-  rtm.on('message', event => {
-    // console.log('event', event);
-    answers.push(event.text);
-    if (currentQuestion < queLength) {
-      rtm
-        .sendMessage(questions[currentQuestion], conversationId)
-        .then(res => {
-          // console.log('Message sent: ', res);
-          currentQuestion++;
-        })
-        .catch(console.error);
-    } else {
-      rtm.disconnect();
-      // web.chat
-      //   .postMessage({
-      //     channel: conversationId,
-      const newConversation = new Conversation({});
-      const newResponse = new Response({
-        user: 'test',
-        questions,
-        answers,
-      });
+  account.save();
+};
 
-      convo.conversations.push(newConversation);
-      convo.conversations.remove(newConversation);
-      convo.conversations[0].responses.push({
-        submittedOn: new Date(),
-        user: 'String',
-        avatar: 'String',
-        questions,
-        answers,
-      });
+const continueConversation = async body => {
+  // console.log(1);
+  const allAccounts = await Account.find({});
+  const token = 'xoxb-334119064773-UW39H2oHxVepvxe1DJWXlbmd';
+  const web = new WebClient(token);
+  let a_id;
+  allAccounts.forEach(a => {
+    a.conv_map.forEach(m => {
+      if (m.channel.toString() === body.event.channel) {
+        a_id = m.a_id;
+        // console.log(2);
+        return;
+      }
+    });
+  });
+  let pos = 0;
+  const ham = `conv_map.0.responses`;
+  const obj = { $set: { ham: '6666666' } };
+  console.log('ham', ham);
+  await Account.findByIdAndUpdate(a_id, {
+    $set: { 'conversations.0.title': 'tofu' },
+    $set: { 'conv_map.0.responses.0': '!!!!!!!!!!!!!!!!!!' },
+  });
+  const account = await Account.findById(a_id);
+  // // account.team.name = 'ham';
+  // console.log(account.team.name);
+  // // account.conversations[0].title = 'poo';
+  // account.save(function(err, product, numAffected) {
+  //   console.log(err, numAffected);
+  // });
 
-      convo.save();
-
-      console.log(convo.conversations[0]);
+  account.conv_map.forEach((a, i) => {
+    if (a.user_id === body.event.user) {
+      if (a.q_index < a.questions.length) {
+        a.responses[a.q_index] = body.event.text;
+        account.conversations.forEach(c => {
+          if (c._id.toString() === a.c_id) {
+            c.responses[a.q_index] = body.event.text;
+          }
+          a.q_index++;
+        });
+        console.log('index', account.conv_map[i].q_index);
+        console.log('responses', account.conv_map[i].responses);
+        console.log(account.conversations);
+        account.save();
+      }
+      if (a.q_index < a.questions.length) {
+        // console.log(5);
+        web.chat
+          .postMessage({
+            channel: body.event.channel,
+            text: a.questions[a.q_index],
+          })
+          .then(res => {
+            // `res` contains information about the posted message
+            console.log('Message sent: ', res.ts);
+            account.save();
+          })
+          .catch(console.error);
+      } else {
+        // console.log(6);
+        web.chat
+          .postMessage({
+            channel: body.event.channel,
+            text: 'All done for now!',
+          })
+          .then(res => {
+            // `res` contains information about the posted message
+            console.log('Message sent: ', res.ts);
+            account.save();
+          })
+          .catch(console.error);
+      }
     }
   });
+};
 
-  res.status(200).send(convo);
+const im = (req, res) => {
+  continueConversation(req.body);
+  // console.log(req.body);
+  res.send(req.body);
 };
 
 module.exports = {
@@ -199,4 +277,7 @@ module.exports = {
   allConversations,
   editConversation,
   respondToConversation,
+  startConversation,
+  quicktest,
+  im,
 };

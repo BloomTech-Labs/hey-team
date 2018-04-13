@@ -28,10 +28,6 @@ http://alexcassell.com
     text-align: center;
 }
 
-.cards__titles{
-    font-weight: bold;
-}
-
 .description{
     height: 160px;
     display: flex;
@@ -91,4 +87,21 @@ http://alexcassell.com
 .conversations__areYouSureButtonWrapper{
     align-self: flex-end;
     padding: 10px;
+}
+
+.cards__questionsWrapper{
+    overflow: auto;
+}
+
+.cards__time{
+    width: 100%;
+    font-size: .6vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: solid 2px lightgrey;
+}
+
+.cards__titles{
+    font-weight: bold;
 }

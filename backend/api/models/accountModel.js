@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const memberSchema = require('./memberModel');
+const convMapSchema = require('./convMapModel');
 
 const accountSchema = new mongoose.Schema({
   owner: {
@@ -77,9 +78,14 @@ const accountSchema = new mongoose.Schema({
       default: '',
     },
   },
-  conversations: [
-    
-  ],
+  conversations: [],
+  conv_map: [],
+  // conv_map: [
+  //   {
+  //     user_id: { type: String },
+  //     c_id: { type: String },
+  //   },
+  // ],
 });
 
 module.exports = mongoose.model('account', accountSchema);
