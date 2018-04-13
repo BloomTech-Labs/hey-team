@@ -4,8 +4,8 @@ import FooterPage from './FooterPage';
 import '../../css/features.css';
 
 const Feature = () => (
-    <div>
-        <a name="features"/>
+    <div className="wrapper">
+        {/* <a name="features"/> */}
         <div className="md-grid">
             <Grid className="landing-grid">
                 <Cell col={12}>

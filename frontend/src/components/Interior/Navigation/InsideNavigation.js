@@ -2,7 +2,7 @@ import React from 'react';
 import { Nav } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-import '../css/interiorNavigation.css';
+import '../../../css/interiorNavigation.css';
 
 const InsideNavigation = () => {
     return (

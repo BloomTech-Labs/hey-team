@@ -140,7 +140,7 @@ const initiate = async (req, res) => {
   const { a_id, c_id, users } = await req.body;
   const account = await Account.findById(a_id);
 
-  const token = 'xoxb-334119064773-rgcvNMZI70rMnTd22lmXGryY';
+  const token = 'xoxb-334119064773-UW39H2oHxVepvxe1DJWXlbmd';
   // const rtm = new RTMClient(token);
   const web = new WebClient(token);
   // get owner id and dm owner response
@@ -203,7 +203,7 @@ const test = async (req, res) => {
   // return res.send('hey');
   let questions = [];
   const answers = [];
-  const token = 'xoxb-334119064773-rgcvNMZI70rMnTd22lmXGryY';
+  const token = 'xoxb-334119064773-UW39H2oHxVepvxe1DJWXlbmd';
   const rtm = new RTMClient(token);
   const web = new WebClient(token);
   // get owner id and dm owner response
