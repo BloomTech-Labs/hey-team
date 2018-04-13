@@ -95,13 +95,32 @@ class New extends Component {
 
   handleRemoveQuestion = (e, d) => {
     console.log(d.children);
-    const questions = this.state.questions.map(q => {
-      if (q !== d.children) {
-        return q;
+    const questions = [];
+    this.state.questions.forEach(p => {
+      if (p !== d.children) {
+        questions.push(p);
       }
     });
     console.log(questions);
     this.setState({ questions });
+  };
+
+  handleRemoveParticipant = (e, d) => {
+    console.log('event', e);
+    console.log('data', d);
+    const participants = [];
+    this.state.participants.forEach(q => {
+      if (q.real_name !== d.children[1]) {
+        participants.push(q);
+      }
+    });
+    console.log(participants);
+    this.setState({ participants });
+  };
+
+  handleUpdateTitle = (e, d) => {
+    this.setState({ tite: e.target.value });
+    console.log('title', this.state.title);
   };
 
   render() {
@@ -202,6 +221,7 @@ class New extends Component {
                     trigger={
                       <Label
                         as="a"
+                        size="large"
                         onClick={(e, d) => this.handleRemoveQuestion(e, d)}
                       >
                         {q}
@@ -233,10 +253,19 @@ class New extends Component {
             <Form.Group inline>
               {this.state.participants.map(p => {
                 return (
-                  <Label size="large">
-                    <img src={p.avatar} /> {`     ${p.real_name}     `}
-                    <Icon name="delete" />
-                  </Label>
+                  <Popup
+                    trigger={
+                      <Label
+                        as="a"
+                        size="large"
+                        onClick={(e, d) => this.handleRemoveParticipant(e, d)}
+                      >
+                        <img src={p.avatar} />
+                        {`${p.real_name}`}
+                      </Label>
+                    }
+                    content="Click to remove from list"
+                  />
                 );
               })}
             </Form.Group>

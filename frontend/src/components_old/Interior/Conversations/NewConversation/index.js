@@ -71,7 +71,7 @@ class New extends Component {
     // console.log(localStorage);
     const thing = {};
     const test = async () => {
-      const res = await axios.post('https://3259afd8.ngrok.io/users/find', {
+      const res = await axios.post('https://3a384b2f.ngrok.io/users/find', {
         a_id: '5ace2f3b4fe2223b887ec9f9',
         searchTerm: e.target.value,
       });
