@@ -39,6 +39,12 @@ let conversation = {
 
 let postName, postTime, postWhere;
 
+class Results extends Component {
+  constructor(props) {
+    super(props);
+  }
+}
+
 class New extends Component {
   constructor(props) {
     super(props);
@@ -62,14 +68,14 @@ class New extends Component {
   }
 
   handleSearch(e) {
-    console.log(localStorage);
+    // console.log(localStorage);
     const thing = {};
     const test = async () => {
-      const res = await axios.post('https://55c3e1eb.ngrok.io/users/find', {
+      const res = await axios.post('https://3259afd8.ngrok.io/users/find', {
         a_id: '5ace2f3b4fe2223b887ec9f9',
         searchTerm: e.target.value,
       });
-      //   console.log(res);
+      //   console.log(res.data);
       const SearchResults = [];
       res.data.forEach(p => {
         SearchResults.push({
@@ -79,6 +85,7 @@ class New extends Component {
         });
       });
       this.setState({ SearchResults });
+      console.log(this.state);
     };
 
     test();
@@ -116,6 +123,8 @@ class New extends Component {
   }
 
   render() {
+    if (this.state.SearchResults.length > 0) {
+    }
     return (
       <div className="conversationsBackground">
         <div className="conversations__newWrapper">
@@ -159,6 +168,11 @@ class New extends Component {
                 onChange={e => this.handleSearch(e)}
                 placeholder={postWhere}
               />
+            </div>
+            <div className="">
+              {this.state.SearchResults.map(r => {
+                <div>r.real_name</div>;
+              })}
             </div>
             <div className="conversations__participants__icons">
               {/* icons for particpants will be loaded here */}

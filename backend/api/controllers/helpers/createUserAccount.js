@@ -42,11 +42,13 @@ module.exports = createUserAccount = async (body, req, res) => {
       // members: test,
     },
   });
+  let account;
   await newAccount.save((err, newAccount) => {
     if (err) {
       res.status(403).json({ err: err.message });
     }
+    account = newAccount;
     // res.status(200).json({ newAccount });
   });
-  res.redirect(__dirname + '/public/DOOKIE_BUTTHAM.html');
+  res.redirect(`http://localhost:3000/dashboard/?doc_id=${account._id}`);
 };
