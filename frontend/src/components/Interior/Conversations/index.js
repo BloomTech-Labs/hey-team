@@ -1675,6 +1675,7 @@ let endCard;
 let cardArray = [];
 let editClicked = false; //dev only will be false
 
+
 class ConversationsIndex extends React.Component {
   constructor(props) {
     super(props);

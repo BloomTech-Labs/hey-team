@@ -12,7 +12,6 @@ let getTimeZone = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1];
 random place within the timezone with the rest of the info */
 let timeZone;
 
-
 class TimeZones extends React.Component {
     constructor(props) {
         super(props);
