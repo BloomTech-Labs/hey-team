@@ -17,7 +17,7 @@ module.exports = login = (req, res, done) => {
     form: {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
-      redirect_uri: 'https://55c3e1eb.ngrok.io/auth/login',
+      redirect_uri: 'https://f0d5afdc.ngrok.io/auth/login',
       code: req.query.code,
     },
   };
@@ -42,8 +42,8 @@ module.exports = login = (req, res, done) => {
       if (account) {
         // console.log(colors.yellow(account._id));
         // backend
-        // res.redirect(`https://55c3e1eb.ngrok.io/?doc_id=${account._id}`);
-        res.redirect(`http://localhost:3000/?doc_id=${account._id}`);
+        res.redirect(`https://f0d5afdc.ngrok.io/?doc_id=${account._id}`);
+        // res.redirect(`http://localhost:3000/?doc_id=${account._id}`);
         // frontend
         // const url = new URL(window.location.href);
         // const params = new URLSearchParams(url.search.slice(1));
