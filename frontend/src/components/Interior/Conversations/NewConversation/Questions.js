@@ -76,12 +76,12 @@ class Questions extends React.Component {
     return (
         <div className="questionsWrapper">
             {this.state.displayArray}
+            {this.state.questions}
             <Button className="questions__button" onClick={() => this.handleCreateInput()}>Add Question</Button>
         </div>
 
     );
 }
 }
-
 export default Questions;
 export {questionsArray};

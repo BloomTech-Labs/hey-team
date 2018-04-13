@@ -3,6 +3,16 @@ createUserAccountHelper = require('./helpers/createUserAccount');
 const Account = require('../models/accountModel');
 const colors = require('colors');
 
+const request = require('request');
+const CLIENT_ID = '270618182930.333388702161';
+const CLIENT_SECRET = '8a86f76a3e4f7de24fae4dab9397848b';
+
+// const createUserAccount = (req, res) => {
+//   console.log('code', req.query.code);
+//   const request = req;
+//   res.status(200).send('hit it');
+// };
+
 const createUserAccount = (req, res) => {
   if (!req.query.code) {
     // access denied

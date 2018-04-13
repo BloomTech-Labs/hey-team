@@ -35,6 +35,7 @@ body{
     left: 30%;
     font-size: 3vw;
     color: white;
+    border: red solid 2px;
     text-shadow: 2px 2px #466365;
 }
 
