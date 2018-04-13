@@ -99,13 +99,6 @@ class New extends Component {
                     </div>
 
                     <div className="conversations__participantWrapper">
-                        <div className="conversations__participant">
-                            Participants
-                        </div>
-                        <div className="conversations__participant">
-                        {/* this has to hook into the backend */}
-                            <Input icon="search" className="ui size input small" type="text" name="search" placeholder="Search"/> 
-                        </div>
                         <div className="conversations__participants__icons">
                         {/* icons for particpants will be loaded here */}
                             <Participants />

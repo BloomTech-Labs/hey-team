@@ -1,23 +1,45 @@
-//Alex Cassell
-//http://alexcassell.com
+import React, {Component} from 'react';
+import StripeCheckout from 'react-stripe-checkout';
+import { Button, Checkbox } from 'react-mdl';
 
-import React from 'react';
-import '../../../css/interior.css';
-import Billing from './Billing';
+class BillingIndex extends Component {
+  // onToken = token => {
+  //   fetch ('api/stripe', {
+  //     method: 'POST',
+  //     body: JSON.stringify (token),
+  //   }).then (res => {
+  //     alert ('Payment Successful');
+  //   });
+  // };
+  
+  onToken = token => {
+    fetch ('/save-stripe-token', {
+      method: 'POST',
+      body: JSON.stringify (token),
+    }).then (res => {
+      alert ('Payment Successful');
+    });
+  };
 
+  render () {
+      console.log("billing");
+    return (
+      
+      <div>
+      <StripeCheckout
+        name="Hey Team"
+        description="30 Day Subscription - $9.99"
+        amount={999}
+        token={this.onToken}
+        stripeKey="pk_test_mSszCkbADb0iAmuW6u0dWhcw"
+      >
+      <Checkbox className="checkbox" label="30 Day Subscription - $9.99" ripple/> 
+      <Button raised colored> Buy Now </Button>
+      </StripeCheckout>
 
-class BillingIndex extends React.Component {
-    constructor(props) {
-    super(props);
-    this.state = {'somestate': ''};
-    }
-    render() {
-        return (
-            <div>
-            <Billing />
-            </div>
-        );
-}
+      </div>
+    );
+  }
 }
 
 export default BillingIndex;
