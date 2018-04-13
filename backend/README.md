@@ -55,3 +55,12 @@ endpoint = teamURL/acount/getOneMember
 endpoint = teamURL/account/getAccountData
 .post(endpoint, { a_id })
 ```
+
+### Send Email to Slected Users
+
+```
+endpoint = teamURL/account/send
+.post(endpoint, { a_id, users })
+
+Where users is an array the IDs of the members within the database.
+```
