@@ -3,7 +3,30 @@
 //new/edit conversation component
 
 import React, { Component } from 'react';
-import { Input, Button } from 'semantic-ui-react';
+import {
+    Button,
+    Form,
+    Grid,
+    Header,
+    Image,
+    Message,
+    Segment,
+    Label,
+    Container,
+    Checkbox,
+    Input,
+    List,
+    Radio,
+    Select,
+    TextArea,
+    Dropdown,
+    FormGroup,
+    Search,
+    Icon,
+    Accordion,
+    Popup,
+  } from 'semantic-ui-react';
+
 
 import TimeZones from './TimeZones';
 import { timeZone } from './TimeZones';
@@ -27,6 +50,11 @@ let dateStamp = String(new Date());
 let participantsData = [[{userName: "fred", responseTime: "10:07:AM", responseDate: "03-12-2018", imageData: {}, answers:["Yes, I loved", "That was the worst thing I have ever done", "I cam a dog person, cats scare me", "This is probably tree", "I want to press charges", "The sky is blue and so is the water"]},{userName: "Jorge", responseTime: "10:17:AM", responseDate: "04-12-2018", imageData: {}, answers:["Yup", "nope", "could be", "yea probably", "who knows", "I did not hear that"]},{userName: "Fran", responseTime: "09:37:AM", responseDate: "02-22-2018", imageData: {}, answers:["hotdog", "tacos then?", "pizza is almost certainly true", "with pineapples of course", "and mayonnaise", "No I am not sick"]},{userName: "Jules", responseTime: "12:27:PM", responseDate: "01-11-2017", imageData: {}, answers:["A river of denile", "Panda bears", "are true bears", "even though that is against the myth", "that mice", "mine cheese"]},{userName: "Bobby", responseTime: "1:07:PM", responseDate: "03-12-2018", imageData: {},answers:["windshield wipers slapping time", "for one single day with", "just another word for nothing left to lose", "Kris did it best", "rusty harpoon and red bandanas", "people"]},{userName: "Dan", responseTime: "10:07:AM", responseDate: "03-12-2018", imageData: {},answers:["Yes, I loved", "That was the worst thing I have ever done", "I cam a dog person, cats scare me", "This is probably tree", "I want to press charges", "The sky is blue and so is the water"]},{userName: "Cindy", responseTime: "10:07:AM", responseDate: "03-12-2018", imageData: {}, answers:["Yes, I loved", "That was the worst thing I have ever done", "I cam a dog person, cats scare me", "This is probably tree", "I want to press charges", "The sky is blue and so is the water"]}]];
 let conversation  = {name:"", days:daysArray, time:"", timeZone:timeZone,
     questions: questionsArray, participants: participantsData, channel: "", date:dateStamp};
+
+    const options = [
+        { key: 'a', text: 'AM', value: 'am' },
+        { key: 'p', text: 'PM', value: 'pm' },
+      ];
 
 let postName, postTime, postWhere;
 
@@ -66,6 +94,8 @@ class New extends Component {
         // console.log(conversation);
     }
 
+    
+
     handleFinished(){
         dateStamp = String(new Date());
         conversation  = {name:postName, time:postTime, schedule:daysArray, created:dateStamp, timeZone:timeZone,
@@ -84,9 +114,16 @@ class New extends Component {
                     <Input className="ui size input" type="text" name="name" onChange={(e) => this.handleInput(e)} placeholder={postName}/>
                         <Days />
                     <div className="conversations__time">
-                        <Input className="ui size input small" type="text" name="time" onChange={(e) => this.handleInput(e)} placeholder={postTime}/>
+                        {/* <Input className="ui size input small" type="text" name="time" onChange={(e) => this.handleInput(e)} placeholder={postTime}/> */}
+                        
                         {/* After time is submitted reformat to look like 10:00:AM */}
-
+                        <Form.Group inline>
+              <Input
+                label={<Dropdown defaultValue="am" options={options} />}
+                labelPosition="right"
+                placeholder="10:00"
+              />
+            </Form.Group>
                         {/* Drop Down Time Zones Menu */}
                         <TimeZones />
 
