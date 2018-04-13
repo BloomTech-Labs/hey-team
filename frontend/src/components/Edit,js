@@ -30,7 +30,7 @@ const options = [
   { key: 'p', text: 'PM', value: 'pm' },
 ];
 
-class New extends Component {
+class Edit extends Component {
   constructor() {
     super();
     this.state = {
@@ -254,4 +254,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {})(New);
+export default connect(mapStateToProps, {})(Edit);
