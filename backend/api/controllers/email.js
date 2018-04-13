@@ -2,6 +2,8 @@ let helper = require('sendgrid').mail;
 const async = require('async');
 const Account = require('../models/accountModel');
 const colors = require('colors');
+const config = require('../../config')
+const MySendGridToken = config.MySendGridToken;
 
 const sendEmail = (
 	parentCallback,
@@ -14,7 +16,7 @@ const sendEmail = (
 	const errorEmails = [];
 	const successfulEmails = [];
 	const sg = require('sendgrid')(
-		'MySendGridToken'
+		MySendGridToken
 	);
 	async.parallel(
 		[
@@ -58,7 +60,7 @@ const sendEmail = (
 };
 
 const emailSender = async (req, res, next) => {
-  const { a_id, users } = req.body;
+  const { a_id, users, context } = req.body;
   let emails = [];
 
   await Account.findById(a_id, (err, account) => {
@@ -86,11 +88,13 @@ const emailSender = async (req, res, next) => {
           callback,
           // Email FROM
           'travisj_jones@hotmail.com',
-          //Email TO
+          // Email TO
           emails,
+          // Subject Line
           'Test from SendGrid API',
-          'YOOOOOO',
-          '<p style="font-size: 32px;">Can you <b>smell</b> what Travis is COOKIN?!</p>'
+          // Text Content
+          'HeyTeam',
+          `<p style="font-size: 32px;">${context}</p>`
         );
       }
     ],
