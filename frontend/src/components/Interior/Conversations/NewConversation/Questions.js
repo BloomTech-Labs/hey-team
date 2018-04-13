@@ -27,13 +27,15 @@ class Questions extends React.Component {
     }
 
     componentWillMount(){
+        console.log(editClicked);
         this.handleDisplayQuestions();
+        questionsArray = [];
         if(editClicked){
-            questionsArray = [];
             for(let r = 0; r < conversationsArray[conversationsArrayPosition].questions.length;r++){
                 questionsArray[r] = conversationsArray[conversationsArrayPosition].questions[r]
             }
             this.handleDisplayQuestions();
+            console.log("reset array");
         }
     }
 
@@ -82,3 +84,4 @@ class Questions extends React.Component {
 }
 
 export default Questions;
+export {questionsArray};

@@ -23,7 +23,6 @@ class TimeZones extends React.Component {
 
     componentWillMount(){
         if(editClicked){
-            console.log();
             timeZone = conversationsArray[conversationsArrayPosition].timeZone;
             this.setState({timeZone:timeZone});
             console.log(conversationsArray[conversationsArrayPosition].timeZone);

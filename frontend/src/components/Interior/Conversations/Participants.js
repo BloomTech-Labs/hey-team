@@ -3,17 +3,14 @@
 //participants reusuable component
 
 import React from 'react';
-import { Button } from 'semantic-ui-react'
 import { v4 } from 'uuid';//creates unique keys
 
 import '../../../css/conversationsParticipants.css';
-// import '../../../Semantic-UI-CSS/semantic.min.css';
 
 import {conversationsArray} from './index.js'
 import {conversationsArrayPosition} from './index.js';
 
 let cardArray = [];
-let dataArray = [];
 
 class Participants extends React.Component {
     constructor(props) {
@@ -34,7 +31,6 @@ handleDisplayCards(){
         <div key={v4()} className="participants__userImage"><button name={i} className="right floated" onClick={(e) => this.handleDelete(e)}><i className="trash icon"></i></button><img src={conversationsArray[conversationsArrayPosition].participants[0][i].imageData} alt="User Photo" /></div>;
     }
     this.setState({displayArray:cardArray});
-    console.log(conversationsArray);
 }
 
 
