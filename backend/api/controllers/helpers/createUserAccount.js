@@ -49,4 +49,5 @@ module.exports = createUserAccount = async (body, req, res) => {
 		// res.status(200).json({ newAccount });
 	});
 	res.redirect(__dirname + '/public/DOOKIE_BUTTHAM.html');
+
 };
