@@ -57,8 +57,9 @@ class ConversationsIndex extends React.Component {
         };
     }
 
-    componentDidMount(){
+    componentWillMount(){
         editClicked = false;
+        console.log(editClicked);
         //load data from the server fill in conversationsArray with objects
         //full of the conversation's data
         if(conversationsArray[0] !== undefined){
@@ -84,6 +85,7 @@ class ConversationsIndex extends React.Component {
     }
 //saves conversation object data into an array
     handleDisplayCards(){
+        cardArray = [];
         for(let i = 0; i < conversationsArray.length; i++){
             this.setState({displayArray:[]});
             cardArray[i] =
@@ -139,7 +141,9 @@ class ConversationsIndex extends React.Component {
         );
         return (
                 <div className="conversations__wrapper">
+                    <div className="conversations__scroll">
                     {button}
+                    </div>
                 </div>
         );
     }
