@@ -47,6 +47,7 @@ class New extends Component {
         sat: false,
         sun: false,
         time: '',
+        modifier: '',
         tz: '',
       },
       participants: [],
@@ -119,9 +120,12 @@ class New extends Component {
   };
 
   handleUpdateTitle = (e, d) => {
-    this.setState({ tite: e.target.value });
-    console.log('title', this.state.title);
+    this.state.title = e.target.value;
+    this.setState({ title: this.state.title });
+    console.log(this.state.title);
   };
+
+  handleUpdateTime = (e, d) => {};
 
   render() {
     const { schedule } = this.state;
@@ -133,7 +137,7 @@ class New extends Component {
               <Form.Field
                 control={Input}
                 placeholder="Enter a title for this conversation"
-                onChange={e => this.handleUserSearch(e)}
+                onChange={(e, d) => this.handleUpdateTitle(e, d)}
               />
             </Form.Group>
             <Form.Group>
