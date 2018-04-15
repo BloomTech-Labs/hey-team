@@ -17,6 +17,8 @@ module.exports = createQuestion = async (w_id, c_id, question) => {
   await Conversation.findByIdAndUpdate(c_id, {
     $push: { questions: newQuestion._id },
   })
-    .then()
+    .then(c => {
+      console.log('pushed question to conversation');
+    })
     .catch(console.error);
 };

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const questionSchema = mongoose.Schema({
   workspace: { type: mongoose.Schema.Types.ObjectId, ref: 'Workspace' },
   conversation: { type: mongoose.Schema.Types.ObjectId, ref: 'Conversation' },
-  response: { type: mongoose.Schema.Types.ObjectId, ref: 'Question' },
+  response: { type: mongoose.Schema.Types.ObjectId, ref: 'Response' },
   question: String,
 });
 

@@ -25,19 +25,17 @@ const createConversation = async (req, res) => {
 
   await conversation.save();
 
-  // const createQuestions = async questions => {
   questions.forEach(q => {
     console.log('calling createQuestion');
-    createQuestion(w_id, conversation._id, q);
+    createQuestion(w_id, conversation._id, questions[0]);
   });
-  // };
-
-  // await createQuestions(questions);
 
   console.log('push conversation');
   await Workspace.findByIdAndUpdate(w_id, {
     $push: { conversation: conversation._id },
-  });
+  })
+    .then('pushed conversation to workspace')
+    .catch(console.error);
 
   res.send(conversation);
 };
