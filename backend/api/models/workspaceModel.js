@@ -13,6 +13,15 @@ const workspaceSchema = new mongoose.Schema({
   conversations: [
     { type: mongoose.Schema.Types.ObjectId, ref: 'Conversation' },
   ],
+  bot: {
+    access_token: { type: String },
+    user_id: { type: String },
+    channel: { type: String },
+    channel_id: { type: String },
+    configuration_url: { type: String },
+    bot_user_id: { type: String },
+    bot_access_token: { type: String },
+  },
 });
 
-model.exports = mongoose.model('Workspace', workspaceSchema);
+module.exports = mongoose.model('Workspace', workspaceSchema);

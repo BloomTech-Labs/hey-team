@@ -2,10 +2,10 @@ const passport = require('passport');
 const cors = require('cors');
 
 // const message = require('../controllers/messageController');
-// const account = require('../controllers/accountController');
+const workspace = require('../controllers/workspaceController');
 // const bot = require('../controllers/accountBotController');
 // const testController = require('../controllers/testController');
-// const conversation = require('../controllers/conversationController');
+const conversation = require('../controllers/conversationController');
 // const users = require('../controllers/usersController');
 
 // const test = require('../controllers/testController');
@@ -33,12 +33,12 @@ module.exports = app => {
   // app.route('/account/getAllMembers').post(account.getAllMembers);
   // // Conversation Routes
   // // app.route('/sendMessage').post(messageController.sendMessage);
-  // app.route('/auth/bot').get(bot.botAccount);
-  // app.route('/auth/login').get(account.login);
+  app.route('/auth/bot').get(workspace.addBot);
+  app.route('/auth/login').get(workspace.login);
   // app.route('/send/test').post(message.sendMessage);
   // app.route('/auth/account').get(account.createUserAccount);
   // // conversations
-  // app.route('/conversation/create').post(conversation.createConversation);
+  app.route('/conversation/create').post(conversation.createConversation);
   // app.route('/conversation/delete').post(conversation.deleteConversation);
   // app.route('/conversation/all').post(conversation.allConversations);
   // app.route('/conversation/edit').post(conversation.editConversation);
