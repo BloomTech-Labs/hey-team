@@ -154,7 +154,7 @@ const initiate = async (a_id, c_id, user_id) => {
   console.log(user_id);
 
   const account = await Account.findById(a_id);
-  const token = 'xoxb-334119064773-UW39H2oHxVepvxe1DJWXlbmd';
+  const token = '';
   const web = new WebClient(token);
 
   await Account.findByIdAndUpdate(a_id, {

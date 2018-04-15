@@ -43,9 +43,9 @@ module.exports = app => {
   // app.route('/conversation/all').post(conversation.allConversations);
   // app.route('/conversation/edit').post(conversation.editConversation);
   // app.route('/conversation/respond').post(conversation.respondToConversation);
-  // app.route('/conversation/start').post(conversation.startConversation);
+  app.route('/conversation/start').post(conversation.startConversation);
   // app.route('/conversation/quicktest').post(conversation.quicktest);
   // //
-  // app.route('/slack/im/listen').post(conversation.im);
+  app.route('/slack/im/listen').post(conversation.im);
   // app.route('/users/find').post(users.findUsers);
 };
