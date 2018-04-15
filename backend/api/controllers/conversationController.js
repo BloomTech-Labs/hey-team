@@ -76,14 +76,20 @@ const allConversations = async (req, res) => {
 const startConversation = async (req, res) => {
   const { w_id, c_id, members } = req.body;
   members.forEach(m_id => {
-    initializeConversation(w_id, c_id, m_id);
+    initializeConversation(c_id, m_id);
   });
   res.send('probably worked');
 };
 
+const updateConversation = async body => {
+  // console.log(body);
+  // check what the last question in channel was
+  // determine which conversation to post response to
+  // determine if all questions have been answered
+};
+
 const im = (req, res) => {
-  // continueConversation(req.body);
-  console.log(req.body);
+  updateConversation(req.body);
   res.send(req.body);
 };
 
@@ -93,5 +99,6 @@ module.exports = {
   editConversation,
   allConversations,
   startConversation,
+  updateConversation,
   im,
 };
