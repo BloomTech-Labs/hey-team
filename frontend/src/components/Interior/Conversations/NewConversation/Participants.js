@@ -29,13 +29,16 @@ import {
     Popup,
   } from 'semantic-ui-react';
 
-import '../../../css/conversationsParticipants.css';
-import { findUsers } from '../../Actions/FindUsers';
-import {conversationsArray} from './index.js'
-import {conversationsArrayPosition} from './index.js';
+import '../../../../css/conversationsParticipants.css';
+import { findUsers } from '../../../Actions/FindUsers';
+import {conversationsArray} from '../index.js'
+import {editClicked} from '../index.js'
+import {conversationsArrayPosition} from '../index.js';
 
 let cardArray = [];
 let postWhere;
+
+let participantsArray = [];
 
 class Participants extends React.Component {
     constructor(props) {
@@ -47,9 +50,22 @@ class Participants extends React.Component {
     this.handleUserSearch = this.handleUserSearch.bind(this);
     }
 
-    componentWillMount(){
-        // this.handleDisplayCards();
-    }
+    // componentWillMount(){
+    //     if(editClicked){
+    //         participantsArray = ["alex", "geekbot"];
+    //         this.handleEditSearch();
+    //     }
+    // }
+
+    // handleEditSearch = async e => {//autofill
+    //     for(let i = 0;i < participantsArray.length; i++){
+    //         const users = await findUsers(participantsArray[i]);
+    //         this.setState({ searchResults: users.data });
+    //         this.state.participants.push(users.data);
+    //         this.setState({ participants: this.state.participants });
+    //     }
+    //     console.log("edit search: " + participantsArray);
+    // };
 
     // handleSearch(e) {
     //     // console.log(localStorage);
@@ -82,8 +98,8 @@ class Participants extends React.Component {
         // console.log(e.target.value);
         const users = await findUsers(e.target.value);
         this.setState({ searchResults: users.data });
-
-        // console.log(this.state.searchResults);
+        console.log("here");
+        console.log("Search Results: " + this.state.searchResults);
     };
 
     
@@ -91,15 +107,16 @@ class Participants extends React.Component {
         // this.setState({ participants: [...d.result] });
         this.state.participants.push(d.result);
         this.setState({ participants: this.state.participants });
-        console.log(this.state.participants);
+        //console.log("participants: " + d.result.name);//gives name of user
+        participantsArray.push(d.result.name);
+        // console.log("participants: " + participantsArray);
     };
 
     handleUserSearch = async e => {
-        // console.log(e.target.value);
         const users = await findUsers(e.target.value);
         this.setState({ searchResults: users.data });
 
-        // console.log(this.state.searchResults);
+        // console.log(this.state.searchResults);//entire group
     };
     
 
@@ -109,12 +126,13 @@ handleDisplayCards(){
         cardArray[i] =
         <div key={v4()} className="participants__userImage"><img src={this.state.SearchResults[i].avatar} alt="User Photo" /></div>;
     }
-    this.setState({displayArray:cardArray});
+    // this.setState({displayArray:cardArray});
 }
 
 
 handleDelete(e){
-    conversationsArray[conversationsArrayPosition].participants[0].splice(e.currentTarget.name, 1);
+//  conversationsArray[conversationsArrayPosition].participants[0].splice(e.currentTarget.name, 1);
+//change to local array
     cardArray = [];
     this.handleDisplayCards();
 }
@@ -132,7 +150,7 @@ handleDelete(e){
                 </Form.Group>
 
                 <Form.Group inline>
-                <Search
+                <Search 
                     results={this.state.searchResults}
                     // icon="search"
                     placeholder="search"
@@ -161,3 +179,4 @@ handleDelete(e){
 }
 
 export default Participants;
+export {participantsArray};

@@ -27,7 +27,7 @@ class Days extends React.Component {
 
     componentWillMount(){
         this.handleStates();
-        console.log(this.state.sunday);
+        // console.log(this.state.sunday);
     }
 
     handleInput(e){
@@ -91,14 +91,14 @@ class Days extends React.Component {
     }
 
         handleStates(){
-            console.log(daysArray);
+            // console.log(daysArray);
             if(daysArray[0] === false){
-                console.log("Mon1");
+                // console.log("Mon1");
                 this.setState({'monday': <Button  name="Mon" onClick={(e) => this.handleInput(e)} basic>Mon</Button>});
             }
             else{
                 this.setState({'monday': <Button color='black' name="Mon" onClick={(e) => this.handleInput(e)}>Mon</Button>});
-                console.log("Mon2");
+                // console.log("Mon2");
             }
 
             if(daysArray[1] === false){

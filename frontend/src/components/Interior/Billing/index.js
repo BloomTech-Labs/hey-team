@@ -12,6 +12,7 @@ class BillingIndex extends Component {
   //   });
   // };
   
+
   onToken = token => {
     fetch ('/save-stripe-token', {
       method: 'POST',
