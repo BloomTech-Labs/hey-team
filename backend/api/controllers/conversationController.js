@@ -84,13 +84,6 @@ const startConversation = async (req, res) => {
 };
 
 const updateConversation = async body => {
-  // console.log('>>>>>>>>>>>>>>>>>>>>>>>>>> Body'.bgBlue.green);
-  // console.log(body);
-  // console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>'.bgBlue.red);
-  // check what the last question in channel was
-  // determine which conversation to post response to
-  // determine if all questions have been answered
-  // const conversation = await Conversation.findById(c_id);
   if (body.event.bot_id) {
     return;
   }
@@ -98,7 +91,6 @@ const updateConversation = async body => {
   const web = new WebClient(process.env.XOXB);
   const dm = await web.im.open({ user: body.event.user });
   const history = await web.im.history({ channel: dm.channel.id, count: 2 });
-  // console.log(history.messages[1].attachments[0].fallback);
 
   if (history.messages[1].user === body.event.user) {
     return;
@@ -106,24 +98,18 @@ const updateConversation = async body => {
   const [q_count, c_id] = history.messages[1].attachments[0].fallback.split(
     ','
   );
-  // console.log('attachments', q_count, c_id);
+
   const member = await Member.findOne({ id: body.event.user });
   const conversation = await Conversation.findById(c_id).populate('responses');
   let numResponses = 0;
-  // console.log(conversation);
+
   conversation.responses.forEach(r => {
-    // console.log(r.member);
-    // console.log(member._id.toString());
     if (r.member.toString() === member._id.toString()) {
       numResponses++;
     }
   });
-  // console.log(numResponses);
-  // console.log(conversation.questions);
+
   if (numResponses === conversation.questions.length - 1) {
-    // console.log('>>>>>>>>>>>>>>>>>>>>>>>>>> Conversation'.bgBlue.green);
-    // console.log(conversation);
-    // console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>'.bgBlue.red);
     const newResponse = await new Response({
       conversation: c_id,
       member: member._id,
@@ -137,9 +123,6 @@ const updateConversation = async body => {
     });
     return;
   } else if (numResponses < conversation.questions.length - 1) {
-    // console.log('>>>>>>>>>>>>>>>>>>>>>>>>>> Conversation'.bgBlue.green);
-    // console.log(conversation);
-    // console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>'.bgBlue.red);
     const newResponse = await new Response({
       conversation: c_id,
       member: member._id,
