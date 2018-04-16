@@ -61,7 +61,8 @@ const addBot = (req, res) => {
     if (!error && response.statusCode == 200) {
       body = JSON.parse(body);
       console.log(body);
-      const workspace = await Workspace.findOneAndUpdate({
+      const workspace = await Workspace.findOne({ 'info.id': body.team_id });
+      await Workspace.findOneAndUpdate({
         'info.id': body.team_id,
         $set: {
           bot: {

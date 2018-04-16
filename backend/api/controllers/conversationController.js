@@ -12,20 +12,20 @@ const Response = require('../models/responseModel');
 const Member = require('../models/memberModel');
 
 const createConversation = async (req, res) => {
-  const { title, questions, users, schedule, w_id } = req.body;
-
+  const { c, w_id } = req.body;
+  console.log(c.members);
   // find all members and add a conversation to member object
   /** Golden */
   const members = await Member.find({
-    id: { $in: users },
+    id: { $in: c.members },
   });
 
   const conversation = await new Conversation({
     workspace: w_id,
     members: members,
-    title: title,
-    questions: questions,
-    schedule: schedule,
+    title: c.title,
+    questions: c.questions,
+    schedule: c.schedule,
   });
 
   await conversation.save();
@@ -57,13 +57,14 @@ const deleteConversation = async (req, res) => {
 
 const editConversation = async (req, res) => {
   const { c_id, c } = req.body;
-  const conversation = Conversation.findByIdAndUpdate(c_id, {
+  const conversation = await Conversation.findByIdAndUpdate(c_id, {
     $update: { title: c.title },
     $update: { members: c.members },
     $update: { questions: c.questions },
     $update: { schedule: c.schedule },
     $update: { responses: [] },
   });
+  res.send('OK');
 };
 
 const allConversations = async (req, res) => {
