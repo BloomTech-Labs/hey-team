@@ -48,5 +48,6 @@ module.exports = app => {
   // //
   app.route('/slack/im/listen').post(conversation.im);
   app.route('/slack/interactive').post(conversation.interactive);
-  // app.route('/users/find').post(users.findUsers);
+  app.route('/users/all').post(workspace.getAllMembers);
+  app.route('/users/find').post(workspace.getOneMember);
 };
