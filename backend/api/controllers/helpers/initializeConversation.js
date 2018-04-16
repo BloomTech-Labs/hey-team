@@ -7,7 +7,9 @@ const Response = require('../../models/responseModel');
 const Member = require('../../models/memberModel');
 
 module.exports = initializeConversation = async (c_id, m_id) => {
-  const conversation = await Conversation.findById(c_id);
+  const conversation = await Conversation.findByIdAndUpdate(c_id, {
+    $set: { responses: [] },
+  });
   const web = new WebClient(process.env.XOXB);
   const dm = await web.im.open({ user: m_id });
 
@@ -16,12 +18,15 @@ module.exports = initializeConversation = async (c_id, m_id) => {
   web.chat
     .postMessage({
       channel: dm.channel.id,
-      text: `Hello `,
+      text: `Hello <@${m_id}> ready for your stand up? Here's your first question!!`,
       attachments: [
         {
           /** Golden */
           // might need to switch to callback_id
-          fallback: `{"index": ${0},"c_id": "${c_id}"}`,
+          // fallback: `{"q_count": ${
+          //   conversation.questions.length
+          // },"c_id": "${c_id}"}`,
+          fallback: `${conversation.questions.length},${c_id}`,
         },
         {
           text: conversation.questions[0],

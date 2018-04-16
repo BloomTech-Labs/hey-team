@@ -1,5 +1,6 @@
 const { WebClient } = require('@slack/client');
 const util = require('util');
+const colors = require('colors');
 
 const initializeConversation = require('./helpers/initializeConversation');
 const createQuestion = require('./helpers/createQuestion');
@@ -11,20 +12,20 @@ const Response = require('../models/responseModel');
 const Member = require('../models/memberModel');
 
 const createConversation = async (req, res) => {
-  const { title, questions, users, schedule, w_id } = req.body;
-
+  const { c, w_id } = req.body;
+  console.log(c.members);
   // find all members and add a conversation to member object
   /** Golden */
   const members = await Member.find({
-    id: { $in: users },
+    id: { $in: c.members },
   });
 
   const conversation = await new Conversation({
     workspace: w_id,
     members: members,
-    title: title,
-    questions: questions,
-    schedule: schedule,
+    title: c.title,
+    questions: c.questions,
+    schedule: c.schedule,
   });
 
   await conversation.save();
@@ -56,13 +57,14 @@ const deleteConversation = async (req, res) => {
 
 const editConversation = async (req, res) => {
   const { c_id, c } = req.body;
-  const conversation = Conversation.findByIdAndUpdate(c_id, {
+  const conversation = await Conversation.findByIdAndUpdate(c_id, {
     $update: { title: c.title },
     $update: { members: c.members },
     $update: { questions: c.questions },
     $update: { schedule: c.schedule },
     $update: { responses: [] },
   });
+  res.send('OK');
 };
 
 const allConversations = async (req, res) => {
@@ -83,11 +85,6 @@ const startConversation = async (req, res) => {
 };
 
 const updateConversation = async body => {
-  console.log(body);
-  // check what the last question in channel was
-  // determine which conversation to post response to
-  // determine if all questions have been answered
-  // const conversation = await Conversation.findById(c_id);
   if (body.event.bot_id) {
     return;
   }
@@ -95,16 +92,65 @@ const updateConversation = async body => {
   const web = new WebClient(process.env.XOXB);
   const dm = await web.im.open({ user: body.event.user });
   const history = await web.im.history({ channel: dm.channel.id, count: 2 });
-  console.log(history);
-  history.messages.forEach(m => {
-    // console.log(m.user);
-  });
 
   if (history.messages[1].user === body.event.user) {
     return;
   }
+  const [q_count, c_id] = history.messages[1].attachments[0].fallback.split(
+    ','
+  );
 
-  console.log('attachments', history.messages[1].attachments);
+  const member = await Member.findOne({ id: body.event.user });
+  const conversation = await Conversation.findById(c_id).populate('responses');
+  let numResponses = 0;
+
+  conversation.responses.forEach(r => {
+    if (r.member.toString() === member._id.toString()) {
+      numResponses++;
+    }
+  });
+
+  if (numResponses === conversation.questions.length - 1) {
+    const newResponse = await new Response({
+      conversation: c_id,
+      member: member._id,
+      time_stamp: body.event.ts,
+      response: body.event.text,
+    });
+    await newResponse.save();
+
+    await Conversation.findByIdAndUpdate(c_id, {
+      $push: { responses: newResponse._id },
+    });
+    return;
+  } else if (numResponses < conversation.questions.length - 1) {
+    const newResponse = await new Response({
+      conversation: c_id,
+      member: member._id,
+      time_stamp: body.event.ts,
+      response: body.event.text,
+    });
+    await newResponse.save();
+
+    await Conversation.findByIdAndUpdate(c_id, {
+      $push: { responses: newResponse._id },
+    });
+    web.chat
+      .postMessage({
+        channel: dm.channel.id,
+        text: `${conversation.questions[numResponses + 1]}`,
+        attachments: [
+          {
+            fallback: `${conversation.questions.length},${c_id}`,
+          },
+        ],
+      })
+      .then(res => {})
+      .catch(console.error);
+    return;
+  } else if (numResponses === conversation.questions.length) {
+    return;
+  }
 };
 
 const im = (req, res) => {
