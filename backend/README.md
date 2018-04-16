@@ -2,36 +2,36 @@
 
 ```
 const teamURL = 'https://hey-test-team.herokuapp.com'
-const w_id = <account id>
-const c_id = <conversation id>
-const c = <conversation obj> === { title, questions, members, schedule }
+const w_id = <Workspace id>
+const c_id = <Conversation id>
+const c = <Conversation obj> === { title, questions, members, schedule }
 ```
 
-### create a conversation
+### Create a Conversation
 
 ```
 endpoint = teamURL/conversation/create
 .post(endpoint, { c, w_id })
 ```
 
-### delete a conversation
+### Delete a Conversation
 
 ```
 endpoint = teamURL/conversation/delete
 .post(endpoint, { w_id, c_id })
 ```
 
-### get all conversations
+### Get All Conversations
 
 ```
 endpoint = teamURL/conversation/all
 .post(endpoint, {w_id)
 ```
 
-### edit a conversation
+### Edit a Conversation
 
 ```
-endpoint = teamURL/conversation/delete
+endpoint = teamURL/conversation/edit
 .post(endpoint, {c_id, c})
 ```
 
