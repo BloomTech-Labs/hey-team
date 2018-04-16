@@ -32,7 +32,7 @@ endpoint = teamURL/conversation/all
 
 ```
 endpoint = teamURL/conversation/delete
-.post(endpoint, {w_id, c_id, c})
+.post(endpoint, {c_id, c})
 ```
 
 ### Grab All Members
