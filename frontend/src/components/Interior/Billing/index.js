@@ -2,8 +2,9 @@
 //http://alexcassell.com
 
 import React from 'react';
-import '../../../css/interior.css';
+// import '../../../css/interior.css';
 import Billing from './Billing';
+import '../../../css/billing.css'
 
 
 class BillingIndex extends React.Component {
@@ -13,7 +14,7 @@ class BillingIndex extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div className="billing">
             <Billing />
             </div>
         );

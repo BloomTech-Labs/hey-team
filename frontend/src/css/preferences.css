@@ -15,3 +15,9 @@ http://alexcassell.com
     padding: 5px;
     border: red solid 2px;
 }
+
+.preferences {
+  top: 20vh;
+  left: 15vw;
+  position: absolute;
+}
