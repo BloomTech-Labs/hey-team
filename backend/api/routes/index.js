@@ -47,5 +47,6 @@ module.exports = app => {
   // app.route('/conversation/quicktest').post(conversation.quicktest);
   // //
   app.route('/slack/im/listen').post(conversation.im);
+  app.route('/slack/interactive').post(conversation.interactive);
   // app.route('/users/find').post(users.findUsers);
 };

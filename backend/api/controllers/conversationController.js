@@ -1,4 +1,5 @@
 const { WebClient } = require('@slack/client');
+const util = require('util');
 
 const initializeConversation = require('./helpers/initializeConversation');
 const createQuestion = require('./helpers/createQuestion');
@@ -82,15 +83,40 @@ const startConversation = async (req, res) => {
 };
 
 const updateConversation = async body => {
-  // console.log(body);
+  console.log(body);
   // check what the last question in channel was
   // determine which conversation to post response to
   // determine if all questions have been answered
+  // const conversation = await Conversation.findById(c_id);
+  if (body.event.bot_id) {
+    return;
+  }
+
+  const web = new WebClient(process.env.XOXB);
+  const dm = await web.im.open({ user: body.event.user });
+  const history = await web.im.history({ channel: dm.channel.id, count: 2 });
+  console.log(history);
+  history.messages.forEach(m => {
+    // console.log(m.user);
+  });
+
+  if (history.messages[1].user === body.event.user) {
+    return;
+  }
+
+  console.log('attachments', history.messages[1].attachments);
 };
 
 const im = (req, res) => {
   updateConversation(req.body);
+  /** Golden */
+  const stuff = util.inspect(req.body, false, null);
+  // console.log(stuff);
   res.send(req.body);
+};
+
+const interactive = (req, res) => {
+  // res.send(req.body);
 };
 
 module.exports = {
@@ -101,4 +127,5 @@ module.exports = {
   startConversation,
   updateConversation,
   im,
+  interactive,
 };
