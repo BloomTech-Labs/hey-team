@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import { Button, Checkbox } from 'react-mdl';
 
+
 class Billing extends Component {
   // onToken = token => {
   //   fetch ('api/stripe', {
@@ -11,6 +12,7 @@ class Billing extends Component {
   //     alert ('Payment Successful');
   //   });
   // };
+
   
   onToken = token => {
     fetch ('/save-stripe-token', {
@@ -24,7 +26,7 @@ class Billing extends Component {
   render () {
     return (
       
-      <div>
+      <div >
       <StripeCheckout
         name="Hey Team"
         description="30 Day Subscription - $9.99"
@@ -33,7 +35,7 @@ class Billing extends Component {
         stripeKey="pk_test_mSszCkbADb0iAmuW6u0dWhcw"
       >
       <Checkbox className="checkbox" label="30 Day Subscription - $9.99" ripple/> 
-      <Button raised colored> Buy Now </Button>
+      <Button onClick = {() => this.onToken()}raised colored> Buy Now </Button>
       </StripeCheckout>
 
       </div>

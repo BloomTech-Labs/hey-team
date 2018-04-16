@@ -1,0 +1,13 @@
+.billing{
+  top: 20vh;
+  left: 15vw;
+  position: absolute;
+  
+  margin: 20px;
+}
+
+.checkbox {
+  bottom: 1vw;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+}
