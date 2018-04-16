@@ -91,7 +91,7 @@ const getAllMembers = async (req, res) => {
   res.json(workspace.members)
 };
 
-const getOneMember = async (req, res) => {
+const findMembers = async (req, res) => {
   const { w_id, user_id } = req.body;
   const workspace = await Workspace.findById(w_id).populate('members');
   let member;
@@ -107,5 +107,5 @@ module.exports = {
   login,
   addBot,
   getAllMembers,
-  getOneMember,
+  findMembers,
 };
