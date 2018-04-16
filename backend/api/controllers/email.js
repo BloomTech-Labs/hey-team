@@ -16,7 +16,7 @@ const sendEmail = (
 	const errorEmails = [];
 	const successfulEmails = [];
 	const sg = require('sendgrid')(
-		MySendGridToken
+		'MySendGridToken'
 	);
 	async.parallel(
 		[
@@ -87,14 +87,15 @@ const emailSender = async (req, res, next) => {
         sendEmail(
           callback,
           // Email FROM
-          'travisj_jones@hotmail.com',
+          'heyteam@heyteam.com',
           // Email TO
           emails,
           // Subject Line
-          'Test from SendGrid API',
+          'Your HeyTeam billing',
           // Text Content
           'HeyTeam',
           `<p style="font-size: 32px;">${context}</p>`
+          // `<p style="font-size: 32px;">Hello from HeyTeam! \n Your billing information for Team: 3DiceJob, is $9.99 for your monthly perscription</p>`
         );
       }
     ],
