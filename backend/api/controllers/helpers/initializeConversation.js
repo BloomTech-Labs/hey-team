@@ -19,6 +19,8 @@ module.exports = initializeConversation = async (c_id, m_id) => {
       text: `Hello `,
       attachments: [
         {
+          /** Golden */
+          // might need to switch to callback_id
           fallback: `{"index": ${0},"c_id": "${c_id}"}`,
         },
         {
