@@ -29,8 +29,8 @@ module.exports = app => {
   // app.route('/auth/login').get(account.login);
   // // app.route('/auth/account').get(account.createUserAccount);
   // app.route('/account/getAccountData').post(account.getAccountData);
-  // app.route('/account/getOneMember').post(account.getOneMember);
-  // app.route('/account/getAllMembers').post(account.getAllMembers);
+  app.route('/account/getOneMember').post(workspace.getOneMember);
+  app.route('/account/getAllMembers').post(workspace.getAllMembers);
   // // Conversation Routes
   // // app.route('/sendMessage').post(messageController.sendMessage);
   app.route('/auth/bot').get(workspace.addBot);

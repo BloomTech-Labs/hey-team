@@ -84,7 +84,27 @@ const addBot = (req, res) => {
   });
 };
 
+const getAllMembers = async (req, res) => {
+  const { w_id } = req.body;
+  const workspace = await Workspace.findById(w_id).populate('members');
+  res.json(workspace.members)
+};
+
+const getOneMember = async (req, res) => {
+  const { w_id, user_id } = req.body;
+  const workspace = await Workspace.findById(w_id).populate('members');
+  let member;
+  workspace.members.forEach(m => {
+    if (m.id === user_id) {
+      member = m;
+    }
+  });
+  res.json(member)
+};
+
 module.exports = {
   login,
   addBot,
+  getAllMembers,
+  getOneMember,
 };

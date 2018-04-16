@@ -2,9 +2,6 @@ const mongoose = require('mongoose');
 
 const memberSchema = mongoose.Schema({
   workspace: { type: mongoose.Schema.Types.ObjectId, ref: 'Workspace' },
-  conversations: [
-    { type: mongoose.Schema.Types.ObjectId, ref: 'Conversation' },
-  ],
   id: { type: String },
   team_id: { type: String },
   tz_offset: { type: String },
