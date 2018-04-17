@@ -25,10 +25,6 @@ const corsOptions = {
 
 module.exports = app => {
   app.use(cors(corsOptions));
-  // app.use(passport.initialize());
-  // // Account Routes
-  // app.route('/auth/login').get(account.login);
-  // // app.route('/auth/account').get(account.createUserAccount);
   // app.route('/account/getAccountData').post(account.getAccountData);
   app.route('/account/getOneMember').post(workspace.getOneMember);
   app.route('/account/getAllMembers').post(workspace.getAllMembers);
@@ -38,18 +34,17 @@ module.exports = app => {
   // // app.route('/sendMessage').post(messageController.sendMessage);
   app.route('/auth/bot').get(workspace.addBot);
   app.route('/auth/login').get(workspace.login);
-  // app.route('/send/test').post(message.sendMessage);
-  // app.route('/auth/account').get(account.createUserAccount);
-  // // conversations
-  app.route('/conversation/create').post(conversation.createConversation);
-  // app.route('/conversation/delete').post(conversation.deleteConversation);
-  // app.route('/conversation/all').post(conversation.allConversations);
-  // app.route('/conversation/edit').post(conversation.editConversation);
-  // app.route('/conversation/respond').post(conversation.respondToConversation);
-  app.route('/conversation/start').post(conversation.startConversation);
-  // app.route('/conversation/quicktest').post(conversation.quicktest);
-  // //
+  app.route('/auth/bot').get(workspace.addBot);
+  // Bot Routes
+  // app.route('/slack/interactive').post(conversation.interactive);
   app.route('/slack/im/listen').post(conversation.im);
-  app.route('/slack/interactive').post(conversation.interactive);
-  // app.route('/users/find').post(users.findUsers);
+  // // Conversation Routes
+  app.route('/conversation/create').post(conversation.createConversation);
+  app.route('/conversation/delete').post(conversation.deleteConversation);
+  app.route('/conversation/start').post(conversation.startConversation);
+  app.route('/conversation/edit').post(conversation.editConversation);
+  app.route('/conversation/all').post(conversation.allConversations);
+  // User Routes
+  app.route('/users/all').post(workspace.getAllMembers);
+  app.route('/users/find').post(workspace.findMembers);
 };
