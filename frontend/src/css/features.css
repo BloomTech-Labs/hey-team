@@ -1,0 +1,24 @@
+/* .wrapper{
+    position: absolute;
+    top: calc(100vh + 25px);
+    width: 100%;
+    height: 100%;
+    background-color: #B1B7D1;
+} */
+
+.landing-grid {
+    text-align: center;
+    position: absolute;
+    top: 112vh;
+    left: 0;
+    width: 100%;
+    height:88vh;
+    background-color: #B1B7D1;
+    }
+    
+.footer {
+        position:absolute;
+        top: 95vh;
+        width:100%;
+        height:100px;
+    }

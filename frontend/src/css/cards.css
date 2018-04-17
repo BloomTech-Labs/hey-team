@@ -1,0 +1,121 @@
+/*
+CSS By Alex Cassell
+http://alexcassell.com
+*/
+/* color pallette */
+/* https://coolors.co/98c1d9-466365-b1b7d1-9b9fb5-a5d8ff */
+
+@font-face {
+    font-family: Adventuring;
+    src: url(../fonts/Adventuring.otf);
+}
+
+.cardWrap{
+    margin: 10px;
+}
+
+.card{
+    width: 200px;
+    height: 200px;
+}
+
+.icon{
+    cursor: pointer;
+}
+
+.card__header{
+    font-weight: bold;
+    text-align: center;
+}
+
+.description{
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.cards__flexWrapper{
+    position: absolute;
+    top: 20vh;
+    left: 15vw;
+    z-index: 1;
+    pointer-events:auto;
+    width: calc(100% - 20vw);
+    /* border: red solid 1px; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* justify-content: space-evenly; */
+    align-content: center;
+}
+
+.conversations__greyedOut{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    opacity: .5;
+    background-color: grey;
+}
+
+.conversations__areYouSure{
+    position: fixed;
+    font-family: Adventuring;
+    top: calc(50% - 13vw);
+    left: calc(50% - 13vw);
+    width: 20vw;
+    height: 10vw;
+    border-radius: 25px;
+    background-color: white;
+    border: 8px solid black;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.conversations__areYouSureTitle{
+    font-size: 2vw;
+    padding: 25px;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.conversations__areYouSureButtonWrapper{
+    align-self: flex-end;
+    padding: 10px;
+}
+
+.cards__questionsWrapper{
+    overflow: auto;
+}
+
+.cards__time{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.cards__timeSet{
+    width: 100%;
+    font-size: .6vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: solid 2px lightgrey;
+}
+
+.cards__titles{
+    font-weight: bold;
+}
+
+.questionsArrayQuestion{
+    color: blue;
+}
+
+.questionsArrayAnswer{
+    color: red;
+}
