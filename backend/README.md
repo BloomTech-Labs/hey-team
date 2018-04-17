@@ -32,7 +32,7 @@ endpoint = teamURL/conversation/all
 
 ```
 endpoint = teamURL/conversation/edit
-.post(endpoint, {c_id, c})
+.post(endpoint, {c, c_id})
 ```
 
 ### Grab All Members
@@ -46,7 +46,7 @@ endpoint = teamURL/users/all
 
 ```
 endpoint = teamURL/users/find
-.post(endpoint, { w_id, user_id })
+.post(endpoint, { w_id, String: searchTerm })
 ```
 
 ### Send Email
@@ -55,8 +55,7 @@ endpoint = teamURL/users/find
 endpoint = teamURL/account/email
 .post(endpoint, { w_id, participants, context })
 
-Where: 
+Where:
 Context = the body of the email sent to participants
 Participants = Member ids from the selected members of that conversation
-
 ```
