@@ -88,19 +88,26 @@ const addBot = (req, res) => {
 const getAllMembers = async (req, res) => {
   const { w_id } = req.body;
   const workspace = await Workspace.findById(w_id).populate('members');
-  res.json(workspace.members)
+  res.json(workspace.members);
 };
 
 const findMembers = async (req, res) => {
-  const { w_id, user_id } = req.body;
+  const { w_id, searchTerm } = req.body;
+  console.log(w_id, searchTerm);
+  const regex = new RegExp(`${searchTerm}`, 'i');
+  const searchResult = [];
+
   const workspace = await Workspace.findById(w_id).populate('members');
-  let member;
+  // console.log(workspace.members);
   workspace.members.forEach(m => {
-    if (m.id === user_id) {
-      member = m;
+    if (m.real_name) {
+      if (m.real_name.match(regex)) {
+        searchResult.push(m);
+      }
     }
   });
-  res.json(member)
+  console.log(searchResult);
+  res.json(searchResult);
 };
 
 module.exports = {

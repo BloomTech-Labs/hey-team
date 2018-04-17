@@ -1,6 +1,6 @@
 const { WebClient } = require('@slack/client');
-const util = require('util');
 const colors = require('colors');
+const util = require('util');
 
 const initializeConversation = require('./helpers/initializeConversation');
 const createQuestion = require('./helpers/createQuestion');
@@ -76,13 +76,20 @@ const allConversations = async (req, res) => {
     .catch(console.error);
 };
 
-const startConversation = async (req, res) => {
-  const { w_id, c_id, members } = req.body;
-  members.forEach(m_id => {
-    initializeConversation(c_id, m_id);
-  });
-  res.send('probably worked');
+const startConversation = async (w_id, c_id, m) => {
+  console.log(w_id, c_id, m);
+  // members.forEach(m_id => {
+  initializeConversation(c_id, m);
+  // });
+  // res.send('probably worked');
 };
+// const startConversation = async (req, res) => {
+//   const { w_id, c_id, members } = req.body;
+//   members.forEach(m_id => {
+//     initializeConversation(c_id, m_id);
+//   });
+//   res.send('probably worked');
+// };
 
 const updateConversation = async body => {
   if (body.event.bot_id) {
