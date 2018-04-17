@@ -14,7 +14,7 @@ const weekDayMap = {
 };
 
 const parseSchedule = async (c, m) => {
-  console.log(m);
+  // console.log(m);
   const w_id = c.workspace.toString();
   // await conversation.startConversation(w_id, c._id, m.id);
   const date = new Date();
