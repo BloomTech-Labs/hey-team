@@ -55,21 +55,47 @@ const deleteConversation = async (req, res) => {
   });
 };
 
+const getMemberFromId = id => {
+  const member = Member.findOne({ id: id });
+  if (member.id) {
+    return member.id;
+  } else {
+    return false;
+  }
+};
+
 const editConversation = async (req, res) => {
   const { c_id, c } = req.body;
+  const dbMembers = [];
+  await c.members.forEach(m => {
+    const foundMemberId = getMemberFromId(m);
+    if (foundMemberId) {
+      dbMembers.push(foundMemberId);
+    }
+  });
+
   const conversation = await Conversation.findByIdAndUpdate(c_id, {
-    $update: { title: c.title },
-    $update: { members: c.members },
-    $update: { questions: c.questions },
-    $update: { schedule: c.schedule },
-    $update: { responses: [] },
+    title: c.title,
+    members: dbMembers,
+    questions: c.questions,
+    schedule: c.schedule,
+    responses: [],
   });
   res.send('OK');
 };
 
 const allConversations = async (req, res) => {
   const { w_id } = req.body;
+  /** Golden  */
   Workspace.findById(w_id)
+    .populate({
+      path: 'conversations',
+      populate: { path: 'responses' },
+    })
+    .populate({
+      path: 'conversations',
+      populate: { path: 'members' },
+    })
     .then(w => {
       res.send(w.conversations);
     })
