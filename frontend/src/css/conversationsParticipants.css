@@ -10,7 +10,7 @@ http://alexcassell.com
     display: flex;
     flex-direction: row;
     width: 20vw;
-    overflow-x: scroll;
+    /* overflow-x: scroll; */
 }
 
 .participants__userImage{

@@ -5,14 +5,35 @@ import React from 'react';
 import {editClicked} from '../index.js';
 import {conversationsArrayPosition} from '../index.js';
 import {conversationsArray} from '../index.js';
+import {
+    Button,
+    Form,
+    Grid,
+    Header,
+    Image,
+    Message,
+    Segment,
+    Label,
+    Container,
+    Checkbox,
+    Input,
+    List,
+    Radio,
+    Select,
+    TextArea,
+    Dropdown,
+    FormGroup,
+    Search,
+    Icon,
+    Accordion,
+    Popup,
+  } from 'semantic-ui-react';
 
 //grabs users timezone -- until default is set in preferences
 let getTimeZone = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1];
 /* converts getTimeZone to something like GMT-0400; Chrome likes to add a seemingly 
 random place within the timezone with the rest of the info */
 let timeZone;
-
-
 class TimeZones extends React.Component {
     constructor(props) {
         super(props);
@@ -44,7 +65,7 @@ class TimeZones extends React.Component {
         return (
             /*eslint-disable */
             <div className="conversations__timeZoneDropdown">
-            <button className="conversations__dropButton">Time Zone</button>
+            <Button className="conversations__dropButton">Time Zone</Button>
             <div className="conversations__dropdown-content">
                 <div className="conversations__timezones__row">
                     <a className="conversations__timeZone__square" name="LINT: UTC+14" onClick={(e) => this.handleTimeZone(e)} href="#">LINT: UTC+14</a>

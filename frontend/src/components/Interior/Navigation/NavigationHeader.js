@@ -17,12 +17,8 @@ class NavigationHeader extends React.Component {
     render() {
         return (
             <div className="interior__wrapper">
-                <div className="interior__header">
-                    <div className="logo"/>
-                    <div className="interior__title">
-                    </div>
-                    <div className="interior__signOut"/>
-                </div>
+            <div className="logo"/>
+            <div className="interior__signOut"/>
                 <InsideNavigation />{/*Side menu */}
             </div>
         );

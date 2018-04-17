@@ -7,7 +7,7 @@ import React from 'react';
 import DisplayQuestions from './DisplayQuestions.js';
 import Schedule from './Schedule.js';
 import Responses from './Responses.js';
-import Participants from '../Participants.js';
+import Participants from '../NewConversation/Participants.js';
 
 // import ConversationsIndex from '../index.js'
 

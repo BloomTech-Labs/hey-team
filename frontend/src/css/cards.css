@@ -95,6 +95,12 @@ http://alexcassell.com
 
 .cards__time{
     width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.cards__timeSet{
+    width: 100%;
     font-size: .6vw;
     display: flex;
     flex-direction: row;
@@ -104,4 +110,12 @@ http://alexcassell.com
 
 .cards__titles{
     font-weight: bold;
+}
+
+.questionsArrayQuestion{
+    color: blue;
+}
+
+.questionsArrayAnswer{
+    color: red;
 }
