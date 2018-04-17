@@ -96,6 +96,7 @@ const findMembers = async (req, res) => {
   console.log(w_id, searchTerm);
   const regex = new RegExp(`${searchTerm}`, 'i');
   const searchResult = [];
+
   const workspace = await Workspace.findById(w_id).populate('members');
   // console.log(workspace.members);
   workspace.members.forEach(m => {

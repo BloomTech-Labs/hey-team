@@ -1,18 +1,9 @@
 const passport = require('passport');
 const cors = require('cors');
 
-// const message = require('../controllers/messageController');
-const workspace = require('../controllers/workspaceController');
-// const bot = require('../controllers/accountBotController');
-// const testController = require('../controllers/testController');
 const conversation = require('../controllers/conversationController');
-// const users = require('../controllers/usersController');
-
-// const test = require('../controllers/testController');
-// // const teamInfo = require('../controllers/getTeamInfo');
-
-// const passportConfig = require('../../app/passport');
-// // const middleware = require('../common/middleware');
+const workspace = require('../controllers/workspaceController');
+const email = require('../controllers/emailController');
 
 const corsOptions = {
   origin: 'http://localhost:3000',
@@ -24,30 +15,25 @@ const corsOptions = {
 
 module.exports = app => {
   app.use(cors(corsOptions));
-  // app.use(passport.initialize());
-  // // Account Routes
-  // app.route('/auth/login').get(account.login);
-  // // app.route('/auth/account').get(account.createUserAccount);
-  // app.route('/account/getAccountData').post(account.getAccountData);
-  // app.route('/account/getOneMember').post(workspace.getOneMember);
-  // app.route('/account/getAllMembers').post(workspace.getAllMembers);
-  // // Conversation Routes
-  // // app.route('/sendMessage').post(messageController.sendMessage);
+  
+  // Mail Routes
+  app.route('/account/email').post(email.emailSender);
+
+  // Auth Routes
   app.route('/auth/bot').get(workspace.addBot);
   app.route('/auth/login').get(workspace.login);
-  // app.route('/send/test').post(message.sendMessage);
-  // app.route('/auth/account').get(account.createUserAccount);
-  // // conversations
-  // app.route('/conversation/delete').post(conversation.deleteConversation);
-  // app.route('/conversation/all').post(conversation.allConversations);
-  // app.route('/conversation/edit').post(conversation.editConversation);
-  // app.route('/conversation/respond').post(conversation.respondToConversation);
-  // app.route('/conversation/quicktest').post(conversation.quicktest);
-  // //
-  app.route('/conversation/create').post(conversation.createConversation);
-  app.route('/conversation/start').post(conversation.startConversation);
+
+  // Bot Routes
   app.route('/slack/im/listen').post(conversation.im);
-  app.route('/slack/interactive').post(conversation.interactive);
+  
+  // Conversation Routes
+  app.route('/conversation/create').post(conversation.createConversation);
+  app.route('/conversation/delete').post(conversation.deleteConversation);
+  app.route('/conversation/start').post(conversation.startConversation);
+  app.route('/conversation/edit').post(conversation.editConversation);
+  app.route('/conversation/all').post(conversation.allConversations);
+  
+  // User Routes
   app.route('/users/all').post(workspace.getAllMembers);
   app.route('/users/find').post(workspace.findMembers);
 };
