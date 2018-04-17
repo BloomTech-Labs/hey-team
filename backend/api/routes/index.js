@@ -3,6 +3,7 @@ const cors = require('cors');
 
 // const message = require('../controllers/messageController');
 const workspace = require('../controllers/workspaceController');
+const email = require('../controllers/emailController');
 // const bot = require('../controllers/accountBotController');
 // const testController = require('../controllers/testController');
 const conversation = require('../controllers/conversationController');
@@ -31,6 +32,8 @@ module.exports = app => {
   // app.route('/account/getAccountData').post(account.getAccountData);
   app.route('/account/getOneMember').post(workspace.getOneMember);
   app.route('/account/getAllMembers').post(workspace.getAllMembers);
+  app.route('/account/email').post(email.emailSender);
+  
   // // Conversation Routes
   // // app.route('/sendMessage').post(messageController.sendMessage);
   app.route('/auth/bot').get(workspace.addBot);
