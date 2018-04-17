@@ -8,6 +8,9 @@ const conversationSchema = mongoose.Schema({
   questions: [{ type: String }],
   title: { type: String, default: 'Untitled' },
   schedule: {
+    sun: {
+      type: Boolean,
+    },
     mon: {
       type: Boolean,
     },
@@ -24,9 +27,6 @@ const conversationSchema = mongoose.Schema({
       type: Boolean,
     },
     sat: {
-      type: Boolean,
-    },
-    sun: {
       type: Boolean,
     },
     time: {
