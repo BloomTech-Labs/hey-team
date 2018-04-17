@@ -27,4 +27,4 @@ server.listen(port, () => {
   console.log(`Server up and running on ${port}`);
 });
 
-setInterval(schedular, 1000 * 10);
+setInterval(schedular, 1000 * 60);

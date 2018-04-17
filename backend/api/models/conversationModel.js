@@ -4,7 +4,6 @@ const conversationSchema = mongoose.Schema({
   workspace: { type: mongoose.Schema.Types.ObjectId, ref: 'Workspace' },
   members: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Member' }],
   responses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Response' }],
-  // questions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }],
   questions: [{ type: String }],
   title: { type: String, default: 'Untitled' },
   schedule: {
@@ -38,7 +37,7 @@ const conversationSchema = mongoose.Schema({
     },
     tz: {
       type: Number,
-      default: -6,
+      default: -5,
     },
   },
 });

@@ -76,15 +76,12 @@ const allConversations = async (req, res) => {
     .catch(console.error);
 };
 
-const startConversation = async (w_id, c_id, m) => {
-  console.log(w_id, c_id, m);
-  // members.forEach(m_id => {
+const startConversation = async (c_id, m) => {
   initializeConversation(c_id, m);
-  // });
-  // res.send('probably worked');
 };
+
 // const startConversation = async (req, res) => {
-//   const { w_id, c_id, members } = req.body;
+//   const { c_id, members } = req.body;
 //   members.forEach(m_id => {
 //     initializeConversation(c_id, m_id);
 //   });
