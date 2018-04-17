@@ -11,7 +11,6 @@ class BillingIndex extends Component {
   //     alert ('Payment Successful');
   //   });
   // };
-  
 
   onToken = token => {
     fetch ('/save-stripe-token', {
