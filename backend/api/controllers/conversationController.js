@@ -1,282 +1,207 @@
-const { RTMClient, WebClient, IncomingWebhook } = require('@slack/client');
-const async = require('async');
-const rp = require('request-promise');
+const { WebClient } = require('@slack/client');
+const colors = require('colors');
+const util = require('util');
 
-const url =
-  'https://hooks.slack.com/services/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';
-const webhook = new IncomingWebhook(url);
+const initializeConversation = require('./helpers/initializeConversation');
+const createQuestion = require('./helpers/createQuestion');
 
 const Conversation = require('../models/conversationModel');
+const Workspace = require('../models/workspaceModel');
+const Question = require('../models/questionModel');
 const Response = require('../models/responseModel');
-const Account = require('../models/accountModel');
-const ConvMap = require('../models/convMapModel');
 const Member = require('../models/memberModel');
 
-const colors = require('colors');
-
 const createConversation = async (req, res) => {
-  const { title, questions, users, schedule, a_id } = req.body;
-  const participants = [];
-
-  await Account.findById(a_id, function(err, model) {
-    model.team.members.forEach(m => {
-      // console.log(colors.yellow(m.name));
-      users.forEach(u => {
-        if (m.id === u) {
-          participants.push(m);
-        }
-      });
-    });
+  const { c, w_id } = req.body;
+  console.log(c.members);
+  // find all members and add a conversation to member object
+  /** Golden */
+  const members = await Member.find({
+    id: { $in: c.members },
   });
-  // if (query) participants.push(query.select('name'));
 
-  const newConversation = new Conversation({
-    title,
-    questions,
-    participants,
-    schedule,
+  const conversation = await new Conversation({
+    workspace: w_id,
+    members: members,
+    title: c.title,
+    questions: c.questions,
+    schedule: c.schedule,
   });
-  // console.log(colors.cyan(newConversation));
-  await Account.findByIdAndUpdate(
-    a_id,
-    { $push: { conversations: newConversation } },
-    { safe: true, upsert: true, new: true },
-    function(err, model) {
-      // console.log('err', err);
-      // console.log('model', model);
-    }
-  );
 
-  // const account = await Account.findById('5abd7623729a5b2bf4c3a8db');
-  // await account.conversations.push(newConversation);
-  // await account.save();
+  await conversation.save();
 
-  // await account.save(function(err, model, numAffected) {
-  //   if (err) return handleError(err);
-  //   console.log(numAffected, 'Success!');
+  // questions.forEach(q => {
+  //   console.log('calling createQuestion');
+  //   createQuestion(w_id, conversation._id, q);
   // });
 
-  res.json(newConversation);
+  console.log('push conversation');
+  await Workspace.findByIdAndUpdate(w_id, {
+    $push: { conversations: conversation._id },
+  })
+    .then('pushed conversation to workspace')
+    .catch(console.error);
+
+  res.send(conversation);
 };
 
 const deleteConversation = async (req, res) => {
-  const { a_id, c_id } = req.body;
-  const account = await Account.findById(a_id);
-  account.conversations.forEach(c => {
-    if (c._id.toString() === c_id) {
-      account.conversations.remove(c);
-    }
+  const { w_id, c_id } = req.body;
+
+  Conversation.findByIdAndRemove(c_id);
+
+  Workspace.findByIdAndUpdate(w_id, {
+    $pull: { conversations: c_id },
   });
-  account.save();
-  res.status(200);
 };
 
-const allConversations = async (req, res) => {
-  const { a_id } = req.body;
-  const account = await Account.findById(a_id);
-  res.json(account.conversations);
+const getMemberFromId = id => {
+  const member = Member.findOne({ id: id });
+  if (member.id) {
+    return member.id;
+  } else {
+    return false;
+  }
 };
 
 const editConversation = async (req, res) => {
-  const { a_id, c_id, conversation } = req.body;
-  const newConversation = new Conversation(conversation);
-  const account = await Account.findById(a_id);
-  account.conversations.forEach(c => {
-    if (c._id.toString() === c_id) {
-      account.conversations.remove(c);
-      account.conversations.push(newConversation);
-      account.save();
-      return;
-    }
-  });
-  res.status(200);
-};
-
-const respondToConversation = async (req, res) => {
-  const { a_id, c_id } = req.body;
-  const account = await Account.findById(a_id);
-};
-
-const addResponses = async (req, res) => {
-  const { response, user, a_id } = req.body;
-
-  await Account.findById(a_id, function(err, model) {
-    model.conversations.forEach(c => {
-      c.for;
-      users.forEach(u => {
-        if (m.id === u) {
-          participants.push(m);
-        }
-      });
-    });
-  });
-  // if (query) participants.push(query.select('name'));
-
-  const newConversation = new Conversation({
-    title,
-    questions,
-    participants,
-    schedule,
-  });
-  // console.log(colors.cyan(newConversation));
-  await Account.findByIdAndUpdate(
-    a_id,
-    { $push: { conversations: newConversation } },
-    { safe: true, upsert: true, new: true },
-    function(err, model) {
-      // console.log('err', err);
-      // console.log('model', model);
-    }
-  );
-  res.json(newConversation);
-};
-
-const startConversation = async (req, res) => {
-  const { a_id, c_id, users } = await req.body;
-  users.forEach(user => {
-    initiate(a_id, c_id, user);
-  });
-  res.send(req.body);
-};
-
-const sendToParticipant = async (a_id, c_id, users) => {};
-
-const quicktest = async (req, res) => {
-  // console.log(req.body);
-  const { a_id, c_id, users } = await req.body;
-  users.forEach(user => {
-    initiate(a_id, c_id, user);
-  });
-  res.send(req.body);
-};
-
-const initiate = async (a_id, c_id, user_id) => {
-  console.log(user_id);
-
-  const account = await Account.findById(a_id);
-  const token = 'xoxb-334119064773-rgcvNMZI70rMnTd22lmXGryY';
-  const web = new WebClient(token);
-
-  await Account.findByIdAndUpdate(a_id, {
-    $pull: { conv_map: { user_id: user_id } },
-  });
-
-  let questions = [];
-  account.conversations.forEach(c => {
-    if (c._id.toString() === c_id) {
-      questions = c.questions;
+  const { c_id, c } = req.body;
+  const dbMembers = [];
+  await c.members.forEach(m => {
+    const foundMemberId = getMemberFromId(m);
+    if (foundMemberId) {
+      dbMembers.push(foundMemberId);
     }
   });
 
-  const dm = await web.im.open({ user: user_id });
-  const channel = dm.channel.id;
+  const conversation = await Conversation.findByIdAndUpdate(c_id, {
+    title: c.title,
+    members: dbMembers,
+    questions: c.questions,
+    schedule: c.schedule,
+    responses: [],
+  });
+  res.send('OK');
+};
 
-  const newConvMap = new ConvMap({ user_id, channel, c_id, a_id, questions });
-  account.conv_map.push(newConvMap);
-
-  web.chat
-    .postMessage({
-      channel: dm.channel.id,
-      text: questions[0],
+const allConversations = async (req, res) => {
+  const { w_id } = req.body;
+  /** Golden  */
+  Workspace.findById(w_id)
+    .populate({
+      path: 'conversations',
+      populate: { path: 'responses' },
     })
-    .then(res => {
-      // `res` contains information about the posted message
-      console.log('Message sent: ', res.ts);
+    .populate({
+      path: 'conversations',
+      populate: { path: 'members' },
+    })
+    .then(w => {
+      res.send(w.conversations);
     })
     .catch(console.error);
-
-  account.save();
 };
 
-const continueConversation = async body => {
-  // console.log(1);
-  const allAccounts = await Account.find({});
-  const token = 'xoxb-334119064773-rgcvNMZI70rMnTd22lmXGryY';
-  const web = new WebClient(token);
-  let a_id;
-  allAccounts.forEach(a => {
-    a.conv_map.forEach(m => {
-      if (m.channel.toString() === body.event.channel) {
-        a_id = m.a_id;
-        // console.log(2);
-        return;
-      }
-    });
-  });
-  // let pos = 1;
-  // const ham = `conv_map.${pos}.responses`;
-  // console.log('ham', ham);
-  // await Account.findByIdAndUpdate(a_id, {
-  //   $set: { 'conversations.0.title': 'tofu' },
-  //   $push: { 'conv_map.0.responses': '!!!!!!!!!!!!!!!!!!' },
-  // });
-  const account = await Account.findById(a_id);
-  // // account.team.name = 'ham';
-  // console.log(account.team.name);
-  // // account.conversations[0].title = 'poo';
-  // account.save(function(err, product, numAffected) {
-  //   console.log(err, numAffected);
-  // });
+const startConversation = async (c_id, m) => {
+  initializeConversation(c_id, m);
+};
 
-  account.conv_map.forEach((a, i) => {
-    if (a.user_id === body.event.user) {
-      if (a.q_index < a.questions.length) {
-        a.responses[a.q_index] = body.event.text;
-        account.conversations.forEach(c => {
-          if (c._id.toString() === a.c_id) {
-            c.responses[a.q_index] = body.event.text;
-          }
-          a.q_index++;
-        });
-        console.log('index', account.conv_map[i].q_index);
-        console.log('responses', account.conv_map[i].responses);
-        console.log(account.conversations);
-        account.save();
-      }
-      if (a.q_index < a.questions.length) {
-        // console.log(5);
-        web.chat
-          .postMessage({
-            channel: body.event.channel,
-            text: a.questions[a.q_index],
-          })
-          .then(res => {
-            // `res` contains information about the posted message
-            console.log('Message sent: ', res.ts);
-            account.save();
-          })
-          .catch(console.error);
-      } else {
-        // console.log(6);
-        web.chat
-          .postMessage({
-            channel: body.event.channel,
-            text: 'All done for now!',
-          })
-          .then(res => {
-            // `res` contains information about the posted message
-            console.log('Message sent: ', res.ts);
-            account.save();
-          })
-          .catch(console.error);
-      }
+// const startConversation = async (req, res) => {
+//   const { c_id, members } = req.body;
+//   members.forEach(m_id => {
+//     initializeConversation(c_id, m_id);
+//   });
+//   res.send('probably worked');
+// };
+
+const updateConversation = async body => {
+  if (body.event.bot_id) {
+    return;
+  }
+
+  const web = new WebClient(process.env.XOXB);
+  const dm = await web.im.open({ user: body.event.user });
+  const history = await web.im.history({ channel: dm.channel.id, count: 2 });
+
+  if (history.messages[1].user === body.event.user) {
+    return;
+  }
+  const [q_count, c_id] = history.messages[1].attachments[0].fallback.split(
+    ','
+  );
+
+  const member = await Member.findOne({ id: body.event.user });
+  const conversation = await Conversation.findById(c_id).populate('responses');
+  let numResponses = 0;
+
+  conversation.responses.forEach(r => {
+    if (r.member.toString() === member._id.toString()) {
+      numResponses++;
     }
   });
+
+  if (numResponses === conversation.questions.length - 1) {
+    const newResponse = await new Response({
+      conversation: c_id,
+      member: member._id,
+      time_stamp: body.event.ts,
+      response: body.event.text,
+    });
+    await newResponse.save();
+
+    await Conversation.findByIdAndUpdate(c_id, {
+      $push: { responses: newResponse._id },
+    });
+    return;
+  } else if (numResponses < conversation.questions.length - 1) {
+    const newResponse = await new Response({
+      conversation: c_id,
+      member: member._id,
+      time_stamp: body.event.ts,
+      response: body.event.text,
+    });
+    await newResponse.save();
+
+    await Conversation.findByIdAndUpdate(c_id, {
+      $push: { responses: newResponse._id },
+    });
+    web.chat
+      .postMessage({
+        channel: dm.channel.id,
+        text: `${conversation.questions[numResponses + 1]}`,
+        attachments: [
+          {
+            fallback: `${conversation.questions.length},${c_id}`,
+          },
+        ],
+      })
+      .then(res => {})
+      .catch(console.error);
+    return;
+  } else if (numResponses === conversation.questions.length) {
+    return;
+  }
 };
 
 const im = (req, res) => {
-  continueConversation(req.body);
-  // console.log(req.body);
+  updateConversation(req.body);
+  /** Golden */
+  const stuff = util.inspect(req.body, false, null);
+  // console.log(stuff);
   res.send(req.body);
+};
+
+const interactive = (req, res) => {
+  // res.send(req.body);
 };
 
 module.exports = {
   createConversation,
   deleteConversation,
-  allConversations,
   editConversation,
-  respondToConversation,
+  allConversations,
   startConversation,
-  quicktest,
+  updateConversation,
   im,
+  interactive,
 };
