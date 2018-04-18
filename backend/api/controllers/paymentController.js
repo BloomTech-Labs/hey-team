@@ -5,6 +5,7 @@ const colors = require('colors');
 const payment = async (req, res) => {
   const { w_id, token } = req.body;
   // console.log(token);
+
   const charged = await stripe.charges.create({
     amount: 999,
     currency: 'usd',
@@ -12,11 +13,9 @@ const payment = async (req, res) => {
     source: token.id,
   });
 
-  // req.user.credits += 9.99;
-  // const user = await req.user.save();
   console.log(charged);
   await Workspace.findByIdAndUpdate(w_id, {
-    $update: { info: { paid: true } },
+    $update: { info: { active: true } },
   });
   res.send('OK');
 };

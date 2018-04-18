@@ -6,6 +6,7 @@
 const colors = require('colors');
 
 const Conversation = require('./models/conversationModel');
+const Workspace = require('./models/workspaceModel');
 const conversation = require('./controllers/conversationController');
 
 const weekDayMap = {
@@ -59,11 +60,38 @@ const parseSchedule = async (c, m) => {
   }
 };
 
-module.exports = startSchedular = async () => {
+const startScheduler = async () => {
   const conversations = await Conversation.find().populate('members');
   conversations.forEach(c => {
     c.members.forEach(m => {
       parseSchedule(c, m);
     });
   });
+};
+
+const checkLastPayment = async w => {
+  const date = Date.parse(new Date());
+  const paidOn = Date.parse(w.info.paidOn);
+
+  const lastPayment = Math.floor((date - paidOn) / (1000 * 60 * 60 * 24));
+  if (lastPayment > 30) {
+    console.log;
+    await Workspace.findByIdAndUpdate(w._id, {
+      'info.active': false,
+    });
+  }
+  return;
+};
+
+const paymentScheduler = async () => {
+  const workspaces = await Workspace.find();
+  // console.log('here'.blue);
+  workspaces.forEach(w => {
+    checkLastPayment(w);
+  });
+};
+
+module.exports = {
+  startScheduler,
+  paymentScheduler,
 };
