@@ -2,23 +2,25 @@ import React, { Component } from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import { Button, Checkbox } from 'react-mdl';
 import axios from 'axios';
-import { ServerResponse } from 'http';
 // const w_id = localStorage.doc_id;
 const w_id = '5ad4cebecb2cb341f09211ee';
+// onToken = token => {
+//   fetch('/stripe', {
+//     method: 'POST',
+//     body: JSON.stringify(token),
+//   }).then(res => {
+//     alert('Payment Successful');
+//   });
+// };
 
 class Billing extends Component {
   onToken = token => {
-    fetch('/stripe', {
-      method: 'POST',
-      body: JSON.stringify(token),
-    }).then(response => {
-      axios
-        .post('https://ab5a9f15.ngrok.io/stripe', { w_id, response })
-        .then(res => {});
-      alert(JSON.stringify(response));
-    });
+    axios
+      .post('https://ab5a9f15.ngrok.io/stripe', { w_id, token })
+      .then(res => {
+        alert('Payment Successful');
+      });
   };
-
   render() {
     return (
       <div>
