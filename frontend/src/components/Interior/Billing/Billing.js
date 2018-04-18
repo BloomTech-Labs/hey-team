@@ -3,7 +3,7 @@ import StripeCheckout from 'react-stripe-checkout';
 import { Button, Checkbox } from 'react-mdl';
 import axios from 'axios';
 // const w_id = localStorage.doc_id;
-const w_id = '5ad4cebecb2cb341f09211ee';
+const w_id = '5ad7a8a68414e703e815ce08';
 // onToken = token => {
 //   fetch('/stripe', {
 //     method: 'POST',
