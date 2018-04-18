@@ -3,7 +3,7 @@
 import React from 'react';
 import { Nav } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import '../Semantic-UI-CSS/semantic.min.css';
+import 'semantic-ui-css/semantic.min.css';
 import '../css/topNavigation.css';
 
 import {displayHeader, shakeSignIn, shakeFeatures, shakeLogo} from './LandingPage/'

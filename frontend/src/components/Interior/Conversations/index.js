@@ -3,14 +3,15 @@
 //conversations index
 
 import React from 'react';
-import { Button } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
 import { v4 } from 'uuid';//creates unique keys
 
 import { getAllConversations} from '../../Actions/GetAllConversations';
 
 import '../../../css/conversations.css';
 import '../../../css/cards.css';
-import '../../../Semantic-UI-CSS/semantic.min.css';
+
 
 
 // import New from './NewConversation/index';
@@ -69,7 +70,7 @@ class ConversationsIndex extends React.Component {
         const users = await getAllConversations("a");
         this.setState({ searchResults: users.data });
         console.log(this.state.searchResults);
-        console.log(this.state.searchResults[0].members[0].real_name);
+        console.log(this.state.searchResults[0]);
         conversationsArray = [];
         for(let a = 0; a < this.state.searchResults.length; a++){
             conversationsArray[a] = {
@@ -105,7 +106,7 @@ class ConversationsIndex extends React.Component {
             this.setState({displayArray:[]});
             cardArray[i] =
             <div key={v4()} className="cardWrap"><div className="ui card"><div className="content"><button name={i} className="right floated" onClick={(e) => this.handleView(e)}><i className="folder open icon"></i></button><button name={i} className="right floated" onClick={(e) => this.handleEdit(e)}><i className="edit icon"></i></button><button name={i} className="right floated" onClick={(e) => this.handleDelete(e)}><i className="trash icon"></i></button><div className="card__header">
-            {dataArray[[i[0]]] = conversationsArray[i].name}</div><div className="description"><div className="cards__time"><span className="cards__titles">Time: </span>
+            {dataArray[[i[0]]] = conversationsArray[i].title}</div><div className="description"><div className="cards__time"><span className="cards__titles">Time: </span>
             {dataArray[[i[1]]] = conversationsArray[i].time}</div><div className="cards__schedule"><span className="cards__titles">Schedule: </span>
             {dataArray[[i[2]]] = conversationsArray[i].schedule}</div><div className="cards__created"><span className="cards__titles">Created: </span>
             {dataArray[[i[3]]] = conversationsArray[i].created}</div></div></div></div></div>;
