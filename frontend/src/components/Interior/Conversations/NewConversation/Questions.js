@@ -27,7 +27,7 @@ class Questions extends React.Component {
     }
 
     componentWillMount(){
-        console.log(editClicked);
+        // console.log(editClicked);
         this.handleDisplayQuestions();
         questionsArray = [];
         if(editClicked){
@@ -35,7 +35,7 @@ class Questions extends React.Component {
                 questionsArray[r] = conversationsArray[conversationsArrayPosition].questions[r]
             }
             this.handleDisplayQuestions();
-            console.log("reset array");
+            // console.log("reset array");
         }
     }
 

@@ -3,6 +3,10 @@
 //conversations index
 
 import React from 'react';
+import axios from 'axios';
+
+import { getAllConversations} from '../../../Actions/GetAllConversations';
+import {createNewConversation} from '../../../Actions/CreateNewConversation';
 
 import DisplayQuestions from './DisplayQuestions.js';
 import Schedule from './Schedule.js';
@@ -22,6 +26,27 @@ class View extends React.Component {
     constructor(props) {
     super(props);
     this.state = {somestate: true};
+
+    // this.createNewConversation = this.createNewConversation.bind(this);
+}
+
+componentWillMount(){
+    this.handleUserSearch();
+}
+
+createNewConversation() {//e
+    // e.preventDefault();
+    this.props.createNewConversation(this.state);
+    this.setState(conversationsArray[0]);
+}
+
+
+handleUserSearch = async e => {
+    const users = await getAllConversations("a");
+    this.setState({ searchResults: users.data });
+    console.log(this.state.searchResults);
+
+    // console.log(this.state.searchResults);//entire group
 };
 
 handleEdit(){

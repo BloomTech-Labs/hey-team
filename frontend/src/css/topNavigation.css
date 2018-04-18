@@ -1,0 +1,288 @@
+/*
+CSS By Alex Cassell
+http://alexcassell.com
+*/
+/* color pallette */
+/* https://coolors.co/98c1d9-466365-b1b7d1-9b9fb5-a5d8ff */
+
+
+/* desktop */
+@media screen and (min-width: 1000px) {
+
+    .topNavigation{
+        position: fixed;
+        top: 1vw;
+        right: 2vw;
+        display: flex;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        padding: 1vw;
+        width: 100%;
+    }
+
+    .topNavigation__padding{
+        margin-right: 1vw
+    }
+
+    .header{
+        position: fixed;
+        top: 0px;
+        width: 100%;
+        height: 12vh;
+        z-index: 15;
+    }
+
+    .header__background{
+        position: fixed;
+        top: 0px;
+        width: 100%;
+        z-index: 15;
+        background-color: #B1B7D1;
+        height: 0px;
+        animation-name: headerOut;
+        animation-duration: .3s;
+        animation-fill-mode: forwards;
+        
+        /* a colored background will show up after user has scrolled down  */
+    }
+
+    @keyframes headerOut {
+        0%   {height: 0px;}
+        25%  {height: 3vh;}
+        50%  {height: 6vh;}
+        75%  {height: 9vh;}
+        100% {height: 12vh;}
+    }
+/* scroll back up */
+    .header__noBackground{
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 15;
+        background-color: #B1B7D1;
+        height: 0px;
+        animation-name: headerIn;
+        animation-duration: .5s;
+    }
+
+    @keyframes headerIn  {
+        0%   {height: 12vh;}
+        25%  {height: 9vh;}
+        50%  {height: 6vh;}
+        75%  {height: 3vh;}
+        100% {height: 0vh;}
+    }
+    
+
+
+    .signIn__default{
+        margin-top: -4.5vw;
+        width: 10vw;
+        height: 10vw;
+        background: url('../images/slackSignInDefault.png') no-repeat center;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+    }
+
+    .signIn__default:hover{
+        animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        perspective: 1000px;
+        margin-top: -4.5vw;
+        width: 10vw;
+        height: 10vw;
+        background: url('../images/slackSignInHover.png') no-repeat center;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+    }
+
+    .shakeHeaderMove{
+        animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        perspective: 1000px;
+        
+    }
+    
+
+    .features__default{
+        margin-top: -6vw;
+        width: 13vw;
+        height: 13vw;
+        background: url('../images/featureButton.png') no-repeat center;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+    }
+
+    .features__default:hover{
+        margin-top: -6vw;
+        width: 13vw;
+        height: 13vw;
+        background: url('../images/featureButtonHover.png') no-repeat center;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+    }
+
+
+    @keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+    
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+    
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+    
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
+    }
+
+    .topNavigation__items{
+        padding: 1vh;
+    }
+
+    .Nav-link{
+        font-size: 1.5vw;
+    }
+
+    .logo{
+        position: fixed;
+        top: -5vw;
+        margin-top: 5px;
+        left: 10px;
+        width: 15vw;
+        height: 15vw;
+        background: url('../images/logo.png') no-repeat center;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+    }
+    
+}
+
+
+/* Mobile */
+@media screen and (max-width: 999px) {
+
+    .topNavigation{
+        position: fixed;
+        top: 1vh;
+        right: 5vw;
+        display: flex;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        padding: 1vw;
+        width: 100vw;
+    }
+
+    .topNavigation__padding{
+        padding-right: 3vw
+    }
+
+    .header{
+        position: fixed;
+        top: 0px;
+        width: 100vw;
+        height: 4vh;
+        /* background-color: grey; */
+        /* color will show up after user has scrolled down  */
+        z-index: 15;
+    }
+
+    .signIn__default{
+        margin-top: -4.5vh;
+        width: 15vh;
+        height: 15vh;
+        background: url('../images/slackSignInDefault.png') no-repeat center;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+    }
+
+    .signIn__default:hover{
+        margin-top: -4.5vh;
+        width: 15vh;
+        height: 15vh;
+        background: url('../images/slackSignInHover.png') no-repeat center;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+    }
+
+    .features__default{
+        margin-top: -6.6vh;
+        width: 19.5vh;
+        height: 19.5vh;
+        background: url('../images/featureButton.png') no-repeat center;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+    }
+
+    .features__default:hover{
+        margin-top: -6.6vh;
+        width: 19.5vh;
+        height: 19.5vh;
+        background: url('../images/featureButtonHover.png') no-repeat center;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+    }
+
+    .Nav-link{
+        font-size: 3.5vh;
+    }
+
+    .logo{
+        position: fixed;
+        top: -5vh;
+        margin-top: 5px;
+        left: 10px;
+        width: 15vh;
+        height: 15vh;
+        background: url('../images/logo.png') no-repeat center;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+    }
+    
+}
+
+a{
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+}
+
+a:hover { 
+    color: darkblue;
+    font-weight: 1000;
+}

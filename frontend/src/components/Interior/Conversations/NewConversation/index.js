@@ -38,25 +38,26 @@ import Questions from './Questions';
 import {questionsArray} from './Questions'
 
 import Participants from './Participants';
+import {membersInfoObjectsArray} from './Participants.js'
 
 import {conversationsArray, editClicked} from '../index.js'
 import {conversationsArrayPosition} from '../index.js'
 
-import {participantsArray} from './Participants.js'
+
 
 import '../../../../css/conversations.css';
 
 let dateStamp = String(new Date()); 
 //this grabs local time - might need to change to GMT-0 - might need to format data
 //dev only
-let participantsData = [[{userName: "fred", responseTime: "10:07:AM", responseDate: "03-12-2018", imageData: {}, answers:["Yes, I loved", "That was the worst thing I have ever done", "I cam a dog person, cats scare me", "This is probably tree", "I want to press charges", "The sky is blue and so is the water"]},{userName: "Jorge", responseTime: "10:17:AM", responseDate: "04-12-2018", imageData: {}, answers:["Yup", "nope", "could be", "yea probably", "who knows", "I did not hear that"]},{userName: "Fran", responseTime: "09:37:AM", responseDate: "02-22-2018", imageData: {}, answers:["hotdog", "tacos then?", "pizza is almost certainly true", "with pineapples of course", "and mayonnaise", "No I am not sick"]},{userName: "Jules", responseTime: "12:27:PM", responseDate: "01-11-2017", imageData: {}, answers:["A river of denile", "Panda bears", "are true bears", "even though that is against the myth", "that mice", "mine cheese"]},{userName: "Bobby", responseTime: "1:07:PM", responseDate: "03-12-2018", imageData: {},answers:["windshield wipers slapping time", "for one single day with", "just another word for nothing left to lose", "Kris did it best", "rusty harpoon and red bandanas", "people"]},{userName: "Dan", responseTime: "10:07:AM", responseDate: "03-12-2018", imageData: {},answers:["Yes, I loved", "That was the worst thing I have ever done", "I cam a dog person, cats scare me", "This is probably tree", "I want to press charges", "The sky is blue and so is the water"]},{userName: "Cindy", responseTime: "10:07:AM", responseDate: "03-12-2018", imageData: {}, answers:["Yes, I loved", "That was the worst thing I have ever done", "I cam a dog person, cats scare me", "This is probably tree", "I want to press charges", "The sky is blue and so is the water"]}]];
+let membersData = [[{userName: "fred", responseTime: "10:07:AM", responseDate: "03-12-2018", imageData: {}, answers:["Yes, I loved", "That was the worst thing I have ever done", "I cam a dog person, cats scare me", "This is probably tree", "I want to press charges", "The sky is blue and so is the water"]},{userName: "Jorge", responseTime: "10:17:AM", responseDate: "04-12-2018", imageData: {}, answers:["Yup", "nope", "could be", "yea probably", "who knows", "I did not hear that"]},{userName: "Fran", responseTime: "09:37:AM", responseDate: "02-22-2018", imageData: {}, answers:["hotdog", "tacos then?", "pizza is almost certainly true", "with pineapples of course", "and mayonnaise", "No I am not sick"]},{userName: "Jules", responseTime: "12:27:PM", responseDate: "01-11-2017", imageData: {}, answers:["A river of denile", "Panda bears", "are true bears", "even though that is against the myth", "that mice", "mine cheese"]},{userName: "Bobby", responseTime: "1:07:PM", responseDate: "03-12-2018", imageData: {},answers:["windshield wipers slapping time", "for one single day with", "just another word for nothing left to lose", "Kris did it best", "rusty harpoon and red bandanas", "people"]},{userName: "Dan", responseTime: "10:07:AM", responseDate: "03-12-2018", imageData: {},answers:["Yes, I loved", "That was the worst thing I have ever done", "I cam a dog person, cats scare me", "This is probably tree", "I want to press charges", "The sky is blue and so is the water"]},{userName: "Cindy", responseTime: "10:07:AM", responseDate: "03-12-2018", imageData: {}, answers:["Yes, I loved", "That was the worst thing I have ever done", "I cam a dog person, cats scare me", "This is probably tree", "I want to press charges", "The sky is blue and so is the water"]}]];
 let conversation  = {name:"", days:daysArray, time:"", timeZone:timeZone,
-    questions: questionsArray, participants: participantsArray, channel: "", date:dateStamp};
+    questions: questionsArray, members: membersInfoObjectsArray, channel: "", date:dateStamp};
 
     const options = [
         { key: 'a', text: 'AM', value: 'am' },
         { key: 'p', text: 'PM', value: 'pm' },
-      ];
+    ];
 
 let postName, postTime, postWhere;
 
@@ -84,13 +85,14 @@ class New extends Component {
 
     handleInput(e){
         if(e.target.name === "name"){
-            conversation["name"] = e.target.value;
+            postName = e.target.value;
         }
         else if (e.target.name === "time"){
-            conversation["time"] = e.target.value;
+            postTime = e.target.value;
+            console.log(e.target);
         }
         else if (e.target.name === "channel"){
-            conversation["channel"] = e.target.value;
+            postWhere = e.target.value;
         }
         this.setState({conversation:conversation});
         // console.log(conversation);
@@ -99,11 +101,40 @@ class New extends Component {
     
 
     handleFinished(){
+        let newDaysArray = [];
+        for(let i = 0; i < daysArray.length; i++){
+            if(daysArray[i] === true){
+                if(i === 0){
+                    newDaysArray.push("Mon");
+                }
+                else if(i === 1){
+                    newDaysArray.push("Tue");
+                }
+                else if(i === 2){
+                    newDaysArray.push("Wed");
+                }
+                else if(i === 3){
+                    newDaysArray.push("Thur");
+                }
+                else if(i === 4){
+                    newDaysArray.push("Fri");
+                }
+                else if(i === 5){
+                    newDaysArray.push("Sat");
+                }
+                else if(i === 6){
+                    newDaysArray.push("Sun");
+                }
+            }
+        }
+        for(let r = 0; r < newDaysArray.length - 1; r++){//does not work yet will come back
+            newDaysArray[r] === newDaysArray[r] + ",";
+        }
         dateStamp = String(new Date());
-        conversation  = {name:postName, time:postTime, schedule:daysArray, created:dateStamp, timeZone:timeZone,
-        post:postWhere, questions: questionsArray, participants: participantsArray};
+        conversation  = {name:postName, time:postTime, schedule:newDaysArray, created:dateStamp, timeZone:timeZone,
+        post:postWhere, questions: questionsArray, members: membersInfoObjectsArray};
         conversationsArray.unshift(conversation);
-        console.log(conversation);
+        console.log(conversationsArray[0]);
         this.props.history.push('/conversations/');
     }
 
@@ -118,6 +149,7 @@ class New extends Component {
                         {/* <Input className="ui size input small" type="text" name="time" onChange={(e) => this.handleInput(e)} placeholder={postTime}/> */}
                             {/* <Form.Group inline> */}
                                 <Input
+                                    name="time"
                                     onChange={(e) => this.handleInput(e)}
                                     label={<Dropdown defaultValue="am" options={options} />}
                                     labelPosition="right"
@@ -136,7 +168,7 @@ class New extends Component {
                         </div>
 
                         <div className="conversations__participantWrapper">
-                            <div className="conversations__participants__icons">
+                            <div className="conversations__members__icons">
                             {/* icons for particpants will be loaded here */}
                                 <Participants />
                             </div>

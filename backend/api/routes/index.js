@@ -5,6 +5,8 @@ const conversation = require('../controllers/conversationController');
 const workspace = require('../controllers/workspaceController');
 const email = require('../controllers/emailController');
 
+const stripe = require('../controllers/paymentController');
+
 const corsOptions = {
   origin: 'http://localhost:3000',
   // origin: 'http://www.mynutricard.com',
@@ -15,6 +17,7 @@ const corsOptions = {
 
 module.exports = app => {
   app.use(cors(corsOptions));
+  app.route('/stripe').post(stripe.payment);
 
   // Mail Routes
   app.route('/account/email').post(email.emailSender);

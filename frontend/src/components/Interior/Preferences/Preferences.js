@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {RadioGroup, Radio} from 'react-mdl';
 
-import '../../../css/preferences.css';
-
 class Preferences extends Component {
   state = {
     selected: 'true',
@@ -15,9 +13,9 @@ class Preferences extends Component {
   };
   render () {
     return (
-      <div >
+      <div>
         <h2>Email Summary</h2>
-        <RadioGroup childContainer="li" name="pref" value="opt1">
+        <RadioGroup container="ul" childContainer="li" name="pref" value="opt1">
           <Radio value="opt1" ripple onChange={this.toggleChange}>
             On
           </Radio>
