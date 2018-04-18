@@ -1,6 +1,6 @@
 //Alex Cassell
 //http://alexcassell.com
-//participants reusuable component
+//members reusuable component
 
 import React from 'react';
 import axios from 'axios';
@@ -38,34 +38,47 @@ import {conversationsArrayPosition} from '../index.js';
 let cardArray = [];
 let postWhere;
 
-let participantsArray = [];
+let membersInfoObjectsArray = [];
 
 class Participants extends React.Component {
     constructor(props) {
     super(props);
     this.state = {
         SearchResults: [],
-        participants: []
+        members: []
     };
     this.handleUserSearch = this.handleUserSearch.bind(this);
     }
 
-    // componentWillMount(){
-    //     if(editClicked){
-    //         participantsArray = ["alex", "geekbot"];
-    //         this.handleEditSearch();
-    //     }
-    // }
+    componentWillMount(){
+        if(editClicked){
+            this.handleEditSearch();
+        }
+    }
 
-    // handleEditSearch = async e => {//autofill
-    //     for(let i = 0;i < participantsArray.length; i++){
-    //         const users = await findUsers(participantsArray[i]);
-    //         this.setState({ searchResults: users.data });
-    //         this.state.participants.push(users.data);
-    //         this.setState({ participants: this.state.participants });
-    //     }
-    //     console.log("edit search: " + participantsArray);
-    // };
+    handleEditSearch() {//autofill
+            // const users = await findUsers(membersArray[i]);
+            // this.setState({ searchResults: users.data });
+            // console.log(this.state.searchResults);
+            // this.state.members.push();
+            console.log(conversationsArrayPosition);
+
+            for(let j = 0; j < conversationsArray[conversationsArrayPosition].members.length; j++){
+                //console.log(j + " " + conversationsArray[conversationsArrayPosition].members[j].realName);
+                // console.log(j + " " + conversationsArray[conversationsArrayPosition].members[j].image);
+                    this.state.members.push(
+                        <Label key={v4()} size="large">
+                        <img src={conversationsArray[conversationsArrayPosition].members[j].image} /> 
+                        {`     ${conversationsArray[conversationsArrayPosition].members[j].realName}     `}
+                        <Icon name="delete" />
+                    </Label>
+                    );
+            }
+            this.setState({ members: this.state.members });
+
+            console.log(this.state.members);
+        // console.log("edit search: " + membersArray);
+    };
 
     // handleSearch(e) {
     //     // console.log(localStorage);
@@ -98,18 +111,18 @@ class Participants extends React.Component {
         // console.log(e.target.value);
         const users = await findUsers(e.target.value);
         this.setState({ searchResults: users.data });
-        console.log("here");
         console.log("Search Results: " + this.state.searchResults);
     };
 
     
     handleAddUser = (e, d) => {
-        // this.setState({ participants: [...d.result] });
-        this.state.participants.push(d.result);
-        this.setState({ participants: this.state.participants });
-        //console.log("participants: " + d.result.name);//gives name of user
-        participantsArray.push(d.result.name);
-        // console.log("participants: " + participantsArray);
+        // this.setState({ members: [...d.result] });
+        console.log(d.result);
+        this.state.members.push(d.result);
+        this.setState({ members: this.state.members });
+        // console.log("members: " + d.result.name);//gives name of user
+        membersInfoObjectsArray.push({userName:d.result.name, image:d.result.image, realName: d.result.real_name});
+        console.log(membersInfoObjectsArray);
     };
 
     handleUserSearch = async e => {
@@ -124,14 +137,14 @@ handleDisplayCards(){
     for(let i = 0; i < this.state.SearchResults.length; ++i){
         this.setState({displayArray:[]});
         cardArray[i] =
-        <div key={v4()} className="participants__userImage"><img src={this.state.SearchResults[i].avatar} alt="User Photo" /></div>;
+        <div key={v4()} className="members__userImage"><img src={this.state.SearchResults[i].avatar} alt="User Photo" /></div>;
     }
     // this.setState({displayArray:cardArray});
 }
 
 
 handleDelete(e){
-//  conversationsArray[conversationsArrayPosition].participants[0].splice(e.currentTarget.name, 1);
+//  conversationsArray[conversationsArrayPosition].members[0].splice(e.currentTarget.name, 1);
 //change to local array
     cardArray = [];
     this.handleDisplayCards();
@@ -141,7 +154,7 @@ handleDelete(e){
 
     render() {
         return(
-            <div className="participants__flexWrapper">
+            <div className="members__flexWrapper">
             <div className="conversations__participant">
               {/* this has to hook into the backend */}
             <Form>
@@ -159,7 +172,7 @@ handleDelete(e){
                 />
                 </Form.Group>
                 <Form.Group inline>
-                {this.state.participants.map(p => {
+                {this.state.members.map(p => {
                     return (
                     <Label key={v4()} size="large">
                         <img src={p.avatar} /> {`     ${p.real_name}     `}
@@ -179,4 +192,4 @@ handleDelete(e){
 }
 
 export default Participants;
-export {participantsArray};
+export {membersInfoObjectsArray};
