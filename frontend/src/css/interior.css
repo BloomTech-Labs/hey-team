@@ -79,3 +79,7 @@ http://alexcassell.com
     -o-background-size: contain;
     background-size: contain;
 }
+
+.Billing {
+    margin: 20px;
+}

@@ -1,30 +1,30 @@
 import React, {Component} from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import { Button, Checkbox } from 'react-mdl';
+import axios from 'axios';
 
 class Billing extends Component {
+  onToken = token => {
+    axios.post ('/stripe')
+    .then (res => {
+      alert ('Payment Successful');
+    });
+  };
+
+  
   // onToken = token => {
-  //   fetch ('api/stripe', {
+  //   fetch ('/stripe', {
   //     method: 'POST',
   //     body: JSON.stringify (token),
   //   }).then (res => {
   //     alert ('Payment Successful');
   //   });
   // };
-  
-  onToken = token => {
-    fetch ('/save-stripe-token', {
-      method: 'POST',
-      body: JSON.stringify (token),
-    }).then (res => {
-      alert ('Payment Successful');
-    });
-  };
 
   render () {
     return (
       
-      <div>
+      <div >
       <StripeCheckout
         name="Hey Team"
         description="30 Day Subscription - $9.99"

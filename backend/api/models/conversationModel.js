@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 
-const conversationSchema = new mongoose.Schema({
-  title: {
-    type: String,
-  },
-  questions: [
-    {
-      type: String,
-    },
-  ],
+const conversationSchema = mongoose.Schema({
+  workspace: { type: mongoose.Schema.Types.ObjectId, ref: 'Workspace' },
+  members: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Member' }],
+  responses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Response' }],
+  questions: [{ type: String }],
+  title: { type: String, default: 'Untitled' },
   schedule: {
+    sun: {
+      type: Boolean,
+    },
     mon: {
       type: Boolean,
     },
@@ -28,35 +28,18 @@ const conversationSchema = new mongoose.Schema({
     sat: {
       type: Boolean,
     },
-    sun: {
-      type: Boolean,
-    },
     time: {
       type: String,
     },
-  },
-  participants: [
-    {
-      name: {
-        type: String,
-      },
-      id: {
-        type: String,
-      },
-      avatar: {
-        type: String,
-      },
+    modifier: {
+      type: String,
+      default: 'AM',
     },
-  ],
-  responses: [
-    // {
-    //   submittedOn: Date,
-    //   user: String,
-    //   avatar: String,
-    //   questions: [],
-    //   answers: [],
-    // },
-  ],
+    tz: {
+      type: Number,
+      default: -5,
+    },
+  },
 });
 
-module.exports = mongoose.model('conversation', conversationSchema);
+module.exports = mongoose.model('Conversation', conversationSchema);
