@@ -3,6 +3,7 @@
 //new/edit conversation component
 
 import React, { Component } from 'react';
+import axios from 'axios';
 import {
     Button,
     Form,
@@ -131,12 +132,35 @@ class New extends Component {
             newDaysArray[r] === newDaysArray[r] + ",";
         }
         dateStamp = String(new Date());
-        conversation  = {name:postName, time:postTime, schedule:newDaysArray, created:dateStamp, timeZone:timeZone,
-        post:postWhere, questions: questionsArray, members: membersInfoObjectsArray};
-        conversationsArray.unshift(conversation);
-        console.log(conversationsArray[0]);
-        this.props.history.push('/conversations/');
+        conversation = { 
+            title: postName, 
+            time: postTime, 
+            schedule: newDaysArray, 
+            created: dateStamp, 
+            timeZone: timeZone, 
+            post: postWhere, 
+            questions: questionsArray, 
+            members: membersInfoObjectsArray };
+        conversationsArray.unshift(conversation);       
+        this.handleSubmit();
     }
+
+    handleSubmit = async e => {
+        // event.preventDefault();
+        console.log("submit");
+        const conversationAdd = {
+            w_id: '5ad4cebecb2cb341f09211ee',
+            c: conversation
+            };
+            console.log("submitted");
+            axios.post(`https://ab5a9f15.ngrok.io/conversation/create`,  conversationAdd)
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+                
+            })
+            this.props.history.push('/conversations/');
+        }
 
     render() {
         return (

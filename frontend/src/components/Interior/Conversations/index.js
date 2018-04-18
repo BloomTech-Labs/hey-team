@@ -3,6 +3,7 @@
 //conversations index
 
 import React from 'react';
+import axios from 'axios';
 import { Button } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import { v4 } from 'uuid';//creates unique keys
@@ -48,7 +49,8 @@ class ConversationsIndex extends React.Component {
     componentWillMount(){
         editClicked = false;
         this.handleLoadConversations();
-        console.log(editClicked);
+        // console.log(editClicked);
+        // this.handleSubmit();
 
         //card has to be declared here so that the onclick will work properly
         endCard = 
@@ -66,11 +68,28 @@ class ConversationsIndex extends React.Component {
     }
 //saves conversation object data into an array
 
+
+    // handleSubmit = async e => {
+    //     // event.preventDefault();
+    //     console.log("submit");
+    //     const conversationAdd = {
+    //         w_id: '5ad4cebecb2cb341f09211ee',
+    //         c: conversationsArray[0]
+    //         };
+    //         console.log("submitted");
+    //         axios.post(`https://ab5a9f15.ngrok.io/conversation/create`,  conversationAdd)
+    //         .then(res => {
+    //             console.log(res);
+    //             console.log(res.data);
+    //         })
+    //     }
+    // 
+
     handleLoadConversations = async e => {
         const users = await getAllConversations("a");
         this.setState({ searchResults: users.data });
         console.log(this.state.searchResults);
-        console.log(this.state.searchResults[0]);
+        // console.log(this.state.searchResults[0]);
         conversationsArray = [];
         for(let a = 0; a < this.state.searchResults.length; a++){
             conversationsArray[a] = {
@@ -93,7 +112,7 @@ class ConversationsIndex extends React.Component {
         else{
             this.setState({conversationsArrayEmpty: true});
         }
-        console.log(conversationsArray);
+        // console.log(conversationsArray);
         this.setState({ searchResults: this.state.searchResults });
 
     // console.log(this.state.searchResults);//entire group
@@ -101,7 +120,7 @@ class ConversationsIndex extends React.Component {
 
     handleDisplayCards(){
         cardArray = [];
-        console.log(cardArray);
+        // console.log(cardArray);
         for(let i = 0; i < conversationsArray.length; i++){
             this.setState({displayArray:[]});
             cardArray[i] =
@@ -112,7 +131,7 @@ class ConversationsIndex extends React.Component {
             {dataArray[[i[3]]] = conversationsArray[i].created}</div></div></div></div></div>;
             this.setState({displayArray:cardArray});
         }
-        console.log(cardArray);
+        // console.log(cardArray);
         cardArray.unshift(endCard);
         
     }
