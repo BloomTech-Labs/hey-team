@@ -7,7 +7,7 @@ import React from 'react';
 import {Events, scrollSpy, scroll } from 'react-scroll';
 
 import { Button } from 'semantic-ui-react';
-// import '../../Semantic-UI-CSS/semantic.min.css';
+import 'semantic-ui-css/semantic.min.css';
 
 import '../../css/landingPageTop.css';
 import TopNavigation from '../TopNavigation';

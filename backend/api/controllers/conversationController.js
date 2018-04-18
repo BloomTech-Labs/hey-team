@@ -49,13 +49,14 @@ const createConversation = async (req, res) => {
 const deleteConversation = async (req, res) => {
 	const { w_id, c_id } = req.body;
 
-	await Conversation.findByIdAndRemove(c_id);
 
-	await Workspace.findByIdAndUpdate(w_id, {
-		$pull: { conversations: c_id }
-	});
+  await Conversation.findByIdAndRemove(c_id);
 
-	res.send('OK');
+  await Workspace.findByIdAndUpdate(w_id, {
+    $pull: { conversations: c_id },
+  });
+
+  res.send('OK');
 };
 
 const getMemberFromId = id => {
