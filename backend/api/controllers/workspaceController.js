@@ -32,6 +32,8 @@ const login = (req, res) => {
         console.log('workspace exists');
         return res.redirect(
           `${process.env.REDIRECT_URI}/?doc_id=${workspace._id}`
+          // 'http://localhost:3000/welcome'
+          
         );
       } else {
         await createWorkspace(body, req, res);
@@ -78,6 +80,7 @@ const addBot = (req, res) => {
         .then(() => {
           return res.redirect(
             `${process.env.REDIRECT_URI}/?doc_id=${workspace._id}`
+            // 'http://localhost:3000/conversations'
           );
         })
         .catch(console.error);

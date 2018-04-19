@@ -66,6 +66,8 @@ module.exports = createWorkspace = async (body, req, res) => {
 
   if (false) {
     return res.redirect(`${process.env.REDIRECT_URI}/?doc_id=${workspace._id}`);
+    // return  res.redirect('http://localhost:3000/welcome');
   }
   return res.redirect(process.env.REDIRECT_URI);
+  // return  res.redirect('http://localhost:3000/welcome');  
 };
