@@ -3,7 +3,7 @@
 //questions refactored
 
 import React from 'react';
-import { Input, Button } from 'semantic-ui-react';
+import { Input, Button, Popup } from 'semantic-ui-react';
 import { v4 } from 'uuid';//creates unique keys
 
 import '../../../../css/questions.css';
@@ -48,15 +48,38 @@ class Questions extends React.Component {
 
     handleDisplayQuestions(){
         for(let i = 0; i < questionsArray.length; i++){
-            this.setState({displayArray:[]});
-            inputArray[i] =
-            <div key={v4()}><Input className="ui size input" type="text" 
-            name={i} onChange={(e) => this.handleInput(e)} 
-            placeholder={dataArray[[i[0]]] = questionsArray[i]}/><Button 
-            name={i} onClick={(e) => this.handleDelete(e)}>-</Button></div>;
-            this.setState({displayArray:inputArray});
+            this.setState({ displayArray: [] });
+            inputArray[i] = <div key={v4()}>
+                <Input className="ui size input" 
+                type="text" name={i} 
+                onChange={e => this.handleInput(e)} 
+                placeholder={(dataArray[[i[0]]] = 
+                questionsArray[i])} 
+                label={
+                    <Popup
+                        trigger={<Button icon='remove' name={i} onClick={e => this.handleDelete(e)}/>}
+                        content="Removes this question from conversation."
+                        basic
+                    />
+                    }
+                />
+                </div>
+                this.setState({ displayArray: inputArray });
         }
     }
+
+//  <Popup
+// trigger={<Button icon='add' />}
+// content="The default theme's basic popup removes the pointing arrow."
+// basic
+// />
+// //     <Input
+//     name="time"
+//     onChange={e => this.handleInput(e)}
+//     label={<Dropdown defaultValue="am" options={options} />}
+//     labelPosition="right"
+//     placeholder="10:00"
+//   />
     
     handleDelete(e){
         if(questionsArray.length > 1){
@@ -75,8 +98,15 @@ class Questions extends React.Component {
     render() {
     return (
         <div className="questionsWrapper">
+                    <div className="questions__Add">
+            <Popup
+                        trigger={<Button  className="questions__addButton" icon='add' onClick={() => this.handleCreateInput()}/>}
+                        content="Adds another question form."
+                        basic
+                    />
+                </div>
             {this.state.displayArray}
-            <Button className="questions__button" onClick={() => this.handleCreateInput()}>Add Question</Button>
+
         </div>
 
     );

@@ -59,7 +59,7 @@ body{
 }
 
 .conversations__newWrapper{
-    font-family: Adventuring;
+    /* font-family: Adventuring; */
     position: absolute;
     height: 80vh;
     top: 20vh;
@@ -81,13 +81,7 @@ body{
 
 }
 
-.conversations__schedule{
-    padding-top: 2vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    margin-top: 2vh;
-}
+
 
 /* Drop down menu */
 .conversations__time{
@@ -105,10 +99,7 @@ body{
     cursor: pointer;
 }
 
-.conversations__timeZoneDropdown {
-    position: relative;
-    display: inline-block;
-}
+
 
 .conversations__dropdown-content {
     display: none;
@@ -119,11 +110,13 @@ body{
 
 .conversations__timeZone__square{
     background-color: #f9f9f9;
+    width: 5vw;
+    height: 3vw;
 }
 
 .conversations__dropdown-content a {
     color: black;
-    border: black 1px solid;
+    border: lightgray 1px solid;
     padding: .5vw .5vw;
     text-decoration: none;
     display: flex;
@@ -199,4 +192,35 @@ body{
 .converations__createNew__icon{
     position: relative;
     align-self: center;
+}
+/* 
+ */
+
+.conversations__schedule{
+    padding-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-top: 2vh;
+}
+
+.conversations__scheduleTitle{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.conversations__timeZoneDropdown {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.conversationTimeWrapper{    
+    direction: flex;
+    flex-direction: row;
+}
+
+.conversationTimeZone{
+    direction: flex;
+    flex-direction: row;
 }

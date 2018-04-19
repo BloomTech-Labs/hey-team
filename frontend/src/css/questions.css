@@ -2,3 +2,13 @@
     display: flex;
     flex-direction: column;
 }
+
+.questions__Add{
+    position: absolute;
+    right: -1vw;
+}
+
+.questions__addButton{
+    width: 3vw;
+    height: 3vw
+}

@@ -157,7 +157,7 @@ handleDelete(e){
             <div className="members__flexWrapper">
             <div className="conversations__participant">
               {/* this has to hook into the backend */}
-            <Form>
+
                 <Form.Group>
                 <label>Participants: </label>
                 </Form.Group>
@@ -182,7 +182,6 @@ handleDelete(e){
                 })}
                 </Form.Group>
                 {/* <Form.Field control={Button}>Submit</Form.Field> */}
-            </Form>
             </div>
             {/* {this.state.displayArray} */}
             </div>

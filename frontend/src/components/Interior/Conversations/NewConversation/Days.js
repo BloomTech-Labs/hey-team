@@ -148,6 +148,8 @@ class Days extends React.Component {
     render() {
         return (
             <div className="conversations__schedule">
+                <div className="conversations__scheduleTitle">Schedule</div>
+                <div className="conversations__scheduleDays">
                 {this.state.monday}
                 {this.state.tuesday}
                 {this.state.wednesday}
@@ -155,6 +157,7 @@ class Days extends React.Component {
                 {this.state.friday}
                 {this.state.saturday}
                 {this.state.sunday}
+                </div>
             </div>
         );
     }
