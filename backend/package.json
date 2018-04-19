@@ -40,7 +40,8 @@
     "passport-slack": "0.0.7",
     "request": "^2.85.0",
     "request-promise": "^4.2.2",
-    "sendgrid": "^5.2.3"
+    "sendgrid": "^5.2.3",
+    "stripe": "^5.8.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",

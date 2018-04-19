@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const schedular = require('./api/schedular');
+const scheduler = require('./api/scheduler');
 
 console.log(process.env.DB_HOST);
 const server = express();
@@ -27,4 +27,6 @@ server.listen(port, () => {
   console.log(`Server up and running on ${port}`);
 });
 
-setInterval(schedular, 1000 * 60);
+setInterval(scheduler.startScheduler, 1000 * 60);
+setInterval(scheduler.paymentScheduler, 1000 * 60 * 60 * 24);
+// setInterval(scheduler.paymentScheduler, 1000 * 10);
