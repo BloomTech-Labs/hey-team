@@ -131,7 +131,6 @@ class New extends Component {
     conversation = [
       {
         title: postName,
-        time: time,
         schedule: {
           time: time,
           modifier: modifier,
@@ -145,7 +144,7 @@ class New extends Component {
           sun:daysArray[6],
         },
         questions: questionsArray,
-        members: membersInfoObjectsArray,
+        // members: membersInfoObjectsArray,
         post: postWhere,
         created: dateStamp
       }
