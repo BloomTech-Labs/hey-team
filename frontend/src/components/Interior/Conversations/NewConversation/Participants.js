@@ -89,9 +89,17 @@ class Participants extends React.Component {
     this.state.members.push(d.result);
     this.setState({ members: this.state.members });
     membersInfoObjectsArray.push({
-      userName: d.result.name,
-      image: d.result.image,
-      realName: d.result.real_name
+      // name: d.result.name,
+      // image: d.result.image,
+      // real_name: d.result.real_name,
+      // color:  d.result.color,
+      // conversations: d.result.conversations,
+      // email: d.result.email,
+      id: d.result.id,
+      // team_id: d.result.team_id,
+      // tz_label: d.result.tz_label,
+      // tz_offset: d.result.tz_offset,
+      // workspace:d.result.workspace
     });
   };
 

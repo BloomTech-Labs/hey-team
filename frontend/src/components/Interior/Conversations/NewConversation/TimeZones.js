@@ -30,16 +30,15 @@ import {
 } from "semantic-ui-react";
 
 //grabs users timezone -- until default is set in preferences
-let getTimeZone = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1];
+// let getTimeZone = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1]; no longer pre-set
 /* converts getTimeZone to something like GMT-0400; Chrome likes to add a seemingly 
 random place within the timezone with the rest of the info */
-let timeZone;
-let time;
+let timeZone, time, modifier = "AM";
 
 //am pm
 const options = [
-  { key: "a", text: "AM", value: "am" },
-  { key: "p", text: "PM", value: "pm" }
+  { key: "a", text: "AM", value: "AM" },
+  { key: "p", text: "PM", value: "PM" }
 ];
 
 const timeZoneChoices = [
@@ -65,17 +64,8 @@ class TimeZones extends React.Component {
       this.setState({ timeZone: timeZone });
       console.log(conversationsArray[conversationsArrayPosition].timeZone);
       console.log(this.state.timeZone);
-    } else {
-      getTimeZone.substring(0, 8);
     }
   }
-
-  // handleTimeZone(e) {
-  //   timeZone = e.target.name;
-  //   // conversation["timeZone"] = timeZone;
-  //   // console.log(conversation);
-  //   this.setState({ timeZone: timeZone });
-  // }
 
   handleInput = (e) =>{
       time = e.target.value;
@@ -83,11 +73,11 @@ class TimeZones extends React.Component {
   }
 
   handleTimeChange = (e, { value }) =>{
-    console.log({value});
+    modifier = value;
   }
 
   handleTimeZoneChange = (e, { value }) =>{
-    console.log({value});
+    timeZone = parseInt(value);
   }
 
   render() {
@@ -97,10 +87,9 @@ class TimeZones extends React.Component {
       <div className="conversations__timeZoneDropdown">
         <Form.Group>
           <Input
-            name="time"
             className="conversationsTime__inputForm"
             onChange={e => this.handleInput(e)}
-            label={<Dropdown 
+            label={<Dropdown
               defaultValue="am" 
               options={options} 
               onChange={this.handleTimeChange}
@@ -132,3 +121,4 @@ class TimeZones extends React.Component {
 export default TimeZones;
 export { timeZone };
 export {time};
+export {modifier};

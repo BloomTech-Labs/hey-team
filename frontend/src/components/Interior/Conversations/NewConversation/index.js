@@ -31,6 +31,7 @@ import {
 import TimeZones from "./TimeZones";
 import { timeZone } from "./TimeZones";
 import { time } from "./TimeZones";
+import { modifier } from "./TimeZones";
 
 import Days from "./Days";
 import { daysArray } from "./Days";
@@ -49,116 +50,16 @@ import "../../../../css/conversations.css";
 let dateStamp = String(new Date());
 //this grabs local time - might need to change to GMT-0 - might need to format data
 //dev only
-let membersData = [
-  [
-    {
-      userName: "fred",
-      responseTime: "10:07:AM",
-      responseDate: "03-12-2018",
-      imageData: {},
-      answers: [
-        "Yes, I loved",
-        "That was the worst thing I have ever done",
-        "I cam a dog person, cats scare me",
-        "This is probably tree",
-        "I want to press charges",
-        "The sky is blue and so is the water"
-      ]
-    },
-    {
-      userName: "Jorge",
-      responseTime: "10:17:AM",
-      responseDate: "04-12-2018",
-      imageData: {},
-      answers: [
-        "Yup",
-        "nope",
-        "could be",
-        "yea probably",
-        "who knows",
-        "I did not hear that"
-      ]
-    },
-    {
-      userName: "Fran",
-      responseTime: "09:37:AM",
-      responseDate: "02-22-2018",
-      imageData: {},
-      answers: [
-        "hotdog",
-        "tacos then?",
-        "pizza is almost certainly true",
-        "with pineapples of course",
-        "and mayonnaise",
-        "No I am not sick"
-      ]
-    },
-    {
-      userName: "Jules",
-      responseTime: "12:27:PM",
-      responseDate: "01-11-2017",
-      imageData: {},
-      answers: [
-        "A river of denile",
-        "Panda bears",
-        "are true bears",
-        "even though that is against the myth",
-        "that mice",
-        "mine cheese"
-      ]
-    },
-    {
-      userName: "Bobby",
-      responseTime: "1:07:PM",
-      responseDate: "03-12-2018",
-      imageData: {},
-      answers: [
-        "windshield wipers slapping time",
-        "for one single day with",
-        "just another word for nothing left to lose",
-        "Kris did it best",
-        "rusty harpoon and red bandanas",
-        "people"
-      ]
-    },
-    {
-      userName: "Dan",
-      responseTime: "10:07:AM",
-      responseDate: "03-12-2018",
-      imageData: {},
-      answers: [
-        "Yes, I loved",
-        "That was the worst thing I have ever done",
-        "I cam a dog person, cats scare me",
-        "This is probably tree",
-        "I want to press charges",
-        "The sky is blue and so is the water"
-      ]
-    },
-    {
-      userName: "Cindy",
-      responseTime: "10:07:AM",
-      responseDate: "03-12-2018",
-      imageData: {},
-      answers: [
-        "Yes, I loved",
-        "That was the worst thing I have ever done",
-        "I cam a dog person, cats scare me",
-        "This is probably tree",
-        "I want to press charges",
-        "The sky is blue and so is the water"
-      ]
-    }
-  ]
-];
+
 let conversation = [
   {
     title: "test",
     days: daysArray,
-    time: "10:45",
+    time: time,
+    modifier: modifier,
     timeZone: timeZone,
     questions: questionsArray,
-    members: membersInfoObjectsArray,
+    // members: membersInfoObjectsArray,
     channel: "",
     date: dateStamp
   }
@@ -176,6 +77,7 @@ class New extends Component {
 
   componentWillMount() {
     if (editClicked) {
+      console.log(conversationsArray[conversationsArrayPosition]);
       postName = conversationsArray[conversationsArrayPosition].name;
       postTime = conversationsArray[conversationsArrayPosition].time;
       postWhere = conversationsArray[conversationsArrayPosition].post;
@@ -201,25 +103,26 @@ class New extends Component {
 
   handleFinished() {
     let newDaysArray = [];
-    for (let i = 0; i < daysArray.length; i++) {
-      if (daysArray[i] === true) {
-        if (i === 0) {
-          newDaysArray.push("Mon");
-        } else if (i === 1) {
-          newDaysArray.push("Tue");
-        } else if (i === 2) {
-          newDaysArray.push("Wed");
-        } else if (i === 3) {
-          newDaysArray.push("Thur");
-        } else if (i === 4) {
-          newDaysArray.push("Fri");
-        } else if (i === 5) {
-          newDaysArray.push("Sat");
-        } else if (i === 6) {
-          newDaysArray.push("Sun");
-        }
-      }
-    }
+    // for (let i = 0; i < daysArray.length; i++) {
+    //   if (daysArray[i] === true) {
+    //     if (i === 0) {
+    //       newDaysArray.push("Mon");
+    //     } else if (i === 1) {
+    //       newDaysArray.push("Tue");
+    //     } else if (i === 2) {
+    //       newDaysArray.push("Wed");
+    //     } else if (i === 3) {
+    //       newDaysArray.push("Thur");
+    //     } else if (i === 4) {
+    //       newDaysArray.push("Fri");
+    //     } else if (i === 5) {
+    //       newDaysArray.push("Sat");
+    //     } else if (i === 6) {
+    //       newDaysArray.push("Sun");
+    //     }
+    //   }
+    // }
+    console.log(membersInfoObjectsArray);
     for (let r = 0; r < newDaysArray.length - 1; r++) {
       //does not work yet will come back
       newDaysArray[r] === newDaysArray[r] + ",";
@@ -229,14 +132,25 @@ class New extends Component {
       {
         title: postName,
         time: time,
-        schedule: newDaysArray,
-        created: dateStamp,
-        timeZone: timeZone,
-        post: postWhere,
+        schedule: {
+          time: time,
+          modifier: modifier,
+          tz: timeZone,
+          mon:daysArray[0],
+          tue:daysArray[1],
+          wed:daysArray[2],
+          thu:daysArray[3],
+          fri:daysArray[4],
+          sat:daysArray[5],
+          sun:daysArray[6],
+        },
         questions: questionsArray,
-        members: membersInfoObjectsArray
+        members: membersInfoObjectsArray,
+        post: postWhere,
+        created: dateStamp
       }
     ];
+    console.log(conversation);
     conversationsArray.unshift(conversation);
     this.handleSubmit();
     // this.props.history.push("/conversations/");
