@@ -30,6 +30,7 @@ import {
 
 import TimeZones from "./TimeZones";
 import { timeZone } from "./TimeZones";
+import { time } from "./TimeZones";
 
 import Days from "./Days";
 import { daysArray } from "./Days";
@@ -150,23 +151,20 @@ let membersData = [
     }
   ]
 ];
-let conversation = [{
-  title: "test",
-  days: daysArray,
-  time: "10:45",
-  timeZone: timeZone,
-  questions: questionsArray,
-  members: membersInfoObjectsArray,
-  channel: "",
-  date: dateStamp
-}];
-
-const options = [
-  { key: "a", text: "AM", value: "am" },
-  { key: "p", text: "PM", value: "pm" }
+let conversation = [
+  {
+    title: "test",
+    days: daysArray,
+    time: "10:45",
+    timeZone: timeZone,
+    questions: questionsArray,
+    members: membersInfoObjectsArray,
+    channel: "",
+    date: dateStamp
+  }
 ];
 
-let postName, postTime, postWhere;
+let postName, postWhere, postTime;
 
 class New extends Component {
   constructor(props) {
@@ -227,16 +225,18 @@ class New extends Component {
       newDaysArray[r] === newDaysArray[r] + ",";
     }
     dateStamp = String(new Date());
-    conversation = [{
-      title: postName,
-      time: postTime,
-      schedule: newDaysArray,
-      created: dateStamp,
-      timeZone: timeZone,
-      post: postWhere,
-      questions: questionsArray,
-      members: membersInfoObjectsArray
-    }];
+    conversation = [
+      {
+        title: postName,
+        time: time,
+        schedule: newDaysArray,
+        created: dateStamp,
+        timeZone: timeZone,
+        post: postWhere,
+        questions: questionsArray,
+        members: membersInfoObjectsArray
+      }
+    ];
     conversationsArray.unshift(conversation);
     this.handleSubmit();
     // this.props.history.push("/conversations/");
@@ -249,18 +249,18 @@ class New extends Component {
     };
     console.log("submitted");
     axios
-      .post(`https://64e527cb.ngrok.io/conversation/create`, conversationAdd)
+      .post(`https://f483aca5.ngrok.io/conversation/create`, conversationAdd)
       .then(res => {
         console.log(res);
         console.log(res.data);
       });
-    
-     this.props.history.push("/conversations/");
+
+    this.props.history.push("/conversations/");
   };
 
   render() {
     return (
-      <div className="conversationsBackground">
+      <div>
         <div className="conversations__newWrapper">
           <Form>
             <Form.Group>
@@ -273,28 +273,14 @@ class New extends Component {
               />
             </Form.Group>
             <Form.Group>
-                  <Days />
+              <Days />
             </Form.Group>
-            <Form.Group>
-              <div className="conversationTimeWrapper">
-                  <Input
-                    name="time"
-                    onChange={e => this.handleInput(e)}
-                    label={<Dropdown defaultValue="am" options={options} />}
-                    labelPosition="right"
-                    placeholder="10:00"
-                  />
-                <div className="conversationTimeZone">
-                  {/* Drop Down Time Zones Menu */}
-                  <TimeZones />
-                  <div className="conversations__showTimeZone">{timeZone}
-                </div>
-                </div>
-              </div>
+            <Form.Group widths="equal">
+              {/* Drop Down Time Zones Menu */}
+              <TimeZones />
             </Form.Group>
 
             <Form.Group widths="equal">
-              Questions
               <Questions />
             </Form.Group>
 

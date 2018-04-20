@@ -1,130 +1,134 @@
 //Alex Cassell
 //http://alexcassell.com
 //set timezone for conversation
-import React from 'react';
-import {editClicked} from '../index.js';
-import {conversationsArrayPosition} from '../index.js';
-import {conversationsArray} from '../index.js';
+import React from "react";
+import { editClicked } from "../index.js";
+import { conversationsArrayPosition } from "../index.js";
+import { conversationsArray } from "../index.js";
 import {
-    Button,
-    Form,
-    Grid,
-    Header,
-    Image,
-    Message,
-    Segment,
-    Label,
-    Container,
-    Checkbox,
-    Input,
-    List,
-    Radio,
-    Select,
-    TextArea,
-    Dropdown,
-    FormGroup,
-    Search,
-    Icon,
-    Accordion,
-    Popup,
-  } from 'semantic-ui-react';
+  Button,
+  Form,
+  Grid,
+  Header,
+  Image,
+  Message,
+  Segment,
+  Label,
+  Container,
+  Checkbox,
+  Input,
+  List,
+  Radio,
+  Select,
+  TextArea,
+  Dropdown,
+  FormGroup,
+  Search,
+  Icon,
+  Accordion,
+  Popup
+} from "semantic-ui-react";
 
 //grabs users timezone -- until default is set in preferences
 let getTimeZone = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1];
 /* converts getTimeZone to something like GMT-0400; Chrome likes to add a seemingly 
 random place within the timezone with the rest of the info */
 let timeZone;
+let time;
+
+//am pm
+const options = [
+  { key: "a", text: "AM", value: "am" },
+  { key: "p", text: "PM", value: "pm" }
+];
+
+const timeZoneChoices = [
+  { key: "UTC−10", text: "HST UTC −10:00", value: "-10" },
+  { key: "UTC−9", text: "AKST UTC −9:00", value: "-9" },
+  { key: "UTC−8", text: "PST UTC −8:00", value: "-8" },
+  { key: "UTC−7", text: "MST UTC −7:00", value: "-7" },
+  { key: "UTC−6", text: "CST UTC −6:00", value: "-6" },
+  { key: "UTC−5", text: "EST UTC −5:00", value: "-5" },
+];
+
 class TimeZones extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            timeZone : timeZone
-        };
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      timeZone: timeZone
+    };
+  }
 
-    componentWillMount(){
-        if(editClicked){
-            timeZone = conversationsArray[conversationsArrayPosition].timeZone;
-            this.setState({timeZone:timeZone});
-            console.log(conversationsArray[conversationsArrayPosition].timeZone);
-            console.log(this.state.timeZone);
-        }
-        else{
-            getTimeZone.substring(0,8);
-        }
+  componentWillMount() {
+    if (editClicked) {
+      timeZone = conversationsArray[conversationsArrayPosition].timeZone;
+      this.setState({ timeZone: timeZone });
+      console.log(conversationsArray[conversationsArrayPosition].timeZone);
+      console.log(this.state.timeZone);
+    } else {
+      getTimeZone.substring(0, 8);
     }
+  }
 
-    handleTimeZone(e){
-        timeZone = e.target.name;
-        // conversation["timeZone"] = timeZone;
-        // console.log(conversation);
-        this.setState({timeZone:timeZone});
-    }
+  // handleTimeZone(e) {
+  //   timeZone = e.target.name;
+  //   // conversation["timeZone"] = timeZone;
+  //   // console.log(conversation);
+  //   this.setState({ timeZone: timeZone });
+  // }
 
-    render() {
-        return (
-            /*eslint-disable */
-            <div className="conversations__timeZoneDropdown">
-            <Button className="conversations__dropButton">Time Zone</Button>
-            <div className="conversations__dropdown-content">
-                <div className="conversations__timezones__row">
-                    <a className="conversations__timeZone__square" name="LINT: UTC+14" onClick={(e) => this.handleTimeZone(e)} href="#">LINT: UTC+14</a>
-                    <a className="conversations__timeZone__square" name="CHADT: UTC+13:45" onClick={(e) => this.handleTimeZone(e)} href="#">CHADT: UTC+13:45</a>
-                    <a className="conversations__timeZone__square" name="NZDT: UTC+13" onClick={(e) => this.handleTimeZone(e)} href="#">NZDT: UTC+13</a>
-                    <a className="conversations__timeZone__square" name="ANAT: UTC+12" onClick={(e) => this.handleTimeZone(e)} href="#">ANAT: UTC+12</a>
-                    <a className="conversations__timeZone__square" name="AEDT: UTC+11" onClick={(e) => this.handleTimeZone(e)} href="#">AEDT: UTC+11</a>
-                    <a className="conversations__timeZone__square" name="ACDT: UTC+10:30" onClick={(e) => this.handleTimeZone(e)} href="#">ACDT: UTC+10:30</a>
-                </div>
-                <div className="conversations__timezones__row">
-                    <a className="conversations__timeZone__square" name="AEST: UTC+10" onClick={(e) => this.handleTimeZone(e)} href="#">AEST: UTC+10</a>
-                    <a className="conversations__timeZone__square" name="ACST: UTC+9:30" onClick={(e) => this.handleTimeZone(e)} href="#">ACST: UTC+9:30</a>
-                    <a className="conversations__timeZone__square" name="JST: UTC+9" onClick={(e) => this.handleTimeZone(e)} href="#">JST: UTC+9</a>
-                    <a className="conversations__timeZone__square" name="ACWST: UTC+8:45" onClick={(e) => this.handleTimeZone(e)} href="#">ACWST: UTC+8:45</a>
-                    <a className="conversations__timeZone__square" name="ADT: UTC−03" onClick={(e) => this.handleTimeZone(e)} href="#">ADT: UTC−03</a>
-                    <a className="conversations__timeZone__square" name="AEDT: UTC+11" onClick={(e) => this.handleTimeZone(e)} href="#">AEDT: UTC+11</a>
-                </div>
-                <div className="conversations__timezones__row">
-                    <a className="conversations__timeZone__square" name="ACDT: UTC+10:30" onClick={(e) => this.handleTimeZone(e)} href="#">ACDT: UTC+10:30</a>
-                    <a className="conversations__timeZone__square" name="ACST: UTC+09:30" onClick={(e) => this.handleTimeZone(e)} href="#">ACST: UTC+09:30</a>
-                    <a className="conversations__timeZone__square" name="ACT: UTC−05" onClick={(e) => this.handleTimeZone(e)} href="#">ACT: UTC−05</a>
-                    <a className="conversations__timeZone__square" name="ACWST: UTC+08:45" onClick={(e) => this.handleTimeZone(e)} href="#">ACWST: UTC+08:45</a>
-                    <a className="conversations__timeZone__square" name="ADT: UTC−03" onClick={(e) => this.handleTimeZone(e)} href="#">ADT: UTC−03</a>
-                    <a className="conversations__timeZone__square" name="AEDT: UTC+11" onClick={(e) => this.handleTimeZone(e)} href="#">AEDT: UTC+11</a>
-                </div>
-                <div className="conversations__timezones__row">
-                    <a className="conversations__timeZone__square" name="ACDT: UTC+10:30" onClick={(e) => this.handleTimeZone(e)} href="#">ACDT: UTC+10:30</a>
-                    <a className="conversations__timeZone__square" name="ACST: UTC+09:30" onClick={(e) => this.handleTimeZone(e)} href="#">ACST: UTC+09:30</a>
-                    <a className="conversations__timeZone__square" name="ACT: UTC−05" onClick={(e) => this.handleTimeZone(e)} href="#">ACT: UTC−05</a>
-                    <a className="conversations__timeZone__square" name="ACWST: UTC+08:45" onClick={(e) => this.handleTimeZone(e)} href="#">ACWST: UTC+08:45</a>
-                    <a className="conversations__timeZone__square" name="ADT: UTC−03" onClick={(e) => this.handleTimeZone(e)} href="#">ADT: UTC−03</a>
-                    <a className="conversations__timeZone__square" name="AEDT: UTC+11" onClick={(e) => this.handleTimeZone(e)} href="#">AEDT: UTC+11</a>
-                </div>
-                <div className="conversations__timezones__row">
-                    <a className="conversations__timeZone__square" name="ACDT: UTC+10:30" onClick={(e) => this.handleTimeZone(e)} href="#">ACDT: UTC+10:30</a>
-                    <a className="conversations__timeZone__square" name="ACST: UTC+09:30" onClick={(e) => this.handleTimeZone(e)} href="#">ACST: UTC+09:30</a>
-                    <a className="conversations__timeZone__square" name="ACT: UTC−05" onClick={(e) => this.handleTimeZone(e)} href="#">ACT: UTC−05</a>
-                    <a className="conversations__timeZone__square" name="ACWST: UTC+08:45" onClick={(e) => this.handleTimeZone(e)} href="#">ACWST: UTC+08:45</a>
-                    <a className="conversations__timeZone__square" name="ADT: UTC−03" onClick={(e) => this.handleTimeZone(e)} href="#">ADT: UTC−03</a>
-                    <a className="conversations__timeZone__square" name="AEDT: UTC+11" onClick={(e) => this.handleTimeZone(e)} href="#">AEDT: UTC+11</a>
-                </div>
-                <div className="conversations__timezones__row">
-                    <a className="conversations__timeZone__square" name="ACDT: UTC+10:30" onClick={(e) => this.handleTimeZone(e)} href="#">ACDT: UTC+10:30</a>
-                    <a className="conversations__timeZone__square" name="ACST: UTC+09:30" onClick={(e) => this.handleTimeZone(e)} href="#">ACST: UTC+09:30</a>
-                    <a className="conversations__timeZone__square" name="ACT: UTC−05" onClick={(e) => this.handleTimeZone(e)} href="#">ACT: UTC−05</a>
-                    <a className="conversations__timeZone__square" name="ACWST: UTC+08:45" onClick={(e) => this.handleTimeZone(e)} href="#">ACWST: UTC+08:45</a>
-                    <a className="conversations__timeZone__square" name="ADT: UTC−03" onClick={(e) => this.handleTimeZone(e)} href="#">ADT: UTC−03</a>
-                    <a className="conversations__timeZone__square" name="AEDT: UTC+11" onClick={(e) => this.handleTimeZone(e)} href="#">AEDT: UTC+11</a>
-                </div>
-                <div className="conversations__timezones__row">
-                    <a className="conversations__timeZone__square" name="ACDT: UTC+10:30" onClick={(e) => this.handleTimeZone(e)} href="#">ACDT: UTC+10:30</a>
-                    <a className="conversations__timeZone__square" name="ACST: UTC+09:30" onClick={(e) => this.handleTimeZone(e)} href="#">ACST: UTC+09:30</a>
-                </div>
-            </div>
+  handleInput = (e) =>{
+      time = e.target.value;
+      
+  }
+
+  handleTimeChange = (e, { value }) =>{
+    console.log({value});
+  }
+
+  handleTimeZoneChange = (e, { value }) =>{
+    console.log({value});
+  }
+
+  render() {
+    console.log()
+    return (
+      /*eslint-disable */ // linter hates my # links--
+      <div className="conversations__timeZoneDropdown">
+        <Form.Group>
+          <Input
+            name="time"
+            className="conversationsTime__inputForm"
+            onChange={e => this.handleInput(e)}
+            label={<Dropdown 
+              defaultValue="am" 
+              options={options} 
+              onChange={this.handleTimeChange}
+              />}
+            labelPosition="right"
+            placeholder="10:00"
+            
+          />
+        </Form.Group>
+        <div className="conversationTimeZone">
+          <Form.Group>
+            <Dropdown
+            className="conversationsTimeZone__inputForm"
+              placeholder="Select Time Zone"
+              fluid
+              // search
+              selection
+              options={timeZoneChoices}
+              onChange={this.handleTimeZoneChange}
+            />
+          </Form.Group>
         </div>
-        /*eslint-enable */
-        );
-}
+      </div>
+      /*eslint-enable */
+    );
+  }
 }
 
 export default TimeZones;
-export {timeZone};
+export { timeZone };
+export {time};

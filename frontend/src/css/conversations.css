@@ -44,22 +44,18 @@ body{
     left: 40%;
     width: 10vh;
     height: 10vh;
-    /* border-radius: 50px; */
-    /* border: 5px solid #466365; */
     text-shadow: 2px 2px #466365;
     color: white;
     cursor: pointer;
 }
 
 .conversationsBackground{
-    /* background-color: #98C1D9; */
     position: absolute;
     width: 100%;
     height: 100%;
 }
 
 .conversations__newWrapper{
-    /* font-family: Adventuring; */
     position: absolute;
     height: 80vh;
     top: 20vh;
@@ -81,60 +77,11 @@ body{
 
 }
 
-
-
 /* Drop down menu */
 .conversations__time{
     display: flex;
     flex-direction: row;
     margin-top: 2vh;
-}
-
-.conversations__dropButton {
-    background-color: #466365;
-    color: white;
-    padding: .5vw;
-    font-size: 1vw;
-    border: none;
-    cursor: pointer;
-}
-
-
-
-.conversations__dropdown-content {
-    display: none;
-    position: absolute;
-    z-index: 1;
-    /* display: flex;//dev only */
-}
-
-.conversations__timeZone__square{
-    background-color: #f9f9f9;
-    width: 5vw;
-    height: 3vw;
-}
-
-.conversations__dropdown-content a {
-    color: black;
-    border: lightgray 1px solid;
-    padding: .5vw .5vw;
-    text-decoration: none;
-    display: flex;
-    flex-direction: row;
-}
-
-.conversations__dropdown-content a:hover {
-    background-color: #466365;
-    color: white;
-}
-
-.conversations__timeZoneDropdown:hover .conversations__dropdown-content {
-    display: flex;
-}
-
-.conversations__timeZoneDropdown:hover .conversations__dropButton {
-    background-color: #466365;
-    color: white;
 }
 
 .conversations__buttonAdd{
@@ -213,6 +160,7 @@ body{
     position: relative;
     display: flex;
     flex-direction: row;
+
 }
 
 .conversationTimeWrapper{    
@@ -220,7 +168,21 @@ body{
     flex-direction: row;
 }
 
-.conversationTimeZone{
-    direction: flex;
-    flex-direction: row;
+/* .conversationTimeZone{
+    margin-left: 15px;
+} */
+
+/* .conversations__showTimeZone{
+    float: right;
+} */
+
+.conversationsTime__inputForm{
+    width: 45%;
 }
+/* 
+.conversationsTimeZone__inputForm{
+    position: absolute;
+    left: 0;
+    width: 45%;
+    min-width:
+} */

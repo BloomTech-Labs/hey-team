@@ -1,7 +1,7 @@
-.questionsWrapper{
+/* .questionsWrapper{
     display: flex;
     flex-direction: column;
-}
+} */
 
 .questions__Add{
     position: absolute;
@@ -9,6 +9,16 @@
 }
 
 .questions__addButton{
+    position: relative;
+    border-radius: 25px;
+    top: 1vh;
     width: 3vw;
     height: 3vw
 }
+
+.conversations__questionsTitle{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+

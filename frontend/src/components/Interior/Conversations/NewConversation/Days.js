@@ -15,11 +15,11 @@ class Days extends React.Component {
     super(props);
     this.state = 
     {
-        'monday': <Button name="Mon" onClick={(e) => this.handleInput(e)} basic>Mon</Button>,
-        'tuesday': <Button name="Tue" onClick={(e) => this.handleInput(e)} basic>Tue</Button>,
-        'wednesday': <Button name="Wed" onClick={(e) => this.handleInput(e)} basic>Wed</Button>,
-        'thursday': <Button name="Thur" onClick={(e) => this.handleInput(e)} basic>Thur</Button>,
-        'friday': <Button name="Fri" onClick={(e) => this.handleInput(e)} basic>Fri</Button>,
+        'monday': <Button name="Mon" onClick={(e) => this.handleInput(e)}>Mon</Button>,
+        'tuesday': <Button name="Tue" onClick={(e) => this.handleInput(e)}>Tue</Button>,
+        'wednesday': <Button name="Wed" onClick={(e) => this.handleInput(e)}>Wed</Button>,
+        'thursday': <Button name="Thur" onClick={(e) => this.handleInput(e)}>Thur</Button>,
+        'friday': <Button name="Fri" onClick={(e) => this.handleInput(e)}>Fri</Button>,
         'saturday': <Button name="Sat" onClick={(e) => this.handleInput(e)} color="grey">Sat</Button>,
         'sunday': <Button name="Sun" onClick={(e) => this.handleInput(e)}  color="grey">Sun</Button>
     };
@@ -94,7 +94,7 @@ class Days extends React.Component {
             // console.log(daysArray);
             if(daysArray[0] === false){
                 // console.log("Mon1");
-                this.setState({'monday': <Button  name="Mon" onClick={(e) => this.handleInput(e)} basic>Mon</Button>});
+                this.setState({'monday': <Button  name="Mon" onClick={(e) => this.handleInput(e)}>Mon</Button>});
             }
             else{
                 this.setState({'monday': <Button color='black' name="Mon" onClick={(e) => this.handleInput(e)}>Mon</Button>});
@@ -102,28 +102,28 @@ class Days extends React.Component {
             }
 
             if(daysArray[1] === false){
-                this.setState({'tuesday': <Button name="Tue" onClick={(e) => this.handleInput(e)} basic>Tue</Button>});
+                this.setState({'tuesday': <Button name="Tue" onClick={(e) => this.handleInput(e)}>Tue</Button>});
             }
             else{
                 this.setState({'tuesday': <Button color='black' name="Tue" onClick={(e) => this.handleInput(e)}>Tue</Button>});
             }
 
             if(daysArray[2] === false){
-            this.setState({'wednesday': <Button name="Wed" onClick={(e) => this.handleInput(e)} basic>Wed</Button>});
+            this.setState({'wednesday': <Button name="Wed" onClick={(e) => this.handleInput(e)}>Wed</Button>});
             }
             else{
             this.setState({'wednesday': <Button color='black' name="Wed" onClick={(e) => this.handleInput(e)}>Wed</Button>});
             }
 
             if(daysArray[3] === false){
-            this.setState({'thursday': <Button name="Thur" onClick={(e) => this.handleInput(e)} basic>Thur</Button>});
+            this.setState({'thursday': <Button name="Thur" onClick={(e) => this.handleInput(e)}>Thur</Button>});
             }
             else{
             this.setState({'thursday': <Button color='black' name="Thur" onClick={(e) => this.handleInput(e)}>Thur</Button>});
             }
 
             if(daysArray[4] === false){
-            this.setState({'friday': <Button name="Fri" onClick={(e) => this.handleInput(e)} basic>Fri</Button>});
+            this.setState({'friday': <Button name="Fri" onClick={(e) => this.handleInput(e)}>Fri</Button>});
             }
             else{
             this.setState({'friday': <Button color='black' name="Fri" onClick={(e) => this.handleInput(e)}>Fri</Button>});
