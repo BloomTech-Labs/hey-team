@@ -1,0 +1,109 @@
+/*
+CSS By Alex Cassell
+http://alexcassell.com
+*/
+/* color pallette */
+/* https://coolors.co/98c1d9-466365-b1b7d1-9b9fb5-a5d8ff */
+
+@font-face {
+    font-family: Consolas;
+    src: url(../fonts/Consolas.ttf);
+}
+
+.slackWrapper{
+    position: relative;
+    font-family: Consolas;
+    margin: auto;
+    height: 55vh;
+    width: 65vw;
+    border: #e6186d solid 2px;
+    box-shadow: 10px 10px grey;
+    font-size: 1rem;
+    background: white;
+}
+
+/* Side Bar*/
+
+.slack__SideBar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #333333;
+    color: #9d9d9d;
+}
+
+.slack__title{
+    position: relative;
+    left: 0;
+    font-weight: bold;
+    font-size: 1rem;
+    color: white
+}
+
+.slack__user{
+    position: relative;
+    left: -10%;
+    color: #9d9d9d;
+}
+
+.slack__glowingBullet{
+    color:#f0dfaf;
+}
+
+.slack__jumpTo{
+    position: relative;
+    margin-top: 5px;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 5px;
+    background-color:#1a1a1a;
+    width: 80%;
+    height:1.5rem;
+    text-align: left;
+    padding-left: 5px;
+}
+
+.slack__subTitles{
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: left;
+    padding-left: 15px;
+}
+
+
+.slack__spacer{
+    height: 10px;
+}
+
+.slack__channels{
+    position: relative;
+    text-align: left;
+    padding-left: 15px;
+}
+
+.slack__hoverDark:hover { 
+    background-color: #1e2320;
+}
+
+.slack__hoverBright:hover { 
+    color: white;
+}
+
+
+.slack__spacedIcons{
+    position: absolute;
+    text-align: right;
+    width: 55%;
+}
+
+/* top bar*/
+
+.slack__top bar{
+    position: absolute;
+    top: 0;
+    left: 200px;
+
+}

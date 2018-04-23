@@ -9,8 +9,6 @@ http://alexcassell.com
 #preload-00 { background: url('../images/logo.png') no-repeat -9999px -9999px; }
 #preload-01 { background: url('../images/slackSignInDefault.png') no-repeat -9999px -9999px; }
 #preload-02 { background: url('../images/slackSignInHover.png') no-repeat -9999px -9999px; }
-#preload-03 { background: url('../images/featureButton.png') no-repeat -9999px -9999px; }
-#preload-04 { background: url('../images/featureButtonHover.png') no-repeat -9999px -9999px; }
 
 body{
     background-color: #98C1D9;
@@ -33,10 +31,9 @@ body{
     
 }
 .wrapper{
-    background-color: #98C1D9;
     font-family: Adventuring;
-    height: 110vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
 }
 
 /* the wrapper for eveything below the header at the top of the landing page */
@@ -44,11 +41,7 @@ body{
 @media screen and (min-width: 1000px) {
     .landingTop{
         position: absolute;
-        top: 15vh;
-    }
-
-    .landingTop__tite{
-        position: relative;
+        top: 10vh;
         padding: 1vw;
         width: 100vw;
         font-weight: bold;
@@ -57,10 +50,6 @@ body{
         font-size: 2vw;
     }
 
-    .landingTop__tite__sub{
-        margin-top: 2vw;
-        font-size: 1.5vw;
-    }
 /*  add everything below here to mobile when finished*/
     .ui.color1.button {
         background-color: #466365;
@@ -69,18 +58,6 @@ body{
         font-size: 2vw;
         width: 20vw;
         height: 5vw;
-    }
-
-    .productImage{
-        position: relative;
-        margin: auto;
-        /* border is dev only */
-        border: red 2px solid;
-        height: 50vh;
-        width: 60vw;
-        /* padding is dev only too */
-        padding: 50px;
-        box-shadow: 10px 10px grey;
     }
 
     .productImage:hover {
@@ -93,30 +70,11 @@ body{
         margin-top: 5vh;
     }
 
-    /* scrapping this parallex because it is no longer works with firefox :(  will make a js one later*/
-    .divider{
-        background-color: black;
-        position: absolute;
-        top: 115vh;
-        height: 40vh;
-        width: 100%;
-        background-image: url("../images/divider.jpg");
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        -moz-transform:translateZ(-999px) scale(1.5);
-        -webkit-transform: translateZ(-999px) scale(1.5);
-        transform: translateZ(-999px) scale(1.5);
-        z-index: 3;
+    .landingTop__words{
+        position: relative;
+        margin-top: 3vh;
     }
 
-    .features{
-        position: absolute;
-        top:155vh;
-    }
 }
 
 /* Mobile */
