@@ -24,6 +24,7 @@ const createMember = async (member, w) => {
 };
 
 module.exports = createWorkspace = async (body, req, res) => {
+  // console.log('create workspace');
   const token = body.access_token;
   const web = await new WebClient(token);
   const members = await web.users.list();
@@ -48,7 +49,7 @@ module.exports = createWorkspace = async (body, req, res) => {
   });
 
   members.members.forEach(m => {
-    // console.log('here');
+    console.log('here');
     const member = {
       workspace: workspace._id,
       id: m.id,
@@ -60,12 +61,13 @@ module.exports = createWorkspace = async (body, req, res) => {
       color: m.color,
       image: m.profile.image_512,
       email: m.profile.email,
+      // title: m.real_name,
     };
     createMember(member, workspace);
   });
 
-  if (false) {
-    return res.redirect(`${process.env.REDIRECT_URI}/?doc_id=${workspace._id}`);
-  }
-  return res.redirect(process.env.REDIRECT_URI);
+  // return res.redirect(`${process.env.REDIRECT_URI}/?doc_id=${workspace._id}`);
+  return res.redirect(
+    `https://slack.com/oauth/authorize?client_id=270618182930.333388702161&scope=bot,incoming-webhook,search:read&redirect_uri=https://035404a8.ngrok.io/auth/bot`
+  );
 };

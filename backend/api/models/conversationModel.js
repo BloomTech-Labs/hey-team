@@ -5,6 +5,7 @@ const conversationSchema = mongoose.Schema({
   members: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Member' }],
   responses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Response' }],
   questions: [{ type: String }],
+  broadcast: { type: String },
   title: { type: String, default: 'Untitled' },
   schedule: {
     sun: {

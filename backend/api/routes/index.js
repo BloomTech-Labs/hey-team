@@ -25,6 +25,7 @@ module.exports = app => {
   // Auth Routes
   app.route('/auth/bot').get(workspace.addBot);
   app.route('/auth/login').get(workspace.login);
+  app.route('/auth/active').get(workspace.hasActiveSubstription);
 
   // Bot Routes
   app.route('/slack/im/listen').post(conversation.im);
@@ -32,8 +33,12 @@ module.exports = app => {
   // Conversation Routes
   app.route('/conversation/create').post(conversation.createConversation);
   app.route('/conversation/delete').post(conversation.deleteConversation);
+  app
+    .route('/conversation/update')
+    .put(conversation.updateExistingConversation);
   app.route('/conversation/start').post(conversation.startConversation);
   app.route('/conversation/edit').post(conversation.editConversation);
+  app.route('/conversation/find').post(conversation.getConversation);
   app.route('/conversation/all').post(conversation.allConversations);
 
   // User Routes

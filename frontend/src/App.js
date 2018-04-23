@@ -1,66 +1,29 @@
-//Alex Cassell
-//http://alexcassell.com
-
 import React, { Component } from 'react';
-import { SignIn } from './components';
-
-import NavigationHeader from './components/Interior/Navigation/NavigationHeader'
-
-import ConversationsIndex from './components/Interior/Conversations/index.js';
-import PreferencesIndex from './components/Interior/Preferences/index.js';
-import BillingIndex from './components/Interior/Billing/index.js';
-
-import New from './components/Interior/Conversations/NewConversation/index.js'
-import View from './components/Interior/Conversations/ViewConversation/index.js';
-
-import LandingPageIndex from './components/LandingPage/index.js';
-
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 
+// import New from './components/New';
+import Login from './components/Login';
+import Dashboard from './components/Dashboard';
+// import SidebarMenu from './components/SidebarMenu';
+
+// import { Sidebar, Segment, Button, Menu } from 'semantic-ui-react';
+
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {loggedIn: true};
-    }
+  // state = { visible: false };
+
+  // toggleVisibility = () => {
+  //   this.setState({ visible: !this.state.visible });
+  // };
+
   render() {
-        // <LandingPageIndex {...this.state} />
-        const loggedIn = this.state.loggedIn;
-    
-        const navigation = loggedIn ? (
-          <div>
-              <Route path="/welcome" component={ SignIn }/>
-              <Route path="/billing" component={ BillingIndex }/>
-              <Route exact path="/conversations" component={ ConversationsIndex }/>
-              <Route path="/preferences" component={ PreferencesIndex }/>
-              <Route path="/conversations/new" component={ New }/>
-              <Route path="/conversations/edit" component={ New }/>
-              <Route path="/conversations/view" component={ View }/>
-              <NavigationHeader />
-          </div>
-        ) : (
-          <div>
-            <Route path="/welcome" component={ SignIn }/>
-            <Route path="/billing" component={ LandingPageIndex }/>
-            <Route exact path="/conversations" component={ LandingPageIndex }/>
-            <Route path="/preferences" component={ LandingPageIndex }/>
-            <Route path="/conversations/new" component={ LandingPageIndex }/>
-            <Route path="/conversations/edit" component={ LandingPageIndex }/>
-            <Route path="/conversations/view" component={ LandingPageIndex }/>
-          </div>
-        );
+    // const { visible } = this.state;
     return (
-      <Router>
-        <div>
-          {/* above will only be shown if logged in and 
-          landing page will not be shown if logged in */}
-          <Route exact path="/" component={ LandingPageIndex }/>
-          {navigation}
-
-
-
-        </div>
-      </Router>
+      <div style={{ height: '100vh' }}>
+        <Route exact path="/" component={Login} />
+        <Route path="/dashboard" component={Dashboard} />
+      </div>
     );
   }
 }
+
 export default App;

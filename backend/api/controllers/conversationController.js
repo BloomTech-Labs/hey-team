@@ -13,17 +13,23 @@ const Member = require('../models/memberModel');
 
 const createConversation = async (req, res) => {
   const { c, w_id } = req.body;
-  console.log(c.members);
+  // console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+  // console.log(c);
+  // console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+  await c.members.forEach(m => {
+    console.log(typeof m);
+  });
   // find all members and add a conversation to member object
   /** Golden */
+  // console.log('here'.red);
   const members = await Member.find({
     id: { $in: c.members },
   });
-
   const conversation = await new Conversation({
     workspace: w_id,
     members: members,
     title: c.title,
+    broadcast: c.broadcast,
     questions: c.questions,
     schedule: c.schedule,
   });
@@ -45,6 +51,28 @@ const createConversation = async (req, res) => {
   res.send(conversation);
 };
 
+const updateExistingConversation = async (req, res) => {
+  const { c_id, c } = req.body;
+
+  /** Golden */
+
+  const members = await Member.find({
+    id: { $in: c.members },
+  });
+
+  await Conversation.findByIdAndUpdate(c_id, {
+    members: members,
+    title: c.title,
+    questions: c.questions,
+    schedule: c.schedule,
+  })
+    .then(response => {
+      console.log(response);
+      res.send('OK');
+    })
+    .catch(console.error);
+};
+
 const deleteConversation = async (req, res) => {
   const { w_id, c_id } = req.body;
 
@@ -64,6 +92,16 @@ const getMemberFromId = id => {
   } else {
     return false;
   }
+};
+
+const getConversation = async (req, res) => {
+  const { c_id } = req.body;
+  await Conversation.findById(c_id)
+    .populate('members')
+    .then(c => {
+      res.json(c);
+    })
+    .catch(console.error);
 };
 
 const editConversation = async (req, res) => {
@@ -109,11 +147,11 @@ const startConversation = async (c_id, m) => {
 };
 
 // const startConversation = async (req, res) => {
-//   const { c_id, members } = req.body;
-//   members.forEach(m_id => {
-//     initializeConversation(c_id, m_id);
-//   });
-//   res.send('probably worked');
+// 	const { c_id, members } = req.body;
+// 	members.forEach(m_id => {
+// 		initializeConversation(c_id, m_id);
+// 	});
+// 	res.send('probably worked');
 // };
 
 const updateConversation = async body => {
@@ -154,6 +192,35 @@ const updateConversation = async body => {
     await Conversation.findByIdAndUpdate(c_id, {
       $push: { responses: newResponse._id },
     });
+
+    const cr = await Conversation.findById(c_id).populate('responses');
+    const broadcast = await web.im.open({ user: cr.broadcast });
+    let certainMemberResponses = [];
+    let questionIndex = 0;
+
+    cr.responses.forEach(r => {
+      let attachmentObj = {};
+      if (member._id.toString() === r.member.toString()) {
+        attachmentObj = {
+          fallback: `${conversation.questions[questionIndex]}\n${r.response}`,
+          text: `${r.response}`,
+          title: `${conversation.questions[questionIndex]}`,
+          color: 'c0dadb',
+          mrkdwn_in: ['text'],
+        };
+        certainMemberResponses.push(attachmentObj);
+        questionIndex++;
+      }
+    });
+
+    web.chat
+      .postMessage({
+        channel: broadcast.channel.id,
+        text: `Hey! This is ${member.real_name}'s standup for ${cr.title}:`,
+        attachments: certainMemberResponses,
+      })
+      .then(res => {})
+      .catch(console.error);
     return;
   } else if (numResponses < conversation.questions.length - 1) {
     const newResponse = await new Response({
@@ -189,21 +256,18 @@ const im = (req, res) => {
   updateConversation(req.body);
   /** Golden */
   const stuff = util.inspect(req.body, false, null);
-  // console.log(stuff);
+  console.log(stuff);
   res.send(req.body);
 };
 
-const interactive = (req, res) => {
-  // res.send(req.body);
-};
-
 module.exports = {
-  createConversation,
-  deleteConversation,
+  im,
+  getConversation,
   editConversation,
   allConversations,
   startConversation,
+  createConversation,
+  deleteConversation,
   updateConversation,
-  im,
-  interactive,
+  updateExistingConversation,
 };

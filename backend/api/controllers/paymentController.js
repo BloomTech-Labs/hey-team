@@ -15,7 +15,7 @@ const payment = async (req, res) => {
 
   console.log(charged);
   await Workspace.findByIdAndUpdate(w_id, {
-    $update: { info: { active: true } },
+    'info.active': true,
   });
   res.send('OK');
 };

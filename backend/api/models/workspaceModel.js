@@ -6,7 +6,7 @@ const workspaceSchema = new mongoose.Schema({
     id: { type: String },
     image: { type: String },
     paidOn: { type: Date },
-    active: { type: Boolean, default: false },
+    active: { type: Boolean, default: true },
   },
   preferences: {
     receive_emails: { type: Boolean, default: false },
