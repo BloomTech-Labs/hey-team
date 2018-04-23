@@ -80,7 +80,9 @@ http://alexcassell.com
 
 
     .signIn__default{
+        position: fixed;
         margin-top: -4.5vw;
+        right: 10px;
         width: 10vw;
         height: 10vw;
         background: url('../images/slackSignInDefault.png') no-repeat center;
