@@ -13,26 +13,27 @@ import ConversationView from './ConversationView';
 import { Sidebar, Segment, Button, Menu } from 'semantic-ui-react';
 
 class Dashboard extends Component {
-  state = { visible: false };
+  state = { visible: false, doc_id: 'null' };
 
   toggleVisibility = () => {
     this.setState({ visible: !this.state.visible });
   };
 
-  componentWillMount() {
-    console.log(localStorage.doc_id);
+  async componentWillMount() {
+    console.log('cwm', localStorage.doc_id);
     if (!localStorage.doc_id) {
       const url = new URL(window.location.href);
       const params = new URLSearchParams(url.search.slice(1));
       const id = params.get('doc_id');
       localStorage.setItem('doc_id', id);
+      await this.setState({ doc_id: id });
     }
   }
 
   handleLogout = (e, d) => {
     console.log(e, d);
     localStorage.setItem('doc_id', null);
-    this.props.history.push('/');
+    // this.props.history.push('/');
   };
 
   render() {
