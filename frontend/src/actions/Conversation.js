@@ -3,9 +3,9 @@ import axios from 'axios';
 // const URL = 'http://localhost:3031';
 const URL = 'https://035404a8.ngrok.io';
 
-const w_id = localStorage.getItem('doc_id');
+// const w_id = localStorage.getItem('doc_id');
 
-export const saveConversation = async c => {
+export const saveConversation = async (w_id, c) => {
   // console.log(c);
   try {
     await axios.post(`${URL}/conversation/create`, {
@@ -38,7 +38,7 @@ export const findConversation = async c_id => {
   } catch (error) {}
 };
 
-export const allConversations = async () => {
+export const allConversations = async w_id => {
   try {
     const res = await axios.post(`${URL}/conversation/all`, {
       w_id,

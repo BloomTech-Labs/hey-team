@@ -147,7 +147,7 @@ class New extends Component {
 
   handleSave = async () => {
     console.log(this.state);
-    await saveConversation(this.state);
+    await saveConversation(localStorage.getItem('doc_id'), this.state);
     this.props.history.push('/dashboard/conversations');
   };
 

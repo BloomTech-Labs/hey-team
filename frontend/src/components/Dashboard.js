@@ -20,12 +20,13 @@ class Dashboard extends Component {
   };
 
   async componentWillMount() {
-    console.log('cwm', localStorage.doc_id);
-    if (!localStorage.doc_id) {
+    console.log(localStorage.doc_id);
+    if (localStorage.doc_id === 'null') {
       const url = new URL(window.location.href);
       const params = new URLSearchParams(url.search.slice(1));
       const id = params.get('doc_id');
       localStorage.setItem('doc_id', id);
+      console.log(localStorage.doc_id);
       await this.setState({ doc_id: id });
     }
   }
@@ -33,13 +34,13 @@ class Dashboard extends Component {
   handleLogout = (e, d) => {
     console.log(e, d);
     localStorage.setItem('doc_id', null);
-    // this.props.history.push('/');
+    this.props.history.push('/');
   };
 
   render() {
     const { visible } = this.state;
     if (localStorage.doc_id === 'null') {
-      this.props.history.push('/');
+      // this.props.history.push('/');
       return <div />;
     } else {
       return (
