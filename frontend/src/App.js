@@ -6,8 +6,6 @@ import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 // import SidebarMenu from './components/SidebarMenu';
 
-import LandingPage from './components/LandingPage';
-
 // import { Sidebar, Segment, Button, Menu } from 'semantic-ui-react';
 
 class App extends Component {
@@ -23,7 +21,6 @@ class App extends Component {
       <div style={{ height: '100vh' }}>
         <Route exact path="/" component={Login} />
         <Route path="/dashboard" component={Dashboard} />
-        < LandingPage />
       </div>
     );
   }
