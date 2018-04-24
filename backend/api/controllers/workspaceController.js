@@ -34,7 +34,9 @@ const login = (req, res) => {
       if (workspace) {
         console.log('workspace exists');
         return res.redirect(
-          `${process.env.REDIRECT_URI}/?doc_id=${workspace._id}`
+          `${process.env.REDIRECT_URI}/dashboard/conversations?doc_id=${
+            workspace._id
+          }`
         );
       } else {
         await createWorkspace(body, req, res);
@@ -80,7 +82,9 @@ const addBot = (req, res) => {
       })
         .then(() => {
           return res.redirect(
-            `${process.env.REDIRECT_URI}/?doc_id=${workspace._id}`
+            `${process.env.REDIRECT_URI}/dashboard/conversations/?doc_id=${
+              workspace._id
+            }`
           );
         })
         .catch(console.error);
