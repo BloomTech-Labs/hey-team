@@ -16,6 +16,7 @@ import {
   Label,
   Menu,
 } from 'semantic-ui-react';
+import LandingPage from './LandingPage';
 
 class Login extends Component {
   constructor() {
@@ -41,6 +42,7 @@ class Login extends Component {
             </a>
           </Menu.Item>
         </Menu>
+        <LandingPage />
       </div>
     );
   }
