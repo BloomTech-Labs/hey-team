@@ -36,7 +36,7 @@ class Conversations extends Component {
     super();
     this.state = {
       conversations: [],
-      w_id: '5add171bf82fa1509c5407d9',
+      w_id: localStorage.getItem('doc_id'),
     };
   }
 

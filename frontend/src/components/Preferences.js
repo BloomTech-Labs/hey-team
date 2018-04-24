@@ -13,7 +13,7 @@ import axios from 'axios';
 
 import { hasActiveSubscription } from '../actions/billing';
 
-const w_id = '5add171bf82fa1509c5407d9';
+const w_id = localStorage.getItem('doc_id');
 
 class Billing extends Component {
   constructor() {

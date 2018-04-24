@@ -1,13 +1,14 @@
 import axios from 'axios';
 
-const URL = '';
+// const URL = 'http://localhost:3031';
+const URL = 'https://035404a8.ngrok.io';
 
-const w_id = '5add171bf82fa1509c5407d9';
+const w_id = localStorage.getItem('doc_id');
 
 export const saveConversation = async c => {
   // console.log(c);
   try {
-    await axios.post('http://localhost:3031/conversation/create', {
+    await axios.post(`${URL}/conversation/create`, {
       w_id,
       c,
     });
@@ -18,7 +19,7 @@ export const saveConversation = async c => {
 export const updateConversation = async (c_id, c) => {
   // console.log(c);
   try {
-    await axios.put('http://localhost:3031/conversation/update', {
+    await axios.put(`${URL}/conversation/update`, {
       c_id,
       c,
     });
@@ -29,7 +30,7 @@ export const updateConversation = async (c_id, c) => {
 export const findConversation = async c_id => {
   // console.log(c);
   try {
-    const res = await axios.post('http://localhost:3031/conversation/find', {
+    const res = await axios.post(`${URL}/conversation/find`, {
       c_id,
     });
     return res;
@@ -39,7 +40,7 @@ export const findConversation = async c_id => {
 
 export const allConversations = async () => {
   try {
-    const res = await axios.post('http://localhost:3031/conversation/all', {
+    const res = await axios.post(`${URL}/conversation/all`, {
       w_id,
     });
     return res;
@@ -48,7 +49,7 @@ export const allConversations = async () => {
 
 export const deleteConversation = async (w_id, c_id) => {
   try {
-    await axios.post('http://localhost:3031/conversation/delete', {
+    await axios.post(`${URL}/conversation/delete`, {
       w_id,
       c_id,
     });

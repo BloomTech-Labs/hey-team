@@ -9,6 +9,8 @@ import {
   List,
   Card,
   Item,
+  Image,
+  Meta,
 } from 'semantic-ui-react';
 
 import { findConversation } from '../actions/Conversation';
@@ -26,8 +28,10 @@ class ConversationView extends Component {
       .then(c => this.setState(c.data))
       .catch(console.error);
   }
+
   render() {
     console.log(this.state);
+    const schedule = [];
     if (this.state.members) {
       return (
         <Container>
@@ -42,7 +46,6 @@ class ConversationView extends Component {
               );
             })}
           </Grid>
-
           <Header>Questions</Header>
           <List>
             {this.state.questions.map((q, i) => {
@@ -53,39 +56,59 @@ class ConversationView extends Component {
               );
             })}
           </List>
-
           <Header>Schedule</Header>
-          {this.state.responses[0].time_stamp}
+          {Object.keys(this.state.schedule).map((k, i) => {
+            if (this.state.schedule[k] === true) {
+              return <Label key={i}> {k} </Label>;
+            }
+          })}
+          <Label>
+            {this.state.schedule.time} {''}
+            {this.state.schedule.modifier}
+          </Label>
           <Header>Responses</Header>
           <Card.Group stackable={true} doubling={true} itemsPerRow={3}>
             {this.state.members.map((m, i) => {
+              let counter = 0;
+              let time = null;
+              this.state.responses.forEach((r, i) => {
+                if (r.member === m._id) {
+                  time = r.time_stamp;
+                }
+              });
+              let date = new Date();
+              if (time !== null) {
+                console.log(time);
+                date = new Date(parseInt(time) * 1000);
+              }
+              console.log(date);
               return (
                 <Card key={i}>
                   <Card.Content>
-                    <Item>
-                      <Item.Content>
-                        <img
-                          style={{ height: '30px', width: '30px' }}
-                          src={m.image}
-                        />
-                        <Item.Header>{m.real_name}</Item.Header>
-                        <Item.Meta>date</Item.Meta>
-                      </Item.Content>
-                      <Item.Content>
-                        <Grid>
-                          {this.state.responses.map((r, i) => {
-                            if (r.member === m._id) {
-                              return (
-                                <div key={i}>
-                                  {/* {this.state.questions[i]} */}
-                                  {r.response}
-                                </div>
-                              );
-                            }
-                          })}
-                        </Grid>
-                      </Item.Content>
-                    </Item>
+                    <Image
+                      floated="left"
+                      style={{ height: '50px', width: '50px' }}
+                      src={m.image}
+                    />
+                    <Card.Header>{m.real_name}</Card.Header>
+                    <Card.Meta>{date.toDateString()}</Card.Meta>
+                  </Card.Content>
+                  <Card.Content>
+                    <Grid stackable={true} doubling={true}>
+                      {this.state.responses.map((r, i) => {
+                        if (r.member === m._id) {
+                          counter++;
+                          return (
+                            <div key={i}>
+                              <Card.Header as="h4">
+                                {this.state.questions[counter - 1]}
+                              </Card.Header>
+                              <Card.Meta>{r.response}</Card.Meta>
+                            </div>
+                          );
+                        }
+                      })}
+                    </Grid>
                   </Card.Content>
                 </Card>
               );

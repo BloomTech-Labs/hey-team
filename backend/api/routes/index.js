@@ -8,7 +8,7 @@ const email = require('../controllers/emailController');
 const stripe = require('../controllers/paymentController');
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  // origin: 'http://localhost:3000',
   // origin: 'http://www.mynutricard.com',
   // methods: 'GET, POST, HEAD, PUT, PATCH, DELETE',
   preflightContinue: false,

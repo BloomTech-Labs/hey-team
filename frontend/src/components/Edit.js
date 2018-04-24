@@ -110,7 +110,10 @@ class Edit extends Component {
 
   handleUserSearch = async e => {
     // console.log(e.target.value);
-    const users = await findUsers(e.target.value);
+    const users = await findUsers(
+      localStorage.getItem('doc_id'),
+      e.target.value
+    );
     this.setState({ searchResults: users.data });
 
     // console.log(this.state.searchResults);
