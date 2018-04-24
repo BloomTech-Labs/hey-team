@@ -139,7 +139,9 @@ class New extends Component {
 
   handleModifier = async (e, d) => {
     // console.log(e.target.value, d.value);
-    await this.setState({ schedule: { modifier: d.value } });
+    let schedule = { ...this.state.schedule };
+    schedule.modifier = d.value;
+    await this.setState({ schedule });
     console.log(this.state);
   };
 
@@ -150,7 +152,9 @@ class New extends Component {
   };
 
   handleUpdateTime = async e => {
-    await this.setState({ schedule: { time: e.target.value } });
+    let schedule = { ...this.state.schedule };
+    schedule.time = e.target.value;
+    await this.setState({ schedule });
   };
 
   render() {
