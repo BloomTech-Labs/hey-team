@@ -36,7 +36,7 @@ class Login extends Component {
           }}
         >
           <Menu.Item position="right">
-            <a href="https://slack.com/oauth/authorize?scope=users:read,users:read.email,team:read&client_id=270618182930.333388702161&redirect_uri=https://035404a8.ngrok.io/auth/login">
+            <a href="https://slack.com/oauth/authorize?scope=users:read,users:read.email,team:read&client_id=270618182930.333388702161&redirect_uri=https://heyteam-backend.herokuapp.com/auth/login">
               <img src="https://api.slack.com/img/sign_in_with_slack.png" />
             </a>
           </Menu.Item>
