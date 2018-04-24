@@ -18,7 +18,7 @@ class TopBar extends React.Component {
       <div className="slack__topBar">
         <div className="slack__topBar__left">
           <div className="slack__topBar__left__top">
-            <i class="star outline icon" />
+            <i className="star outline icon" />
             Hey Team
           </div>
           <div className="slack__topBar__left__top_bottom">
@@ -27,16 +27,16 @@ class TopBar extends React.Component {
           </div>
         </div>
         <div className="slack__topBar__inside">
-          <i class="info circle icon" />
-          <i class="cog icon" />
+          <i className="info circle icon" />
+          <i className="cog icon" />
         </div>
         <div className="slack__topBar__rightSearch">
-          <i class="search icon" />Search
+          <i className="search icon" />Search
         </div>
         <div className="slack__topBar__right">
-          <i class="at icon" />
-          <i class="star outline icon" />
-          <i class="ellipsis vertical icon" />
+          <i className="at icon" />
+          <i className="star outline icon" />
+          <i className="ellipsis vertical icon" />
         </div>
       </div>
     );

@@ -7,6 +7,7 @@ import "semantic-ui-css/semantic.min.css";
 
 import SideBar from "./SideBar";
 import TopBar from "./TopBar";
+import Chat from "./Chat";
 import "../../../css/slack.css";
 
 class SlackIndex extends React.Component {
@@ -20,15 +21,7 @@ class SlackIndex extends React.Component {
       <div className="slackWrapper">
         <SideBar />
         <TopBar />
-        <div className="slack__chatBox">
-          <div className="slack__chatBoxLeft">
-            +
-          </div>
-          <div className="slack__chatBoxRight">
-          <i class="at icon" />
-          <i class="smile outline icon"></i>
-          </div>
-        </div>
+        <Chat />
       </div>
     );
   }
