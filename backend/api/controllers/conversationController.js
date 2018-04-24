@@ -98,6 +98,7 @@ const getConversation = async (req, res) => {
   const { c_id } = req.body;
   await Conversation.findById(c_id)
     .populate('members')
+    .populate('responses')
     .then(c => {
       res.json(c);
     })
