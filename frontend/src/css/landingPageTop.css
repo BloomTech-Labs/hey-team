@@ -1,0 +1,112 @@
+/*
+CSS By Alex Cassell
+http://alexcassell.com
+*/
+/* color pallette */
+/* https://coolors.co/98c1d9-466365-b1b7d1-9b9fb5-a5d8ff */
+
+.wrapper {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.wrapperAnimated {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  animation-name: backgroundFade;
+  animation-duration: 4s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes backgroundFade {
+  0% {
+    background-color: white;
+  }
+  25% {
+    background-color: #81d2e0;
+  }
+  50% {
+    background-color: #5c3a58;
+  }
+  75% {
+    background-color: #e6186d;
+  }
+  90% {
+    background-color: #edb625;
+  }
+  100% {
+    background-color: #49c4a1;
+  }
+}
+
+/* the wrapper for eveything below the header at the top of the landing page */
+
+@media screen and (min-width: 1000px) {
+  .landingTop {
+    position: absolute;
+    top: 10vh;
+    padding: 1vw;
+    width: 100vw;
+    text-align: center;
+    color: #466365;
+  }
+
+  /*  add everything below here to mobile when finished*/
+  .ui.color1.button {
+    background-color: #466365;
+    font-family: Adventuring;
+    color: white;
+    font-size: 2vw;
+    width: 20vw;
+    height: 5vw;
+  }
+
+  .productImage:hover {
+    box-shadow: 12px 12px grey;
+  }
+
+  .button__BuyNow {
+    position: relative;
+    margin-top: 5vh;
+  }
+
+  .landingTop__words {
+    position: relative;
+    margin-top: 3vh;
+    font-weight: bold;
+    font-size: 2rem;
+  }
+
+  .landing__trial{
+    position: relative;
+    margin-top: 15px;
+    font-style: italic;
+    font-size: 1rem;
+  }
+}
+
+/* Mobile */
+
+@media screen and (max-width: 999px) {
+  .landingTop {
+    position: absolute;
+    top: 12vh;
+  }
+
+  .landingTop__tite {
+    position: relative;
+    padding: 1vw;
+    width: 100vw;
+    font-weight: bold;
+    text-align: center;
+    color: #466365;
+    font-size: 3vh;
+  }
+
+  .landingTop__tite__sub {
+    margin-top: 2vh;
+    font-size: 2vh;
+  }
+}
