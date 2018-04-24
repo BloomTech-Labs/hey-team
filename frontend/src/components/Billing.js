@@ -6,7 +6,9 @@ import axios from 'axios';
 
 import { hasActiveSubscription } from '../actions/billing';
 
-const w_id = '5add171bf82fa1509c5407d9';
+const w_id = localStorage.getItem('doc_id');
+
+const URL = 'https://035404a8.ngrok.io';
 
 class Billing extends Component {
   constructor() {
@@ -17,7 +19,7 @@ class Billing extends Component {
     };
   }
   onToken = token => {
-    axios.post('http://localhost:3031/stripe', { w_id, token }).then(res => {
+    axios.post(`${URL}/stripe`, { w_id, token }).then(res => {
       alert('Payment Successful');
     });
   };

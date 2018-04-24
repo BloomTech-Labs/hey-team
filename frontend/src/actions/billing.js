@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const URL = '';
+const URL = 'https://035404a8.ngrok.io';
 
-const w_id = '5add171bf82fa1509c5407d9';
+const w_id = localStorage.getItem('doc_id');
 
 // export const saveConversation = async c => {
 //   // console.log(c);
@@ -17,7 +17,7 @@ const w_id = '5add171bf82fa1509c5407d9';
 
 export const hasActiveSubscription = async w_id => {
   try {
-    const res = await axios.post('http://localhost:3031/auth/active', {
+    const res = await axios.post(`${URL}/auth/active`, {
       w_id,
     });
     return res;
