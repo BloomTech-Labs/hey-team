@@ -65,6 +65,11 @@ class Conversations extends Component {
     this.props.history.push(`/dashboard/conversations/edit/?c_id=${d.id}`);
   };
 
+  handleViewConversation = (e, d) => {
+    console.log(d);
+    this.props.history.push(`/dashboard/conversation/?c_id=${d.id}`);
+  };
+
   render() {
     // if (this.state.conversations.length > 0) {
     return (
@@ -115,6 +120,12 @@ class Conversations extends Component {
                     })}
                   </Card.Description>
                 </Card.Content>
+                <Button
+                  id={c._id}
+                  onClick={(e, d) => this.handleViewConversation(e, d)}
+                >
+                  View Conversation
+                </Button>
               </Card>
             );
           })}

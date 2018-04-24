@@ -8,6 +8,7 @@ import Billing from './Billing';
 import Preferences from './Preferences';
 import SidebarMenu from './SidebarMenu';
 import Conversations from './Conversations';
+import ConversationView from './ConversationView';
 
 import { Sidebar, Segment, Button, Menu } from 'semantic-ui-react';
 
@@ -84,6 +85,11 @@ class Dashboard extends Component {
                 component={Edit}
               />
               <Route exact path="/dashboard/billing" component={Billing} />
+              <Route
+                exact
+                path="/dashboard/conversation"
+                component={ConversationView}
+              />
               <Route
                 exact
                 path="/dashboard/preferences"
