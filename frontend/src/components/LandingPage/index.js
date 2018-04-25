@@ -19,7 +19,7 @@ class LandingPageIndex extends React.Component {
   }
 
   handleBuyButton() {
-    window.location.replace("https://slack.com/oauth/authorize?scope=users:read,users:read.email,team:read&client_id=270618182930.333388702161&redirect_uri=https://heyteam-backend.herokuapp.com/auth/login","_self")
+    window.location.replace("https://slack.com/oauth/authorize?scope=users:read,users:read.email,team:read&client_id=270618182930.333388702161&redirect_uri=https://035404a8.ngrok.io/auth/login","_self")
   }
 
   render() {

@@ -39,6 +39,7 @@ class New extends Component {
     super();
     this.state = {
       searchResults: [],
+      broadcastResults: [],
       questions: [],
       title: '',
       schedule: {
@@ -53,8 +54,10 @@ class New extends Component {
         modifier: 'AM',
         tz: '',
       },
+      broadcast: '',
       members: [],
       localMembers: [],
+      localBroadcast: '',
       questionToAdd: '',
     };
     this.handleUserSearch = this.handleUserSearch.bind(this);
@@ -69,6 +72,13 @@ class New extends Component {
     console.log(this.state.members);
   };
 
+  handleAddBroadcast = (e, d) => {
+    console.log('result', d.result);
+    this.setState({ localBroadcast: this.state.localBroadcast });
+    this.setState({ broadcast: this.state.broadcast });
+    console.log(this.state.broadcast);
+  };
+
   handleUserSearch = async e => {
     // console.log(e.target.value);
     const users = await findUsers(
@@ -76,6 +86,17 @@ class New extends Component {
       e.target.value
     );
     this.setState({ searchResults: users.data });
+
+    // console.log(this.state.searchResults);
+  };
+
+  handleUserBroadcast = async e => {
+    // console.log(e.target.value);
+    const users = await findUsers(
+      localStorage.getItem('doc_id'),
+      e.target.value
+    );
+    this.setState({ broadcastResults: users.data });
 
     // console.log(this.state.searchResults);
   };
@@ -129,6 +150,15 @@ class New extends Component {
     console.log(members);
     this.setState({ localMembers });
     this.setState({ members });
+  };
+
+  handleRemoveBroadcast = (e, d) => {
+    console.log('event', e);
+    console.log('data', d);
+    const localBroadcast = '';
+    const broadcast = '';
+    this.setState({ localBroadcast });
+    this.setState({ broadcast });
   };
 
   handleUpdateTitle = async (e, d) => {
@@ -310,6 +340,33 @@ class New extends Component {
                   />
                 );
               })}
+            </Form.Group>
+            <Form.Group>
+              <label>Broadcast Channel: </label>
+            </Form.Group>
+            <Form.Group inline>
+              <Search
+                results={this.state.searchResults}
+                // icon="search"
+                placeholder="search"
+                onSearchChange={e => this.handleUserBroadcast(e)}
+                onResultSelect={(e, d) => this.handleAddBroadcast(e, d)}
+              />
+            </Form.Group>
+            <Form.Group inline>
+                  <Popup
+                    trigger={
+                      <Label
+                        as="a"
+                        size="large"
+                        onClick={(e, d) => this.handleRemoveBroadcast(e, d)}
+                      >
+                        <img src={this.state.localBroadcast.image} />
+                        {`${this.state.localBroadcast.real_name}`}
+                      </Label>
+                    }
+                    content="Click to remove from list"
+                  />
             </Form.Group>
             <Form.Field
               control={Button}

@@ -21,14 +21,14 @@ class Dashboard extends Component {
 
   async componentWillMount() {
     console.log(localStorage.doc_id);
-    if (localStorage.doc_id === 'null') {
+    // if (localStorage.doc_id === null) {
       const url = new URL(window.location.href);
       const params = new URLSearchParams(url.search.slice(1));
       const id = params.get('doc_id');
       localStorage.setItem('doc_id', id);
       console.log(localStorage.doc_id);
       await this.setState({ doc_id: id });
-    }
+    // }
   }
 
   handleLogout = (e, d) => {
