@@ -12,3 +12,13 @@ export const findUsers = async (w_id, searchTerm) => {
     return res;
   } catch (error) {}
 };
+
+export const findUserBySlackId = async (w_id, u_id) => {
+  try {
+    const res = await axios.post(`${URL}/users/id`, {
+      w_id,
+      u_id,
+    });
+    return res;
+  } catch (error) {}
+};

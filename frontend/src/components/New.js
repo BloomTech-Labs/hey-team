@@ -52,31 +52,32 @@ class New extends Component {
         sun: false,
         time: '',
         modifier: 'AM',
-        tz: '',
+        // tz: -5,
       },
       broadcast: '',
       members: [],
       localMembers: [],
-      localBroadcast: '',
+      localBroadcast: [],
       questionToAdd: '',
     };
     this.handleUserSearch = this.handleUserSearch.bind(this);
   }
 
-  handleAddUser = (e, d) => {
+  handleAddUser = async (e, d) => {
     console.log('result', d.result);
     this.state.members.push(d.result.id);
     this.state.localMembers.push(d.result);
-    this.setState({ localMembers: this.state.localMembers });
-    this.setState({ members: this.state.members });
+    await this.setState({ localMembers: this.state.localMembers });
+    await this.setState({ members: this.state.members });
     console.log(this.state.members);
   };
 
-  handleAddBroadcast = (e, d) => {
+  handleAddBroadcast = async (e, d) => {
     console.log('result', d.result);
-    this.setState({ localBroadcast: d.result.data });
-    this.setState({ broadcast: d.result.id});
-    console.log(this.state.broadcast);
+    await this.setState({ localBroadcast: [d.result] });
+    await this.setState({ broadcast: d.result.id });
+    // console.log(this.state.broadcast);
+    // console.log(this.state.localBroadcast);
   };
 
   handleUserSearch = async e => {
@@ -155,7 +156,7 @@ class New extends Component {
   handleRemoveBroadcast = (e, d) => {
     console.log('event', e);
     console.log('data', d);
-    const localBroadcast = '';
+    const localBroadcast = [];
     const broadcast = '';
     this.setState({ localBroadcast });
     this.setState({ broadcast });
@@ -287,9 +288,9 @@ class New extends Component {
                 // onClick={(e, d) => this.handleAddQuestion(e, d)}
               />
             </Form.Group>
-            {this.state.questions.map(q => {
+            {this.state.questions.map((q, i) => {
               return (
-                <Form.Group>
+                <Form.Group key={i}>
                   <Popup
                     trigger={
                       <Label
@@ -311,7 +312,7 @@ class New extends Component {
               );
             })}
             <Form.Group>
-              <label>localMembers: </label>
+              <label>Members: </label>
             </Form.Group>
             <Form.Group inline>
               <Search
@@ -323,9 +324,10 @@ class New extends Component {
               />
             </Form.Group>
             <Form.Group inline>
-              {this.state.localMembers.map(p => {
+              {this.state.localMembers.map((p, i) => {
                 return (
                   <Popup
+                    key={i}
                     trigger={
                       <Label
                         as="a"
@@ -346,7 +348,7 @@ class New extends Component {
             </Form.Group>
             <Form.Group inline>
               <Search
-                results={this.state.searchResults}
+                results={this.state.broadcastResults}
                 // icon="search"
                 placeholder="search"
                 onSearchChange={e => this.handleUserBroadcast(e)}
@@ -354,19 +356,24 @@ class New extends Component {
               />
             </Form.Group>
             <Form.Group inline>
+              {this.state.localBroadcast.map((l, i) => {
+                return (
                   <Popup
+                    key={i}
                     trigger={
                       <Label
                         as="a"
                         size="large"
                         onClick={(e, d) => this.handleRemoveBroadcast(e, d)}
                       >
-                        <img src={this.state.localBroadcast.image} />
-                        {`${this.state.localBroadcast.real_name}`}
+                        <img src={l.image} />
+                        {`${l.real_name}`}
                       </Label>
                     }
                     content="Click to remove from list"
                   />
+                );
+              })}
             </Form.Group>
             <Form.Field
               control={Button}

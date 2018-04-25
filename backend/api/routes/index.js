@@ -44,4 +44,5 @@ module.exports = app => {
   // User Routes
   app.route('/users/all').post(workspace.getAllMembers);
   app.route('/users/find').post(workspace.findMembers);
+  app.route('/users/id').post(workspace.findMemberBySlackId);
 };

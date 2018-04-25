@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import { findUsers } from '../actions/FindUsers';
+import { findUsers, findUserBySlackId } from '../actions/FindUsers';
 import {
   saveConversation,
   findConversation,
@@ -43,6 +43,7 @@ class Edit extends Component {
     super();
     this.state = {
       searchResults: [],
+      broadcastResults: [],
       questions: [],
       title: '',
       schedule: {
@@ -55,10 +56,12 @@ class Edit extends Component {
         sun: false,
         time: '',
         modifier: 'AM',
-        tz: '',
+        // tz: -5,
       },
+      broadcast: '',
       members: [],
       localMembers: [],
+      localBroadcast: [],
       questionToAdd: '',
     };
     this.handleUserSearch = this.handleUserSearch.bind(this);
@@ -72,7 +75,7 @@ class Edit extends Component {
     // console.log('c_id', id);
     findConversation(id)
       .then(c => {
-        // console.log('c', c.data);
+        const localBroadcast = [];
         const localMembers = [];
         const members = [];
         c.data.members.forEach(m => {
@@ -86,15 +89,22 @@ class Edit extends Component {
             description: m.name,
           });
         });
-        this.setState({
-          questions: c.data.questions,
-          title: c.data.title,
-          schedule: c.data.schedule,
-          time: c.data.time,
-          modifier: c.data.modifier,
-          members,
-          localMembers,
-        });
+        // console.log('c', c.data.broadcast);
+        findUserBySlackId(localStorage.getItem('doc_id'), c.data.broadcast)
+          .then(b => {
+            console.log(b.data);
+            this.setState({
+              questions: c.data.questions,
+              title: c.data.title,
+              schedule: c.data.schedule,
+              modifier: c.data.modifier,
+              broadcast: c.data.broadcast,
+              members,
+              localMembers,
+              localBroadcast: [b.data],
+            });
+          })
+          .catch(console.error);
       })
       .catch(console.error);
   }
@@ -108,6 +118,14 @@ class Edit extends Component {
     console.log(this.state.members);
   };
 
+  handleAddBroadcast = async (e, d) => {
+    console.log('result', d.result);
+    await this.setState({ localBroadcast: [d.result] });
+    await this.setState({ broadcast: d.result.id });
+    // console.log(this.state.broadcast);
+    // console.log(this.state.localBroadcast);
+  };
+
   handleUserSearch = async e => {
     // console.log(e.target.value);
     const users = await findUsers(
@@ -115,6 +133,17 @@ class Edit extends Component {
       e.target.value
     );
     this.setState({ searchResults: users.data });
+
+    // console.log(this.state.searchResults);
+  };
+
+  handleUserBroadcast = async e => {
+    // console.log(e.target.value);
+    const users = await findUsers(
+      localStorage.getItem('doc_id'),
+      e.target.value
+    );
+    this.setState({ broadcastResults: users.data });
 
     // console.log(this.state.searchResults);
   };
@@ -170,6 +199,15 @@ class Edit extends Component {
     this.setState({ members });
   };
 
+  handleRemoveBroadcast = (e, d) => {
+    console.log('event', e);
+    console.log('data', d);
+    const localBroadcast = [];
+    const broadcast = '';
+    this.setState({ localBroadcast });
+    this.setState({ broadcast });
+  };
+
   handleUpdateTitle = async (e, d) => {
     this.state.title = e.target.value;
     await this.setState({ title: this.state.title });
@@ -186,7 +224,7 @@ class Edit extends Component {
 
   handleSave = async () => {
     console.log(this.state);
-    await saveConversation(this.state);
+    await saveConversation(localStorage.getItem('doc_id'), this.state);
     this.props.history.push('/dashboard/conversations');
   };
 
@@ -273,6 +311,7 @@ class Edit extends Component {
             </Form.Group>
             <Form.Group inline>
               <Input
+                value={this.state.schedule.time}
                 onChange={this.handleUpdateTime}
                 label={
                   <Dropdown
@@ -350,6 +389,38 @@ class Edit extends Component {
                       >
                         <img src={p.image} />
                         {`${p.real_name}`}
+                      </Label>
+                    }
+                    content="Click to remove from list"
+                  />
+                );
+              })}
+            </Form.Group>
+            <Form.Group>
+              <label>Broadcast Channel: </label>
+            </Form.Group>
+            <Form.Group inline>
+              <Search
+                results={this.state.broadcastResults}
+                // icon="search"
+                placeholder="search"
+                onSearchChange={e => this.handleUserBroadcast(e)}
+                onResultSelect={(e, d) => this.handleAddBroadcast(e, d)}
+              />
+            </Form.Group>
+            <Form.Group inline>
+              {this.state.localBroadcast.map((l, i) => {
+                return (
+                  <Popup
+                    key={i}
+                    trigger={
+                      <Label
+                        as="a"
+                        size="large"
+                        onClick={(e, d) => this.handleRemoveBroadcast(e, d)}
+                      >
+                        <img src={l.image} />
+                        {`${l.real_name}`}
                       </Label>
                     }
                     content="Click to remove from list"

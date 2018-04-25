@@ -121,6 +121,28 @@ const findMembers = async (req, res) => {
   res.json(searchResult);
 };
 
+const findMemberBySlackId = async (req, res) => {
+  console.log('find member by slack id');
+  const { w_id, u_id } = req.body;
+  console.log(u_id);
+  let member = 'No Member Found';
+  const workspace = await Workspace.findById(w_id).populate('members');
+  workspace.members.forEach(m => {
+    if (m.id === u_id) {
+      member = {
+        id: m.id,
+        image: m.image,
+        color: m.color,
+        title: m.real_name,
+        real_name: m.real_name,
+        description: m.name,
+      };
+      return;
+    }
+  });
+  res.send(member);
+};
+
 const hasActiveSubstription = async (req, res) => {
   const { w_id } = req.body;
   const workspace = await Workspace.findById(w_id);
@@ -133,4 +155,5 @@ module.exports = {
   getAllMembers,
   findMembers,
   hasActiveSubstription,
+  findMemberBySlackId,
 };

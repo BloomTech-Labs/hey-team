@@ -27,6 +27,7 @@ const createOffset = date => {
 };
 
 const parseSchedule = async (c, m) => {
+  // console.log(m.real_name);
   const date = new Date();
   const currentWeekDay = weekDayMap[date.getDay()];
 
@@ -38,6 +39,8 @@ const parseSchedule = async (c, m) => {
     let [hr, min] = c.schedule.time.split(':');
     hr = parseInt(hr);
     min = parseInt(min);
+    // console.log(hr, min, c.schedule.modifier);
+    // console.log(serverLocale, conversationLocale);
     if (serverLocale > conversationLocale) {
       hr += localeAdjustment;
       // console.log('server time is ahead of conversation time');
@@ -45,7 +48,7 @@ const parseSchedule = async (c, m) => {
       hr -= localeAdjustment;
       // console.log('server time is behind conversation time');
     }
-
+    // console.log(hr);
     if (c.schedule.modifier === 'PM') {
       if (hr >= 1 && hr < 12) {
         hr += 12;
@@ -53,7 +56,9 @@ const parseSchedule = async (c, m) => {
     }
 
     if (hr === date.getHours()) {
+      // console.log(hr);
       if (min === date.getMinutes()) {
+        // console.log(min);
         await conversation.startConversation(c._id, m.id);
       }
     }
@@ -61,6 +66,7 @@ const parseSchedule = async (c, m) => {
 };
 
 const startScheduler = async () => {
+  // console.log('*************************************'.yellow);
   const conversations = await Conversation.find().populate('members');
   conversations.forEach(c => {
     c.members.forEach(m => {

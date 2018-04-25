@@ -100,6 +100,7 @@ const getConversation = async (req, res) => {
     .populate('members')
     .populate('responses')
     .then(c => {
+      // console.log(c);
       res.json(c);
     })
     .catch(console.error);
