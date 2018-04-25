@@ -74,8 +74,8 @@ class New extends Component {
 
   handleAddBroadcast = (e, d) => {
     console.log('result', d.result);
-    this.setState({ localBroadcast: this.state.localBroadcast });
-    this.setState({ broadcast: this.state.broadcast });
+    this.setState({ localBroadcast: d.result.data });
+    this.setState({ broadcast: d.result.id});
     console.log(this.state.broadcast);
   };
 
